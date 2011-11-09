@@ -1,0 +1,379 @@
+/* zurücksetzen der Innen und Aussenabstände für alle Html Elemente */
+* {
+ margin:0; padding: 0
+ }
+ 
+/* (de) Erzwingen vertikaler Scrollbalken in Netscape, Firefox und Safari Browsern */
+html{
+  height: 100%
+  font-size: 85%;
+}
+
+body {
+	min-height: 100%;
+	/* (de) Vorgabe der Standardfarben und Textausrichtung */
+	color: #6E6455;
+	background-color: #E1DFD7;
+	text-align: left;
+	line-height: 20px;
+}
+
+body, td, input, textarea {
+	font-family:  Arial, Helvetica, Verdana, sans-serif;
+	font-size: 0.9em;
+}
+
+a:link, a:visited {
+	color: #474747; /*333*/
+}
+
+a:hover, a:active {
+	background-color: #ECECEC;
+	color: #DE001F;
+}
+
+p, li, label {
+	font-size: 0.9em;
+	color: #6E6455;
+}
+
+h1 {
+	font-size: 1em;
+	font-weight: bold;
+	color: #6E6455;
+	letter-spacing: 0.15em;
+	text-transform: uppercase;
+}
+
+
+h2 {
+	font-size: 0.85em;
+	font-weight: bold;
+	text-transform: uppercase;
+	color: #6E6455;
+	line-height: 20px;
+	letter-spacing: 0.2em;
+}
+
+h3 {
+	font-size: 0.75em;
+	font-weight: bold;
+	color: #6E6455;
+	line-height: 20px;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+}
+
+/* das folgende Statemant verhindert, dass ein Link umrahmt wird, wenn man draufklickt */
+*:focus, *:active  {
+	outline: none; 
+}
+
+
+/* (de) Layout: Breite, Hintergrund, Rahmen */
+#page_margins
+{
+	width: 1040px;
+	margin: 20px auto;
+	text-align:left;
+	border: 0px solid green;
+	background-image: url(../img/logo.png); 
+	background-position: left 30px;  /* 1. wert = vertikal, 2. wert horizontal */
+	background-repeat: no-repeat; 
+}
+
+#page
+{
+	min-height: 600px;
+}
+
+/* (de) Zentrierung des Layouts in alten IE-versionen */
+body
+{
+	text-align: center;
+}
+
+#header
+{
+	height: 0;
+	padding: 0;
+	background-color: #FFFFFF;
+}
+
+#home_link
+{
+	height: 0px;
+	width: 500px;
+	background-color: transparent;
+	float: right;
+	cursor: pointer;
+}
+
+#main
+{
+	clear: both;
+	min-height: 630px;
+	padding: 0;
+}
+
+.subcontainer 
+{
+  background-color: #EBCA30;
+  margin-left: 80px;
+  width: 960px;
+  border: 0px dashed purple;
+}
+
+.kurztxt_container {
+  padding-right: 24px;
+}
+
+.kurztxt_container ul {
+  padding: 5px 0 10px 16px;
+  list-style-image: url(../gifs/bg_6x6.gif);
+  list-style-position: outside;
+}
+
+.kurztxt_container ol {
+  padding: 5px 0 10px 20px;
+  list-style-type: decimal;
+  list-style-position: outside;
+}
+
+.kurztext_container li {
+  line-heigt: 20px;
+}
+
+/* (de) Definition 2 Kolonnen (navigation und spalte 1 */
+#navigation
+{
+	float: left;
+	width: 80px;
+}
+
+#spalte3
+{
+	margin: 0;
+	border: 0;
+	width: 100.01%;
+/*	border-left: 1px solid #232323; */
+}
+
+#spalte3_inhalt
+{
+  margin: 0;
+	padding: 0;
+	min-height: 630px;
+}
+
+* html #spalte3_inhalt {
+  height: 500px;
+}
+
+/* allg. Spalteneinteilung für 3-spaltiges Layout */
+#spalten_wrapper 
+{
+  width: 880px;
+  background-color: #FFFEF6;
+  min-height: 630px;
+  height: 100%;
+}
+
+.spalte_links 
+{ 
+  margin: 0;
+  padding: 0;
+  background-color: #FFFEF6;
+}
+
+.subspalte_detail_l
+{
+  padding: 95px 80px 0 40px;
+}
+
+.subspalte_detail_ll
+{
+  padding: 95px 80px 0 40px;
+}
+
+.spalte_mitte 
+{
+  margin: 0;
+  padding: 0;
+  background-color: #FFFEF6;
+}
+
+/* Textspalte in der Startseite */
+.spalte_360_r 
+{
+  clear: both;
+  margin-left: 160px;
+  padding-top: 80px;
+  padding-right: 30px;
+  min-hight: 150px;
+}
+
+.subspalte_detail_m
+{
+  padding: 90px 0 0 0;
+}
+
+/* Auswahl-Template */
+.subspalte_auswahl
+{
+  padding: 90px 0 0 0;
+}
+
+.container_auswahl
+{
+  margin-left: 165px;
+  min-height: 90px;
+  width: auto;
+  border: 0px solid red;
+}
+
+.img_container_auswahl
+{
+  margin-left: 0pt;
+  height: 90px;
+  width: 135px;
+  float: left;
+}
+
+.img_thumb_rahmen
+{
+  width: 135px;
+  height: 90px;
+  text-align: right;
+  border: none;
+  margin: 0;
+}
+
+.kurztxt_container_auswahl
+{
+  height: 85px;
+  width: 480px;
+  padding-left: 20px;
+}
+
+
+/* titel und counter */
+.titel_seite {
+  height: 40px;
+  width: auto;
+  overflow: hidden;
+  text-transform: uppercase;
+  display: none;
+}
+
+.counter {
+  height: auto;
+  background-color: transparent;
+}
+
+.clearfix
+{
+  display: block;
+}
+
+/* pageslider */
+.slider {
+	color: #938356;
+	font-weight: bold;
+}
+
+#footer
+{
+	height: 20px;
+	background-color: #FFFEF6;
+	padding-left: 10px;
+	border: 0px;
+	clear: both;
+	display: none;
+	color: #FFFEF6;; /*Text unsichtbar */
+}
+
+.img_container_thumb
+{
+	height: auto;
+}
+
+.img_medium_left, .img_medium_right 
+{
+  width: auto;
+	height: 280px;
+	background-color: transparent;
+	padding-bottom: 9px;
+}
+
+.img_medium_right
+{
+  padding-top: 5px; /*45*/
+}
+
+.img_medium_320
+{
+  height: 220px;
+}
+
+.img_medium_640
+{
+  height: 213px;
+  width: 640px;
+}
+
+.bildleiste_wrapper, .galerie_wrapper 
+{
+  padding: 0;
+}
+
+.bildleiste_space
+{
+  width: 11px;
+}
+
+.bildleiste {
+  height: 8px;
+  width: 8px;
+}
+
+.img_small {
+  margin: 0;
+}
+
+/* CSS für automatischen Bildwechsler */ 
+#imageContainer1 img {
+  display:none;
+  position: absolute;
+}
+
+/* den Rechts müssen wir bei Templates mit Bild rechts hinzufügen 
+   also beim Template md_zweispaltig_480_400_tpl.html
+*/
+.setright {
+  float: right;
+  margin-right: 280px;
+}
+
+
+
+#imageContainer2 img {
+  display:none;
+  position: relative;
+}
+
+/* Kontaktformular */
+.error 
+{
+  color: #DE001F 
+} 
+
+/* klassen für Link1 und Link2 */
+.clslink1 {
+	padding-top: 25px;
+	padding-bottom: 0px;
+}
+
+.clslink2 {
+	padding-top: 3px;
+}

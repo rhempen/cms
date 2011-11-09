@@ -1,0 +1,183 @@
+/* zurücksetzen der Innen und Aussenabstände für alle Html Elemnte */
+ * {
+ 	margin:0; padding: 0
+ }
+ 
+/* (de) Erzwingen vertikaler Scrollbalken in Netscape, Firefox und Safari Browsern */
+html{
+	height: 100%
+}
+
+body{ 
+	font-family: Helvetica, Arial, Verdana, sans-serif;
+	min-height: 101%;
+	color: #ffffff;
+	background-color: #232323;
+	text-align: left;
+}
+
+/* das folgende Statemant verhindert, dass ein Link umrahmt wird, wenn man draufklickt */
+*:focus, *:active  {
+	outline: none; 
+}
+
+/* (de) Layout: Breite, Hintergrund, Rahmen */
+#page_margins
+{
+	width: 960px;
+	margin: 20px auto;
+	border: 0px solid #8c8c8c;
+	background-color: #232323;
+	color: #ffffff;
+}
+
+#page
+{
+	min-height: 400px;
+}
+
+/* (de) Zentrierung des Layouts in alten IE-versionen */
+body
+{
+	text-align: center;
+}
+
+#page_margins
+{
+	text-align:left;
+}
+  
+#header
+{
+	height: 160px;
+	/*background-color: #C1EF8F;*/
+	background-color: #232323;
+	padding: 0;
+	background-image: url(../img/logo.png);
+	background-position: 30px 30px;
+	background-repeat: no-repeat;
+}
+
+#home_link
+{
+	height: 50px;
+	width: 200px;
+	background-color: transparent;
+	float: left;
+	cursor: pointer;
+}
+
+#main
+{
+	min-height: 400px;
+	background-color: transparent;
+	padding: 0px;
+}
+
+
+/* (de) Definition 2 Kolonnen (navigation und spalte 1 */
+#navigation
+{
+	float: left;
+	width: 200px;
+	border: 0;
+	padding-top: 30px;
+}
+
+
+#spalte3
+{
+	margin-left: 200px;
+	border: 0;
+}
+
+#spalte3_inhalt
+{
+	padding: 0;
+	margin: 0;
+}
+
+#spalte2
+{
+	visibility: hidden;
+	width: 1px;
+	background-color: Red;
+	float: right;
+	border: 0;
+	height: 400px;
+}
+
+.clearfix
+{
+	display: block;
+}
+
+
+#footer
+{
+	height: 20px;
+	color: #8C8C8C;
+	background: transparent;
+	padding-left: 20px;
+	border: 0px;
+	border-top: 0px solid #d7d2d1;
+	clear: both;
+	display: block;
+	font-size: 11px;
+}
+	
+/* Redfinitionen von Klassen aus vorlagen, subtpl, kontakt */
+a:link, a:visited, a:active
+{
+	font-weight: normal;
+}
+
+p {
+	padding-right: 10px;
+}
+
+p, h1, h2, h3 {
+	color: #ffffff;
+}
+
+ h1, h2, h3 {
+	font-weight: bold;
+}
+
+h1 {
+	font-size: 20px;
+}
+
+.subcontainer {	
+/*	clear: both; */
+	padding-top: 40px;
+	width: 99.9%;
+	border-left: 0px solid #8C8C8C;	
+}
+
+.img_container_thumb{
+	height: auto;
+}
+
+.img_thumb_rahmen {
+	background-color: #C23925;
+	background-color: transparent;
+}
+
+.img_medium_right,.img_medium_left {
+	padding-top: 15px;
+	background-color: #C23925;
+	background-color: transparent;
+	min-height: 400px;
+}
+
+/* kontakt / formularfelder */
+.submit, .zuruecksetzen {
+	color: #d7d2d1;
+}
+
+input, textarea
+{ 
+	color: #d7d2d1;
+}
+

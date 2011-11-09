@@ -1,0 +1,46 @@
+<!-- beginn subtemplate zweispaltig_480_400_tpl.html  -->
+<div class="subcontainer<!-- BEGIN subcontainer -->{farbe}<!-- END subcontainer -->">
+  <div id="spalten_wrapper">
+  	<div class="spalte_links" style="width:480px;">
+  		<div class="subspalte_detail_ll" style="padding-right:0px;">
+  	    <div class="titel_seite">{kap_ukap}</div>
+  			<!-- BEGIN inhalt -->
+  			<div class="kurztxt_container">
+  				{name}
+  				{zusatztext}
+  				{von_bis}
+  				{kurztext}
+  				{langtext}
+  				{link_weiter}
+  				{link1}
+  				{link2}
+  			</div>					
+  			<!-- END inhalt -->
+			<!-- BEGIN sitemap -->
+				{sitemap}
+			<!-- END sitemap -->
+        <div class="counter">{link_uebersicht}</div>
+  			<!-- BEGIN kontaktform -->
+  			<div class="kontaktform">
+  				{kontakt_formular}
+  			</div>					
+  			<!-- END kontaktform -->
+  		</div> 
+  	</div>
+															
+  	<div class="spalte_mitte">
+  		<div class="subspalte_detail_m"> 
+  			<!-- BEGIN bilder -->
+  			<div {imagecontainer}class="img_medium_right{setright}">{xfade}{bild1}</div>		
+  			<div class="bildleiste_wrapper" style="float:rigth;{leiste}">{bilder_leiste}</div>
+         		<div class="galerie_wrapper" style="float:rigth;{galink}">{link_galerie}</div>
+  			<p style="display:none;">{galerie}</p>
+  			<!-- END bilder -->
+  		</div>
+  	</div>
+
+  	<div class="spalte_rechts"></div>
+  </div> <!-- Ende Spalten_wrapper --> 
+</div>
+<!-- ende subtemplate-->
+<!-- ende subtemplate zweispaltig_480_400_tpl.html  -->

@@ -1,0 +1,7 @@
+/* Globale Sammeldatei f�r shared CSS */
+@import url("lightbox.css");
+@import url("kontakt.css");
+@import url("vorlagen.css");
+@import url("subtpl.css");
+@import url("accordion.css");
+@import url("niftycorners.css");

@@ -1,0 +1,7 @@
+cms/db/*/dbconf.php
+cms/media*
+cms/tinymce/*
+cms/nbproject/*
+cms/cmsadmin/backup/backups/*
+cms/.htpasswd
+cms/.htusers

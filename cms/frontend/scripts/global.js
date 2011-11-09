@@ -1,0 +1,213 @@
+// Javascripts für cms Frontend
+// Author: Roland Hempen
+// Creation Date: 05.10.2007
+// 
+
+function setLinkCookie(referer) 
+{
+	// Cookie "CrossLink" setzen, welches bei der Anzeige im Frontend abgefragt wird,
+	// um innerhalb der Pages-Section hin-und zurück zu navigieren
+	// Wird vorwiegend da verwendet, wo der Benutzer zb. aus der Detailansicht eines Künstlers
+	// zur verlinkten Expo und wieder zurück navigieren kann.
+	// Das Cookie wir in der Methode create_uebersicht_link der klasse frontendPresent ausgewertet
+	// Es ist ein Stunden lang gültig
+	var ablauf = new Date();
+	var inEinerStunde = ablauf.getTime() + (60 * 60 * 1000);
+	ablauf.setTime(inEinerStunde);
+//	document.cookie = "CrossLink" + "=" + referrer;
+	document.cookie = "CrossLink=" + referer + "; expires=" + ablauf.toGMTString();
+//	alert(unescape(document.cookie));
+}
+
+function delLinkCookie(referer) 
+{
+	// Cookie "CrossLink" wieder löschen, sobald der Benutzer auf den Link klickt
+	var ablauf = new Date();
+	var eineStungeZurueck = ablauf.getTime() + (60 * 60 * 1000 * (-1));
+	ablauf.setTime(eineStungeZurueck);
+	document.cookie = "CrossLink=" + referer + "; expires=" + ablauf.toGMTString();
+//	alert(unescape(ablauf.toGMTString()));	
+}
+
+
+/* Cookie auslesen */
+function getCookie(iName) {
+  var lMatch = document.cookie.match(new RegExp(iName+"=(.*?);"));
+  return lMatch ? unescape( lMatch[1] ) : "";
+}
+
+function check_form() {
+  // Felder im Kontaktformular überprüfen
+	var f = document.forms["formmail"];
+   	var fehler = ""; 
+	var fehler_code = "";
+	var fehler_email = "";
+	var fehler_telefon = "";
+	// *** Überprüfung auf vollständige Ausfüllung
+	  // Bild-code
+   	if (f.code.value=="") {
+   	 	fehler += "bitte den Bild-Code eingeben"+"<br />\n";
+   		$("code").setStyle({ border:'1px solid red' });
+		$("code").focus();
+   	} else {
+  		$("code").setStyle({ border:'' });   		
+   	}
+   	// email
+   	if (f.email.value=="") {
+      	fehler += "bitte Email eingeben"+"<br />\n";
+   		$("email").setStyle({ border:'1px solid red' });
+		$("email").focus();
+	} else if (!isEmail(f.email.value)) {
+      	fehler_email = "Die Emailadresse ist ung&uuml;ltig!";
+		fehler += fehler_email;
+   		$("email").setStyle({ border:'1px solid red' });
+		$("email").focus();
+   	} else {
+  		$("email").setStyle({ border:'' });   		
+   	}
+   	// Telefon
+   	if (f.telefon.value=="") {
+      	fehler += "bitte Telefonnummer eingeben"+"<br />\n";
+   		$("telefon").setStyle({ border:'1px solid red' });
+		$("telefon").focus();
+   	} else {
+  		$("telefon").setStyle({ border:'' });   		
+   	}
+   	// Postleitzahl
+   	if (f.plz_ort.value=="") {
+      	fehler += "bitte Plz und Ort eingeben"+"<br />\n";
+   		$("plz_ort").setStyle({ border:'1px solid red' });
+		$("plz_ort").focus();
+   	} else {
+  		$("plz_ort").setStyle({ border:'' });   		
+   	}
+   	// Adresse
+   	if (f.adresse.value=="") {
+      	fehler += "bitte Ihre Adresse eingeben"+"<br />\n";
+   		$("adresse").setStyle({ border:'1px solid red' });
+		$("adresse").focus()
+   	} else {
+  		$("adresse").setStyle({ border:'' });   		
+   	}
+	  // Namen
+   	if (f.name.value=="") {
+   	 	fehler += "bitte Ihren Namen und Vornamen eingeben"+"<br />\n";
+   		$("name").setStyle({ border:'1px solid red' });
+		$("name").focus();
+   	} else {
+  		$("name").setStyle({ border:'' });   		
+   	}
+    // *** Gegebenenfalls Fehlermeldung
+   	if (fehler != ""){
+    	var fehlertext = "Bitte f&uuml;llen Sie die markierten Felder aus ";
+		if (fehler_telefon != '') { fehlertext += fehler_telefon; }
+		if (fehler_email != '') { fehlertext += "<br />\n"+fehler_email; }
+		$("meldung").innerHTML = fehlertext;
+      	$("meldung").setStyle({ color:'red' });
+      	return false;
+   	}
+   	return true;
+}
+
+/* Formularcheck für Webmail */
+function check_webmail() {
+	var f = document.forms["webmail"];
+   	var fehler = ""; 
+	var fehler_email = "";
+	// *** Überprüfung auf vollständige Ausfüllung
+   	// email
+   	alert(f.login_username.value);
+   	if (f.login_username.value=="") {
+      	fehler += "bitte Email eingeben"+"<br />\n";
+   		$("login_username").setStyle({ border:'1px solid red' });
+		$("login_username").focus();
+	} else if (!isEmail(f.email.value)) {
+      	fehler_email = "Die Emailadresse ist ung&uuml;ltig!";
+		fehler += fehler_email;
+   		$("email").setStyle({ border:'1px solid red' });
+		$("email").focus();
+   	} else {
+  		$("email").setStyle({ border:'' });   		
+   	}
+   	// passwort
+	if (f.passw.value=="") {
+      	fehler += "bitte das Passwort eingeben"+"<br />\n";
+   		$("passw").setStyle({ border:'1px solid red' });
+		$("passw").focus();
+	}
+}
+
+function isEmail(string) {
+	if (string.search(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/) != -1) { 
+		return true; 
+	} else {
+		return false;
+	}
+}
+
+/* Bilderwechsel indem mit der Maus über die entsprechenden Böxchen unterhalb des Bildes gefahren wird. 
+   das Erscheinungsbild kann gänzlich in der CSS-Datei gesteuert werden - Keine CSS-Notation hier drin! */
+function picSwitch(switchnr) {
+	// erst alle Elemente ausblenden
+	var x = 0;
+	var pict_alle = 'pict_' + x;
+	var rect_alle = 'rect_' + x;
+	while($(pict_alle)) {
+		if ($(pict_alle)) {
+			$(pict_alle).style.display = 'none';
+		}
+		$(rect_alle).className = 'bildleiste rect_passiv';
+		var pict_alle = 'pict_' + x;
+		var rect_alle  = 'rect_' + x++;
+	}
+	// dann das aktive Elemente einblenden und den Schalter aktiv schalten
+	var pict_switch = 'pict_' + switchnr;
+	var rect_switch = 'rect_' + switchnr;
+  	if ($(pict_switch)) $(pict_switch).style.display = 'inline';
+  	if ($(rect_switch)) $(rect_switch).className = 'bildleiste rect_aktiv';
+}	
+
+/* Google Analytics */
+function google_analytics(iGaKonto) {
+  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+  document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  try{
+    var pageTracker = _gat._getTracker("+ iGaKonto +");
+    pageTracker._trackPageview();
+  } catch(err) {}
+}
+
+
+/* Bilder anzeigen beim hovern der Reflinks */
+function showRefPic(iNr) {
+  switch (iNr) {
+    case 1:
+      $('refpic').src = "media/footer/th_feednsmile.png";
+	  break;
+    case 2:
+      $('refpic').src = "media/footer/th_physio-allschwil.png";
+    	break;
+    case 3:
+      $('refpic').src = "media/footer/th_birchler-architektur.png";
+    	break;
+    case 4:
+      $('refpic').src = "media/footer/th_gigijacquier.png";
+    	break;
+    case 5:
+      $('refpic').src = "media/footer/th_art4art.png";
+   	  break;
+    case 6:
+      $('refpic').src = "media/footer/th_orasch.png";
+      break;
+    case 7:
+      $('refpic').src = "media/footer/th_physio-steiner.png";
+   	  break;
+    case 8:
+      $('refpic').src = "media/footer/th_raku.png";
+      break;
+    default:
+      $('refpic').src = "media/footer/th_feednsmile.png";
+      break;
+  }
+  $('refpics').show();
+}

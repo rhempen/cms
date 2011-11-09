@@ -1,0 +1,177 @@
+
+/*======================================================
+  01 Das umgebende DIV gestalten
+  ====================================================== */
+#navibereich {
+	min-width: 70%;
+	width: auto;
+	background-color: #ECECEC;
+  	height: 56px;
+  	float: left;
+  	border-top: 0px solid #000000;
+  	border-bottom: 0px solid #000000;
+}
+
+#navi {
+  	float: left;
+	width: auto;
+	border-top: 0px solid transparent;	/* default: ein Oberstrich */
+	border-bottom: 0px solid transparent;	/* default: ein Unterstrich */
+  	display: table; 
+}
+
+#servicebereich {
+	min-width: 30%;
+	width: auto;
+	background-color: #ECECEC;
+  	height: 36px;
+  	float: right;
+  	padding-top: 20px;
+  	border-top: 0px solid #000000;
+  	border-bottom: 0px solid #000000;
+}
+
+#service {
+  	float: right;
+	width: auto;
+  	display: table; 
+}
+
+#filler {
+	float: left;
+	width: 24px;
+  	height: 56px;
+}
+
+
+.ebene01 {
+	background: #ECECEC;
+}
+
+#navi.right {
+  	float: right;
+}
+
+#navi.left {
+  	float: left;
+}
+
+/*======================================================
+  02 die ungeordnete Liste in Ebene 1 gestalten
+  ======================================================*/
+#navi ul {
+  	margin: 0;
+  	padding: 0;	
+	text-align: center;
+	background :#ECECEC;
+}
+
+#navi li, #service li  {
+  	margin: 0;
+  	padding: 0;	
+	padding-right: 15px;
+	float: left; 
+	list-style-type: none;
+	text-align: left; 
+	width: 6em;
+	width: auto;
+}
+
+a {
+	text-decoration: none;
+  	font-size: 1em;
+}
+
+a:hover {
+	font-weight: bold;	
+  	color: #DE001F;
+  	background-color: #ECECEC;
+}
+
+.navi {
+	background: #ECECEC;
+}
+
+/*======================================================
+  03 Hyperlinks der Ebene 1 gestalten
+  ======================================================*/
+
+#navi li a {
+	display: block;
+  	font-weight: bold;
+  	/*padding: 0.33em 0.6em;*/
+	padding: 0;
+  	color:  #333333;
+}
+
+#navi a:hover {
+	background-color: #ECECEC;
+  	color: #DE001F;
+}
+
+
+/* ==========================================================================================
+	Spezifität erhöhen -> nützt aber leider nur, solange der Cursor mit gedrücketer Maustaste über dem Link ist.
+	Damit der Link Weiss mit schwarzer Schrift bleibt, muss in nav.php die CSS-Klasse .active gesetzt werden. 
+	========================================================================================= */
+#navi li a:active
+{
+	color: #DE001F !important;
+	background-color: #ECECEC !important;
+}
+
+.active
+{
+	color: #DE001F !important;
+	background-color: #ECECEC !important;
+}
+
+/*======================================================
+  04 Ebene 2 verstecken
+  ====================================================== */
+#navi li ul
+{
+	position: absolute;
+	left: -9999px;	
+	top: -9999px;
+	display: inline;
+	width: 0;
+	height: 0;
+}  
+
+/*======================================================
+  05 Ebene 2 sichtbar machen
+  li.sfhover ist ein Workaround für IE < Version 7 --> suckerfish.js
+  ====================================================== */
+#navi li:hover ul,
+#navi li.sfhover ul
+{
+	left: auto;
+	top: auto;
+	display: table-row;
+	height: auto;
+	background-color: #FFFFFF;
+	width: 14em;	
+}
+
+/* Korrektur fuer den IE 5 und 6 */
+* html #navi li:hover ul, 
+       #navi li.sfhover ul {
+	margin-left: 0px;    
+	ma\rgin-left: -5.5em;    
+} 
+
+/* ==============================================
+   06 Die Rausklappliste korrekt einfärben
+   ==============================================*/
+#navi ul.ebene02 li a { 
+	font-size: 0.8em;
+	font-weight: bold;
+	padding: 0.5em 1em 0.5em 1em;
+	padding: 0em 0.5em;
+ }
+
+ /* ganze breite des Ausklappmenues beim hovern einfärben */
+#navi ul.ebene02 li:hover { 
+	width: 14em;
+ }

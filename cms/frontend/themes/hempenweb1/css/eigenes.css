@@ -1,0 +1,154 @@
+/* kundeneigene CSS - Diese CSS kann zu einem späteren Zeitpunkt direkt im 
+	CMS bearbeitet und ergänzt werden */
+
+
+p a:link, p a:visited, p a:active  {
+  color: #1C6069;
+}
+
+p a:hover  {
+  color: #F0FFFF;
+  font-weight: bold;
+}
+
+/* Notationen für die Homeseite */
+div#intro {
+  background-color: #dcdcdc;
+}
+
+div#introcontent {
+  background-color: transparent;
+  padding: 1.5em;
+  min-height: 380px;
+}
+
+
+/* Grosse Schrift für den Titel auf der Homeseite */
+.verybig {
+  font-size: 30px;
+  line-height: 60px;
+  margin-top: -30px; /* übersteuert .titel_seite und .counter */
+}
+
+/* teaser - auf jeder beliebigen Seite */
+.teaserwrapper {
+	background-color: #FFFFFF;
+	padding: 10px;
+}
+
+.teaser {
+  width: 284px;
+  margin: 15px 0;
+  padding: 10px;
+  background-color: #F0F0F0;
+  float: left;
+}
+
+.teasertitle {
+  padding: 5px;
+  font-size: 20px;
+  line-height: 21px;
+  color: #434343;
+}
+
+.teasertext {
+  padding: 5px;
+  color: #434343;
+}
+
+div#introcontent .teaser ul,
+div#introcontent .teaserwrapper ul {
+	padding: 0 10px 0 20px;
+}
+
+/* CSS-Notationen für Links im Footer */
+div#impressum {
+  position: absolute;
+  margin-left: 135px;
+}
+
+div#servlinks {
+  position: absolute;
+  margin-left: 350px;
+}
+
+div#reflinks {
+  position: absolute;
+  margin-left: 555px;
+}
+
+div#refpics {
+  position: absolute;
+  margin-left: 690px; 
+}
+
+
+div#impressum ul, div#reflinks ul, div#servlinks ul {
+  list-style-type: none;
+}
+
+div#impressum li, div#impressum li a, div#reflinks li a, div#servlinks li a {
+  color: #F0F0F0;
+  font-size: 1.2em;
+  font-weight: normal;
+}
+
+div#impressum li a:hover, div#reflinks li a:hover, div#servlinks li a:hover {
+  color: #F0F0F0;
+  background-color: transparent;  
+  font-weight: normal;
+  background-color: #9A8B13;
+}
+
+div#footer li.title {
+  font-size: 1.2em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #F0FFFF;
+}
+
+/* Divs im footer vorläufig verbergen */
+div#impressum, div#reflinks, div#servlinks
+{
+  display: none;
+}
+
+/* CSS für automatischen Bildwechsler */ 
+div#imageContainer1
+{
+  width: 300px;
+}
+
+div#imageContainer1 img
+{
+	display: none;
+  position: absolute;
+  max-width: 300px;
+  max-height: 300px;
+}
+
+/* Accordion Schriftfarbe für paragraph p */
+.accordion_content p 
+{
+  color: #232323;
+}
+
+.accordion_content p a:link, 
+.accordion_content p a:visited, 
+.accordion_content ul li a:link, 
+.accordion_content ul li a:visited 
+{
+  color: #1C5069;
+  font-weight: bold;
+}
+
+.accordion_content p a:active,
+.accordion_content p a:hover, 
+.accordion_content ul li a:active, 
+.accordion_content ul li a:hover 
+{
+  color: #F0FFFF;
+  background-color: #9B8C14;
+} 
+
+

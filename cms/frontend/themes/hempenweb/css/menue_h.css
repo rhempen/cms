@@ -1,0 +1,149 @@
+
+/*======================================================
+  01 Das umgebende DIV gestalten
+  ====================================================== */
+#navibereich {
+	width: 100%;
+	background:  #9E987E;
+  height: 1.9em;
+  border-top: 1px solid #000000;
+  border-bottom: 1px solid #000000;
+}
+
+#filler {
+	float: left;
+	width: 20%;
+  height: 1.9em;
+}
+
+#navi {
+  float: left;
+	width: auto;
+	border-top: 0px solid transparent;	/* default: ein Oberstrich */
+	border-bottom: 0px solid transparent;	/* default: ein Unterstrich */
+  display: table; 
+}
+
+.ebene01 {
+	background: #9E987E;
+}
+
+#navi.right {
+  float: right;
+}
+
+#navi.left {
+  float: left;
+}
+
+/*======================================================
+  02 die ungeordnete Liste in Ebene 1 gestalten
+  ======================================================*/
+#navi ul {
+  margin: 0;
+  padding: 0;	
+	text-align: center;
+	background: #9E987E;
+}
+
+#navi li  {
+  margin: 0;
+  padding: 0;	
+	float: left; 
+	list-style-type: none;
+	width: 10em;
+}
+
+a {
+	text-decoration: none;
+  font-size: 1em;
+}
+
+a:hover {
+	font-weight: bold;	
+  color: #F0FFFF;
+  background-color: #9B8C14;
+}
+
+.navi {
+	background: #9E987E;
+}
+
+/*======================================================
+  03 Hyperlinks der Ebene 1 gestalten
+  ======================================================*/
+
+#navi li a {
+	display: block;
+  font-weight: bold;
+  padding: 0.33em 1em;
+  color: #1C5069;
+}
+
+#navi a:hover {
+	background-color: #9B8C14;
+  color: #F0FFFF; 
+}
+
+
+/* ==========================================================================================
+	Spezifität erhöhen -> nützt aber leider nur, solange der Cursor mit gedrücketer Maustaste über dem Link ist.
+	Damit der Link Weiss mit schwarzer Schrift bleibt, muss in nav.php die CSS-Klasse .active gesetzt werden. 
+	========================================================================================= */
+#navi li a:active
+{
+	color: #F0FFFF !important;
+	background-color: #9B8C14 !important;
+}
+
+.active
+{
+	color: #F0FFFF !important;
+	background-color: #9B8C14 !important;
+}
+
+/*======================================================
+  04 Ebene 2 verstecken
+  ====================================================== */
+#navi li ul
+{
+	position: absolute;
+	left: -9999px;	
+	top: -9999px;
+	display: inline;
+	width: 0;
+	height: 0;
+}  
+
+/*======================================================
+  05 Ebene 2 sichtbar machen
+  li.sfhover ist ein Workaround für IE < Version 7 --> suckerfish.js
+  ====================================================== */
+#navi li:hover ul,
+#navi li.sfhover ul
+{
+	left: auto;
+	top: auto;
+	display: block;
+	height: auto;
+	width: 11em;	
+}
+
+/* Korrektur fuer den IE 5 und 6 */
+* html #navi li:hover ul, 
+       #navi li.sfhover ul {
+	margin-left: 0px;    
+	ma\rgin-left: -5.5em;    
+} 
+
+/* ==============================================
+   06 Die Rausklappliste korrekt einfärben
+   ==============================================*/
+#navi ul.ebene02 li a { 
+  border-top: 1px solid #504539;
+	border-left: 1em solid #1C5069; /*#504539;*/
+	font-size: 0.8em;
+	font-weight: bold;
+	padding: 0.5em 1em 0.5em 1em;
+ }
+

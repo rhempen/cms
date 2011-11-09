@@ -1,0 +1,125 @@
+
+/*======================================================
+  01 Das umgebende DIV gestalten
+  ====================================================== */
+#navibereich {
+	width: 100%;
+	background-color: #d7d2d1;		
+	background-color: #8c8c8c;		
+  	height: auto;
+	min-height: 3.2em;
+  	border-bottom: 0px solid #8c8c8c;	
+}
+
+#filler {
+   clear: both;
+	float: left;
+	width: 0px;
+  	height: auto;
+	min-height: 3.2em;
+}
+
+#navi {
+  	float: left;
+	width: auto;
+	border-top: 0px solid transparent;	/* default: ein Oberstrich */
+	border-bottom: 1px solid transparent;	/* default: ein Unterstrich */
+  	display: table; 
+}
+
+.ebene01 {
+	background-color: #d7d2d1;		
+}
+
+#navi.right {
+  	float: right;
+}
+
+#navi.left {
+  	float: left;
+}
+
+/*======================================================
+  02 die ungeordnete Liste in Ebene 1 gestalten
+  ======================================================*/
+#navi ul {
+  	margin: 0;
+  	padding: 0;	
+	text-align: center;
+	background:  #8c8c8c;
+}
+
+#navi  li  {
+ 	margin: 0;
+  	padding: 0;	
+	float: left; 
+	list-style-type: none;
+	width: auto;
+}
+
+a:hover {
+  	font-weight: bold;	
+  	color: #FFFFFF;
+  	background-color: #8c8c8c;
+}
+
+.navi {
+	background-color:  #8c8c8c;
+	line-height: auto;
+	font-size: 1.7em;
+}
+
+/*======================================================
+  03 Hyperlinks der Ebene 1 gestalten
+  ======================================================*/
+
+#navi li a {
+	display: block;
+  	font-weight: bold;
+  	padding: 0.33em 1em;
+}
+
+#navi a:hover {
+	background-color: #8c8c8c;
+}
+
+/*======================================================
+  04 Ebene 2 verstecken
+  ====================================================== */
+#navi li ul
+{
+	position: absolute;
+	left: -9999px;	
+	top: -9999px;
+	display: inline;
+	width: 0;
+	height: 0;
+}  
+
+/*======================================================
+  05 Ebene 2 sichtbar machen
+  li.sfhover ist ein Workaround für IE < Version 7 --> suckerfish.js
+  ====================================================== */
+#navi li:hover ul,
+#navi li.sfhover ul
+{
+	left: auto;
+	top: auto;
+	display: block;
+	height: auto;
+	width: 8em;
+}
+
+/* ==============================================
+   06 Die Rausklappliste korrekt einfärben
+   ==============================================*/
+#navi ul.ebene02 li a { 
+    border-top: 1px solid  #d7d2d1;
+	border-left: 1em solid  #d7d2d1;
+	font-size: 0.6em;
+	font-weight: bold;
+	text-align: left;
+	padding: 0.2em 0.5em 0.2em -0.7em;
+	width: 10em;
+ }
+

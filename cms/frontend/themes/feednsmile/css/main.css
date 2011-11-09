@@ -1,0 +1,183 @@
+/* zur�cksetzen der Innen und Aussenabst�nde f�r alle Html Elemnte */
+ * {
+ margin:0; padding: 0
+ }
+ 
+/* (de) Erzwingen vertikaler Scrollbalken in Netscape, Firefox und Safari Browsern */
+html{
+	height: 100%
+}
+
+body{ 
+	min-height: 101%;
+/* (de) Vorgabe der Standardfarben und Textausrichtung */
+	color: #424242;
+	background-color: #dedede;
+	text-align: left;
+}
+
+/* das folgende Statemant verhindert, dass ein Link umrahmt wird, wenn man draufklickt */
+*:focus, *:active  {
+	outline: none; 
+}
+
+/*
+p.intro { 
+	font-size: 14px;
+	line-height: 23px;
+}
+*/
+/* (de) Layout: Breite, Hintergrund, Rahmen */
+#page_margins
+{
+	width: 1024px;
+	margin: 20px auto;
+	border: 0px;
+	text-align:left;
+}
+
+#page
+{
+	min-height: 400px;
+}
+
+
+
+/* (de) Zentrierung des Layouts in alten IE-versionen */
+body
+{
+	text-align: center;
+}
+
+a:link, a:visited, a:active 
+{
+  color: #FF6600;
+	font-family: "Lucida Handwriting", "Sans Serife", Helvetica;
+	font-weight: normal;
+	text-decoration: none;
+}
+
+a:hover
+{
+  color: #FF0000;
+	text-decoration: underline;
+}
+
+#header
+{
+	z-index: 1;
+	height: 250px;
+	background-color: #f2b578;
+	background-image: url(../img/bgheader.png);
+	background-position: top left;
+	background-repeat: repeat;
+	padding: 0;
+}
+
+#home_bild {
+	z-index: 2;
+	position:	absolute;
+	background-color: transparent;
+/*	background-image: url(http://hero02/cms2/media/navi_069/_images/header01.png); 
+	background-image: url("<?php echo $frontget->get_random_bild();?>");
+	background-repeat: no-repeat;*/
+	padding: 0;
+	width: 760px;
+	height: 250px;
+	padding-left: 264px;
+}
+
+#home_link
+{
+	position:	absolute;
+	float: left;
+	z-index: 3;
+	height: 180px;
+	width: 590px;
+	background-color: transparent;
+	background-image: url(../img/logo.png); /* 500x130 */
+	background-repeat: no-repeat;
+	background-position: 87px 50px;
+	padding: 0;
+	cursor: pointer;
+}
+
+
+#main
+{
+	min-height: 480px;
+	background-color: transparent;
+	background-image: url(../img/bgcontent.png);
+	background-repeat: repeat;
+	padding: 0px;
+	padding-top: 30px;
+}
+
+/* (de) Definition 2 Kolonnen (navigation und spalte 1 */
+#navigation
+{
+	float: left;
+	width: 264px;
+	border: 0;
+	margin-top: 0px;
+}
+
+
+#spalte3
+{
+	margin-left: 264px;
+	border: 0;
+	border-left: 1px solid #f0f0f0;
+}
+
+#spalte3_inhalt
+{
+	padding: 0px;
+	min-height: 480px;
+}
+
+* html #spalte3_inhalt {
+  height: 480px;
+}
+
+#spalte2
+{
+	visibility: hidden;
+	width: 1px;
+	background-color: red;
+	float: right;
+	border: 0;
+	min-height: 480px;
+}
+
+* html #spalte2 {
+  height: 480px;
+}
+
+.clearfix
+{
+	display: block;
+}
+
+#footer
+{
+	height: 20px;
+	color: #323232;
+	background-color: transparent;
+	background-image: url(../img/bgcontent.png);
+	background-repeat: repeat;
+	padding-left: 20px;
+	border: 0px;
+	clear: both;
+	display: block;
+	font-size: 11px;
+	border-top: 0px solid #f0f0f0;
+}
+
+.even {
+	background-color: #F3F3F3;
+}
+
+.odd {
+	background-color: #FFFFFF;
+}

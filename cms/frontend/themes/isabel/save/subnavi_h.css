@@ -1,0 +1,67 @@
+/*_________Definition des subnavi-containers */
+
+#subnavibereich {
+	width: 960px;
+	height: auto;
+	min-height: 1.6em;
+	background-color: #8C8C8C;	
+	border-bottom: 0px dashed  #d7d2d1;	
+}
+
+#filler_subnavi {
+	clear: both;
+	background-color: inherit;	
+	padding-left: 200px;
+}
+
+#subnavi{
+	float: right; /* default: rechts -> kann im spezifischen CSS überschrieben werden */
+	overflow: hidden;
+	width: auto;
+	margin: 0px;
+	padding: 0px;
+	padding-left: 200px;
+	display: table; /* mit display table erscheinen die SubMenues ÜBER den anderen DIV's */
+	background-color: inherit;	
+	background-color: #8C8C8C;	
+}
+
+#subnavi.left {
+	float: left;
+}
+
+#subnavi.right {
+	float: right;
+}
+
+/*_________Format fuer Linksverhalten innerhalb des subnavis */
+#subnavi li, 
+#subnavi a {
+	color: #448;
+	background-color: inherit;
+	display: inline;
+}
+
+#subnavi li {
+	background-color: inherit;
+	padding: 0 1em;
+}
+
+/*_________Pseudoklassen fuer links im subnavi-container */
+
+#subnavi a:visited {
+	background-color: inherit;
+	color: #448;
+}
+
+#subnavi li:hover, #subnavi li a:hover {
+	color: #ffffff;
+  	background-color: #8c8c8c;
+}
+
+/* hover und aktiver link */
+#subnavi a.subactive, #subnavi li.active  {
+	color: #ffffff;
+  	background-color: #8c8c8c;
+}
+
