@@ -43,9 +43,6 @@ class navigationRedirect
 		$tab_prefix = $this->mPrefix;
 		unset($_GET);
 		$uri = $_SERVER['REQUEST_URI'];
-//		echo '<br>'.__FILE__;	
-//		echo '<br>'.$uri;	
-//		echo '<br>Rootdir='.ROOTDIR;
 
 //  aus $uri wird nur der String in ROOTDIR entfernt, weil nur die folgenden 
 //	Parameter gültig sind.		
@@ -57,8 +54,8 @@ class navigationRedirect
 		{
 			$uri = substr($uri,1);
 		}
-//		echo '<br>$uri='.$uri;	
-		if (strlen($uri) > 0)
+
+        if (strlen($uri) > 0)
 		{
 			$uri = explode('/',$uri);
 			$k = 0;
@@ -66,8 +63,7 @@ class navigationRedirect
 			{
 				if ($t != '' && $t != ROOTDIR && !preg_match('/index.php/',$t))
 				{
-//					echo '<br>$uri['.$i.']='.$t;
-					// start=9 muss separat behandelt werden (Bl�ttern in Bildern)
+                    // start=9 muss separat behandelt werden (Bl�ttern in Bildern)
 					if (preg_match('/start/',$t)) {
 						$start = explode('_', $t);
 						$_GET['start'] = $start[1];
@@ -101,7 +97,6 @@ class navigationRedirect
 			}
 		}
 		
-//		echo "<br>navtxt=".$_GET['navtxt'];
 		if ($_GET['navtxt'] != '') {
 			$abfrage = 'SELECT distinct r.navid FROM '.$tab_prefix.'redirect as r inner join '.$tab_prefix.'navigation as n on r.navid=n.nav_id where r.kuerzel="'.$_GET['navtxt'].'" and r.subid=0 and r.pagid=0 and n.aktiv="j"';
 			$navid = $db->queryOne($abfrage);						
@@ -113,11 +108,21 @@ class navigationRedirect
 			$abfrage = 'SELECT subid FROM ' .$tab_prefix. 'redirect where kuerzel="'.$_GET['subtxt'].'" and navid='.$navid.' and subid > 0 and pagid=0';
 			$sid = $db->queryOne($abfrage);			
 			// wenn subid nicht gefunden wird, muss auch noch pagid gesucht werden, da eine Unterseite auch zu einem
-			// hauptnavigationspunkt erstellt werden kann.
+			// Hauptnavigationspunkt erstellt werden kann.
 			$subid = $sid > 0 ? $sid : 0;
-			if ($subid == 0 && $_GET['pagtxt'] == '') { $_GET['pagtxt'] = $_GET['subtxt']; } 
+			if ($subid == 0 && $_GET['pagtxt'] == '') { 
+              $_GET['pagtxt'] = $_GET['subtxt']; 
+              $_GET['subtxt'] = ''; // Es gibt hier keinen Subtxt, da Subid = 0
+              } 
 		}
 
+        // Suche der Pagid für eine Unterseite zu einem Haupt-Navigationspunkt
+		if ($_GET['pagtxt'] != '' && (int)$navid > 0 && (int)$subid == 0) {
+			$abfrage = 'SELECT pagid FROM ' .$tab_prefix. 'redirect where kuerzel="'.$_GET['pagtxt'].'" and navid='.$navid.' and subid='.$subid.' and pagid >0';
+			$pagid = $db->queryOne($abfrage);						
+		}
+                
+        // Suche der Pagid für eine Unterseite zu einem Unter-Navigationspunkt
 		if ($_GET['pagtxt'] != '' && (int)$navid > 0 && (int)$subid > 0) {
 			$abfrage = 'SELECT pagid FROM ' .$tab_prefix. 'redirect where kuerzel="'.$_GET['pagtxt'].'" and navid='.$navid.' and subid='.$subid.' and pagid >0';
 			$pagid = $db->queryOne($abfrage);						
@@ -181,30 +186,19 @@ class navigationRedirect
 	
 	/**
 	 * 	Link erstellen anhand GET-Parameters navid, subid, pagid 
-	 *	@param: $_GET $pagid
+	 *	@param: $pagid, $subid, $navid
 	 *	@return: $link
 	*/
 	public function set_link($pagid=0)
 	{
-		$db = $this->mDb;
-		$tab_prefix = $this->mPrefix;
 		$link = '';
 		$navid = (int)$_GET['navid'];
 		$subid = (int)$_GET['subid'];
 		$pagid = (int)$pagid;
-		if (SMURL == 'ja') {
-			$params = '/'.$_GET['navtxt'];
-			$params .= $_GET['subid']!='' ? '/'.$_GET['subtxt'] : '';
-			if ($pagid > 0) { $params .= '/'.$this->get_kuerzel_pagid($navid, $subid, $pagid); }			
-//			$params .= '.html';
-			$link = $_SERVER['PHP_SELF'].$params;
-			$link = preg_replace('/index.php\//','',$link);
-		} else {
-			$params = '?navid='.$navid;
-			$params .= $subid !='' ? '&subid='.$subid : '';
-			if ($pagid > 0) { $params .= '&pagid='.$pagid; }
-			$link = $_SERVER['PHP_SELF'].$params;
-		}
+        // Link zusammenbauen, abhängig davon, ob SMURL aktiviert ist
+        $link = $this->set_navlink($navid,$subid,$pagid);
+        // jetzt noch eine ev. vorhandene Startnr für Listitems anfügen
+        $link .= $this->add_start_to_url( );
 		return $link;
 	}
 	
@@ -238,11 +232,12 @@ class navigationRedirect
 	}
 	
 	/**
-	 * 	Parameter start abh�ngig von SMURL formatieren 
+	 * 	Parameter start abhaengig von SMURL formatieren 
 	 *	@param: $nr - Seiten- oder Bildnummer
 	 *	@return: $start - formatierter Parameter
 	*/ 
-	public function set_start($nr) {
+	public function set_start($nr) 
+    {
 		if (SMURL == 'ja') {
 			$start = 'start_'.$nr;
 		} else {
@@ -250,6 +245,36 @@ class navigationRedirect
 		}
 		return $start;		
 	}	
-	
+
+	/**
+	 * 	Parameter start an einen Link anfuegen
+     *  das Cookie CrossLink wird beim Klick auf einen Listitem-Pfeil gesetzt 
+     *  und kann  daher hier ausgewertet werden.
+     *  $_SERVER['HTTP_REFERER'] könnte allenfalls auch ausgewertet werden.
+	 *	@return: $start - formatierter Parameter
+	*/ 
+	private function add_start_to_url() 
+    {
+        $referer = $_SERVER['HTTP_REFERER'];
+        $cookie  = $_SERVER['HTTP_COOKIE']; 
+        $cvalue  = $_SERVER['HTTP_COOKIE']['CrossLink']; 
+        $separator = SMURL == 'ja' ? '/' : '&';
+
+        if (is_array($cookie) && isset($cookie['CrossLink'])) {
+          $params = SMURL == 'ja' ? explode('/',$cookie['CrossLink']) : explode('&',$cookie['CrossLink']);
+        } else {
+          $params = SMURL == 'ja' ? explode('/',$referer) : explode('&',$referer);
+        }           
+         if (is_array($params)) {
+          foreach($params as $key => $value) {
+            if (preg_match('/start/',$value)) {
+                $start .= $separator.$value;                 
+            }
+          }
+        }
+        
+		return $start;		
+	}	
+    
 }
 

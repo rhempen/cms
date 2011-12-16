@@ -1,4 +1,4 @@
-// Javascripts für cms Frontend (themenabhängig)
+// Javascripts fï¿½r cms Frontend (themenabhï¿½ngig)
 // Author: Roland Hempen
 // Creation Date: 29.12.2009
 // 
@@ -21,32 +21,22 @@
 	jQuery NoConflict laden und Datatables initialisieren
   -------------------------------------------------------------------------------*/
  // <![CDATA[
-		jQuery.noConflict();
-		jQuery(document).ready(function() { 
-			var tab = jQuery('#datatab').dataTable( {
-							"bPaginate": true,
-							"bLengthChange": true,
-							"bFilter": true,
-							"bSort": true,
-							"bInfo": true,
-							"bAutoWidth": false } ); 
-		} );
+    jQuery.noConflict();
+    jQuery(document).ready(function() { 
+        var tab = jQuery('#datatab').dataTable( {
+                        "bPaginate": true,
+                        "bLengthChange": true,
+                        "bFilter": true,
+                        "bSort": true,
+                        "bInfo": true,
+                        "bAutoWidth": false } ); 
+    } );
 // ]]>
 
 /*-------------------------------------------------------------------------------
-  Accordion initialisieren bei onLoad
+  NiftyCorners aktivieren fï¿½r Teaser etc.
   -------------------------------------------------------------------------------*/
-		jQuery.noConflict();
-  	loadAccordion = function() {
-    	if ($("vertical_container")) {
-        var verticalAccordion = new accordion('vertical_container');
-      }
-    }
-
-/*-------------------------------------------------------------------------------
-  NiftyCorners aktivieren für Teaser etc.
-  -------------------------------------------------------------------------------*/
-	startNifty = function() {
+	var startNifty = function() {
 		Nifty("div.teaser","big");
 	}
 
@@ -54,6 +44,5 @@
   Events bei onLoad registrieren
   -------------------------------------------------------------------------------*/
     Event.observe(window, 'load', sfHover, false);
-    Event.observe(window, 'load', loadAccordion, false);
     Event.observe(window, 'load', startNifty, true);
 

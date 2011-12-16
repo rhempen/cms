@@ -1,4 +1,4 @@
-/* zurücksetzen der Innen und Aussenabstände für alle Html Elemnte */
+/* zurï¿½cksetzen der Innen und Aussenabstï¿½nde fï¿½r alle Html Elemnte */
  * {
  margin:0; padding: 0
  }
@@ -16,11 +16,30 @@ background-color: #d7d2d1;
 text-align: left;
 }
 
+body, td {
+  font-family: 'Century Gothic',Helvetica,Arial,Verdana,sans-serif;
+}
+
 /* das folgende Statemant verhindert, dass ein Link umrahmt wird, wenn man draufklickt */
 *:focus, *:active  {
 	outline: none; 
 }
 
+h1 {
+  color: #FFFFFF;
+}
+
+h2 {
+  border-bottom: 1px solid #646464;
+  border-top: 1px solid #646464;  
+  padding-bottom: 0px;
+}
+
+a:link, a:visited, a:active {
+    color: #dcdcdc;
+    font-weight: normal;
+    text-decoration: none;
+}
 
 /* (de) Layout: Breite, Hintergrund, Rahmen */
 
@@ -130,7 +149,7 @@ display: block;
 font-size: 11px;
 }
 
-/* CSS für Bilder-Leiste */
+/* CSS fï¿½r Bilder-Leiste */
 .img_medium_left, .img_medium_right {
 	height: 300px;
 	background-color: transparent;
@@ -166,4 +185,19 @@ font-size: 11px;
 	background-color: #323232; /*#535250; */
 }
 
+/* Ãœbersichtsboxen auf Pages-Overview */
+.kurztxt_container_auswahl {
+    float: left;
+    min-height: 125px;
+    line-height: 20px;
+    width: 460px;
+}
 
+.kurztxt_container_auswahl p {
+  padding-bottom: 0;
+}
+
+.subspalte_detail_r {
+  width: auto;
+  padding: 50px 0px 0px 20px;
+}

@@ -1,11 +1,17 @@
 <?php
 // zu Hause
-if ($_SERVER['HTTP_HOST'] == 'a4a' || $_SERVER['HTTP_HOST'] == 'hero') 
+if (preg_match('/^hero/',$_SERVER['HTTP_HOST']) || $_SERVER['HTTP_HOST'] == 'localhost') 
 { 
-	ini_set('include_path', ini_get('include_path') . ';c:\xampp\xampp\php\pear;c:\xampp\xampp\htdocs\cms');
-	$login_file = '\xampp\xampp\htdocs\cms\db\db_login_pear.php';
+	ini_set('include_path', ini_get('include_path') . ';c:\xampp\php\PEAR;c:\xampp\htdocs\\'.ROOTDIR);
+	$login_file = '\\xampp\\htdocs\\'.ROOTDIR.'\\db\\db_login_pear.php';
 } 
-// www.hempen.ch
+// publicdev
+elseif ($_SERVER['HTTP_HOST'] == 'www.publicdev.ch' || $_SERVER['HTTP_HOST'] == 'publicdev.ch')
+{ 
+	ini_set('include_path', ini_get('include_path'));
+  $login_file = '/home/httpd/vhosts/publicdev.ch/httpdocs/'.ROOTDIR.'db/db_login_pear.php';
+} 
+
 elseif ($_SERVER['HTTP_HOST'] == 'www.hempen.ch' || $_SERVER['HTTP_HOST'] == 'hempen.ch') 
 { 
 	ini_set('include_path', ini_get('include_path'));

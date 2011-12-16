@@ -1,1 +1,44 @@
-@import url("fragmente_save.css");
+.links {
+  background-image: url("../img/bgcontent.png");
+  background-color: #FFF;
+  border: 0px solid #dedede;
+  width: 480px;
+  height: 400px;
+  float: left;
+  overflow: auto;
+}
+
+.rechts {
+  background-image: url("../img/bgcontent.png");
+  background-color: #FFF; 
+  width: 220px;
+  height: auto;
+  float: right;
+}
+
+.teaserwrapper {
+  background-image: url("../img/bgcontent.png");
+  background-color: #FFF;
+  max-width: 260px;
+}
+
+.teaser {
+  background-color: #FFF;
+  padding: 10px;
+}
+
+.teasertitle {
+  font-size: 20px;
+  line-height: 21px;
+}
+
+.teasertext {
+  padding: 5px;
+  background-color: #f3f3f3;
+}
+
+#teaser2, #teaser3 {
+  background-color: #FF9900; 
+  url("../img/bgheader.png")
+}
+

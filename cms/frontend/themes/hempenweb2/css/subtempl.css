@@ -302,31 +302,6 @@ ________________________________________________*/
 	text-align: center;
 }
 
-
-
-/*______________________________________________
-Container fuer Counter / Kuenstlerdetailseite 
-________________________________________________*/
-/*
-.counter_kuenstlerdetail
-{
-	height: auto;
-	margin-bottom: 0px;
-	text-align: right;
-	clear: both;
-}
-*/
-/*______________________________________________
-Counter / Kuenstlerdetailseite (500_260v)
-________________________________________________
-.counter_kuenstlerdetail_vertikal
-{
-	height: auto;
-	width: 250px;
-	margin-bottom: 0px;
-	text-align: right;
-}
-*/
 /*______________________________________________
 Container fuer Counter / Uebersicht - Auwahlseiten
 ________________________________________________*/
@@ -456,7 +431,7 @@ ________________________________________________*/
 	/*text-align: right; */
 	height: 360px;
 	width: 330px;
-	/* display: inline; damit wird die Höhe übersteuert */
+	/* display: inline; damit wird die Hï¿½he ï¿½bersteuert */
 }
 
 .img_medium_left
@@ -464,7 +439,7 @@ ________________________________________________*/
 	text-align: left;
 	height: 360px;
 	width: 300px;
-	/* display: inline;  damit wird die Höhe übersteuert */
+	/* display: inline;  damit wird die Hï¿½he ï¿½bersteuert */
 }
 
 .img_galerie
@@ -477,7 +452,7 @@ ________________________________________________*/
 .img_fix
 {
 	text-align: left;
-	min-height: 320px;
+	min-height: 220px;
 	width: 300px;
 }
 
@@ -522,11 +497,13 @@ ________________________________________________*/
 }
 
 .galerie_wrapper a:hover {
-  	background-color: transparent;  
+  color: #f0f0f0;
+  background-color: #9B8C14;
+  font-weight: bold;
 }
 
 .bildleiste_wrapper a:hover {
-  	background-color: #DE001F;
+  background-color: #9B8C14 /*#1B4F68;*/
 }
 
 
@@ -548,11 +525,11 @@ ________________________________________________*/
 
 
 .rect_aktiv {
-	background-color: #FF0000;
+	background-color: #FF0000; /*#9B8C14;*/
 }
 
 .rect_passiv {
-	background-color: #ff6600;
+	background-color: #434343;
 }
 
 /* klassen fuer Link1 und Link2 auf den Unterseiten */

@@ -83,11 +83,13 @@ class configMaintain
 		 */
 		public function update_website_media()
 		{
-			global $db, $pictdb, $navi, $msg;
+			global $db, $pictdb, $navi, $pages, $frgmain, $msg;
 			$newmedia = MEDIA_ROOT;
 			$webroot  = ROOTDIR;			
 			$msg = $pictdb->update_bildpfade();
 			$msg = $navi->update_bildpfade();
+            $msg = $pages->update_bildpfade();
+            $msg = $frgmain->update_bildpfade();
 			return $msg;
 		}
 		

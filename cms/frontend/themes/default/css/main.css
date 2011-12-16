@@ -1,19 +1,25 @@
 /* zurücksetzen der Innen und Aussenabstände für alle Html Elemnte */
  * {
- margin:0; padding: 0
+	margin:0; padding: 0
  }
  
 /* (de) Erzwingen vertikaler Scrollbalken in Netscape, Firefox und Safari Browsern */
 html{
-height: 100%
+  	height: 100%
 }
 
 body{ 
-min-height: 101%;
+  	min-height: 101%;
 /* (de) Vorgabe der Standardfarben und Textausrichtung */
-color: #232323;
-background-color: #999967;
-text-align: left;
+  	color:  #047391;
+  	background-color: #960500;
+	background-image: url(../img/web_gigi_orange.jpg);
+  	background-repeat : no-repeat;
+ 	text-align: left;
+}
+
+p, li, td {
+	font-size: 1em;
 }
 
 /* das folgende Statemant verhindert, dass ein Link umrahmt wird, wenn man draufklickt */
@@ -21,125 +27,150 @@ text-align: left;
 	outline: none; 
 }
 
-
 /* (de) Layout: Breite, Hintergrund, Rahmen */
-
 #page_margins
 {
-width: 960px;
-margin: 20px auto;
-border: 0px;
+	width: 95%;
+	margin: 35px auto;
+	border: 0px;
 }
 
 #page
 {
-min-height: 600px;
+	min-height: 600px;
+	width: 950px;
 }
-
-
 
 /* (de) Zentrierung des Layouts in alten IE-versionen */
 body
 {
-text-align: center;
+	text-align: center;
 }
-
-a:link, a:visited, a:active 
-{
-  color: #D90000;
-}
-
 #page_margins
 {
-text-align:left;
+	text-align:left;
 }
   
 #header
 {
-height: 100px;
-background-color: transparent;
-background-image: url(../img/logo.png);
-background-position: top left;
-background-repeat: no-repeat;
-padding: 0;
+	height: 100px;
+	background-color: #424242;
+	background-image: url(../img/logo.png);
+	background-position: 20px top;
+	background-repeat: no-repeat;
+	padding: 0;
+	width: 950px;
 }
 
 #home_link
 {
-height: 90px;
-width: 200px;
-background-color: transparent;
-float: left;
-cursor: pointer;
+	height: 90px;
+	width: 200px;
+	background-color: transparent;
+	float: left;
+	cursor: pointer;
 }
 
 #main
 {
-min-height: 480px;
-background-color: transparent;
-padding: 0px;
+	clear: both;
+	min-height: 480px;
+	padding: 0px;
 }
+
 
 /* (de) Definition 2 Kolonnen (navigation und spalte 1 */
 #navigation
 {
-float: left;
-width: 200px;
-border: 0;
+	width: 200px;
+	border: 0;
+	float: left;
 }
 
+* html #navigation 
+{
+  width: 197px;
+}
 
 #spalte3
 {
-margin-left: 200px;
-border: 0;
-border-left: 1px solid #232323;
+	margin-left: 200px;
+	width: 750px;
+	border: 0;
+	padding: 0;
 }
+
+* html #spalte3
+{
+  margin-left: 197px;
+}
+
 
 #spalte3_inhalt
 {
-padding: 0px;
-min-height: 480px;
+	margin: 0;
+	padding: 0;
+	min-height: 480px;
+	background-color: #FFFFFF;
 }
 
-* html #spalte3_inhalt {
-  height: 480px;
+* html #spalte3_inhalt
+{
+  height: 400px;
 }
+
 
 #spalte2
 {
-visibility: hidden;
-width: 1px;
-background-color: red;
-float: right;
-border: 0;
-min-height: 480px;
-}
-
-* html #spalte2 {
-  height: 480px;
+	visibility: hidden;
+	width: 1px;
+	background-color: red;
+	float: right;	
+	border: 0;
+	height: 480px;
 }
 
 .clearfix
 {
-display: block;
+	display: block;
 }
 
+
+/* CSS für automatischen Bildwechsler */ 
+#imageContainer1 img {
+  	display:none;
+  	position: absolute;
+}
+/* Divs im footer verbergen */
+div#impressum, div#reflinks, div#servlinks {
+  display: none;
+}
 
 #footer
 {
-height: 20px;
-color:#323232; 
-background: transparent;
-padding-left: 20px;
-border: 0px;
-clear: both;
-display: block;
-font-size: 11px;
-border-top: 1px solid #232323;
+	clear: both;
+	height: 20px;
+	width: 730px;
+	color: #e4bebd; 
+	background: #047391;
+	margin-left: 200px;
+	padding-left: 20px;
+	border: 0px;
+	display: block;
+	font-size: 11px;
+	border-top: 1px solid #232323;
 }
 
-.img_container_thumb{
+* html #footer 
+{
+  width: 750px;
+}
+
+.error {
+  color: #DE001F 
+}
+
+.img_container_thumb {
 	height: auto;
 }
 
@@ -172,9 +203,9 @@ border-top: 1px solid #232323;
 
 
 .rect_aktiv {
-	background-color: #D90000; 	
+	background-color: #FF66FF; 	
 }
 
 .rect_passiv {
-	background-color: #504539; /*#535250; */
+	background-color: #1C5069; /*#535250; */
 }

@@ -1,10 +1,12 @@
 <!--beginn template einspaltig_960_tpl.html  -->
 <div class="subcontainer">
 	<!-- BEGIN bilder -->
-	<div class="img_medium_960">{bild1}</div>
-	<div class="bildleiste_wrapper" style="float:rigth;{leiste}">{bilder_leiste}</div>
-	<div class="galerie_wrapper" style="float:rigth;{galink}">{link_galerie}</div>
-	<p style="display:none;">{galerie}</p>
+    <div {imagecontainer}class="img_medium_left">
+        {xfade}<div class="{img_fix}">{bild1}</div>
+        <div class="bildleiste_wrapper" style="float:rigth;{leiste}">{bilder_leiste}</div>
+        <div class="galerie_wrapper" style="float:rigth;{galink}">{link_galerie}</div>
+        <p style="display:none;">{galerie}</p>
+    </div>
     <!-- END bilder -->
 	<!-- BEGIN inhalt -->
 	<div class="kurztxt_container" style="width:500px;float:left;margin-left:25px;">				
@@ -14,12 +16,15 @@
 		{zusatztext}
 		{von_bis}
 		{kurztext}
-		{langtext}
+        {langtext}
 		{link_weiter}
 		{link1}
 		{link2}
 		</div>
 	</div>					
+	<div class="spalte_360_r" style="margin-left:610px; min-height:50px; margin-top:150px;">
+		{langtext}
+	</div>
 	<!-- END inhalt -->
 	<!-- BEGIN kontaktform -->
 	<div class="kontaktform">
@@ -30,8 +35,5 @@
 		{sitemap}
 	<!-- END sitemap -->
 															
-	<div class="spalte_360_r" style="margin-left:610px; min-height:50px; margin-top:150px;">
-		{langtext}
-	</div>
 </div>
 <!--ende subtemplate-->

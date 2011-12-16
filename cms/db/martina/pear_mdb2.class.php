@@ -1,9 +1,15 @@
 <?php
 // zu Hause
-if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == 'hero02') 
+if (preg_match('/^hero/',$_SERVER['HTTP_HOST']) || $_SERVER['HTTP_HOST'] == 'localhost')
 { 
-	ini_set('include_path', ini_get('include_path') . ';e:\xampp\php\pear;e:\xampp\htdocs\cms2');
-	$login_file = '\xampp\htdocs\cms2\db\db_login_pear.php';
+	ini_set('include_path', ini_get('include_path') . ';c:\xampp\php\PEAR;e:\xampp\htdocs\\'.ROOTDIR);
+	$login_file = '\\xampp\\htdocs\\'.ROOTDIR.'\\db\\db_login_pear.php';
+} 
+// publicdev
+elseif ($_SERVER['HTTP_HOST'] == 'www.publicdev.ch' || $_SERVER['HTTP_HOST'] == 'publicdev.ch')
+{ 
+	ini_set('include_path', ini_get('include_path'));
+  $login_file = '/home/httpd/vhosts/publicdev.ch/httpdocs/'.ROOTDIR.'db/db_login_pear.php';
 } 
 // www.physio-allschwil.ch
 elseif ($_SERVER['HTTP_HOST'] == 'www.physio-allschwil.ch' || $_SERVER['HTTP_HOST'] == 'physio-allschwil.ch') 

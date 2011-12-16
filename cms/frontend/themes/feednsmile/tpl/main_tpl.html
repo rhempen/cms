@@ -33,7 +33,6 @@
 	<script type="text/javascript" src="{host}lib/scriptaculous.js"></script> 
 	<script type="text/javascript" src="{host}lib/path_finder.js"></script> 
 	<script type="text/javascript" src="{host}lib/lightbox.js"></script> 
-	<script type="text/javascript" src="{host}lib/accordion.js"></script> 
 	<script type="text/javascript" src="{host}frontend/scripts/niftycorners.js"></script>
 	<script type="text/javascript" src="{host}frontend/scripts/global.js"></script>
 	{theme_js}
@@ -48,7 +47,8 @@
 				  <!-- BEGIN home -->
 					<div id="home_bild">{header_bild}</div>
 					<div id="home_link" title="Startseite" onclick="location.href='{home_link}';"></div>
-				  <input type="hidden" id="webroot" value="{webroot}" />
+                    <input type="hidden" id="webroot" value="{webroot}" />
+                    <input type="hidden" id="mediadir" value="{mediadir}" />
 					<!-- END home -->
 					<!-- BEGIN message -->
 					<div id="message">
@@ -62,12 +62,12 @@
   				  <div id="navi" class="<!-- BEGIN navi_h_richtung -->{richtung_navi}<!-- END navi_h_richtung -->">
   					<ul class="ebene01">
  						<!-- BEGIN navi_horiz -->
-  						<li class="navi"><a href="{link}"{hstyle}>{text}</a>{pipe}
-  						{ul_unavi_h_start}						  
+  						<li class="navi">{navi_h_link}{pipe}
+                          {ul_unavi_h_start}						  
   							<!-- BEGIN unavi_horiz -->
   						 	<li{unavi_h_aktiv}>{unavi_h_link}</li> 
   							<!-- END unavi_horiz -->
-  						{ul_unavi_h_ende}						  
+                          {ul_unavi_h_ende}						  
   						</li>
  						<!-- END navi_horiz -->
   					</ul>
@@ -75,10 +75,10 @@
  				</div> <!-- ende navibereich -->
 
 				<div id="servicebereich">
- 						<!-- BEGIN navi_service -->
+ 				  <!-- BEGIN navi_service -->
   				  <div id="service" class="<!-- BEGIN navi_s_richtung -->{richtung_navi}<!-- END navi_s_richtung -->">
   					<ul class="ebene01">
-  						<li class="navi{listyle}"><a href="{link}"{astyle}>{text}</a>{pipe}
+  						<li class="navi{listyle}">{service_link}{pipe}
   						{ul_uservice_start}						  
   							<!-- BEGIN uservice -->
   						 	<li{uservice_aktiv}>{uservice_link}</li> 
@@ -87,7 +87,7 @@
   						</li>
   					</ul>
   				  </div> <!-- ende servicenavigation -->
- 						<!-- END navi_service -->
+ 				  <!-- END navi_service -->		
  				</div> <!-- ende servicebereich -->
 
  				<!-- BEGIN subnavi_horizontal -->
@@ -124,7 +124,7 @@
 						</div> <!-- ende navigation_liste -->
 					</div> <!-- ende navigation -->
 	  				
-					<div id="spalte3"{dyn_margin}>
+					<div id="spalte3"<!-- BEGIN dyn_margin -->{dyn_margin}<!-- END dyn_margin -->>
 						<div id="spalte3_inhalt">							
 							<!--beginn subtemplate-->
 							<!-- BEGIN content -->

@@ -3,28 +3,28 @@
   01 Das umgebende DIV gestalten
   ====================================================== */
 #navibereich {
-	width: 100%;
-  	height: 2em;
-	background-color:  #504539;
-	border-top: 0px solid #504539;
-	border-bottom: 0px solid #504539;
+	width: 950px;
+	background:  #FFFFFF;
+  	height: 2.2em;
+  	border-bottom: 0px solid #960500;
 }
 
 #filler {
 	float: left;
 	width: 200px;
-  	height: 2em;
+  	height: 2.2em;
+  	background-color: #960500;
 }
 
 #navi {
   	float: left;
 	width: auto;
   	display: table; 
-  
 }
 
 .ebene01 {
-	background: #9E987E;
+	background-color:  #FFFFFF;
+	color: #047391;	
 }
 
 #navi.right {
@@ -42,6 +42,7 @@
   	margin: 0;
   	padding: 0;	
 	text-align: center;
+	background:  #FFFFFF; /*#960500;*/
 }
 
 #navi li  {
@@ -50,23 +51,27 @@
 	float: left; 
 	list-style-type: none;
 	width: 11em;
-	height: 1em;
+	text-transform: uppercase;
+	border-right: 0px dashed #047391; 
+	border-bottom: 0px dashed #047391;
 }
 
-a {
+#navi li a {
 	text-decoration: none;
-  font-size: 1em;
+  	font-size: 1em;
 }
 
-a:hover {
+#navi li a:hover {
 	font-weight: bold;	
-	color: #FFFFFF;
-	background-color: #d90000;
+  	color: #FFFFFF;
+  	background-color: #047391;
 }
 
 .navi {
-	background-color:  #9E987E; /* helles Braun */
-	background-color:  #504539; /* dunkles Braun */
+	color: #047391;
+	background: #FFCCFF;
+	/*#960500;
+	*/
 }
 
 /*======================================================
@@ -74,28 +79,27 @@ a:hover {
   ======================================================*/
 
 #navi li a {
-  display: block;
-	color: #F0F080;
-	border: 1px solid black;
-	padding: 0.3em 1em;
+	display: block;
+ 	font-weight: bold;
+  	padding: 0.33em 1em;
+	color: #047391;	
 }
-
-#navi a:hover {
-	color: #FFFFFF;
-	background-color: #d90000;
-}
-
 
 /* ==========================================================================================
 	Spezifität erhöhen -> nützt aber leider nur, solange der Cursor mit gedrücketer Maustaste über dem Link ist.
 	Damit der Link Weiss mit schwarzer Schrift bleibt, muss in nav.php die CSS-Klasse .active gesetzt werden. 
 	========================================================================================= */
-#navi li a.active
+#navi li a:active
 {
-	color: #000000 !important;
-	background-color: #d90000 !important;
+	color: #FFFFFF !important;
+	background-color: #047391 !important;
 }
 
+.active
+{
+	color: #FFFFFF !important;
+	background-color: #047391 !important;
+}
 
 /*======================================================
   04 Ebene 2 verstecken
@@ -122,7 +126,6 @@ a:hover {
 	display: block;
 	height: auto;
 	width: 11em;	
-	background-color: #ffe05a;
 }
 
 /* Korrektur fuer den IE 5 und 6 */
@@ -136,17 +139,15 @@ a:hover {
    06 Die Rausklappliste korrekt einfärben
    ==============================================*/
 #navi ul.ebene02 li a { 
-  border-top: 1px solid #504539;
-	border-left: 1px solid #504539;
-	font-size: 1em;
+  	border-top: 0px solid #047391;
+	border-left: 1em solid #047391;
+	font-size: 0.8em;
 	font-weight: bold;
-	padding: 0.4em 1em;  
-  background-color: #fff3c0; 
- 	color: #d90000;
-}
+	padding: 0.5em 1em 0.5em 1em;
+	background-color: #FFCCFF; 
+ }
 
-/* Spezifität erhöhen */
-#navi ul#ebene01 ul.ebene02 li a:hover {
-	background-color: #ffe05a;
-}
-
+#navi ul.ebene02 li a:hover {
+	background-color: #047391;
+	color: #FFFFFF;
+} 

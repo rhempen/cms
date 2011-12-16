@@ -16,7 +16,7 @@ div#introcontent {
 .verybig {
   font-size: 30px;
   line-height: 60px;
-  margin-top: -20px; /* übersteuert .titel_seite und .counter */
+  margin-top: -50px; /* übersteuert .titel_seite und .counter */
 }
 
 /* teaser - auf jeder beliebigen Seite */
@@ -27,7 +27,7 @@ div#introcontent {
 }
 
 .teaser {
-  width: 307px;
+  width: 327px;
   margin: 15px 0;
   padding: 5px;
   background-color: #F0F0F0; /* #CC6666; #9B8C14; */
@@ -83,22 +83,22 @@ div#introcontent .teaserwrapper ul {
 /* CSS-Notationen fuer Links im Footer */
 div#impressum {
   position: absolute;
-  margin-left: 150px;
+  margin-left: 140px;
 }
 
 div#servlinks {
   position: absolute;
-  margin-left: 350px;
+  margin-left: 340px;
 }
 
 div#reflinks {
   position: absolute;
-  margin-left: 555px;
+  margin-left: 545px;
 }
 
 div#refpics {
   position: absolute;
-  margin-left: 690px; 
+  margin-left: 725px; 
 }
 
 

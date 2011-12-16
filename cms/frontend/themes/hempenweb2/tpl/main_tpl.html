@@ -1,8 +1,8 @@
-<!-- BEGIN xml -->{xml_notation}<!-- END xml --><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- BEGIN xml -->{xml_notation}<!-- END xml -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
-	<!-- main_tpl.html V.20110120 hempenweb.ch -->
+	<!-- main_tpl.html V.20111130 hempenweb.ch theme: hempenweb2 -->
 
 	<!-- BEGIN header -->
 	{header}
@@ -29,12 +29,13 @@
 	<link href="{host}frontend/shared/css/shared_global.css" rel="stylesheet" type="text/css" media="screen" />
 	<link href="{host}{themes_dir}{theme}css/{theme_global}.css" rel="stylesheet" type="text/css"/>
 	<link rel="shortcut icon"  href="{host}{themes_dir}{theme}img/favicon.ico" type="image/x-icon" />
+	<script type="text/javascript" src="{host}lib/jquery-1.6.2.min.js"></script> 
+	<script type="text/javascript" src="{host}lib/jquery-ui-1.8.16.custom.min.js"></script> 
 	<script type="text/javascript" src="{host}lib/prototype.js"></script> 
 	<script type="text/javascript" src="{host}lib/scriptaculous.js"></script> 
 	<script type="text/javascript" src="{host}lib/effects.js"></script> 
 	<script type="text/javascript" src="{host}lib/path_finder.js"></script> 
 	<script type="text/javascript" src="{host}lib/lightbox.js"></script> 
-	<script type="text/javascript" src="{host}lib/accordion.js"></script> 
 	<script type="text/javascript" src="{host}frontend/scripts/niftycorners.js"></script>
 	<script type="text/javascript" src="{host}frontend/scripts/global.js"></script>
 	{theme_js}
@@ -48,8 +49,9 @@
 			<div id="page">
 				<div id="header">
 				  <!-- BEGIN home -->
-					<div id="home_link" title="" onclick="location.href='{home_link}'";> 
+                  <div id="home_link" title="" onclick="location.href='{home_link}'";> 
 				  <input type="hidden" id="webroot" value="{webroot}" />
+				  <input type="hidden" id="mediadir" value="{mediadir}" />
 				  <!-- END home -->
 					<!-- BEGIN message -->
 						{meldung}
@@ -59,16 +61,16 @@
 				</div><!-- ende header -->
 				
 				<div id="navibereich">
-          	<div id="filler"></div>
+                <div id="filler"></div>
   				  <div id="navi" class="<!-- BEGIN navi_h_richtung -->{richtung_navi}<!-- END navi_h_richtung -->">
   					<ul class="ebene01">
   						<!-- BEGIN navi_horiz -->
-  						<li class="navi"><a href="{link}"{style}>{text}</a>{pipe}
-  						{ul_unavi_h_start}						  
+  						<li class="navi">{navi_h_link}{pipe}
+                          {ul_unavi_h_start}						  
   							<!-- BEGIN unavi_horiz -->
   						 	<li{unavi_h_aktiv}>{unavi_h_link}</li> 
   							<!-- END unavi_horiz -->
-  						{ul_unavi_h_ende}						  
+                          {ul_unavi_h_ende}						  
   						</li>
   						<!-- END navi_horiz -->
   					</ul>
@@ -76,24 +78,24 @@
  				</div> <!-- ende navibereich -->
 
 				<div id="servicebereich">
-  				  <div id="service" class="{richtung_navi}">
+ 				  <!-- BEGIN navi_service -->
+  				  <div id="service" class="<!-- BEGIN navi_s_richtung -->{richtung_navi}<!-- END navi_s_richtung -->">
   					<ul class="ebene01">
-  						<!-- BEGIN navi_service -->
-  						<li class="navi{listyle}"><a href="{link}"{astyle}>{text}</a>{pipe}
+  						<li class="navi{listyle}">{service_link}{pipe}
   						{ul_uservice_start}						  
   							<!-- BEGIN uservice -->
   						 	<li{uservice_aktiv}>{uservice_link}</li> 
   							<!-- END uservice -->
   						{ul_uservice_ende}						  
   						</li>
-  						<!-- END navi_service -->
   					</ul>
   				  </div> <!-- ende servicenavigation -->
+ 				  <!-- END navi_service -->
  				</div> <!-- ende servicebereich -->
 
- 				<!-- BEGIN subnavi_horizontal -->
+                <!-- BEGIN subnavi_horizontal -->
 				<div id="subnavibereich_horizontal">
-	          <div id="filler_subnavi_horizontal" class="{shnav}"></div>
+                <div id="filler_subnavi_horizontal" class="{shnav}"></div>
 	  				<div id="subnavi_horizontal" class="{richtung_subnavi}">
   						{ul_subitem_start}						  
   							<!-- BEGIN subitem_horizontal -->
@@ -125,7 +127,7 @@
 						</div> <!-- ende navigation_liste -->
 					</div> <!-- ende navigation -->
 	  				
-					<div id="spalte3"{dyn_margin}>
+					<div id="spalte3"<!-- BEGIN dyn_margin -->{dyn_margin}<!-- END dyn_margin -->>
 						<div id="spalte3_inhalt">							
 							<!--beginn subtemplate-->
 							<!-- BEGIN content -->
@@ -141,6 +143,7 @@
 				<!-- BEGIN copyright -->
 					 &copy; {copyright}	
 				<!-- END copyright -->
+                
 			  <div id="impressum">
 		        <ul>
 		          <li class="title">Impressum</li>
@@ -150,7 +153,6 @@
 		        </ul>
 		      </div>
 			  <div id="servlinks">
-                <!-- BEGIN navi_s_richtung --><!-- END navi_s_richtung -->
 			    <ul>
 			      <li class="title">Servicelinks</li>
 			      <li><a href="home">Home</a></li>
@@ -161,19 +163,20 @@
 			  <div id="reflinks">
 			    <ul>
 			      <li class="title">Portfolio</li>
-			      <li><a target="_blank" href="http://www.feednsmile.ch" onmouseover="javascript:showRefPic(1);" onmouseout="javascript:$('refpics').hide();">feednsmile.ch</a></li>
-			      <li><a target="_blank" href="http://www.physio-allschwil.ch" onmouseover="javascript:showRefPic(2);" onmouseout="javascript:$('refpics').hide();">physio-allschwil.ch</a></li>
-			      <li><a target="_blank" href="http://www.birchler-architektur.ch" onmouseover="javascript:showRefPic(3);" onmouseout="javascript:$('refpics').hide();">birchler-architektur.ch</a></li>
-			      <li><a target="_blank" href="http://www.gigijacquier.ch" onmouseover="javascript:showRefPic(4);" onmouseout="javascript:$('refpics').hide();">gigijacquier.ch</a></li>
-			      <li><a target="_blank" href="http://www.art4art.ch" onmouseover="javascript:showRefPic(5);" onmouseout="javascript:$('refpics').hide();">art4art.ch</a></li>
-			      <li><a target="_blank" href="http://www.orasch.ch" onmouseover="javascript:showRefPic(6);" onmouseout="javascript:$('refpics').hide();">orasch.ch</a></li>
-			      <li><a target="_blank" href="http://www.physio-steiner.ch" onmouseover="javascript:showRefPic(7);" onmouseout="javascript:$('refpics').hide();">physio-steiner.ch</a></li>
-			      <li><a target="_blank" href="http://www.raku.ch" onmouseover="javascript:showRefPic(8);" onmouseout="javascript:$('refpics').hide();">raku.ch</a></li>
+			      <li><a target="_blank" href="http://www.feednsmile.ch" onmouseover="showRefPic(1);" onmouseout="showRefPic(1);">feednsmile.ch</a></li>
+			      <li><a target="_blank" href="http://www.physio-allschwil.ch" onmouseover="showRefPic(2);" onmouseout="showRefPic(1);">physio-allschwil.ch</a></li>
+			      <li><a target="_blank" href="http://www.birchler-architektur.ch" onmouseover="showRefPic(3);" onmouseout="showRefPic(1);">birchler-architektur.ch</a></li>
+			      <li><a target="_blank" href="http://www.gigijacquier.ch" onmouseover="showRefPic(4);" onmouseout="showRefPic(1);">gigijacquier.ch</a></li>
+			      <li><a target="_blank" href="http://www.art4art.ch" onmouseover="showRefPic(5);" onmouseout="showRefPic(1);">art4art.ch</a></li>
+			      <li><a target="_blank" href="http://www.orasch.ch" onmouseover="showRefPic(6);" onmouseout="showRefPic(1);">orasch.ch</a></li>
+			      <li><a target="_blank" href="http://www.physio-steiner.ch" onmouseover="showRefPic(7);" onmouseout="showRefPic(1);">physio-steiner.ch</a></li>
+			      <li><a target="_blank" href="http://www.raku.ch" onmouseover="showRefPic(8);" onmouseout="showRefPic(1);">raku.ch</a></li>
 			    </ul>
 			  </div>
-			  <div id="refpics" style="display:none;">
-			    <img id="refpic" src="media/footer/th_feednsmile.png"/>
+			  <div id="refpics">
+			    <img id="refpic" src="media_hempenweb/footer/th_feednsmile.png"/>
 			  </div>
+
 			</div> <!-- ende page -->
 		</div> <!-- ende page_margins --> 
 {google_analytics}		

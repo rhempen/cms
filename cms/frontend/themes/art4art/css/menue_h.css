@@ -8,6 +8,7 @@
 	background-color:  transparent;
 	border-top: 0px solid #504539;
 	border-bottom: 0px solid #504539; 
+    display: none;
 }
 
 #filler {
@@ -85,7 +86,7 @@ a:hover {
 
 
 /* ==========================================================================================
-	Spezifität erhöhen -> nützt aber leider nur, solange der Cursor mit gedrücketer Maustaste über dem Link ist.
+	Spezifitï¿½t erhï¿½hen -> nï¿½tzt aber leider nur, solange der Cursor mit gedrï¿½cketer Maustaste ï¿½ber dem Link ist.
 	Damit der Link Weiss mit schwarzer Schrift bleibt, muss in nav.php die CSS-Klasse .active gesetzt werden. 
 	========================================================================================= */
 #navi li a.active
@@ -110,7 +111,7 @@ a:hover {
 
 /*======================================================
   05 Ebene 2 sichtbar machen
-  li.sfhover ist ein Workaround für IE < Version 7 --> suckerfish.js
+  li.sfhover ist ein Workaround fï¿½r IE < Version 7 --> suckerfish.js
   ====================================================== */
 #navi li:hover ul,
 #navi li.sfhover ul
@@ -131,7 +132,7 @@ a:hover {
 } 
 
 /* ==============================================
-   06 Die Rausklappliste korrekt einfärben
+   06 Die Rausklappliste korrekt einfï¿½rben
    ==============================================*/
 #navi ul.ebene02 li a { 
   	border-bottom: 1px solid #504539;

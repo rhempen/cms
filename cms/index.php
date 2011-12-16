@@ -25,15 +25,17 @@ function my_obstart()
 	}
 }
 my_obstart();
+session_start();
 
 // wichtige Includes und Debuggingfunktion einbinden
 require('./includes/includes.php');
 
 // SMURL 
 if (SMURL == 'ja') { $redirect->get_navid(); }
-
 // Fuer den Zugriff auf die Bilder-DB muss der Seiten-Type (Page oder Navi) bekannt sein
 $type = $_GET['pagid'] > 0 ? 'P' : 'N';
+// Startzahl zum Lesen der Bilder bzw. der Listitems
+$start = isset($_GET['start']) && $_GET['start'] > 0 ? $_GET['start'] : 0;
 
 // auf Cross Site Scripting pruefen, ev. Meldung ausgeben und alle GET-Parameter l�schen
 $rc = $frontget->check_parameters();
@@ -48,8 +50,6 @@ if ($rc===false) {
 	unset($_GET);
 }	
 
-// Startzahl f�rs Lesen der Bilder bzw. der Listitems
-$start	= isset($_GET['start']) && $_GET['start'] > 0 ? $_GET['start'] : 0;
 
 // Einlesen der Haupttemplate-Datei
 $tpl->loadTemplatefile('main_tpl.html', true, true);
@@ -81,6 +81,7 @@ $tpl->setVariable('home_link', ROOTDIR.'index.php');
 $header_bild = $frontget->get_random_bild();
 $header_bild != '' ? $tpl->setVariable('header_bild',$header_bild) : '';
 $tpl->setVariable('webroot', ROOTDIR); // ist nötig für Lightbox
+$tpl->setVariable('mediadir', str_replace('../../','',MEDIA_ROOT)); // ist nötig für footer
 $tpl->parseCurrentBlock();
 
 // Copyright
@@ -139,7 +140,11 @@ $tpl->setCurrentBlock('content_block');
 // feststellen, ob die Startseite angezeigt werden soll
 $query = 'SELECT start FROM '.$tab_prefix.'navigation WHERE nav_id='.$s_id;
 $startseite = $db->queryOne($query);
-if ($startseite == 'j') { $tpl->setVariable('dyn_margin', ' style="margin-left:0;"'); }
+if ($startseite == 'j') { 
+  $tpl->setCurrentBlock('dyn_margin');
+  $tpl->setVariable('dyn_margin',' style="margin-left:0;"'); 
+  $tpl->parseCurrentBlock();
+}
 
 // Ist der Seite ein Modul zugewiesen?
 if ($seiten_infos['modul'] == 0)
@@ -157,6 +162,19 @@ else {
 	/* Module einbinden */
 	switch ($module) 
 	{
+	  case 'LIST_EXPOS_EVENTS':
+            if (isset($_GET['pagid']) && $_GET['pagid'] > 0) {
+                include_once(PAGE_DETAIL);
+                $controller = PAGE_DETAIL;
+            } else {
+                include_once(PAGES_OVERVIEW);
+                $controller = PAGES_OVERVIEW;
+            }
+  			break;
+	  case 'READ_TOP_EXPO_EVENT':
+			include_once(HOME_ART4ART);
+			$controller = HOME_ART4ART;
+			break;
 	  case 'READ_TOP_NEWS':
 			include_once(HOME);
 			$controller = HOME;
@@ -173,7 +191,8 @@ else {
   			include_once(SITEMAP);
 			$controller = SITEMAP;
   			break;
-	  case 'PAGES_OVERVIEW':
+//	  case 'PAGES_OVERVIEW':
+      default:
 		  	if ($akt_pagid > 0) {
 		  		// Template mit Thumbnails (98x98) f�r Detailanzeige (horizontal oder vertikal)
 			  	if (preg_match('/760h/', $template) || preg_match('/760v/', $template)) {

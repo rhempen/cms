@@ -65,33 +65,10 @@ class frontendPresent
 	{
 //		echo '$_COOKIE[\'CrossLink\']: '. $_COOKIE['CrossLink'] ."<br />";
 //		echo '$_REQUEST[\'original_url\']: '. $_REQUEST['original_url'] ."<br />";
-//		echo '$_ENV[\'HTTP_REFERER\']: '. $_ENV['HTTP_REFERER'];
+//		echo '$_SERVER[\'HTTP_REFERER\']: '. $_SERVER['HTTP_REFERER'];
 		
-		global $tpl;
-		global $redirect;
-		$uebersicht_link = '';
-		// $uebersicht_link wird erst mal aus den GET-Parametern zusammengesetzt
-		// Abhaengig von SMURL werden GET-Parameter oder Unterverzeichnisse gebildet
+		global $tpl, $redirect;
 		$uebersicht_link = $redirect->set_link();
-		/* Falls ein Cookie CrossLink gesetzt wurde, wird der Link daraus uebernommen
-		   Falls das Cookie nicht gesetzt ist, wird noch $_RQUEST und $HTTP_COOKIE_VARS befragt
-		   Falls alles nichts hilft, wird der oben zusammengesetzte Link verwendet
-		 */
-//		if (isset($_COOKIE['CrossLink']) && $_COOKIE['CrossLink'] != '') {
-//			$uebersicht_link = urldecode($_COOKIE['CrossLink']);
-			// Das Cookie wieder lueschen, indem die Verfallszeit auf 1 Stunde in der Vergangenheit gesetzt wird
-			// setcookie("CrossLink", "", time() - 3600);
-			// --> ist doch nicht nuetig. Das Cookie ist eine Stunde lang gueltig, somit bleibt der Link erhalten,
-			// wenn der Benutzer zB. die Galerie durchbluettert.
-			// Wenn er dann zurueck anklickt, kommt er wieder an den Ausgangpunkt zurueck und beim nuechsten 
-			// Kuenstler bzw. Expo wird das Cookie ueberschrieben
-//		} elseif (isset($_REQUEST['original_url']) && $_REQUEST['original_url'] != '') {
-//			$uebersicht_link = urldecode($_REQUEST['original_url']);			
-//		} elseif (isset($HTTP_COOKIE_VARS['original_url']) && $HTTP_COOKIE_VARS['original_url'] != '') {
-//			$uebersicht_link = urldecode($HTTP_COOKIE_VARS['original_url']);			
-//		} else {
-//			$uebersicht_link = $params_link;
-//		}		
 		$href = '<a href="'.$uebersicht_link.'" onclick="javascript:delLinkCookie(this.value);">'.$GLOBALS['LINKS']['UEBERSICHT'].'</a>';
 		$tpl->setVariable('link_uebersicht', '<p>'.$href.'</p>');
 	}
@@ -126,12 +103,14 @@ class frontendPresent
 				list($kap, $ukap, $label) = explode('-',$value);
 				if ($ukap_text == $submenu) {
 					$ukap_text = $label;
+                    break;
 				}
 			}
 		}
 		// Titel = Bezeichnungen von Kap und Ukap
 		$titel .= $ukap_text !='' ? ' &#150; '.$ukap_text : '';
-		//$tpl->setVariable('kap_ukap', '<h1 class="h1mod">'.$titel.'</h1>');
+		// hier mÃ¼sste ein Flag abgefrage werden kÃ¶nnen, ob der Titel angezeigt werden soll
+        $tpl->setVariable('kap_ukap', '<h1 class="h1mod">'.$titel.'</h1>');
 	}
 	
 	/**
@@ -192,7 +171,9 @@ class frontendPresent
 	public function display_texte($row, $type='')
 	{
 		global $tpl, $frontget, $general;
-		$tpl->setVariable('name', '<h2>'.$row['name'].'</h2>');
+        if ($row['name'] != '') {
+          $tpl->setVariable('name', '<h2>'.$row['name'].'</h2>');
+        }
 		// wenn $type = detail, dann sollen einzelne Textelemente nicht angezeigt werden
 		if ($type == '') {
 			$von_bis = '';
@@ -231,7 +212,7 @@ class frontendPresent
 	/**
 	 *	Text des Elementes "inhalt2" einer Seite anzeigen
 	 *	Diese Funktion wertet Felder von der Tabelle cms_seiten als auch cms_pages aus. 
-	 *	Das bedeutet, dass die Felder in beiden Tabellen identisch sein müssen!
+	 *	Das bedeutet, dass die Felder in beiden Tabellen identisch sein mï¿½ssen!
 	 *	@param  $row - Textelemente einer Seite
 	*/
 	public function display_inhalt2($row)
@@ -250,7 +231,7 @@ class frontendPresent
 	
 	/**
 	 * 	Datum pruefen, ob ueberhaupt eines gesetzt wurde 
-	 * 	@param: $datum - zu prüfenden Datum 
+	 * 	@param: $datum - zu prï¿½fenden Datum 
 	*/
 	private function check_datum($datum) {
 		if ($datum == null || $datum == '') {
@@ -280,8 +261,6 @@ class frontendPresent
 	public function display_bilder($row,$type) 
 	{		
 		global $tpl, $pictdb, $frontget; 
-		//var_dump($type);
-		//if ($type == 'P') { $row['template'] = ''; }
 		$thumbsize = $frontget->read_thumbsize_by_tplid($row['template']);
 		$id = $type == 'P' ? $row['page_id'] : $row['nav_id'];
 		if ($row['bild1'] != '' && !preg_match('/blank/',$row['bild1']))  {
@@ -327,7 +306,7 @@ class frontendPresent
 	/**
 	 * 	Resizen der Thumbnail-Datei abhaengig vom Template
 	 * 	@param:	$bild - aktuelles Bild
-	 *  @param:	$thumbsize - Grösse des Thumbnails
+	 *  @param:	$thumbsize - Grï¿½sse des Thumbnails
 	 *  @param:	$type  
 	*/ 
 	private function resize_thumbnail($bild, $thumbsize=0, $type) 
@@ -348,7 +327,7 @@ class frontendPresent
 			if ($imagesize == false || $imagesize == null) return $this->convert_rel2abs_path($bild);
 		} else { return false; }
 		
-		// Breite und Huehe aus der Template-Tabelle
+		// Breite und Hoehe aus der Template-Tabelle
 		list($th_breite, $th_hoehe) = explode('x', $thumbsize);
 
 		// Masse des Bildes < Masse Template-Masse?
@@ -379,8 +358,8 @@ class frontendPresent
 	 *	@param: $id
 	 *	@param: $galerie - SQL-Array mit den auszugebenden Bildern
 	 *	@param:	$bild - das sichtbare Bild
-	 *	@param: $type - Art des Links für die Galerie
-	 *	@param:	$thumbsize - Grösse der Thumbnails
+	 *	@param: $type - Art des Links fï¿½r die Galerie
+	 *	@param:	$thumbsize - Grï¿½sse der Thumbnails
 	 * 	n = es wird kein Link angeboten
 	 *	a = Es wird der Link ">Galerie" angeboten
 	 * 	b = Es wird eine Bilderleiste mit Links angeboten
@@ -407,7 +386,7 @@ class frontendPresent
      *	@param: $nav_id - id der Seite zu der die Galerie gehoert
      *	@param: $type - Seitentype N oder P um Bilder aus cms_galerien auszulesen
      *	@param: $bild - Bild, welches angezeigt wird
-     *	@param: $thumbsize - Grösse der Thumbnails aus cms_templates
+     *	@param: $thumbsize - Grï¿½sse der Thumbnails aus cms_templates
     */
     public function erzeuge_bildergalerie($id, $type, $bild, $thumbsize) 
     {	
@@ -458,7 +437,7 @@ class frontendPresent
      *	@param: $nav_id - id der Seite zu der die Galerie gehoert
      *	@param: $type - Seitentype N oder P um Bilder aus cms_galerien auszulesen
      *	@param: $bild - Bild, welches angezeigt wird
-     *	@param: $thumbsize - Grösse der Thumbnails aus cms_templates
+     *	@param: $thumbsize - Grï¿½sse der Thumbnails aus cms_templates
     */
     public function erzeuge_bilderleiste($id, $type, $bild, $thumbsize) 
     {	
@@ -509,7 +488,7 @@ class frontendPresent
      *	@param: $nav_id - id der Seite zu der die Galerie gehoert
      *	@param: $type - Seitentype N oder P um Bilder aus cms_galerien auszulesen
      *	@param: $bild - Bild, welches angezeigt wird
-     *	@param: $thumbsize - Grösse der Thumbnails aus cms_templates
+     *	@param: $thumbsize - Grï¿½sse der Thumbnails aus cms_templates
     */
     public function erzeuge_auto_bildwechsel($id, $type, $bild, $thumbsize) 
     {	
@@ -558,58 +537,64 @@ class frontendPresent
 		
 	/**
 	 *  Farbgebung gemess Eintraegen in der cms_spezial setzen 
+     *  Es soll nur die CSS-Eigenschaft aus cms_spezial zurÃ¼ckgegeben werden.
 	 *	@param: $type -> Navigation, Unternavigation oder Seite
-	 *	@param: $navid -> Id der Navigation 
+	 *	@param: $navid -> Id der Navigation
 	 *	@param: $css_classes -> Array mit CSS-Klassen
 	*/
 	public function set_css_class($type, $navid, $css_classes)
 	{
 		global $tpl;
 		$farbe = '';
-		if ($type == 'nav')	{ $style = ' class="active"'; }
-		if ($type == 'subnav')	{ $style = ' class="subactive"'; }
-		if ($type == 'service') { $astyle = ' class="active"'; $listyle = ' active'; }
+//		if ($type == 'nav')	{ $style = ' class="active"'; }
+//		if ($type == 'subnav')	{ $style = ' class="subactive"'; }
+//		if ($type == 'service') { $astyle = ' class="active"'; $listyle = ' active'; }
 		if (count($css_classes) > 0 && $navid > 0) {
-			foreach($css_classes as $index => $css){
-				if ($css['wert1'] == $navid)  {
-					switch($type) {
-						case 'nav':
-							$style = ' class="active '.$css['wert2'].'"';
-							$farbe = ' '.$css['wert2'];
-							break;
-						case 'subnav':
-							$style = ' class="subactive '.$css['wert2'].'"';
-							break;
-						case 'service':
-							$farbe = ' '.$css['wert2'];
-							break;
-						case 'seite':
-							$style = ' '.$css['wert2'];
-							break;
-					}
-				}
-			}			
-		}
-		
-		//Platzhalter-Variable setzen
-		if ($type == 'nav') {
-			$tpl->setVariable('style', $style);
-			$tpl->setVariable('farbe', $farbe);
-		} elseif ($type == 'subnav') {
-			return $style;
-		} elseif ($type == 'service') {
-			$tpl->setVariable('listyle', $listyle);
-			$tpl->setVariable('astyle', $astyle);
-			$tpl->setVariable('farbe', $farbe);
-		} elseif ($type == 'seite') {
-			$tpl->setCurrentBlock('subnavi_horizontal');
-			$tpl->setVariable('shnav', $style); // Hintergrundfarbe Subnavi Horizontal
-			$tpl->parseCurrentBlock();
-			$tpl->setCurrentBlock('subcontainer');
-			$tpl->setVariable('farbe', $style); // Hintergrundfarbe Contentseite
-		}
-		$style = '';
-		$farbe = '';
+          foreach($css_classes as $index => $css){
+            if ($css['wert1'] == $navid)  {
+              switch($type) {
+                case 'nav':
+                    $style = $css['wert2'];
+                    $farbe = $css['wert2'];
+                    break;
+                case 'subnav':
+//                    $style = ' class="subactive '.$css['wert2'].'"';
+                    $style = $css['wert2'];
+                    $farbe = $css['wert2'];
+                    break;
+                case 'service':
+                    $farbe = ' '.$css['wert2'];
+                    break;
+                case 'seite':
+                    $style = ' '.$css['wert2'];
+                    break;
+              }
+            }
+          }			
+
+          //Platzhalter-Variable setzen
+          if ($type == 'nav') {
+              return $style;
+//              $tpl->setVariable('style', $style);
+//              $tpl->setVariable('farbe', $farbe);
+          } elseif ($type == 'subnav') {
+              $tpl->setVariable('shnav', $farbe);
+              return $style;
+          } elseif ($type == 'service') {
+              $tpl->setVariable('listyle', $listyle);
+              $tpl->setVariable('astyle', $astyle);
+              $tpl->setVariable('farbe', $farbe); // Farbe setzen in nav_tpl.html
+          } elseif ($type == 'seite') {
+              $tpl->setCurrentBlock('subnavi_horizontal');
+              $tpl->setVariable('shnav', $style); // Hintergrundfarbe Subnavi Horizontal
+              $tpl->parseCurrentBlock();
+              $tpl->setCurrentBlock('subcontainer');
+              $tpl->setVariable('farbe', $style); // Hintergrundfarbe Contentseite
+              $tpl->parseCurrentBlock();
+          }
+          $style = '';
+          $farbe = '';
+        }
 	}
 	
 	/**

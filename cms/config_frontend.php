@@ -21,6 +21,7 @@ define('GIFS_PAGESLIDER', HOST. THEMES_DIR . THEME_SELECTED . 'gifs/');
 
 /* Frontend Controllers */
 define('HOME', './frontend/_controllers/home.inc.php');
+define('HOME_ART4ART', './frontend/_controllers/home.inc.art4art.php');
 define('INDEX_DETAIL', './frontend/_controllers/index.inc.php');
 define('KONTAKTFORMULAR', './frontend/_controllers/kontakt.inc.php');
 define('WEBMAIL', './frontend/_controllers/webmail.inc.php');

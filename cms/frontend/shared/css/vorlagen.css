@@ -79,7 +79,7 @@ a:link, a:visited, a:active
 	text-decoration: none;
 }
 
-/* CSS für Automatischen Bildwechsler xfade2.js --> 2 Container */
+/* CSS fuer Automatischen Bildwechsler xfade2.js --> 2 Container */
 #imageContainer1, #imageContainer2  {
 	height:309px;
 }

@@ -18,18 +18,9 @@
   	}
 
 /*-------------------------------------------------------------------------------
-  Accordion initialisieren bei onLoad
-  -------------------------------------------------------------------------------*/
-  	loadAccordion = function() {
-    	if ($("vertical_container")) {
-        var verticalAccordion = new accordion('vertical_container');
-      }
-    }
-
-/*-------------------------------------------------------------------------------
   Niftycubes initialisieren bei onLoad
   -------------------------------------------------------------------------------*/
-    niftycubes = function() {
+    var niftycubes = function() {
       var agent = navigator.userAgent;
 //    NiftyCorners funktionieren nur ab IE 8
       if (agent.match(/MSIE/) && agent.match(/[MSIE\s]\d/) < 8) { return; }  
@@ -46,6 +37,5 @@
   Events bei onLoad registrieren
   -------------------------------------------------------------------------------*/
     Event.observe(window, 'load', sfHover, false);
-    Event.observe(window, 'load', loadAccordion, false);
     Event.observe(window, 'load', niftycubes, false);
 

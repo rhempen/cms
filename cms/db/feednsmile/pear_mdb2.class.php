@@ -2,7 +2,7 @@
 // zu Hause
 if (preg_match('/^hero/',$_SERVER['HTTP_HOST']) || $_SERVER['HTTP_HOST'] == 'localhost') 
 { 
-	ini_set('include_path', ini_get('include_path') . ';e:\xampp\php\PEAR;e:\xampp\htdocs\\'.ROOTDIR);
+	ini_set('include_path', ini_get('include_path') . ';c:\xampp\php\PEAR;c:\xampp\htdocs\\'.ROOTDIR);
 	$login_file = '\\xampp\\htdocs\\'.ROOTDIR.'\\db\\db_login_pear.php';
 } 
 // publicdev

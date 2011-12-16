@@ -1,4 +1,4 @@
-// Javascripts für cms Frontend
+// Javascripts fï¿½r cms Frontend
 // Author: Roland Hempen
 // Creation Date: 05.10.2007
 // 
@@ -6,11 +6,11 @@
 function setLinkCookie(referer) 
 {
 	// Cookie "CrossLink" setzen, welches bei der Anzeige im Frontend abgefragt wird,
-	// um innerhalb der Pages-Section hin-und zurück zu navigieren
-	// Wird vorwiegend da verwendet, wo der Benutzer zb. aus der Detailansicht eines Künstlers
-	// zur verlinkten Expo und wieder zurück navigieren kann.
+	// um innerhalb der Pages-Section hin-und zurï¿½ck zu navigieren
+	// Wird vorwiegend da verwendet, wo der Benutzer zb. aus der Detailansicht eines Kï¿½nstlers
+	// zur verlinkten Expo und wieder zurï¿½ck navigieren kann.
 	// Das Cookie wir in der Methode create_uebersicht_link der klasse frontendPresent ausgewertet
-	// Es ist ein Stunden lang gültig
+	// Es ist ein Stunden lang gï¿½ltig
 	var ablauf = new Date();
 	var inEinerStunde = ablauf.getTime() + (60 * 60 * 1000);
 	ablauf.setTime(inEinerStunde);
@@ -21,7 +21,7 @@ function setLinkCookie(referer)
 
 function delLinkCookie(referer) 
 {
-	// Cookie "CrossLink" wieder löschen, sobald der Benutzer auf den Link klickt
+	// Cookie "CrossLink" wieder lï¿½schen, sobald der Benutzer auf den Link klickt
 	var ablauf = new Date();
 	var eineStungeZurueck = ablauf.getTime() + (60 * 60 * 1000 * (-1));
 	ablauf.setTime(eineStungeZurueck);
@@ -37,13 +37,13 @@ function getCookie(iName) {
 }
 
 function check_form() {
-  // Felder im Kontaktformular überprüfen
+  // Felder im Kontaktformular ï¿½berprï¿½fen
 	var f = document.forms["formmail"];
    	var fehler = ""; 
 	var fehler_code = "";
 	var fehler_email = "";
 	var fehler_telefon = "";
-	// *** Überprüfung auf vollständige Ausfüllung
+	// *** ï¿½berprï¿½fung auf vollstï¿½ndige Ausfï¿½llung
 	  // Bild-code
    	if (f.code.value=="") {
    	 	fehler += "bitte den Bild-Code eingeben"+"<br />\n";
@@ -109,12 +109,12 @@ function check_form() {
    	return true;
 }
 
-/* Formularcheck für Webmail */
+/* Formularcheck fï¿½r Webmail */
 function check_webmail() {
 	var f = document.forms["webmail"];
    	var fehler = ""; 
 	var fehler_email = "";
-	// *** Überprüfung auf vollständige Ausfüllung
+	// *** ï¿½berprï¿½fung auf vollstï¿½ndige Ausfï¿½llung
    	// email
    	alert(f.login_username.value);
    	if (f.login_username.value=="") {
@@ -145,8 +145,8 @@ function isEmail(string) {
 	}
 }
 
-/* Bilderwechsel indem mit der Maus über die entsprechenden Böxchen unterhalb des Bildes gefahren wird. 
-   das Erscheinungsbild kann gänzlich in der CSS-Datei gesteuert werden - Keine CSS-Notation hier drin! */
+/* Bilderwechsel indem mit der Maus ï¿½ber die entsprechenden Bï¿½xchen unterhalb des Bildes gefahren wird. 
+   das Erscheinungsbild kann gï¿½nzlich in der CSS-Datei gesteuert werden - Keine CSS-Notation hier drin! */
 function picSwitch(switchnr) {
 	// erst alle Elemente ausblenden
 	var x = 0;
@@ -180,33 +180,34 @@ function google_analytics(iGaKonto) {
 
 /* Bilder anzeigen beim hovern der Reflinks */
 function showRefPic(iNr) {
+  var lMedia = document.getElementById("mediadir").value;
   switch (iNr) {
     case 1:
-      $('refpic').src = "media/footer/th_feednsmile.png";
+      $('refpic').src = lMedia+"/footer/th_feednsmile.png";
 	  break;
     case 2:
-      $('refpic').src = "media/footer/th_physio-allschwil.png";
+      $('refpic').src = lMedia+"/footer/th_physio-allschwil.png";
     	break;
     case 3:
-      $('refpic').src = "media/footer/th_birchler-architektur.png";
+      $('refpic').src = lMedia+"/footer/th_birchler-architektur.png";
     	break;
     case 4:
-      $('refpic').src = "media/footer/th_gigijacquier.png";
+      $('refpic').src = lMedia+"/footer/th_gigijacquier.png";
     	break;
     case 5:
-      $('refpic').src = "media/footer/th_art4art.png";
+      $('refpic').src = lMedia+"/footer/th_art4art.png";
    	  break;
     case 6:
-      $('refpic').src = "media/footer/th_orasch.png";
+      $('refpic').src = lMedia+"/footer/th_orasch.png";
       break;
     case 7:
-      $('refpic').src = "media/footer/th_physio-steiner.png";
+      $('refpic').src = lMedia+"/footer/th_physio-steiner.png";
    	  break;
     case 8:
-      $('refpic').src = "media/footer/th_raku.png";
+      $('refpic').src = lMedia+"/footer/th_raku.png";
       break;
     default:
-      $('refpic').src = "media/footer/th_feednsmile.png";
+      $('refpic').src = lMedia+"/footer/th_feednsmile.png";
       break;
   }
   $('refpics').show();

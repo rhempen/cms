@@ -215,6 +215,92 @@ class frgmntsMaintain
 			}
 		}
 	}
+    
+	/********************************************************************************/
+	/* Funktionen zum Update der Bildpfade nach einem DB-Wechsel
+	/********************************************************************************/
+	/* Update der Bildpfade nach einem DB-Wechsel */
+	public function update_bildpfade() 
+	{
+		global $db, $msg;
+		$msg[] = 'message'; $msg[] = $GLOBALS['TEXTE']['FRAGMENTE'];		
+		$newmedia = '/media_'.WEBSITE.'/';
+		$fragmente = $this->alle_fragmente_laden();
+		if (count($fragmente) > 0) {
+			while ($row = $fragmente->fetchRow(MDB2_FETCHMODE_ASSOC))  
+			{
+				$seite = $row['name'];
+				$content = $row['content'];
+				if (stristr($content,'<img') || stristr($content,'href')) 
+                { 
+                  $content = str_replace('/media/',$newmedia,$row['content']); 
+                  // funktioniert noch nicht!! 
+                  //  $content = $this->links_replace($newmedia,$row['content']); 
+                  /* Update nur, falls noetig! */
+                  if ($content != $row['content'])
+                  {
+                      $update = 'UPDATE '.$this->mPrefix.'fragmente SET';
+                      $update .= ' content="'.$db->escape($content).'"';
+                      $update .= ' WHERE frag_id = '.$row[frag_id];
+                      $affected =& $db->exec($update);
+                      if (PEAR::isError($affected))
+                      {
+                              $msg[] = 'error'; $msg[] = sprintf($GLOBALS['MESSAGES']['MSG_FRGMNT_NICHT_GESPEICHERT'], $seite);
+                          } else {
+                              $msg[] = 'success'; $msg[] = sprintf($GLOBALS['MESSAGES']['MSG_FRGMNT_GESPEICHERT'], $seite);
+                      }
+                  } else {
+                    $msg[] = 'neutral'; $msg[] = 'OK: '. $seite;
+                  }
+                } else {
+                    $msg[] = 'neutral'; $msg[] = 'OK: '. $seite;						
+                }
+			}
+		return $msg;
+		}	
+	}
+
+	/* Alle fragmente aus der DB lesen */
+	private function alle_fragmente_laden() 
+	{
+		global $db;
+		$query = 'SELECT * from '.$this->mPrefix.'fragmente';
+		return $db->query($query);	
+	}
+    
+    /* weitere Links ersetzen, falls nötig */
+    private function links_replace($newmedia, $content) 
+    {      
+      $pattern = '#<a [^>]*(href|scr)="([^\">]*)"[^>]*>(.*)(</a>|/>)#';
+      $datei = preg_match_all($pattern, $content, $matchesarray);
+      if ($datei != false) {
+        foreach ($matchesarray as $key => $eintrag) {
+          foreach ($eintrag as $key2 => $oldfile) {
+            $pattern = '#^[/a-zA-Z0-9-_+]+\.[a-zA-Z0-9]+$#';
+            $file = preg_match($pattern, $oldfile, $matches);
+            if ($file == true ) {
+// wenn das keine gültige Datei ist, wird mittels Ersetzungen von ROOTDIR versucht, den richtigen Filenamen zu ermitteln  
+              if (!file_exists($oldfile)) { 
+                $filearray = explode('/',$oldfile); 
+                $count = count($filearray);
+                for ($i = 0; $i < $count; $i++) { // jeweils erstes Element aus dem Array löschen bis das Element 0 in $newmedia vorkommt
+                  if ($filearray[0] == 'media_'.WEBSITE) { break; }
+                  $first = array_shift($filearray);  
+                }
+                // wenn $newfile als file identifiziert werden, wird $oldfile durch $newfile im $content ersetzt
+                $newfile = ROOTDIR . implode('/',$filearray); 
+                $file_to_check = DOCUROOT .  implode('/',$filearray);
+                $handler = is_file($file_to_check);
+                if ($handler) {
+                  $content = str_replace($oldfile,$newfile,$row['content']); 
+                }
+              }
+            }
+          }
+        }
+       }
+       return $content; 
+    }
 
 	/*****************************************************************************
 	 * Funktionen zum Lesen und editieren von CSS-Dateien

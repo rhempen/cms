@@ -5,7 +5,7 @@
 
 #navigation_liste
 {
-padding: 0px 10px 10px 20px;
+padding: 31px 10px 10px 20px;
 font-family: inherit;
 font-size: 13px;
 font-weight: bold;
@@ -62,9 +62,11 @@ color: #ffffff;
 
 html>body #navigation_liste li a { width: auto; }
 
-#navigation_liste li a:active
+#navigation_liste li a:active,
+#navigation_liste ul li a.active,
+#navigation_liste ul li a.subactive
 {
-color: #fff;
+color: #fff !important;
 font-weight: bold;
 }
 

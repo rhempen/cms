@@ -1,7 +1,7 @@
-/* kundeneigene CSS - Diese CSS kann zu einem späteren Zeitpunkt direkt im 
-	CMS bearbeitet und ergänzt werden */
+/* kundeneigene CSS - Diese CSS kann zu einem spï¿½teren Zeitpunkt direkt im 
+	CMS bearbeitet und ergï¿½nzt werden */
 
-/* Notationen für die Homeseite */
+/* Notationen fï¿½r die Homeseite */
 div#intro {
   background-color: #dcdcdc;
 }
@@ -13,7 +13,7 @@ div#introcontent {
 }
 
 
-/* Grosse Schrift für den Titel auf der Homeseite */
+/* Grosse Schrift fï¿½r den Titel auf der Homeseite */
 .verybig {
   font-size: 30px;
   line-height: 60px;
@@ -50,7 +50,7 @@ div#introcontent .teaserwrapper ul {
 	padding: 0 10px 0 20px;
 }
 
-/* CSS-Notationen für Links im Footer */
+/* CSS-Notationen fï¿½r Links im Footer */
 div#impressum {
   position: absolute;
   margin-left: 135px;
@@ -93,23 +93,10 @@ div#footer li.title {
   color: #F0FFFF;
 }
 
-/* Divs im footer vorläufig verbergen */
+/* Divs im footer vorlï¿½ufig verbergen */
 div#impressum, div#reflinks, div#servlinks
 {
   display: none;
 }
 
-/* CSS für automatischen Bildwechsler */ 
-div#imageContainer1
-{
-  width: 300px;
-}
-
-div#imageContainer1 img
-{
-	display: none;
-  position: absolute;
-  max-width: 300px;
-  max-height: 300px;
-}
 

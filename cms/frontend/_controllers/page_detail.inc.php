@@ -1,7 +1,7 @@
 <?php
 // die Seite aus der DB lesen
 $page 	= $pages->read_page($_GET['pagid']);
-$bilder	= $pictdb->bilder_pro_pageid_lesen($_GET['pagid']);
+// $bilder	= $pictdb->bilder_pro_pageid_lesen($_GET['pagid']);
 
 $tpl->setCurrentBlock('inhalt');
 

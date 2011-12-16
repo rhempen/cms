@@ -1,5 +1,5 @@
 /*******************************************************************************
- CSS-Notationen für Untermenupositionen unterhalb der horizontalen Navigation
+ CSS-Notationen fï¿½r Untermenupositionen unterhalb der horizontalen Navigation
 ********************************************************************************/
 /*_________Definition des subnavi-containers */
 
@@ -17,13 +17,13 @@
 }
 
 #subnavi_horizontal {
-	float: right; /* default: rechts -> kann im spezifischen CSS überschrieben werden */
+	float: right; /* default: rechts -> kann im spezifischen CSS ï¿½berschrieben werden */
 	overflow: hidden;
 	width: auto;
 	margin: 0;
 	padding: 0;
 	padding-left: 192px;
-	display: table; /* mit display table erscheinen die SubMenues ÜBER den anderen DIV's */
+	display: table; /* mit display table erscheinen die SubMenues ï¿½BER den anderen DIV's */
 	background-color: inherit;	
 }
 
@@ -73,7 +73,7 @@
 }
 
 /*********************************************************************************************
- CSS-Notationen für Untermenupositionen unterhalb der vertikalen Hauptnavigation
+ CSS-Notationen fï¿½r Untermenupositionen unterhalb der vertikalen Hauptnavigation
 *********************************************************************************************/
 /*_________Definition des subnavi-containers */
 
@@ -93,13 +93,18 @@
 	overflow: hidden;
 	margin: 0;
 	padding: 0;
-	display: table; /* mit display table erscheinen die SubMenues ÜBER den anderen DIV's */
+	display: table; /* mit display table erscheinen die SubMenues ï¿½BER den anderen DIV's */
 	background-color: inherit;
 	width: 192px;
 }
 
 
 /*_________Format fuer Linksverhalten innerhalb des subnavis ____________*/
+#subnavi_vertikal ul {
+  padding-left: 0px;
+  list-style-type: none;
+}
+
 #subnavi_vertikal li, 
 #subnavi_vertikal a {
 	color: #333333;

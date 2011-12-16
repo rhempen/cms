@@ -12,6 +12,7 @@ div#introcontent {
   min-height: 380px;
 }
 
+
 /* Grosse Schrift für den Titel auf der Homeseite */
 .verybig {
   font-size: 30px;
@@ -26,11 +27,11 @@ div#introcontent {
 }
 
 .teaser {
-   width: 100%; /* 286px; */
-  /* margin: 15px 0;
-  padding: 10px; */
+  width: 286px;
+  margin: 15px 0;
+  padding: 10px;
   background-color: #F0F0F0;
-  /* float: left; */
+  float: left;
 }
 
 .teasertitle {
@@ -41,8 +42,7 @@ div#introcontent {
 }
 
 .teasertext {
-  padding: 100px;
-  background-color:#0066CC;
+  padding: 5px;
   color: #434343;
 }
 

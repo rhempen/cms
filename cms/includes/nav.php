@@ -70,7 +70,9 @@ while ($eintrag = $navigation->fetchRow())
 {
 	$ausgewaehlt = '';
 	$style	= '';
-	$temp	= $eintrag['kuerzel'];
+    $css_comp = '';
+//	$temp	= $eintrag['kuerzel'];
+	$temp	= $eintrag['bezeichnung'];
 	$tempid = $eintrag['nav_id'];
 	$ukap_navid = 0;
 	if ($eintrag['ukap'] == 0) {
@@ -83,9 +85,7 @@ while ($eintrag = $navigation->fetchRow())
 			
 			$tpl->setCurrentBlock('navi_h_richtung');
 			$tpl->setVariable('richtung_navi', HMENU_RICHTUNG);
-
 			$tpl->setCurrentBlock('navi_horiz');
-			$tpl->setVariable('text', $eintrag['bezeichnung']);
 
 			// Unterpositionen 
 			$ukap_navid = $naviout->check_ukap($eintrag['kap'], $unav_array);
@@ -96,14 +96,16 @@ while ($eintrag = $navigation->fetchRow())
 			} else {
 				$nav_url = $redirect->set_navlink($tempid);
 			}
-			$tpl->setVariable('link', $nav_url);
 
 			if ($akt_navid == $tempid) {
-				//$frontend->set_css_class('nav', $akt_navid, $css_classes);
 				$aktive_menupos = $akt_navid; // Merken der aktiven Navid 
+				$class = $frontend->set_css_class('nav',$akt_navid,$css_classes);
 				$style = $naviout->set_style(THEME_SELECTED, $GLOBALS['NAVI']['HORIZONTAL']);
-				$tpl->setVariable('hstyle',$style);
-			}
+                $css_comp = ' class="'.$style.' '.$class.'"';
+            }
+            $navi_h_link = '<a href="'.urldecode($nav_url).'" '.$css_comp.'>'.$temp.'</a>';
+            $tpl->setVariable('navi_h_link',$navi_h_link);
+            $tpl->setVariable('pipe',$pipe);
 
 			// Ausgabe der Unterpositionen als Dropdown 
 			if ($ukap_navid > 0 && HMENU_SUBMENU == 'dropdown') 
@@ -118,15 +120,18 @@ while ($eintrag = $navigation->fetchRow())
 		// Servicenavigation
 		if ($navtype == $GLOBALS['NAVI']['SERVICE']) 
 		{
+			$pipe  = $naviout->set_pipe(THEME_SELECTED);
 			$count_service++;
 			$tpl->setCurrentBlock('navi_s_richtung');
 			$tpl->setVariable('richtung_navi', HMENU_RICHTUNG);
 			$tpl->setCurrentBlock('navi_service');
-			$tpl->setVariable('text', $eintrag['bezeichnung']);
+//			$tpl->setVariable('text', $eintrag['bezeichnung']);
 			if ($count_service < $anz_service) { $tpl->setVariable('pipe', $pipe); }
 			if ($akt_navid == $tempid) { 
-				$frontend->set_css_class('service', $akt_navid, $css_classes);			
 				$aktive_menupos = $akt_navid; // Merken der aktiven Navid 
+				$class = $frontend->set_css_class('service',$akt_navid,$css_classes);			
+				$style = $naviout->set_style(THEME_SELECTED, $GLOBALS['NAVI']['HORIZONTAL']);
+                $css_comp = ' class="'.$style.' '.$class.'"';
 			}
 
 			// Soll gleich auf die erste Unterposition positioniert werden?			
@@ -135,7 +140,8 @@ while ($eintrag = $navigation->fetchRow())
 			} else {
 				$nav_url = $redirect->set_navlink($tempid);
 			}
-			$tpl->setVariable('link', $nav_url);
+            $service_link = '<a href="'.urldecode($nav_url).'" '.$css_comp.'>'.$temp.'</a>';            
+			$tpl->setVariable('service_link', $service_link);
 			$tpl->parseCurrentBlock();		
 			continue;		
 		}
@@ -148,8 +154,9 @@ while ($eintrag = $navigation->fetchRow())
 			$nav_id = $eintrag['nav_id'];
 			$aktive_menupos = $akt_navid; // Merken der aktiven Navid 
 			$ausgewaehlt = ' class="active"';
-			$frontend->set_css_class('nav', $akt_navid, $css_classes);
+			$class = $frontend->set_css_class('nav', $akt_navid, $css_classes);
 			$style = $naviout->set_style(THEME_SELECTED, $GLOBALS['NAVI']['VERTIKAL']);
+            $css_comp = ' class="'.$style.' '.$class.'"';
 		}
 		$label = $eintrag['bezeichnung'];
 
@@ -165,7 +172,7 @@ while ($eintrag = $navigation->fetchRow())
 		$last_label = $label;
 		$tpl->setVariable('label',$label);
 		$tpl->setVariable('aktiv',$ausgewaehlt);
-		$link = '<a'.$style.' href="'.urldecode($nav_url).'">'.$label.'</a>';
+		$link = '<a'.$css_comp.' href="'.urldecode($nav_url).'">'.$label.'</a>';
 		$tpl->setVariable('link',$link);
 		
 		if ($ukap_navid != '' && $eintrag['nav_id'] == $akt_navid) 

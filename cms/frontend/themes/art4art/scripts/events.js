@@ -1,4 +1,4 @@
-// Javascripts für cms Frontend (themenabhängig)
+// Javascripts fï¿½r cms Frontend (themenabhï¿½ngig)
 // Author: Roland Hempen
 // Creation Date: 29.12.2009
 // 
@@ -18,27 +18,18 @@
   	}
 
 /*-------------------------------------------------------------------------------
-  Accordion initialisieren bei onLoad
-  -------------------------------------------------------------------------------*/
-  	loadAccordion = function() {
-    	if ($("vertical_container")) {
-        var verticalAccordion = new accordion('vertical_container');
-      }
-    }
-
-/*-------------------------------------------------------------------------------
   Niftycubes initialisieren bei onLoad
   -------------------------------------------------------------------------------*/
     niftycubes = function() {
       var agent = navigator.userAgent;
 //    NiftyCorners funktionieren nur ab IE 8 
-      if (agent.match(/MSIE/) && !agent.match(/8.0/)) { return; }  
+//      if (agent.match(/MSIE/) && !agent.match(/8.0/)) { return; }  
       Nifty("div#page","big");
       Nifty("div#header","tl big, tr big");
       Nifty("div.txt_kuenstlerdetail","big");
       Nifty("div#intro","big");
       Nifty("div#introbild","big");
-      Nifty("li.navi","top");
+//      Nifty("li.navi","top");
       Nifty("div.teaserwrapper","big");
       Nifty("div.teaser","big, same height");
 //      Nifty("li.navi a:hover","tl big, tr big");
@@ -49,6 +40,5 @@
   Events bei onLoad registrieren
   -------------------------------------------------------------------------------*/
     Event.observe(window, 'load', sfHover, false);
-    Event.observe(window, 'load', loadAccordion, false);
     Event.observe(window, 'load', niftycubes, false);
 

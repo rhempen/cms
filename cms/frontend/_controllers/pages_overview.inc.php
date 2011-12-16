@@ -26,46 +26,53 @@ $farbe = $frontend->set_css_class('seite', $aktive_menupos, $css_classes);
 $tpl->setVariable('leiste', HIDDEN);
 $tpl->setVariable('galink', HIDDEN);
 
-while ($row = $overview->fetchRow(MDB2_FETCHMODE_ASSOC)) 
-{
-	$tpl->setCurrentBlock('inhalt');
+if ($items != 0) {
+  while ($row = $overview->fetchRow(MDB2_FETCHMODE_ASSOC)) 
+  {
+      $tpl->setCurrentBlock('inhalt');
 
-	// Seitentitel zusammensetzen und anzeigen
-	$frontend->create_titel($seiten_infos['kurztitel']);
-	
-	// Textelement einer Seite anzeigen
-	$frontend->display_texte($row);
-	
-	// Weiter Link
-	$detail_link = $frontend->create_weiter_link($row['page_id']);
-	
-	// Bild(er) anzeigen - Wenn kein Bild vorhanden, wird ein blank.gif angezeigt und der Rahmen 
-	// des umschliessenden Div ausgeblendet.
-	if ($row['bild1'] != '' || $row['bild2'] != '') { 
-		if ($row['bild1'] != '') { 
-			$href = $frontend->create_href_img_tag($row['bild1'], $detail_link);
-			$tpl->setVariable('bild1', $href); 
-		} else { 
-			$tpl->setVariable('bild1', BLANK_GIF); 
-			$tpl->setVariable('display_bild1', NO_BORDER); 
-			//$tpl->setVariable('display_bild1', HIDDEN); 
-		}
-		
-		if ($row['bild2'] != '') { 
-			$href = $frontend->create_href_img_tag($row['bild2'], $detail_link);
-			$tpl->setVariable('bild2', $href); 
-		} else { 
-			$tpl->setVariable('bild2', BLANK_GIF); 
-			$tpl->setVariable('display_bild2', NO_BORDER); 
-			//$tpl->setVariable('display_bild2', HIDDEN); 
-		}
+      // Seitentitel zusammensetzen und anzeigen
+      $frontend->create_titel($seiten_infos['kurztitel']);
 
-	} else {
-		$tpl->setVariable('display_bild1', HIDDEN); 
-		$tpl->setVariable('display_bild2', HIDDEN); 
-	}
-	// Block parsen
-	$tpl->parseCurrentBlock();
+      // Textelement einer Seite anzeigen
+      $frontend->display_texte($row);
+
+      // Weiter Link
+      $detail_link = $frontend->create_weiter_link($row['page_id']);
+
+      // Bild(er) anzeigen - Wenn kein Bild vorhanden, wird ein blank.gif angezeigt und der Rahmen 
+      // des umschliessenden Div ausgeblendet.
+      if ($row['bild1'] != '' || $row['bild2'] != '') { 
+          if ($row['bild1'] != '') { 
+              $href = $frontend->create_href_img_tag($row['bild1'], $detail_link);
+              $tpl->setVariable('bild1', $href); 
+          } else { 
+              $tpl->setVariable('bild1', BLANK_GIF); 
+              $tpl->setVariable('display_bild1', NO_BORDER); 
+          }
+
+          if ($row['bild2'] != '') { 
+              $href = $frontend->create_href_img_tag($row['bild2'], $detail_link);
+              $tpl->setVariable('bild2', $href); 
+          } else { 
+              $tpl->setVariable('bild2', BLANK_GIF); 
+              $tpl->setVariable('display_bild2', NO_BORDER); 
+          }
+
+      } else {
+          $tpl->setVariable('display_bild1', HIDDEN); 
+          $tpl->setVariable('display_bild2', HIDDEN); 
+      }
+      // Block parsen
+      $tpl->parseCurrentBlock();
+  }
+} else {
+      $tpl->setCurrentBlock('inhalt');
+      $frontend->create_titel($seiten_infos['kurztitel']);
+      $tpl->setVariable('link_uebersicht','');
+      $tpl->setVariable('pageslider','');
+      $tpl->setVariable('langtext', $GLOBALS['TEXTE']['TEXT_SELECTBOX_LEER']);
+      $tpl->parseCurrentBlock();
 }
 
 // Pageslider anzeigen, falls noetig

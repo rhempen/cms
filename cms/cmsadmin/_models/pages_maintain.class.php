@@ -472,6 +472,60 @@ class pagesMaintain
 		}
 	}
 
+	/********************************************************************************/
+	/* Funktionen zum Update der Bildpfade nach einem DB-Wechsel
+	/********************************************************************************/
+	/* Update der Bildpfade nach einem DB-Wechsel */
+	public function update_bildpfade() 
+	{
+		global $db, $msg;
+		$msg[] = 'message'; $msg[] = $GLOBALS['CMS']['MENU02'];		
+		$newmedia = '/media_'.WEBSITE.'/';
+		$unterseiten = $this->alle_unterseiten_laden();
+		if (count($unterseiten) > 0) {
+			while ($row = $unterseiten->fetchRow(MDB2_FETCHMODE_ASSOC))  
+			{
+				$seite = $row['name'];
+				$inhalt1 = $row['langtext'];
+				$inhalt2 = $row['inhalt2'];
+				$bild1 = $row['bild1'];
+				$bild2 = $row['bild2'];
+				if (stristr($inhalt1,'<img')) { $inhalt1 = str_replace('/media/',$newmedia,$row['langtext']); }
+				if (stristr($inhalt2,'<img')) { $inhalt2 = str_replace('/media/',$newmedia,$row['inhalt2']); }
+				if (stristr($bild1,'/media/'))  { $bild1   = str_replace('/media/',$newmedia,$row['bild1']); }
+				if (stristr($bild2,'/media/'))  { $bild2   = str_replace('/media/',$newmedia,$row['bild2']); }
+                /* Update nur, falls noetig! */
+                if ($inhalt1 != $row['langtext'] || $inhalt2 != $row['inhalt2'] || $bild1 != $row['bild1'] || $bild2 != $row['bild2'])
+                {
+                    $update = 'UPDATE '.$this->mPrefix.'pages SET';
+                    $update .= ' langtext="'.$db->escape($inhalt1).'",';
+                    $update .= ' inhalt2="'.$db->escape($inhalt2).'",';
+                    $update .= ' bild1="'.$db->escape($bild1).'",';
+                    $update .= ' bild2="'.$db->escape($bild2).'"';
+                    $update .= ' WHERE page_id = '.$row[page_id];
+                    $affected =& $db->exec($update);
+                    if (PEAR::isError($affected))
+                    {
+                            $msg[] = 'error'; $msg[] = sprintf($GLOBALS['MESSAGES']['MSG_SEITE_NICHT_GESPEICHERT'], $seite);
+                        } else {
+                            $msg[] = 'success'; $msg[] = sprintf($GLOBALS['MESSAGES']['MSG_SEITE_GESPEICHERT'], $seite);
+                    }
+                } else {
+                    $msg[] = 'neutral'; $msg[] = 'OK: '. $seite;						
+                }
+			}
+		return $msg;
+		}	
+	}
+
+	/* Alle Seiten aus der DB lesen */
+	private function alle_unterseiten_laden() 
+	{
+		global $db;
+		$query = 'SELECT * from '.$this->mPrefix.'pages';
+		return $db->query($query);	
+	}
+    
 	/**************************************************************************
 	* private functions
 	***************************************************************************/

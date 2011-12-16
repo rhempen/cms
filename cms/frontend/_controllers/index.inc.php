@@ -1,9 +1,7 @@
 <?php
 
 // Inhalte Content-Bereich einfuellen - HTML-Tagx fuer ein oder mehrere Bilder
-//$tpl->setCurrentBlock('bilder');
 $frontend->display_bilder($seiten_infos,'N');
-//$tpl->parseCurrentBlock();
 
 // Inhalte Content-Bereich einfuellen - Texte und Links
 $tpl->setCurrentBlock('inhalt');
@@ -32,5 +30,8 @@ $tpl->parseCurrentBlock();
 
 // Block inhalt2 in der re bzw. li Spalte nur anzeigen, wenn der entspr. Platzhalter im Tpl gefunden wird
 $frontend->display_inhalt2($seiten_infos);
+
+// Farbgebung gemaess Eintraegen in cms_spezial setzen
+$farbe = $frontend->set_css_class('seite', $_GET['navid'], $css_classes);
 
 ?> 

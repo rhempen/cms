@@ -1,6 +1,41 @@
-/* CSS-Notationen für den Servicebereich (Menu) */
+/* CSS-Notationen fÃ¼r den Servicebereich (Menu) */
 
 div#servicebereich {
-  display: none;
+  margin-right: 20px;
+  margin-top: -60px;
+  background-color: transparent;
+  display: inline;
+  float: right;
+  font-size: 11px;
 }
 
+div#servicebereich a {
+    text-decoration: none;
+    font-weight: normal;
+}
+
+div#servicebereich a:link, div#servicebereich a:visited {
+    color: #232323;
+}
+
+div#servicebereich a:hover {
+    color: #ffffff;
+}
+
+
+div#servicebereich .right {
+  float: left;
+}
+
+/* Abstad zwischen den Pipes*/
+div#servicebereich ul {
+  padding-left: 3px;
+}
+
+div#servicebereich ul li.navi {
+  list-style-type: none;
+}
+
+div#servicebereich ul li a.active {
+  color: #FFFFFF;
+}

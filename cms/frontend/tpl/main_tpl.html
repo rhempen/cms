@@ -29,7 +29,6 @@
 	<script type="text/javascript" src="{host}lib/effects.js"></script> 
 	<script type="text/javascript" src="{host}lib/path_finder.js"></script> 
 	<script type="text/javascript" src="{host}lib/lightbox.js"></script> 
-	<script type="text/javascript" src="{host}lib/accordion.js"></script> 
 	<script type="text/javascript" src="{host}frontend/scripts/niftycorners.js"></script>
 	<script type="text/javascript" src="{host}frontend/scripts/global.js"></script>
 	{theme_js}
@@ -74,12 +73,12 @@
   				  <div id="service" class="{richtung_navi}">
   					<ul class="ebene01">
   						<!-- BEGIN navi_service -->
-  						<li class="navi{listyle}"><a href="{link}"{astyle}>{text}</a>{pipe}
-  						{ul_uservice_start}						  
+  						<li class="navi{listyle}">{service_link}{pipe}
+                          {ul_uservice_start}						  
   							<!-- BEGIN uservice -->
   						 	<li{uservice_aktiv}>{uservice_link}</li> 
   							<!-- END uservice -->
-  						{ul_uservice_ende}						  
+                          {ul_uservice_ende}						  
   						</li>
   						<!-- END navi_service -->
   					</ul>
@@ -120,7 +119,7 @@
 						</div> <!-- ende navigation_liste -->
 					</div> <!-- ende navigation -->
 	  				
-					<div id="spalte3"{dyn_margin}>
+					<div id="spalte3"<!-- BEGIN dyn_margin -->{dyn_margin}<!-- END dyn_margin -->>
 						<div id="spalte3_inhalt">							
 							<!--beginn subtemplate-->
 							<!-- BEGIN content -->

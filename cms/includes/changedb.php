@@ -20,7 +20,6 @@ if (defined('WEBSITE') && WEBSITE != '') {
 
 define('DBASEDIR', $dbdir); 	
 define('DBFILE','cms_'.$thema);
-
 //echo '<br>ROOTDIR='.ROOTDIR.'<br>DOCUROOT='.DOCUROOT .'<br>DBASEDIR='. DBASEDIR .'<br>SCRIPT_NAME='. $_SERVER['SCRIPT_NAME'].'<br />';
 //echo '<br>'.$_SERVER['DOCUMENT_ROOT'];
 

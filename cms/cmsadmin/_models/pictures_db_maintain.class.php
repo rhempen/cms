@@ -289,15 +289,14 @@ class picturesDbMaintain
 	{
 		global $db, $msg;
 		$msg[] = 'message'; $msg[] = $GLOBALS['LABELS']['BILDERGALERIE'];
-		$newmedia = MEDIA_ROOT; // ../../media
-		$newmedia = 'media_'.WEBSITE;
+		$newmedia = '/media_'.WEBSITE.'/';
 		$bilder = $this->alle_bilder_lesen();
 		if (count($bilder) > 0) {
 			while ($row = $bilder->fetchRow(MDB2_FETCHMODE_ASSOC))  
 			{
 				if (!stristr($row['bildpfad'],$newmedia)) // Update nur, wenn nötig!
 				{
-					$pfad = str_replace('media',$newmedia,$row['bildpfad']);
+					$pfad = str_replace('/media/',$newmedia,$row['bildpfad']);
 					$update = 'UPDATE '.$this->mPrefix.'galerien SET bildpfad="'.$pfad.'" WHERE id='.$row[id];
 					$affected =& $db->exec($update);
 					if (PEAR::isError($affected)) {

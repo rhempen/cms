@@ -1,11 +1,11 @@
-/* zurücksetzen der Innen und Aussenabstände für alle Html Elemente */
+/* zurï¿½cksetzen der Innen und Aussenabstï¿½nde fï¿½r alle Html Elemente */
 * {
  margin:0; padding: 0
  }
  
 /* (de) Erzwingen vertikaler Scrollbalken in Netscape, Firefox und Safari Browsern */
 html{
-  height: 100%
+  height: 100%;
   font-size: 85%;
 }
 
@@ -20,8 +20,20 @@ body{
   font-size: 90%;
 }
 
+h1 {
+  font-size: 18px;
+}
+
+h2 {
+  font-size: 13px;
+}
+
+h2.title {
+  font-size: 15px;
+}
+
 p, li, td {
-	font-size: 1em;
+  font-size: 1em;
 }
 
 /* das folgende Statemant verhindert, dass ein Link umrahmt wird, wenn man draufklickt */
@@ -35,7 +47,7 @@ p, li, td {
 {
 	width: 960px;
 	margin: 20px auto;
-	border: 1px solid black; 
+	border: 0px solid black; 
 }
 
 #page
@@ -55,52 +67,52 @@ body
   
 #header
 {
-	height: 100px;
-	background-color: #ffffff;
-	background-image: url(../img/logo_hempenweb.png);
-	background-position: 7px 10px;
-	background-repeat: no-repeat;
-	padding: 0;
+  height: 100px;
+  background-color: #ffffff;
+  background-image: url(../img/logo_hempenweb.png);
+  background-position: 192px 10px;
+  background-repeat: no-repeat;
+  padding: 0;
 }
 
 #home_link
 {
-	height: 100px;
-	width: 360px;
-	background-color: transparent;
-	float: left;
-	cursor: pointer;
+  height: 100px;
+  width: 360px;
+  background-color: transparent;
+  float: left;
+  cursor: pointer;
 }
 
 #main
 {
-	clear: both;
-	min-height: 500px;
-	background-color: #9B8C14;
-	padding: 0;
+  clear: both;
+  min-height: 500px;
+  background-color: #9B8C14;
+  padding: 0;
 }
 
 /* (de) Definition 2 Kolonnen (navigation und spalte 1 */
 #navigation
 {
-	float: left;
-	width: 20%;
+  float: left;
+  width: 20%;
 }
 
 #spalte3
 {
-	margin-left: 20%;
-	border: 0;
+  margin-left: 20%;
+  border: 0;
 /*	border-left: 1px solid #232323; */
 }
 
 #spalte3_inhalt
 {
   margin: 0;
-	padding: 0;
-	min-height: 500px;
-	background-color: #FFFFFF;
-	border-left: 0px solid #232323;
+  padding: 0;
+  min-height: 500px;
+  background-color: #FFFFFF;
+  border-left: 0px solid #232323;
 }
 
 * html #spalte3_inhalt {
@@ -138,73 +150,86 @@ body
 }
 
 .spalte_420_r {
-	width: 420px;
+  width: 420px;
 }
 
 .subspalte_kuenstlerdetail, .subspalte_auswahl {
-	padding: 0 20px;
+  padding: 0 20px;
 }
 
 .subspalte_detail_l {
-	padding: 0 0 0 20px;
+  padding: 0 0 0 20px;
 }
 
 .subspalte_home_l {
-	padding: 25px 0 0 40px;
+  padding: 25px 0 0 40px;
 }
 
 .subspalte_home_r {
-	padding: 15px 15px 0 0;
+  padding: 15px 15px 0 0;
 }
 
 .counter {
-	min-height: 10px;
-	height: auto;
-}
-/*
-.spalte_340_r {
-  background-color: red;
-  min-height: 500px;
+  min-height: 10px;
+  height: auto;
 }
 
-.subcontainer {
-  width: 100%;
-}
-*/
 .clearfix
 {
   display: block;
 }
 
+.titel_seite {
+  height: 30px;
+}
+
+.accordion_title {
+  background-color: #dddddd;
+  cursor: pointer;
+  margin: 2px 0;
+  padding: 3px 5px;
+}
+
+.ui-accordion-content p {
+  padding: 0 5px;
+}
+
 /* pageslider */
 .slider {
-	color: #938356;
-	font-weight: bold;
+  color: #938356;
+  font-weight: bold;
 }
 
-/* CSS für automatischen Bildwechsler */ 
-#imageContainer1 img {
-  	display:none;
-  	position: absolute;
+#introbild img {
+  padding: 0 20px;
+  width: 686px;
+  height: 290px;
 }
 
-/* CSS für automatischen Bildwechsler */ 
+/* CSS fï¿½r automatischen Bildwechsler */ 
 #imageContainer1 img {
-  	display:none;
-  	position: absolute;
+  display:none;
+  position: absolute;
+}
+
+/* CSS fï¿½r automatischen Bildwechsler */ 
+#imageContainer1 img {
+  display:none;
+  position: absolute;
 }
 
 #footer
 {
-	height: 20px;
-	background-color: #1C5069;
-	color: #938356;
-	padding-left: 20px;
-	border: 0px;
-	clear: both;
-	display: block;
-	font-size: 11px;
-	border-top: 1px solid #232323;
+  height: 20px;
+  line-height: 20px;
+  background-color: #1C5069;
+  color: #938356;
+  padding-left: 20px;
+  border: 0px;
+  clear: both;
+  display: block;
+  font-size: 11px;
+  border-top: 0px solid #232323;
 }
 
 div#impressum, div#reflinks, div#servlinks {
@@ -212,40 +237,40 @@ div#impressum, div#reflinks, div#servlinks {
 }
 
 .img_container_thumb{
-	height: auto;
+  height: auto;
 }
 
 .img_medium_left, .img_medium_right {
-	height: 300px;
-	background-color: transparent;
-	padding-bottom: 5px;
-	padding-left: 0;
+  height: 300px;
+  background-color: transparent;
+  padding-bottom: 5px;
+  padding-left: 0;
 }
 
-/* CSS für Bilder-Leiste */
+/* CSS fï¿½r Bilder-Leiste */
 #bildleiste_wrapper {
-	width: 300px;
+  width: 300px;
 }
 
 .bildleiste {
-	width: 9px; 
-	height: 9px; 
-	float: left;  
-	margin-top: 5px;
-	border: 0px solid black;
+  width: 9px; 
+  height: 9px; 
+  float: left;  
+  margin-top: 5px;
+  border: 0px solid black;
 }
 
 .bildleiste_space {
-	width: 18px; 
-	height: 9px; 
-	float: left; 
-	background-color: transparent;
+  width: 18px; 
+  height: 9px; 
+  float: left; 
+  background-color: transparent;
 }
 
 .rect_aktiv {
-	background-color: red; 	
+  background-color: red; 	
 }
 
 .rect_passiv {
-	background-color: #1C5069; /*#535250; */
+  background-color: #1C5069; /*#535250; */
 }

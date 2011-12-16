@@ -79,16 +79,16 @@ $newfile.="#----------------------------------------------\n\n\n";
        $i++;
     }
 
-		$datei = $path.date('Ymd').'backup.'.$filetype;
-		$datei_neu = $path.date('Ymd').'backup.'.$filetype2;
-        $fp = fopen ($datei,'w');
-        fwrite ($fp,$newfile);
-        fclose ($fp);
-        @rename($datei,$datei_neu);
-        clearstatcache();  
-      	chmod ($datei_neu, 0777);
-		clearstatcache();  
-		?>
+      $datei = $path.date('Ymd').'backup_'.WEBSITE.'.'.$filetype;
+      $datei_neu = $path.date('Ymd').'backup_'.WEBSITE.'.'.$filetype2;
+      $fp = fopen ($datei,'w');
+      fwrite ($fp,$newfile);
+      fclose ($fp);
+      @rename($datei,$datei_neu);
+      clearstatcache();  
+      chmod ($datei_neu, 0777);
+      clearstatcache();  
+      ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 
 <html>

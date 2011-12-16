@@ -1,5 +1,5 @@
-/* kundeneigene CSS - Diese CSS kann zu einem späteren Zeitpunkt direkt im 
-	CMS bearbeitet und ergänzt werden */
+/* kundeneigene CSS - Diese CSS kann zu einem spï¿½teren Zeitpunkt direkt im 
+	CMS bearbeitet und ergï¿½nzt werden */
 
 
 p a:link, p a:visited, p a:active  {
@@ -11,7 +11,7 @@ p a:hover  {
   font-weight: bold;
 }
 
-/* Notationen für die Homeseite */
+/* Notationen fï¿½r die Homeseite */
 div#intro {
   background-color: #dcdcdc;
 }
@@ -19,25 +19,26 @@ div#intro {
 div#introcontent {
   background-color: transparent;
   padding: 1.5em;
-  min-height: 380px;
+  min-height: 400px;
 }
 
 
-/* Grosse Schrift für den Titel auf der Homeseite */
+/* Grosse Schrift fï¿½r den Titel auf der Homeseite */
 .verybig {
   font-size: 30px;
   line-height: 60px;
-  margin-top: -30px; /* übersteuert .titel_seite und .counter */
+  margin-top: -30px; /* ï¿½bersteuert .titel_seite und .counter */
 }
 
 /* teaser - auf jeder beliebigen Seite */
 .teaserwrapper {
-	background-color: #FFFFFF;
-	padding: 10px;
+  background-color: #FFFFFF;
+  padding: 10px;
+  width: 647px;
 }
 
 .teaser {
-  width: 284px;
+  width: 305px;
   margin: 15px 0;
   padding: 10px;
   background-color: #F0F0F0;
@@ -61,7 +62,7 @@ div#introcontent .teaserwrapper ul {
 	padding: 0 10px 0 20px;
 }
 
-/* CSS-Notationen für Links im Footer */
+/* CSS-Notationen fï¿½r Links im Footer */
 div#impressum {
   position: absolute;
   margin-left: 135px;
@@ -107,13 +108,13 @@ div#footer li.title {
   color: #F0FFFF;
 }
 
-/* Divs im footer vorläufig verbergen */
+/* Divs im footer vorlï¿½ufig verbergen */
 div#impressum, div#reflinks, div#servlinks
 {
   display: none;
 }
 
-/* CSS für automatischen Bildwechsler */ 
+/* CSS fï¿½r automatischen Bildwechsler */ 
 div#imageContainer1
 {
   width: 300px;
@@ -127,7 +128,7 @@ div#imageContainer1 img
   max-height: 300px;
 }
 
-/* Accordion Schriftfarbe für paragraph p */
+/* Accordion Schriftfarbe fï¿½r paragraph p */
 .accordion_content p 
 {
   color: #232323;

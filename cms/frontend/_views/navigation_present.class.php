@@ -63,7 +63,7 @@ class navigationPresent
     	global $akt_kap;
     	global $akt_navid;
     	global $akt_subid;
-    	global $redirect, $general;
+    	global $redirect, $general, $naviout;
     	global $aktive_menupos, $css_classes;
 
     	// damit der Bereich fuer die vertikale Subnavigation wirklich nur dann
@@ -75,6 +75,7 @@ class navigationPresent
     	if ($rc === true) 
     	{ 
 	    	$tpl->setCurrentBlock('subnavi_'.SUBMENU_DIR);
+            $frontend->set_css_class('subnav', $akt_navid, $css_classes);
 		    $tpl->setVariable('ul_subitem_start', '<ul>');
 			// alle Unterpositionen pro Navigationspunkt (horizontal)
 			foreach ($unav_array as $subid => $value) 
@@ -86,8 +87,10 @@ class navigationPresent
 		        $nav_url = $redirect->set_navlink($akt_navid, $subid);
 		        $link    = '<a href="'.urldecode($nav_url).'"';
 		        if ($subid == $akt_subid) { 
-		        	$link .= $frontend->set_css_class('subnav', $aktive_menupos, $css_classes);
-		        }
+                    $style = $naviout->set_style(THEME_SELECTED);
+                    $class = $frontend->set_css_class('subnav', $aktive_menupos, $css_classes);
+                    $link .= ' class="'.$style.' '.$class.'"';
+                }
 		        $link 	.= '>'.$label.'</a>';
 				if (SUBMENU_DIR == 'horizontal') { $tpl->setVariable('richtung_subnavi', HMENU_RICHTUNG); }
 				$tpl->setVariable('subnavi_link',$link);		
@@ -151,6 +154,7 @@ class navigationPresent
 					$nav_id = $eintrag['nav_id'];
 					$ausgewaehlt = ' class="active"';
 					$style = $frontend->set_css_class('subnav', $aktive_menupos, $css_classes);
+                    if ($style == '') {$style = $ausgewaehlt; }
 				}
 				$nav_url = $redirect->set_navlink($tempid, $subid);
 				$tpl->setVariable('aktivu',$ausgewaehlt);
@@ -203,10 +207,12 @@ class navigationPresent
 //	        $style = $dir == 'H' ? ' class="active"'
 //	        					 : ' class="active"';
 	        break;                    
-	      case 'feednsmile/':
-		        $style = ' class="active"';
+//	      case 'feednsmile/':
+//		    $style = ' class="active"';
+//            break;
 	      default:
-		        $style = ' class="active"';
+//		    $style = ' class="active"';
+		    $style = 'active';
 	        break;                    
 	    }
 	    return $style;		
@@ -215,10 +221,10 @@ class navigationPresent
 	public function set_pipe() 
 	{
 		// das Pipe-Zeichen | wird nicht bei allen Themes ben�tigt
-		switch ($thema) {
+		switch (THEME_SELECTED) {
 		  case 'art4art/':
-//			return '&nbsp;|&nbsp;';
-//		  	break;
+			return '&nbsp;|&nbsp;';
+		  	break;
 		  default:
 			return '';
 			break;		
