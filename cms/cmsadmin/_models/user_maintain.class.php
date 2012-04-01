@@ -5,9 +5,9 @@
  *           www.hempenweb.ch
  * ----------------------------------------------------------
  *
- * Klasse für die Verwaltung der Benutzer und Logindaten
+ * Klasse fï¿½r die Verwaltung der Benutzer und Logindaten
  * @author      Roland Hempen
- * @copyright   Frei einsetz- und veraenderbar, wenn der Autor erwähnt wird
+ * @copyright   Frei einsetz- und veraenderbar, wenn der Autor erwï¿½hnt wird
  * @version     1.0 | 2009-05-22
  */
 
@@ -27,10 +27,10 @@ class userMaintain
     }                                                                          
 
     /* Neue Methode implementieren */	
-    /* login ausführen
+    /* login ausfï¿½hren
 		@param: $user - Benutzername
 		@param: $pass - Passwort
-		@param: $pwcode - Passwort MD5 verschlüsselt
+		@param: $pwcode - Passwort MD5 verschlï¿½sselt
 		@return: $rc - Returncode (4 = ohne Fehlermeldung, 8 = Fehlermeldung)
     */	
     public function login($user, $pass, $pwcode) 
@@ -38,7 +38,7 @@ class userMaintain
     	$rc = $this->check_input('login', $user, $pass, $pwcode);
     	if ((int)$rc == 0) {
 			$pass = md5($pass);
-			// Zugriff auf DB und prüfen, ob der Benutzer erfasst wurde.
+			// Zugriff auf DB und prï¿½fen, ob der Benutzer erfasst wurde.
 			$usrow	= $this->get_user_row($user, $pass);
 			// Nichts gefunden!
 			if ($usrow == '') { return $rc=8; }
@@ -76,10 +76,10 @@ class userMaintain
 		return $row;      
     }	
 
-    /* Passwort ändern
+    /* Passwort ï¿½ndern
 		@param: $user - Benutzername
 		@param: $pass - Passwort
-		@param: $pwcode - Passwort MD5 verschlüsselt
+		@param: $pwcode - Passwort MD5 verschlï¿½sselt
 		@return: $rc - Returncode
     */	
     public function change_password($user, $pass, $pwneu1, $pwneu2) 
@@ -89,10 +89,10 @@ class userMaintain
     	return $rc;
     }    
 
-    /* Passwort ändern auf der DB
+    /* Passwort ï¿½ndern auf der DB
 		@param: $user - Benutzername
 		@param: $pass - Passwort
-		@param: $pwcode - Passwort MD5 verschlüsselt
+		@param: $pwcode - Passwort MD5 verschlï¿½sselt
 		@return: $rc - Returncode
     */	
     private function update_user($user, $pass, $pwneu) 
@@ -180,7 +180,7 @@ class userMaintain
 		@param: $action - Aktion
 		@param: $user - Benutzername
 		@param: $pass - Passwort 
-		@param: $pwcode - Passwort MD5-verschlüsselt 
+		@param: $pwcode - Passwort MD5-verschlï¿½sselt 
 		@param: $pwneu1 - Neues Passwort 1
 		@param: $pwneu2 - Neues Passwort 2
 		@param: $email - Emailadresse
@@ -216,7 +216,7 @@ class userMaintain
     			} elseif ($user == '' || $email == '') {
     				$rc = 8; // Fehlermeldung
     			}
-    			// Email prüfen
+    			// Email prï¿½fen
     			if ($email != '' && !preg_match('/^[\w.+-]{2,}\@[\w.-]{2,}\.[a-z]{2,6}$/', $email)) {
     				$rc = 9;
     			}
@@ -225,7 +225,7 @@ class userMaintain
 		return $rc;      
     }	
 
-    /* Prüfen, ob der eingegebene Username existiert auf der DB 
+    /* Prï¿½fen, ob der eingegebene Username existiert auf der DB 
     	@params: $user	- Username
     	@return: $rc	- Return-Code (0=User existiert, 12=User existiert nicht)
     */
@@ -273,6 +273,9 @@ class userMaintain
 						break;
 					case 'D': // Dokumentation
 						$menu_arr[$index] = $GLOBALS['CMS']['MENU08'];
+						break;
+					case 'A': // Addons
+						$menu_arr[$index] = $GLOBALS['CMS']['MENU12'];
 						break;
 				}
 			}

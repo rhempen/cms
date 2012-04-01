@@ -73,6 +73,7 @@ $GLOBALS['CMS']['MENU08'] 								= 'Documentation';
 $GLOBALS['CMS']['MENU09'] 								= 'Logout';
 $GLOBALS['CMS']['MENU10'] 								= 'Configuration';
 $GLOBALS['CMS']['MENU11'] 								= 'Fragments';
+$GLOBALS['CMS']['MENU12'] 								= 'Addons';
 $GLOBALS['CMS']['TEXT_ANMELDEN'] 						= 'Veuillez vous connecter';
 $GLOBALS['CMS']['TEXT_WAEHLEN'] 						= 'Sélectionnez une option du menu';
 
@@ -149,8 +150,9 @@ $GLOBALS['TEXTE']['NAVI_VERWALTUNG']	 				= 'Gestion de la navigation';
 $GLOBALS['TEXTE']['TEXT_BILDER_HOCHLADEN'] 				= 'Télécharger les images';
 $GLOBALS['TEXTE']['TEXT_EDIT_HAUPTNAVI'] 				= 'Modifier un élément de la navigation principale';
 $GLOBALS['TEXTE']['TEXT_NEUE_UNTERNAVI'] 				= 'Insérer un nouvel élément de sous-navigation';
-$GLOBALS['TEXTE']['TEXT_DELE_HAUPTNAVI'] 				= 'Supprimer l\'élément de la navigation principale?';
-$GLOBALS['TEXTE']['TEXT_DELE_UNTERNAVI'] 				= 'Supprimer l\'élément de la sous-navigation?';
+$GLOBALS['TEXTE']['TEXT_DELE_HAUPTNAVI'] 				= 'Supprimer l\'élément de la navigation principale';
+$GLOBALS['TEXTE']['TEXT_DELE_UNTERNAVI'] 				= 'Supprimer l\'élément de la sous-navigation';
+$GLOBALS['TEXTE']['TEXT_COPY_HAUPTNAVI'] 				= 'Copier l\'élément de la navigation principale';
 $GLOBALS['TEXTE']['TEXT_REIHENFOLGE'] 	 				= 'Modifier l\'ordre en déplaçant l\'image vers le haut';
 $GLOBALS['TEXTE']['TEXT_EDIT_UNTERNAVI'] 				= 'Modifier l\'élément de la sous-navigation';
 $GLOBALS['TEXTE']['TEXT_NEUE_HAUPTNAVI'] 				= 'Nouvel élément de la navigation principale';
@@ -178,17 +180,19 @@ $GLOBALS['NAVI']['SERVICE']								= 'S';
  * Texte zur Klasse naviMaintain
  *********************************************************************************************************************/
 // Erfolgsmeldungen
-$GLOBALS['MESSAGES']['MSG_NAVI_SEITE_ANGELEGT'] 		= 'L\'élément de la navigation et la page correspondante ont été créés';
+$GLOBALS['MESSAGES']['MSG_NAVI_SEITE_ANGELEGT'] 		= 'L\'élément de la navigation %s et la page correspondante ont été créés';
 $GLOBALS['MESSAGES']['MSG_NAVI_SEITE_GESPEICHERT'] 		= 'La page %s a été sauvegardée';
 $GLOBALS['MESSAGES']['MSG_NAVI_SEITE_GELOESCHT'] 		= 'L\'élément de la navigation %s et toutes les données correspondantes ont été supprimés';
 $GLOBALS['MESSAGES']['MSG_KAP_HOCHZIEHEN']				= 'L\'élément de la navigation %s a été déplacé vers le haut';
 $GLOBALS['MESSAGES']['MSG_UKAP_HOCHZIEHEN']				= 'L\'élément de la sous-navigation %s a été déplacé vers le haut';
+$GLOBALS['MESSAGES']['MSG_NEU_SORTIERT']   				= 'Die Datens&auml;tze wurden neu sortiert!';
 
 // Fehlermeldungen
 $GLOBALS['MESSAGES']['MSG_NAVI_SEITE_NICHT_GESPEICHERT'] 		= 'L\'élément de navigation %s n\'a pas pu être sauvegardée!';
 $GLOBALS['MESSAGES']['MSG_NAVI_SEITE_NICHT_ANGELEGT'] 	= 'L\'élément de navigation %s n\'a pas pu être créé!';
 $GLOBALS['MESSAGES']['MSG_NAVI_SEITE_NICHT_GELOESCHT'] 	= 'Des erreurs sont survenues lors de la suppression de l\'élément de la navigation %s!';
 $GLOBALS['MESSAGES']['MSG_NAVI_NICHT_LOESCHBAR']		= '%s sous-page(s) encore disponible(s) - supprimez d\'abord la(les) sous-page(s)!';
+$GLOBALS['MESSAGES']['MSG_NICHT_NEU_SORTIERT']   		= 'Die Datens&auml;tze konnten nicht neu sortiert werden!';
 
 /*********************************************************************************************************************
  * Labels zu Formularen navi_edit, page_edit

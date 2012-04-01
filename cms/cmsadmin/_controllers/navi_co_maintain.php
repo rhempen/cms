@@ -7,15 +7,16 @@
 	$timestamp = $t['mday'].'.'.$t['mon'].'.'.$t['year'].' '.$t['hours'].':'.$t['minutes'].':'.$t['seconds'];
 	
 // $_GET-Parameter abholen
-	$nav_id			= $_GET['nav_id'] ? $_GET['nav_id'] : '';
-	$type				= $_GET['type'] ? $_GET['type'] : '';
+	$nav_id		= $_GET['nav_id'] ? $_GET['nav_id'] : '';
+	$type		= $_GET['type'] ? $_GET['type'] : '';
 	$seiten_id	= $_GET['seiten_id'] ? $_GET['seiten_id'] : '';
-	$ukap				= $_GET['ukap'] ? $_GET['ukap'] : '';
-	$kap				= $_GET['kap'] ? $_GET['kap'] : '';
-	$action			= $_GET['action'] ? $_GET['action'] : '';
-	$menutext		= $_GET['text'] ? $_GET['text'] : '';
+	$ukap		= $_GET['ukap'] ? $_GET['ukap'] : '';
+	$kap		= $_GET['kap'] ? $_GET['kap'] : '';
+	$action		= $_GET['action'] ? $_GET['action'] : '';
+	$menutext	= $_GET['text'] ? $_GET['text'] : '';
 	$thumbsdir	= $_GET['dir'] ? $_GET['dir'] : '';
-	$view				= ''; // steuert die Anzeige der Daten
+	$srtids		= isset($_POST['srtids']) ? $_POST['srtids'] : '';
+	$view		= ''; // steuert die Anzeige der Daten
 
 	$_SESSION['ref_id'] = $nav_id;
 	$_SESSION['type'] = $type;
@@ -43,6 +44,11 @@
                 elseif 	($wert == $GLOBALS['NAVI']['SERVICE']) { $feldwert = $GLOBALS['NAVI']['HORIZONTAL']; }
                 $feldname = 'nav_type'; // Feldname, dessen wert geändert werden soll
                 break;
+            case 'naviSort':
+                $ele = preg_split('/\&?(navisDivs\[\]=)/', $srtids);
+                $navi->navi_sortieren($ele);
+    			$view = 'nothingToDo';
+                break;
             default:
                 $feldname   = '';
                 break;
@@ -55,8 +61,6 @@
 // $row ist danach in der $GLOBALS['row'] verf�gbar
 	if ($nav_id > 0) {
 		$row = $navi->read_navigation_by_id($nav_id);
-//	Session-Variable setzen f�r den TinyMce-ImageManager
-//		$_SESSION['site_media'] = $row['bildpfad'];
 	}
 
 // Hauptnavigations-Punkt hochziehen
@@ -66,15 +70,15 @@
 	}
 
 // Unternavigations-Punkt hochziehen
-	elseif ($action == 'ukap' && $nav_id > 0 && $ukap > 10)
+	elseif ($action == 'ukap')
 	{
-		$message = $navi->ukap_hochziehen($nav_id, $kap, $ukap);
+		$message = $navi->ukap_hochziehen($nav_id);
 	}		
 
 // Neuen Unternavigationspunkt eroeffnen
-	elseif ($action == 'neu' && $kap != 0 && $nav_id != 0)
+	elseif ($action == 'neuUkap' && $nav_id != 0)
 	{
-		$message = $navi->neuer_ukap($kap, $nav_id);
+		$message = $navi->neuer_ukap($nav_id);
 	}
 
 // Neuen Hauptnavigationspunkt eroeffnen
@@ -130,7 +134,15 @@
 		$thumbnails = $browser->get_images($thumbsdir);
 		$view = 'editPage';
 	}  
-	
+
+// Navigationspunkt kopieren
+	elseif ($action == 'copy' && $nav_id != 0) 	
+	{
+		$navigation = $row;
+		$navi_page 	= $navi->read_navi_page($nav_id);
+        $message    = $navi->copy_navi_page($navigation,$navi_page);
+	}  
+    
 // Navigationspunkt nach dem Bearbeiten speichern
 	elseif ($action == 'save' && $seiten_id != 0) 	
 	{

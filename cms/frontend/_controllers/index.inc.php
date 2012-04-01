@@ -7,7 +7,7 @@ $frontend->display_bilder($seiten_infos,'N');
 $tpl->setCurrentBlock('inhalt');
 
 // Titel anzeigen
-$frontend->create_titel($_GET['navid']);
+$frontend->create_titel($_GET['navid'],$seiten_infos['template_name']);
 
 // Link Uebersicht brauchen wir hier nur, falls page_id gesetzt ist.
 // dh. die Seite wurde als Linkverweis aufgerufen

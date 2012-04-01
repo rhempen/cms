@@ -4,7 +4,7 @@
 	
 // $_GET-Parameter abholen
 	$action	= isset($_GET['action']) ? $_GET['action'] : '';
-	$cat		= isset($_GET['cat']) ? $_GET['cat'] : '';
+	$cat	= isset($_GET['cat']) ? $_GET['cat'] : '';
 	$catid	= isset($_GET['id']) ? $_GET['id'] : '';
 	$param	= isset($_GET['param']) ? $_GET['param'] : '';
 	$thema	= isset($_GET['thema']) ? $_GET['thema'] : '';

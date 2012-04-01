@@ -10,7 +10,7 @@ function login_fields($action)
 	$html .= '<input type="hidden" name="pwcode" id="pwcode" value="'.$pwcode.'" />' . "\n";
 	switch ($action) {
 	case 'CHANGE':
-		// Passwort ändern
+		// Passwort ï¿½ndern
 		$html .= '<h2>'.$GLOBALS['TEXTE']['LBL_CHANGE_PASSWORD'].'</h2>' . "\n";
 		$html .= '<p class="odd">'.$GLOBALS['TEXTE']['USERNAME'].'<br/>' . "\n";
 		$html .= '<input style="width:160px;" type="text" id="username" name="username" tabindex="1" value="'.$user.'" />' . "\n";
@@ -88,7 +88,7 @@ function set_class($act, $pos) {
 function menu()
 {
 	global $menu_arr;
-	// Debugging - Fenster öffnen 
+	// Debugging - Fenster ï¿½ffnen 
 	if ($_SESSION['debugging'] === true) {
 		debug_open_window();
 		debug_var('Seite: ', $_SERVER['PHP_SELF']);
@@ -104,6 +104,7 @@ function menu()
 		if (in_array($GLOBALS['CMS']['MENU01'],$menu_arr)) { $html .= '<li class="'.set_class($action, 'NAVIGA').'"><a href="#" onclick="javascript:start_form(\'naviga\');">'.$GLOBALS['CMS']['MENU01'].'</a></li>' . "\n"; }
 		if (in_array($GLOBALS['CMS']['MENU02'],$menu_arr)) { $html .= '<li class="'.set_class($action, 'SEITEN').'"><a href="#" onclick="javascript:start_form(\'seiten\');">'.$GLOBALS['CMS']['MENU02'].'</a></li>' . "\n"; }
 		if (in_array($GLOBALS['CMS']['MENU11'],$menu_arr)) { $html .= '<li class="'.set_class($action, 'FRGMNT').'"><a href="#" onclick="javascript:start_form(\'frgmnt\');">'.$GLOBALS['CMS']['MENU11'].'</a></li>' . "\n"; }
+		if (in_array($GLOBALS['CMS']['MENU12'],$menu_arr)) { $html .= '<li class="'.set_class($action, 'ADDONS').'"><a href="#" onclick="javascript:start_form(\'addons\');">'.$GLOBALS['CMS']['MENU12'].'</a></li>' . "\n"; }
 		if (in_array($GLOBALS['CMS']['MENU03'],$menu_arr)) { $html .= '<li class="'.set_class($action, 'MEDIEN').'"><a href="#" onclick="javascript:start_form(\'medien\');">'.$GLOBALS['CMS']['MENU03'].'</a></li>' . "\n"; }
 		if (in_array($GLOBALS['CMS']['MENU10'],$menu_arr)) { $html .= '<li class="'.set_class($action, 'CONFIG').'"><a href="#" onclick="javascript:start_form(\'config\');">'.$GLOBALS['CMS']['MENU10'].'</a></li>' . "\n"; }
 		if (in_array($GLOBALS['CMS']['MENU06'],$menu_arr)) { $html .= '<li class="'.set_class($action, 'XLINKS').'"><a href="#" onclick="javascript:start_form(\'xlinks\');">'.$GLOBALS['CMS']['MENU06'].'</a></li>' . "\n"; }

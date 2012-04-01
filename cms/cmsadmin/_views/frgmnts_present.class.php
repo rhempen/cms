@@ -79,7 +79,7 @@ class frgmntsPresent
   */
   private function present_fragments($frgmnts) 
   {
-    global $tpl;
+    global $tpl, $general;
     // Datenzeilen 
     $tpl->setCurrentBlock('frgmntzeile');
     while ($row = $frgmnts->fetchRow(MDB2_FETCHMODE_ASSOC)) 
@@ -92,7 +92,7 @@ class frgmntsPresent
       $tpl->setVariable('nr', $row['frag_id']);
       $tpl->setVariable('frgname', $row['name']);
       $tpl->setVariable('bearbeiten', $this->compose_workmenu($row['frag_id'],$row['name']));
-      $tpl->setVariable('sorticon', $this->compose_sorticon($row['frag_id']));
+      $tpl->setVariable('sorticon', $general->compose_sorticon());
       // die Zeile parsen
       $tpl->parseCurrentBlock();
     }		
@@ -120,17 +120,6 @@ class frgmntsPresent
     return $html;
   }
 
-  /* Sorticon zusammenstellen 
-    @params: $frgid - Aktuelle Fragment-id
-    @return: $sorticon  - html f�r das anzuzeigende Menu
-  */
-  public function compose_sorticon($frgid) 
-  {
-    $html = '<img src="../gifs/up.gif" height="15" width="12" border="0" alt="'.$GLOBALS['TEXTE']['TEXT_MOVE'].'" title="'.$GLOBALS['TEXTE']['TEXT_MOVE'].'" />';
-    $html .= '<img src="../gifs/down.gif" height="15" width="12" border="0" alt="'.$GLOBALS['TEXTE']['TEXT_MOVE'].'" title="'.$GLOBALS['TEXTE']['TEXT_MOVE'].'" />';
-    return $html;
-  }
-  
   /* output - einen Platzhalter in der View mit einem Wert ausgeben 
     @params: $platzhalter - der {Platzhalter} im Template
     @return: $value - Der Wert, der den Platzhalter f�llt

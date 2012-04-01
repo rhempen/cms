@@ -75,11 +75,13 @@ class frontendPresent
 
 	/**
 	 * 	Zusammensetzen des Titels aus der Bezeichnung fuer kap / ukap der Navigation 
-	 * 	@param: $kurztitel 
+	 * 	@params: $kurztitel 
+     *  @params: $template - Nummer des Template, um festzustellen, ob ein eigener
+     *                       Titelblock existiert 
 	*/
-	public function create_titel($kurztitel)
+	public function create_titel($kurztitel,$tplname='',$tplnr=0)
 	{
-		global $tpl, $general;
+		global $tpl, $general, $frontget;
 		global $nav_array, $unav_array;
 		$kap_text  = $_GET['navid'];
 		$ukap_text = $_GET['subid'];
@@ -87,7 +89,7 @@ class frontendPresent
 		// die Bezeichnung des Kap kann aus dem Array nav_array aus nav.php geholt werden
 		if ($kap_text!='' && is_array($nav_array)) {
 			foreach ($nav_array as $menu => $value) {
-				list($kap, $label) = explode('-',$value);
+				list($kap, $label) = explode('|',$value);
 				if ($kap_text == $menu) {
 					$kap_text = $label;
 					break;
@@ -100,7 +102,7 @@ class frontendPresent
 		// die Bezeichnung des Ukap kann aus dem Array unav_array aus nav.php geholt werden
 		if ($ukap_text!='' && is_array($unav_array)) {
 			foreach ($unav_array as $submenu => $value) {
-				list($kap, $ukap, $label) = explode('-',$value);
+				list($kap, $ukap, $label) = explode('|',$value);
 				if ($ukap_text == $submenu) {
 					$ukap_text = $label;
                     break;
@@ -109,8 +111,17 @@ class frontendPresent
 		}
 		// Titel = Bezeichnungen von Kap und Ukap
 		$titel .= $ukap_text !='' ? ' &#150; '.$ukap_text : '';
-		// hier müsste ein Flag abgefrage werden können, ob der Titel angezeigt werden soll
+        // Falls der Titel ausserhalb des Inhalt-Blockes angezeigt wird
+        // wird hier ein separater Seitentitel-Block angzeigt und gleich nach
+        // der Anzeige des Titel geparst.
+        $rc = $general->analyse_template($tplname,$tplnr,'/seitentitel/');
+        if ($rc) { $tpl->setCurrentBlock('seitentitel'); }
+		// hier müsste ein Flag abgefragt werden können, ob der Titel angezeigt werden soll
         $tpl->setVariable('kap_ukap', '<h1 class="h1mod">'.$titel.'</h1>');
+        if ($rc) { 
+          $tpl->parseCurrentBlock(); 
+          $tpl->setCurrentBlock('inhalt');          
+        }
 	}
 	
 	/**
@@ -218,9 +229,8 @@ class frontendPresent
 	public function display_inhalt2($row)
 	{
 		global $tpl, $frontget, $general;
-		$template = $frontget->read_single_template($row['template']);
-		$templdir = DOCUROOT.'/'.TEMPLATE_DIR.'/'.$template['template_name'];
-		if ($general->analyse_template($templdir)) {
+		$tplname = $row['template_name'];
+		if ($general->analyse_template($tplname,0,'/{inhalt2}/')) {
 			$tpl->setCurrentBlock('inhalt2');
 			$newtext = $this->replenish_text_with_fragments($row['inhalt2']);
 			$row['inhalt2'] = $newtext;

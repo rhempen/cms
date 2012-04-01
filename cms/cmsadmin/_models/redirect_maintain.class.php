@@ -35,13 +35,13 @@ class redirectMaintain
 	*/
     public function page_save_redirect() 
     { 
-		global $db, $msg;
+		global $db, $msg, $genmain;
 		$navid = 0;
 		$subid = 0;
 		$ids   = array();
 		$pagid = (int)$_POST['page_id'];
 		$kuerzel = $_POST['name'] != '' ? $_POST['name'] : $_POST['seite'];
-		$kuerzel = $this->format_kuerzel($kuerzel);
+		$kuerzel = $genmain->format_kuerzel($kuerzel);
 		
 		// navid und subid aus cms_navigation ermitteln 
 		if ((int)$_POST['navid'] !=0) {
@@ -67,11 +67,11 @@ class redirectMaintain
 	*/
     public function page_update_redirect() 
     { 
-		global $akt_redir, $db, $msg;
+		global $akt_redir, $db, $msg, $genmain;
 		$nav_id_neu = isset($_POST['navid']) ? $_POST['navid'] : 0;
 
 		$kuerzel = $_POST['name'] != '' ? $_POST['name'] : $_POST['seite'];
-		$kuerzel = $this->format_kuerzel($kuerzel);
+		$kuerzel = $genmain->format_kuerzel($kuerzel);
 		
 		// wurde die Zuordnung ge�ndert? 
 		$ids 	= $this->get_navids($nav_id_neu);
@@ -181,14 +181,14 @@ class redirectMaintain
     /* Index-Tabelle cms_redirect aus cms_navigation updaten */
     private function smurl_navi_insert() 
     {
-    	global $db, $naviga, $msg;
+    	global $db, $naviga, $msg, $genmain;
 			$msg[] = 'message'; $msg[] = $GLOBALS['CMS']['MENU01'];
     	$navigation = $naviga->navigation_laden();
 			while ($row = $navigation->fetchRow(MDB2_FETCHMODE_ASSOC)) 
 			{
 				$pagid = 0;
 				$subid = 0;
-				$kuerzel = $this->format_kuerzel($row['bezeichnung']);
+				$kuerzel = $genmain->format_kuerzel($row['bezeichnung']);
 
 				if ($row['ukap'] == 0) { 
 					$kap_save = $row['kap']; 
@@ -210,15 +210,15 @@ class redirectMaintain
     /* Index-Tabelle cms_redirect aus cms_navigation updaten */
     private function smurl_page_insert() 
     {
-    	global $db, $pages, $msg;
-			$msg[] = 'message'; $msg[] = $GLOBALS['CMS']['MENU02'];
+    	global $db, $pages, $msg, $genmain;
+        $msg[] = 'message'; $msg[] = $GLOBALS['CMS']['MENU02'];
     	$allpages = $pages->read_all_pages();
 			while ($row = $allpages->fetchRow(MDB2_FETCHMODE_ASSOC)) 
 			{
 				unset($ids);
 				$subid = 0;
 				$pagid = $row['page_id'];
-				$kuerzel = $this->format_kuerzel($row['name']);
+				$kuerzel = $genmain->format_kuerzel($row['name']);
 				// Zuordnung aus cms_navigation ermitteln? 
 				$ids 	= $this->get_navids($row['nav_id']);
 				$subid 	= isset($ids['subid']) ? $ids['subid'] : 0;
@@ -231,13 +231,13 @@ class redirectMaintain
     
     
     
-    /* Kuerzel formatieren */
-    private function format_kuerzel($text) 
-    {
-    	$text = convert_umlaute2(utf8_decode($text));
-		$kuerzel = str_replace(' ','_',$text);
-		return strtolower($kuerzel);
-    }    
+    /* Kuerzel formatieren --> verlagert in general_maintain.class.php */
+//    private function format_kuerzel($text) 
+//    {
+//    	$text = convert_umlaute2(utf8_decode($text));
+//		$kuerzel = str_replace(' ','_',$text);
+//		return strtolower($kuerzel);
+//    }    
     
        
     /* Datensatz in cms_redirect einf�gen

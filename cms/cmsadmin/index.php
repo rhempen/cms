@@ -186,6 +186,11 @@ switch($action) {
 	echo '<iframe name="pages" frameborder="0" marginheight="0" marginwidth="0" scrolling="auto" width="100%" height="800" src="_controllers/frgmnts_co_maintain.php"></iframe>';
 	break;
 
+  case "ADDONS":
+	echo '<h2>' .$GLOBALS['CMS']['MENU12']. '</h2>';
+	echo '<iframe name="addons" frameborder="0" scrolling="auto" width="100%" height="800" src="../frontend/_addons/gmaps/maintain.php"></iframe>';
+	break;
+
   case "MEDIEN": 
 	echo '<h2>' .$GLOBALS['CMS']['MENU03']. '</h2>';
 	echo '<iframe name="medien" frameborder="0" scrolling="auto" width="100%" height="800" src="_controllers/pictures_co_maintain.php"></iframe>';

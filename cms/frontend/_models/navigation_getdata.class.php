@@ -5,28 +5,31 @@
  *           www.hempenweb.ch
  * ----------------------------------------------------------
  *
- * Model-Klasse für die Beschaffung der Navigation (horizontal und vertikal)
+ * Model-Klasse fï¿½r die Beschaffung der Navigation (horizontal und vertikal)
  *
  * @author      Roland Hempen
- * @copyright   Frei einsetz- und veraenderbar, wenn der Autor erwähnt wird
+ * @copyright   Frei einsetz- und veraenderbar, wenn der Autor erwï¿½hnt wird
  * @version     1.0 | 2008-05-03
  */
 
 class navigationGetData
 {
 	private $mDb;
-	private $mPrefix;	
+	private $mPrefix;
+    private $mLangu;
 
     /* Constructor */
     function __construct($db) 
     {
 		$this->mPrefix 	= TABLE_PREFIX;
 		$this->mDb 		= $db;
+        $this->mLangu   = $_SESSION['language'];
     }                                                                          
 
     /* Neue Methoden implementieren */
     
-	/* Erst einmal sämtliche aktiven Navigationsdaten (Haupt- und Unterknoten) einlesen 
+    
+    /* Erst einmal saemtliche aktiven Navigationsdaten (Haupt- und Unterknoten) einlesen 
 		@return: $navigation - Array mit allen Navigationselementen
 	*/
 	public function get_complete_navigation()
@@ -40,12 +43,81 @@ class navigationGetData
 		return $navigation;
 	}
 
-	/* ein einzelnes Feld für eine bestimmte NavID aus der DB lesen 
+    /* ein einzelner Datensatz aus der Navigation lesen 
+     * @params: $navid
+     * $return: $navigation - der Row aus der DB
+     */
+    public function get_single_navigation($navid)
+    {
+      global $db;
+      $abfrage = 'SELECT * FROM '.$this->mPrefix.'navigation 
+					 WHERE nav_id='.$navid.' AND aktiv = "j"';
+      $navigation = $db->queryRow($abfrage);
+      return $navigation;
+    }
+    
+	/* die URL fÃ¼r die Startseite (Link im Headerbereich) zusammensetzen
+     * 1. muss die niedrigste NavId ermittelt werden
+     * 2. muss nachgelesen werden, ob es Unterseiten zur NavId gibt
+     * 3. AbhÃ¤ngig davon, ob SMURL aktiviert ist, wird die URL zusammengesetzt 
+     * @return: $url	- URL der Startseite
+	*/ 	
+    public function get_startseite() 
+    {
+      global $redirect;
+      $url = '';
+//      Alternativ kÃ¶nnte auch die Seite mit der niedrigsten Kap-Nr gelesen werden
+//      $navi_kap = $this->get_single_navi_with_lowest_kap();
+      $navid = $this->get_home_navid();
+      $navi_kap = $this->get_single_navigation($navid);
+      if (is_array($navi_kap)) {
+        // es wurde also ein DS gefunden, Jetzt schauen, ob es UNAV's gibt
+        $navi_ukap = $this->get_single_navi_with_ukap($navi_kap['kap']);
+      }
+      if (is_array($navi_ukap)) { $subid = $navi_ukap['nav_id']; }
+      // URL zusammensetzen, abhÃ¤ngig von SMURL
+      if (SMURL == 'ja') {
+        $url = $redirect->set_navlink($navid,$subid);
+      } else {
+        $url = ROOTDIR.'?navid='.$navid;
+        if ($subid > 0) { $url .= '&subid='.$subid; }
+      }
+      return $url;
+    }
+    
+    /* ein einzelner Datensatz aus der Navigation lesen 
+     * $return: $navigation - der Row aus der DB
+     */
+    public function get_single_navi_with_lowest_kap() 
+    {
+      global $db;
+      $abfrage = 'SELECT * FROM '.$this->mPrefix.'navigation 
+                   WHERE aktiv="j" HAVING MIN(kap)'; 
+      $navi_kap = $db->queryRow($abfrage);
+      return $navi_kap;      
+    }
+    
+    
+    
+    /* ein einzelner Datensatz aus der Navigation lesen mittels KAP, 
+     * um festzustellen ob es Unterkapitel gibt
+     * @params: $kap
+     * $return: $navi_ukap - der Row aus der DB mit der ersten Ukap
+     */
+    public function get_single_navi_with_ukap($kap, $ukap=10) 
+    {
+      global $db;
+      $abfrage = 'SELECT * FROM '.$this->mPrefix.'navigation 
+                   WHERE aktiv="j" AND kap='.$kap.' AND ukap='.$ukap; 
+      $navi_ukap = $db->queryRow($abfrage);
+      return $navi_ukap;      
+    }
+    
+	/* die erst mÃ¶gliche NavId als Startseite ermitteln 
 		@params: $akt_navid - Aktuelle Navigations-ID
-		@params: $field		- Feld, welches gelesen werden soll
 		@return: $value		- Wert des gelesenen Feldes
 	*/ 	
-	public function get_home_navid($akt_navid)
+	public function get_home_navid($akt_navid=0)
 	{
 		global $db;
 		$abfrage = 'SELECT nav_id FROM '.$this->mPrefix.'navigation 
@@ -64,7 +136,7 @@ class navigationGetData
 	}
 	
 
-	/* ein einzelnes Feld für eine bestimmte NavID aus der DB lesen 
+	/* ein einzelnes Feld fï¿½r eine bestimmte NavID aus der DB lesen 
 		@params: $akt_navid - Aktuelle Navigations-ID
 		@params: $field		- Feld, welches gelesen werden soll
 		@return: $value		- Wert des gelesenen Feldes
@@ -79,21 +151,21 @@ class navigationGetData
 		return $value;
 	}
 	
-
 	/* Die Anzahl ID's mit Nav_type 'S' lesen 
+     *  @params: $navtype - Navigationstype: S oder H oder V
 		@return: $anz_service - Anzahl ID's
 	*/ 	
-	public function get_anz_services()
+	public function get_anz_navtype($navtype)
 	{
 		global $db;
+        
 		$abfrage = 'SELECT COUNT(*) FROM '.$this->mPrefix.'navigation 
-					 WHERE aktiv="j" 
-					   AND nav_type="S"';
-		$anz_service = $db->queryOne($abfrage);
-		return $anz_service;
+					 WHERE aktiv="j" AND ukap="0" AND nav_type="'.$navtype.'"';
+		$anz_navtype = $db->queryOne($abfrage);
+		return $anz_navtype;
 	}
-	
-	/* Einen Array mit allen Haupt-Navigationspunkten füllen 
+
+    /* Einen Array mit allen Haupt-Navigationspunkten fï¿½llen 
 		@params: $akt_navid - Aktuelle Navigations-ID
 	*/ 	
 	public function fill_nav_array($akt_navid)
@@ -115,9 +187,9 @@ class navigationGetData
 			if ($eintrag['ukap'] == 0)
 			{
 				$akt_type = $eintrag['nav_type'];
-				// für die Hauptnavigation werden kap und bezeichnung in einen String gespeichert, der beim Anzeigen
+				// fï¿½r die Hauptnavigation werden kap und bezeichnung in einen String gespeichert, der beim Anzeigen
 				// der Navigation wieder verwendet wird
-				$nav_array[$eintrag['nav_id']] = $eintrag['kap'].'-'.$eintrag['bezeichnung'];
+				$nav_array[$eintrag['nav_id']] = $eintrag['kap'].'|'.$eintrag['bezeichnung'];
 				if ($eintrag['nav_id'] == $akt_navid)
 				{
 					$n_id = $eintrag['nav_id'];
@@ -126,9 +198,9 @@ class navigationGetData
 			}
 			else  
 			{
-				// für die Unternavigation werden kap, ukap und bezeichnung in einen String gespeichert, der beim Anzeigen
+				// fï¿½r die Unternavigation werden kap, ukap und bezeichnung in einen String gespeichert, der beim Anzeigen
 				// der Unternavigation wieder verwendet wird
-			    $unav_array[$eintrag['nav_id']] = $eintrag['kap'].'-'.$eintrag['ukap'].'-'.$eintrag['bezeichnung'].'-'.$akt_type;
+			    $unav_array[$eintrag['nav_id']] = $eintrag['kap'].'|'.$eintrag['ukap'].'|'.$eintrag['bezeichnung'].'|'.$akt_type;
 				if ($eintrag['kuerzel'] == $akt_ukap)
 				{
 					$n_id = $eintrag['nav_id'];

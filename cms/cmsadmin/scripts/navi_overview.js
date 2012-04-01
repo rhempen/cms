@@ -33,27 +33,66 @@ Event.observe(window, "load", function() {
 		new Ajax.InPlaceEditor( element, "../_controllers/navi_co_maintain.php?action=naviSave&nav_id=" + element.id, {});
 	});
 
-// 2. Eine Instantz pro Element mit der Klasse "aktivflag" erstellen --> AJAX-Request für den Update auf der DB
+// 2. Eine Instantz pro Element mit der Klasse "aktivflag" erstellen --> AJAX-Request fï¿½r den Update auf der DB
 	$A($$(".aktivflag")).each(function(element) {
 		Event.observe(element, "click", function() {
 			update_aktivflag(element.id);
 		});
 	});
 
-// 3. Eine Instantz pro Element mit der Klasse "typeflag" erstellen --> AJAX-Request für den Update auf der DB
+// 3. Eine Instantz pro Element mit der Klasse "typeflag" erstellen --> AJAX-Request fï¿½r den Update auf der DB
 	$A($$(".typeflag")).each(function(element) {
 		Event.observe(element, "click", function() {
 			update_typeflag(element.id);
 		});
 	});
 
-// 4. Eine Instantz pro Element mit der Klasse "startseite" erstellen --> AJAX-Request für den Update auf der DB
+// 4. Eine Instantz pro Element mit der Klasse "startseite" erstellen --> AJAX-Request fï¿½r den Update auf der DB
 	$A($$(".startflag")).each(function(element) {
 		Event.observe(element, "click", function() {
 			update_startflag(element.id);
 		});
-	});
+	})
 });
+
+
+Event.observe(window, "load", function() {
+// Sortierbarkeit von DIV-Elementen 
+	Sortable.create('navisDivs',{ tag:"DIV",onUpdate:updateSortIndex,handle:"navisort",only:"navisort" });
+  });
+
+  var updateSortIndex = function(e) {
+    var elements  = Sortable.serialize('navisDivs');  //$('debug').update(elements);
+    var url       = '../_controllers/navi_co_maintain.php?action=naviSort&srtids='+elements; 
+    var lRequest  = new Ajax.Request(url, { 
+                    parameters: { action:"naviSort", srtids:elements }, 
+                        method: 'post',
+                     onSuccess: updateMessage
+  		} );
+  	}
+
+  var updateMessage = function(transport) {
+  	// Meldung ausgeben nach der Neusortierung der cms_fragmente-Tabelle
+		  var msgtxt;
+			if (transport.statusText == 'OK') {
+				msgtxt = '<span class="success">'+transport.responseText+'</span>';
+			} else {
+				msgtxt = '<span class="error">'+transport.responseText+'</span>';
+			}
+  		$('debug').update(msgtxt);
+            var tdId = new Array(), tdIdSave = new Array(), lIndex = 0;
+			// Sortids updaten = durchnummerieren
+			$$("td.sortid").each( function(row) { 
+              tdId = row.id.split('_');
+              row.setStyle({backgroundColor:'yellow'}); 
+              if (tdId[0] != tdIdSave[0]) {
+                lIndex++;                
+              }
+              row.innerHTML=lIndex; 
+              tdIdSave = row.id.split('_');
+            });
+ 	}
+
 
 /*------------------------------------------------------------------------------
   Funktion: update_aktivflag -> Funktionsaufruf aus Event .aktivflag
@@ -161,20 +200,20 @@ function update_startflag(id) {
 
 /*--------------------------------------------------------------------------------------------
   Funktion: toggle_ukaps -> Auf- und Zuklappen von Ukaps
-  jede Kapitel hat im TR-Tag eine ID, die aus dem Feld Domain erstellt wird (zb. navi_7)
+  jedes Kapitel hat im TR-Tag eine ID, die aus dem Feld Domain erstellt wird (zb. navi_7)
   Gibt es zum Kapitel Unterkapitel, werden die folgenden TR-Tags mit der Id vom Kapitel plus _99
   in 10-schritten gesetzt. (zb. navi_7_10).
   Dem Script werden folgende Parameter mitgegeben:
   1. Id des Bildes
   2. Id des TR-Tags mit dem Kapitel 
   3. Anzahl der Unterkapitel
-  Anhand dieser Parameter können die Ukaps sichtbar gemacht oder versteckt und das Bild ausge-
+  Anhand dieser Parameter kï¿½nnen die Ukaps sichtbar gemacht oder versteckt und das Bild ausge-
   wechselt werden.
   Der aktuelle Zustand wird in einem Cookie gespeichert. Default sind die Ukaps sichtbar. 
 ----------------------------------------------------------------------------------------------*/ 
 function toggle_ukaps(img,id,anz) {
-	//alert($(img).src);
-	var src = $(img).src;
+
+    var src = $(img).src;
 	var bild = src.search(/minus/g);	
 	var i, plus_minus;
 	var uid;
@@ -200,7 +239,7 @@ function toggle_ukaps(img,id,anz) {
 	}
 	
 	// Cookie setzen, welches bei der Anzeige der Seite aus $_COOKIE navi_present.class.php abgefragt wird
-	plus_minus = plus_minus == 'minus' ? 'plus' : 'minus'; // Wert umkehren für das Cookie
+	plus_minus = plus_minus == 'minus' ? 'plus' : 'minus'; // Wert umkehren fï¿½r das Cookie
 	document.cookie = id + "=" + plus_minus;
 	//alert(document.cookie);
 }

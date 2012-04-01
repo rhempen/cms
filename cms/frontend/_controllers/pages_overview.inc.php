@@ -27,12 +27,12 @@ $tpl->setVariable('leiste', HIDDEN);
 $tpl->setVariable('galink', HIDDEN);
 
 if ($items != 0) {
+  // Seitentitel zusammensetzen und anzeigen
+  $frontend->create_titel($seiten_infos['kurztitel'],$seiten_infos['template_name']);
+
   while ($row = $overview->fetchRow(MDB2_FETCHMODE_ASSOC)) 
   {
       $tpl->setCurrentBlock('inhalt');
-
-      // Seitentitel zusammensetzen und anzeigen
-      $frontend->create_titel($seiten_infos['kurztitel']);
 
       // Textelement einer Seite anzeigen
       $frontend->display_texte($row);
@@ -68,7 +68,7 @@ if ($items != 0) {
   }
 } else {
       $tpl->setCurrentBlock('inhalt');
-      $frontend->create_titel($seiten_infos['kurztitel']);
+      $frontend->create_titel($seiten_infos['kurztitel'],$seiten_infos['template_name']);
       $tpl->setVariable('link_uebersicht','');
       $tpl->setVariable('pageslider','');
       $tpl->setVariable('langtext', $GLOBALS['TEXTE']['TEXT_SELECTBOX_LEER']);

@@ -13,7 +13,7 @@
 
 	$seiten = $pages->read_pages_with_latest_date($domain,$anzahl);
 	
-	$frontend->create_titel($seiten_infos['kurztitel']);
+	$frontend->create_titel($seiten_infos['kurztitel'],$seiten_infos['template_name']);
 
 	while ($row = $seiten->fetchRow(MDB2_FETCHMODE_ASSOC)) {
 		$tpl->setCurrentBlock('inhalt');

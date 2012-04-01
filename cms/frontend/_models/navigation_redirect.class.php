@@ -31,7 +31,117 @@ class navigationRedirect
   }                                                                          
 
     /* Neue Methoden implementieren */
+
+    /* die URI überprüfen -> Vergleich mit Einträgen in der Tabelle cms_redirect
+     * dabei muss unterschieden werden, ob SMURL aktiv ist oder nicht. Wenn nicht,
+     * werden die $_GET-Parameter überprüft
+     * @params: $_GET
+     * @return: $rc (true oder false)
+    */
+    public function check_uri() 
+    {
+      global $cfg;
+      $uri = $_SERVER['REQUEST_URI'];
+      $nav = str_replace(ROOTDIR,'',$uri);
+      $arr = explode('/',$nav);
+      $this->fill_redirect_buffer();
+      foreach($arr as $index => $value) {
+        if (preg_match('/start/',$value) || $value == '' || $value == 'index.php') { continue; }
+        $rc = 8;
+        if (SMURL == 'ja') {
+          if ($cfg->check_sprachcode($value)) { $rc = 0; }
+          if (in_array($value,$GLOBALS['allredirections'])) { $rc = 0; }
+        } else {
+          $navid = $subid = $pagid = $rc = 0;
+          if (count($_GET) > 0) {
+            $rc = 8;
+            foreach($_GET as $name => $value) {
+              switch($name) {
+                case 'navid': 
+                  $navid = $value;
+                  break;
+                case 'subid':
+                  $subid = $value;
+                  break;
+                case 'pagid':
+                  $pagid = $value;
+                  break;
+              }
+            }
+          }
+          $params = $navid.'_'.$subid.'_'.$pagid;
+          if (in_array($params,$GLOBALS['allredirections'])) { $rc = 0; }          
+        }
+      }
+      // wenn die URI bzw. Parameter ohne ROOTDIR nicht in einem der Array's 
+      // enthalten ist, kann das Rendern getrost abgebrochen werden, bzw. es 
+      // wird das Root-Verzeichnis der Website angesteuert
+      if ($rc > 0) { 
+        header('Location: ' . ROOTDIR);
+        exit;         
+        }
+    }
     
+	/* saemtliche Einträge aus cms_redirect einlesen 
+		@return: $GLOBALS['allredirections']
+	*/
+	public function fill_redirect_buffer()
+	{
+      global $db;
+      $redir_array  = array();
+      $allredir = $this->get_all_redirections();
+      while ($eintrag = $allredir->fetchRow())
+      { 
+        if (SMURL == 'ja') {
+          $redir_array[] = $eintrag['kuerzel'];          
+        } else {
+          $redir_array[] = $eintrag['navid'].'_'.$eintrag['subid'].'_'.
+                           $eintrag['pagid'];
+        }
+      }
+      $GLOBALS['allredirections'] = $redir_array;
+    }
+
+    /* alle Datensätze aus redirect lesen für Überprüfung der URL 
+     * @return: $result - DB-Object
+    */
+    public function get_all_redirections() 
+    {
+      global $db;
+      $query = 'SELECT * FROM '.$this->mPrefix.'redirect 
+                  ORDER BY navid, subid, pagid';
+      $result = $db->query($query);
+      return $result;
+    }
+  
+	/* Wenn die Website mittels index.php oder ohne index.php gestartet wird,
+     * muss eventuell ein Redirect auf die 1. Navigationsseite gemacht werden
+	*/
+    public function redirect_to_first_navi() 
+    {
+      global $naviget;
+      $url = $_SERVER['REQUEST_URI'];
+      if (SMURL == 'nein') {
+        $params = explode('?',$url);
+        $anzahl = count($params);
+        if ( $anzahl == 1) { // es gibt keine GET-Parameter
+          $index = str_replace('index.php','',$params[0]);          
+        } else {
+          return;
+        }       
+      }
+      $index = !preg_match('/index/',$url) 
+              ? $index = str_replace('//','/',$_SERVER['REQUEST_URI'].'/index.php')
+              : $url;
+
+      if ($url == ROOTDIR || $url == $index) {
+        $url_new = $naviget->get_startseite();
+        header('Location: ' . $url_new);
+        exit;
+      }        
+    }
+    
+  
 	/**
 	 * 	navid, subid oder pagid anhand der GET-Parameter ermitteln
 	 *	@param: $uri - URI
@@ -39,10 +149,11 @@ class navigationRedirect
 	*/
 	public function get_navid()
 	{
-		$db = $this->mDb;
+        global $db, $cfg;
 		$tab_prefix = $this->mPrefix;
 		unset($_GET);
 		$uri = $_SERVER['REQUEST_URI'];
+        $request_uri = explode('/',$uri);
 
 //  aus $uri wird nur der String in ROOTDIR entfernt, weil nur die folgenden 
 //	Parameter gültig sind.		
@@ -63,7 +174,7 @@ class navigationRedirect
 			{
 				if ($t != '' && $t != ROOTDIR && !preg_match('/index.php/',$t))
 				{
-                    // start=9 muss separat behandelt werden (Bl�ttern in Bildern)
+                    // start=9 muss separat behandelt werden (Blaettern in Bildern)
 					if (preg_match('/start/',$t)) {
 						$start = explode('_', $t);
 						$_GET['start'] = $start[1];
@@ -76,7 +187,18 @@ class navigationRedirect
 						$_GET['mail'] = $mail[1];
 						continue;
 					}
-										
+							
+                    // Sprachcode
+                    if ($cfg->check_sprachcode($t)) {
+                      // Wenn ein Sprachcode iden$cfg->check_sprachcode($t)tifiziert wurde, muss er aus dem
+                      // Request_Uri herausgelöscht werden
+                      array_pop($request_uri); 
+                      $_SERVER['REQUEST_URI'] = implode('/',$request_uri);
+                      $_GET['langu'] = strtolower($t);
+                      $_SESSION['language'] = strtoupper($t);
+                      continue;
+                    }
+                      
 					// .html wegschnippseln, falls ueberhaupt vorhanden...
 					$t = preg_replace('/.html/','',$t);
 					switch ($k)

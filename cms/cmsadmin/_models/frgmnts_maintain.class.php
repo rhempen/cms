@@ -39,16 +39,16 @@ class frgmntsMaintain
     */
     public function fragmente_sortieren($srtids)
     {
-    	global $db;
-			$success=$error=0;
-    	foreach ($srtids as $index =>$value) {
-    		if ($value != '') {
-    			$update = 'UPDATE '.$this->mPrefix.'fragmente SET sort_id='.$index.' WHERE frag_id='.$value;
-    			if ($db->query($update)) { $success++; } else { $error++; }
-    		}
-    	}
-			if ($error != 0) {echo 'Es konnten nicht alle Datens&auml;tze neu sortiert werden'. "<br />\n";}
-			else { echo 'Die Datens&auml;tze wurden neu sortiert!';	}
+      global $db;
+      $success=$error=0;
+      foreach ($srtids as $index =>$value) {
+        if ($value != '') {
+            $update = 'UPDATE '.$this->mPrefix.'fragmente SET sort_id='.$index.' WHERE frag_id='.$value;
+            if ($db->query($update)) { $success++; } else { $error++; }
+        }
+      }
+        if ($error != 0) {echo 'Es konnten nicht alle Datens&auml;tze neu sortiert werden'. "<br />\n";}
+        else { echo 'Die Datens&auml;tze wurden neu sortiert!';	}
     }
 
     /* den Content eines einzelnen fragments lesen
@@ -90,15 +90,15 @@ class frgmntsMaintain
 			return $msg;
     }
 
-		// Fragment-Name sichern via Ajax
-		public function fragment_name_save($frgid, $frgname)
-		{
-			global $db;
-			$update = 'UPDATE '.$this->mPrefix.'fragmente SET name="'.$db->escape($frgname).'" WHERE frag_id='.$frgid;
-			$affected =& $db->exec($update);
-			if (PEAR::isError($affected)) { echo $affected->getMessage().' '.$affected->getDebugInfo(); }
-			return $frgname;
-		}
+    // Fragment-Name sichern via Ajax
+    public function fragment_name_save($frgid, $frgname)
+    {
+        global $db;
+        $update = 'UPDATE '.$this->mPrefix.'fragmente SET name="'.$db->escape($frgname).'" WHERE frag_id='.$frgid;
+        $affected =& $db->exec($update);
+        if (PEAR::isError($affected)) { echo $affected->getMessage().' '.$affected->getDebugInfo(); }
+        return $frgname;
+    }
 
 	// ein bestimmtes Fragment kopieren
     public function fragment_kopieren($frgid)

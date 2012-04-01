@@ -21,7 +21,8 @@
 <body id="top">
 
 	<div id="content">
-		<table id="navis" width="730" cellpadding="1" cellspacing="1">
+      <div id="navisWrapper">
+        <table id="navis" width="100%" cellspacing="1">
 		  <tr> 
 		    <td colspan="7"> 
 				<ul id="tabnav">
@@ -41,37 +42,65 @@
 			<td>&nbsp;</td>
 		  </tr>		  				
           <!-- END message_block -->
-          <!-- BEGIN titel -->
+        </table>
+        <div id="debug" style="padding:5px;"></div>		
+        <!-- BEGIN titel -->
+        <table class="navi_overview" cellspacing="1">
+          <colgroup>
+            <col width="50"></col>
+            <col width="55"></col>
+            <col width="280"></col>
+            <col width="55"></col>
+            <col width="55"></col>
+            <col width="55"></col>
+            <col width="210"></col>
+          </colgroup>
 		  <tr class="{class}">
-			<td width="5%" align="center">{label_kap}</td>
-			<td width="5%" align="center">{label_ukap}</td>
-			<td width="50%">{label_bezeichnung}</td>
-			<td width="5%">{label_start}</td>
-			<td width="5%" align="center">{label_nav_type}</td>
-			<td width="5%" align="center">{label_aktiv}</td>
-			<td width="25%" align="center" nowrap>{label_links}</td>
+			<td align="center">{label_kap}</td>
+			<td align="center">{label_ukap}</td>
+			<td align="left">{label_bezeichnung}</td>
+			<td align="center">{label_start}</td>
+			<td align="center">{label_nav_type}</td>
+			<td align="center">{label_aktiv}</td>
+			<td align="left" nowrap>{label_links}</td>
 		  </tr>
+        </table>
           <!-- END titel -->
+        <div id="navisDivs">
           <!-- BEGIN zeile -->
-		  <tr class="{class}" id="{tr_id}"{ukap_hide}>
-			<td width="5%" align="center">{kap}</td>
-			<td width="5%" align="center">{ukap}</td>
-			<td width="50%">
-				<span class="bezeichnung" id="{nav_id}">{bezeichnung}</span>
-			</td>
-			<td width="5%" align="center">
-				<span class="startflag" id="{startid}" title="{starttitle}">{startseite}</span> 
-			</td>
-			<td width="5%" align="center">
-				<span class="typeflag" style="color:{typecolor};" id="{typeid}" title="{typetitle}">{nav_type}</span>
-			</td>
-			<td width="5%" align="center">
-				<span class="aktivflag" id="{aktivid}" style="color:{farbe}">{aktiv}</span>
-			</td>
-			<td width="25%" align="left" nowrap>{links}</td>
-		  </tr>
+          {sortableDivBegin}
+            <table class="navi_overview" cellspacing="1">
+              <colgroup>
+                <col width="50"></col>
+                <col width="55"></col>
+                <col width="280"></col>
+                <col width="55"></col>
+                <col width="55"></col>
+                <col width="55"></col>
+                <col width="210"></col>
+              </colgroup>
+              <tr class="{class}" id="{tr_id}"{ukap_hide}>
+                <td align="center" id="{kap_ukap}" class="sortid">{kap}</td>
+                <td align="center">{ukap}</td>
+                <td>
+                    <span class="bezeichnung" id="{nav_id}">{bezeichnung}</span>
+                </td>
+                <td align="center">
+                    <span class="startflag" id="{startid}" title="{starttitle}">{startseite}</span> 
+                </td>
+                <td align="center">
+                    <span class="typeflag" style="color:{typecolor};" id="{typeid}" title="{typetitle}">{nav_type}</span>
+                </td>
+                <td align="center">
+                    <span class="aktivflag" id="{aktivid}" style="color:{farbe}">{aktiv}</span>
+                </td>
+                <td align="left" nowrap>{links}</td>
+              </tr>
+            </table>
+          {sortableDivEnd}
           <!-- END zeile -->
-		</table>
+        </div>
+      </div>
 	</div>
 
 </body>

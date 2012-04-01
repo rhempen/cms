@@ -22,7 +22,7 @@ $phpself  	= $_SERVER['PHP_SELF'];
 if ($_SESSION['debugging'] === true) { echo $akt_navid.' '.$akt_subid.' '.$akt_pageid.'<br />'; }
 
 /*===============================================================================
-	Datenbeschaffung f�r die anschliessende Ausgabe	
+	Datenbeschaffung fuer die anschliessende Ausgabe	
   ===============================================================================*/
 // Gesamte aktive Navigation einlesen
 $navigation = $naviget->get_complete_navigation();
@@ -51,11 +51,12 @@ $css_classes = $frontget->read_css_classes(THEME_SELECTED);
 // Gesamte aktive Navigation einlesen
 $navigation = $naviget->get_complete_navigation();
 
-// Anzahl der aktiven Servicenavigationen ermitteln
-$anz_service = $naviget->get_anz_services();
+// Anzahl der aktiven Servicenavigationen ermitteln -> wegen $pipe!
+$anz_service = $naviget->get_anz_navtype("S");
+$anz_navigation = $naviget->get_anz_navtype("H");
 
 /* START Ausgabe Navigation-Block */
-$tpl->setCurrentBlock('navigation');
+//$tpl->setCurrentBlock('navigation');
 
 $tempid = null;
 $temp	= 'xxx';
@@ -64,14 +65,17 @@ $nav_id = 1;
 $unav_kennung = '';
 $last_label = '';
 $aktive_menupos = '';
-
+$navi_h_richtung_done = false;
+$navi_s_richtung_done = false;
 $count_service = 0;
+$count_navigation = 0;
+$pipe  = $naviout->set_pipe(THEME_SELECTED);
+
 while ($eintrag = $navigation->fetchRow())
 {
 	$ausgewaehlt = '';
 	$style	= '';
     $css_comp = '';
-//	$temp	= $eintrag['kuerzel'];
 	$temp	= $eintrag['bezeichnung'];
 	$tempid = $eintrag['nav_id'];
 	$ukap_navid = 0;
@@ -80,11 +84,15 @@ while ($eintrag = $navigation->fetchRow())
 		$navtype = strtoupper($eintrag['nav_type']);
 		if ($navtype == $GLOBALS['NAVI']['HORIZONTAL']) 
 		{
-			/* Pipezeichen | setzen, falls erwuenscht */ 
-			$pipe  = $naviout->set_pipe(THEME_SELECTED);
-			
-			$tpl->setCurrentBlock('navi_h_richtung');
-			$tpl->setVariable('richtung_navi', HMENU_RICHTUNG);
+			$count_navigation++;
+            /* Pipezeichen | setzen, falls erwuenscht */ 
+			if ($count_navigation < $anz_navigation) { $tpl->setVariable('pipe', $pipe); }
+            if (!$navi_h_richtung_done) {
+              $tpl->setCurrentBlock('navi_h_richtung');
+              $tpl->setVariable('richtung_navi', HMENU_RICHTUNG);
+              $navi_h_richtung_done = true;
+              $tpl->parseCurrentBlock();	
+            }
 			$tpl->setCurrentBlock('navi_horiz');
 
 			// Unterpositionen 
@@ -105,27 +113,27 @@ while ($eintrag = $navigation->fetchRow())
             }
             $navi_h_link = '<a href="'.urldecode($nav_url).'" '.$css_comp.'>'.$temp.'</a>';
             $tpl->setVariable('navi_h_link',$navi_h_link);
-            $tpl->setVariable('pipe',$pipe);
 
 			// Ausgabe der Unterpositionen als Dropdown 
 			if ($ukap_navid > 0 && HMENU_SUBMENU == 'dropdown') 
 			{
 				$naviout->positionen_dropdown();
-			} else {
-				$tpl->parseCurrentBlock();		
-			}
+			} 
+			$tpl->parseCurrentBlock();	// Block 'navi_horiz'	
 			continue;
 		}
 		
 		// Servicenavigation
 		if ($navtype == $GLOBALS['NAVI']['SERVICE']) 
 		{
-			$pipe  = $naviout->set_pipe(THEME_SELECTED);
 			$count_service++;
-			$tpl->setCurrentBlock('navi_s_richtung');
-			$tpl->setVariable('richtung_navi', HMENU_RICHTUNG);
+            if (!$navi_s_richtung_done) {            
+              $tpl->setCurrentBlock('navi_s_richtung');
+              $tpl->setVariable('richtung_navi', HMENU_RICHTUNG);
+              $navi_s_richtung_done = true;
+              $tpl->parseCurrentBlock();	
+            }
 			$tpl->setCurrentBlock('navi_service');
-//			$tpl->setVariable('text', $eintrag['bezeichnung']);
 			if ($count_service < $anz_service) { $tpl->setVariable('pipe', $pipe); }
 			if ($akt_navid == $tempid) { 
 				$aktive_menupos = $akt_navid; // Merken der aktiven Navid 
@@ -190,5 +198,11 @@ if (HMENU_SUBMENU == 'submenu')
 {
 	$naviout->positionen_submenu();
 }		
-		
+
+
+  /*==============================================================================
+	Ausgabe	der Sprachenwahl, falls in cms_spezial Sprachen eingetragen wurden 
+  ==============================================================================*/
+  // Sprachauswahl ausgeben
+  $naviout->sprachauswahl();    
 ?>

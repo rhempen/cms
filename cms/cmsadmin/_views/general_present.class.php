@@ -70,7 +70,17 @@ class generalPresent
 		$browser = stristr($useragent, "msie") ? 'msie' : '';
 		return $browser;
 	}
-	
+
+    /* Sorticon zusammenstellen 
+      @return: $sorticon  - html fuer das anzuzeigende Menu
+    */
+    public function compose_sorticon() 
+    {
+      $html = '<img src="../gifs/move.png" height="20" width="20" border="0" alt="'.$GLOBALS['TEXTE']['TEXT_MOVE'].'" title="'.$GLOBALS['TEXTE']['TEXT_MOVE'].'" />';
+//      $html .= '<img src="../gifs/down.gif" height="15" width="12" border="0" alt="'.$GLOBALS['TEXTE']['TEXT_MOVE'].'" title="'.$GLOBALS['TEXTE']['TEXT_MOVE'].'" />';
+      return $html;
+    }
+
 	
 	/**
 	 * mit den Templates eine Selectbox erstellen, wobei die von der Seite eingelesene Nummer vorselektiert sein soll.
@@ -303,12 +313,10 @@ class generalPresent
 	 * @param: $tmpl - Template, welches einer Seite zugeordnet ist
 	 * @return: true oder false 
 	 */
-	public function show_inhalt2($tmpl) 
+	public function show_inhalt2($tplnr) 
 	{
 		global $frontget, $tpl;
-		$template = $frontget->read_single_template($tmpl);	
-		$tpldir = DOCUROOT.'/'.TEMPLATE_DIR.'/'.$template['template_name']; //Vollstaendiger Pfad 
-		if ($template['template_name'] != '' && !$this->analyse_template($tpldir,'/{inhalt2}/')) {
+		if ($template['template_name'] != '' && !$this->analyse_template('',$tplnr,'/{inhalt2}/')) {
 			$tpl->setVariable('hide_inhalt2',HIDDEN);
 			$tpl->setVariable('evenodd2',$this->flipflop($i++));
 			$tpl->setVariable('evenodd1',$this->flipflop($i++));
@@ -322,19 +330,31 @@ class generalPresent
 	
 	/**
 	 * Funktion zum Analysieren eines Templates --> finde den String $pattern
-	 * @param: $intpl - zu analysierendes Template 
-	 * @param: $pattern - den zu findenden String
-	 * @return: gibt true oder false zur�ck
+	 * @params: $intpl - zu analysierendes Template. Falls Keines übergeben wird, 
+     *                  muss $template eine Ziffer grösser 0 enthalten, damit es
+     *                  auf der DB gelesen wird.
+     * @params: $template - Nummer des Templates - Zum Nachlesen auf der DB  
+	 * @params: $pattern - der zu findende String
+	 * @return: gibt true oder false zurueck
 	 */
-	public function analyse_template($intpl, $pattern='') 
+	public function analyse_template($tplname='',$tplnr=0,$pattern='') 
 	{
-		if ($pattern == '') { $pattern = '/{inhalt2}/'; }
-		// ab PHP5.0 k�nnen folgende optionale Parameter mitgegeben werden
-		$lines = file($intpl, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-		foreach($lines as $line_num => $line ) {			
-			if (preg_match($pattern, $line)) { return true; } 
-		} 
-		return false;		
+      // Templatename- oder Nummer muss übergeben werden
+      if ($tplname == '' && $tplnr > 0) {
+        $tplname = $frontget->read_single_template($tplnr); 
+      }
+      // Template mit absolutem Pfad ergänzen
+      $intpl = $tplname !='' ? DOCUROOT.'/'.TEMPLATE_DIR.'/'.$tplname : '';  
+      // Pattern, nach dem gesucht werden soll
+      if ($pattern == '') { $pattern = '/{inhalt2}/'; }
+      // ab PHP5.0 koennen folgende optionale Parameter mitgegeben werden
+      if ($intpl != '') {
+        $lines = file($intpl, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        foreach($lines as $line_num => $line ) {			
+            if (preg_match($pattern, $line)) { return true; } 
+        } 
+      }
+      return false;		
 	}
 
 	/**

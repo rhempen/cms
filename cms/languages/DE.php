@@ -73,6 +73,7 @@ $GLOBALS['CMS']['MENU08'] 								= 'Dokumentation';
 $GLOBALS['CMS']['MENU09'] 								= 'Logout';
 $GLOBALS['CMS']['MENU10'] 								= 'Konfiguration';
 $GLOBALS['CMS']['MENU11'] 								= 'Fragmente';
+$GLOBALS['CMS']['MENU12'] 								= 'Addons';
 $GLOBALS['CMS']['TEXT_ANMELDEN'] 						= 'Bitte anmelden';
 $GLOBALS['CMS']['TEXT_WAEHLEN'] 						= 'Bitte aus dem Menu w&auml;hlen';
 
@@ -108,23 +109,23 @@ $GLOBALS['MESSAGES']['MSG_FILE_KEINE_BERECHTIGUNG']		= 'Datei %s kann mangels Be
  * Texte zur Klasse configPresent
  *********************************************************************************************************************/
 $GLOBALS['TEXTE']['CONFIGURATION']						= 'Konfiguration';
-$GLOBALS['TEXTE']['CONFIG_DESCR']							= 'Beschreibung';
-$GLOBALS['TEXTE']['CONFIG_PARAM']							= 'Parameter';
-$GLOBALS['TEXTE']['CONFIG_VALUE']							= 'Wert';
-$GLOBALS['TEXTE']['THEME']										= 'Theme / Design / Website';
+$GLOBALS['TEXTE']['CONFIG_DESCR']						= 'Beschreibung';
+$GLOBALS['TEXTE']['CONFIG_PARAM']						= 'Parameter';
+$GLOBALS['TEXTE']['CONFIG_VALUE']						= 'Wert';
+$GLOBALS['TEXTE']['THEME']								= 'Theme / Design / Website';
 $GLOBALS['TEXTE']['COPYRIGHT']	   						= 'Copyright-Text in der Fusszeile';
-$GLOBALS['TEXTE']['MAX_THUMBS']								= 'Max. angezeigte Thumbnails';
+$GLOBALS['TEXTE']['MAX_THUMBS']							= 'Max. angezeigte Thumbnails';
 $GLOBALS['TEXTE']['MAX_LIST_ITEMS']						= 'Max. angezeigte Listeneintr&auml;ge';
-$GLOBALS['TEXTE']['MAX_LENGTH_KURZTEXT']			= 'Max. L&auml;nge Kurztext';
-$GLOBALS['TEXTE']['LANGUAGE']									= 'Sprache';
-$GLOBALS['TEXTE']['THUMB_PAGE_MAX_WIDTH']			= 'Max. Breite der Thumbnails auf Unterseiten';
-$GLOBALS['TEXTE']['THUMB_PAGE_MAX_HEIGHT']		= 'Max. H&ouml;he der Thumbnails auf Unterseiten';
-$GLOBALS['TEXTE']['THUMB_NAVI_MAX_WIDTH']			= 'Max. Breite der Thumbnails auf Navigationsseiten';
-$GLOBALS['TEXTE']['THUMB_NAVI_MAX_HEIGHT']		= 'Max. H&ouml;he der Thumbnails auf Navigationsseiten';
+$GLOBALS['TEXTE']['MAX_LENGTH_KURZTEXT']                = 'Max. L&auml;nge Kurztext';
+$GLOBALS['TEXTE']['LANGUAGE']							= 'Sprache';
+$GLOBALS['TEXTE']['THUMB_PAGE_MAX_WIDTH']               = 'Max. Breite der Thumbnails auf Unterseiten';
+$GLOBALS['TEXTE']['THUMB_PAGE_MAX_HEIGHT']              = 'Max. H&ouml;he der Thumbnails auf Unterseiten';
+$GLOBALS['TEXTE']['THUMB_NAVI_MAX_WIDTH']               = 'Max. Breite der Thumbnails auf Navigationsseiten';
+$GLOBALS['TEXTE']['THUMB_NAVI_MAX_HEIGHT']              = 'Max. H&ouml;he der Thumbnails auf Navigationsseiten';
 $GLOBALS['TEXTE']['IMAGE_MAX_WIDTH']					= 'Max. angezeigte Bildbreite';
 $GLOBALS['TEXTE']['IMAGE_MAX_HEIGHT']					= 'Max. angezeigte Bildh&ouml;he';
-$GLOBALS['TEXTE']['DISK_DB_ADJUSTMENT']				= 'Abgleich Bilder Disk - DB';
-$GLOBALS['TEXTE']['MEDIA_ROOT_ADJUSTMENT']		= 'Anpassung MEDIA-Verzeichnis';
+$GLOBALS['TEXTE']['DISK_DB_ADJUSTMENT']                 = 'Abgleich Bilder Disk - DB';
+$GLOBALS['TEXTE']['MEDIA_ROOT_ADJUSTMENT']              = 'Anpassung MEDIA-Verzeichnis';
 $GLOBALS['TEXTE']['HMENU_RICHTUNG']						= 'Horizontal: Ausrichtung';
 $GLOBALS['TEXTE']['HMENU_SUBMENU']						= 'Horizontal: Form Submenu';
 $GLOBALS['TEXTE']['SUBMENU_DIR']						= 'Position des Submenues';
@@ -149,8 +150,9 @@ $GLOBALS['TEXTE']['NAVI_VERWALTUNG']	 				= 'Navigation Verwaltung';
 $GLOBALS['TEXTE']['TEXT_BILDER_HOCHLADEN'] 				= 'Bilder hochladen';
 $GLOBALS['TEXTE']['TEXT_EDIT_HAUPTNAVI'] 				= 'Hauptnavigations-Punkt bearbeiten';
 $GLOBALS['TEXTE']['TEXT_NEUE_UNTERNAVI'] 				= 'Neuen Unternavigations-Punkt einf&uuml;gen';
-$GLOBALS['TEXTE']['TEXT_DELE_HAUPTNAVI'] 				= 'Hauptnavigations-Punkt l&ouml;schen?';
-$GLOBALS['TEXTE']['TEXT_DELE_UNTERNAVI'] 				= 'Unternavigations-Punkt l&ouml;schen?';
+$GLOBALS['TEXTE']['TEXT_DELE_HAUPTNAVI'] 				= 'Hauptnavigations-Punkt l&ouml;schen';
+$GLOBALS['TEXTE']['TEXT_DELE_UNTERNAVI'] 				= 'Unternavigations-Punkt l&ouml;schen';
+$GLOBALS['TEXTE']['TEXT_COPY_HAUPTNAVI'] 				= 'Hauptnavigations-Punkt kopieren';
 $GLOBALS['TEXTE']['TEXT_REIHENFOLGE'] 	 				= 'Reihenfolge &auml;ndern, Bild hochziehen';
 $GLOBALS['TEXTE']['TEXT_EDIT_UNTERNAVI'] 				= 'Unternavigations-Punkt bearbeiten';
 $GLOBALS['TEXTE']['TEXT_NEUE_HAUPTNAVI'] 				= 'Neuer Hauptnavigationspunkt';
@@ -178,17 +180,19 @@ $GLOBALS['NAVI']['SERVICE']								= 'S';
  * Texte zur Klasse naviMaintain
  *********************************************************************************************************************/
 // Erfolgsmeldungen
-$GLOBALS['MESSAGES']['MSG_NAVI_SEITE_ANGELEGT'] 		= 'Der Navigationspunkt und die zugeh&ouml;rige Seite wurden erstellt';
+$GLOBALS['MESSAGES']['MSG_NAVI_SEITE_ANGELEGT'] 		= 'Der Navigationspunkt %s und die zugeh&ouml;rige Seite wurden erstellt';
 $GLOBALS['MESSAGES']['MSG_NAVI_SEITE_GESPEICHERT'] 		= 'Die Seite %s wurde gespeichert';
 $GLOBALS['MESSAGES']['MSG_NAVI_SEITE_GELOESCHT'] 		= 'Der Navigationspunkt %s und alle zugeh&ouml;rigen Daten wurden entfernt';
 $GLOBALS['MESSAGES']['MSG_KAP_HOCHZIEHEN']				= 'Der Navigationspunkt %s wurde hochgezogen';
 $GLOBALS['MESSAGES']['MSG_UKAP_HOCHZIEHEN']				= 'Der Unternavigationspunkt %s wurde hochgezogen';
+$GLOBALS['MESSAGES']['MSG_NEU_SORTIERT']   				= 'Die Datens&auml;tze wurden neu sortiert!';
 
 // Fehlermeldungen
-$GLOBALS['MESSAGES']['MSG_NAVI_SEITE_NICHT_GESPEICHERT'] 		= 'Die Seite %s wurde nicht gespeichert';
+$GLOBALS['MESSAGES']['MSG_NAVI_SEITE_NICHT_GESPEICHERT']= 'Die Seite %s wurde nicht gespeichert';
 $GLOBALS['MESSAGES']['MSG_NAVI_SEITE_NICHT_ANGELEGT'] 	= 'Der Navigationspunkt %s konnte nicht erfolgreich angelegt werden!';
 $GLOBALS['MESSAGES']['MSG_NAVI_SEITE_NICHT_GELOESCHT'] 	= 'Beim L&ouml;schen des Navigationspunktes %s sind Fehler aufgetreten!';
 $GLOBALS['MESSAGES']['MSG_NAVI_NICHT_LOESCHBAR']		= 'Noch %s verkn&uuml;pfte Unterseite(n) - bitte zuerst Unterseite(n) l&ouml;schen!';
+$GLOBALS['MESSAGES']['MSG_NICHT_NEU_SORTIERT']   		= 'Die Datens&auml;tze konnten nicht neu sortiert werden!';
 
 /*********************************************************************************************************************
  * Labels zu Formularen navi_edit, page_edit

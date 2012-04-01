@@ -1,6 +1,6 @@
 <?php
 
-// die gewünschte Künstler-Seite aus der DB lesen
+// die gewï¿½nschte Kï¿½nstler-Seite aus der DB lesen
 //$page  	= $pages->read_page($_GET['pagid']);
 $total 	= $pictdb->count_bilder_pro_pageid($seiten_infos['nav_id']);
 $bilder	= $pictdb->bilder_pro_pageid_lesen($seiten_infos['nav_id'], $start);
@@ -11,7 +11,7 @@ if (!$slider)	{ $slider = new pageSlider(MAX_THUMBS, $total, $start); }
 $tpl->setCurrentBlock('inhalt');
 
 // Seitentitel zusammensetzen und anzeigen
-$frontend->create_titel($seiten_infos['kurztitel']);	
+$frontend->create_titel($seiten_infos['kurztitel'],$seiten_infos['template_name']);	
 
 // Textelemente einer Seite anzeigen
 $row['name'] 	 = $seiten_infos['zusatztext'];
@@ -33,7 +33,7 @@ $i=0;
 while ($bild = $bilder->fetchRow(MDB2_FETCHMODE_ASSOC)) 
 {
 	/* Die Bildleiste kann horizontal oder vertikal angeordnet sein -> nur bei Template einspaltig_760*
-	 	es werden in beiden Fällen max. 6 Bilder angezeigt. --> es wurden auch nur max. MAX_THUMBS - Bilder eingelesen
+	 	es werden in beiden Fï¿½llen max. 6 Bilder angezeigt. --> es wurden auch nur max. MAX_THUMBS - Bilder eingelesen
 	 */		
 	switch ($tpl_ausrichtung) {
 	case 'horizontal':
@@ -44,7 +44,7 @@ while ($bild = $bilder->fetchRow(MDB2_FETCHMODE_ASSOC))
 		$href = $frontend->create_href_thumbnail_tag($bild, $thumbsize, $type);
 		
 		if ($i <= MAX_THUMBS) {
-			// max. 6 Thumbnails pro Zeile, dh. beim 7. Thumb muss die Bedingung erfüllt sein
+			// max. 6 Thumbnails pro Zeile, dh. beim 7. Thumb muss die Bedingung erfï¿½llt sein
 			if ( $i != 0 && $i % 6 != 0) {
 				$style = 'style="margin-left:12px;"';
 			} else  { 
@@ -65,7 +65,7 @@ while ($bild = $bilder->fetchRow(MDB2_FETCHMODE_ASSOC))
 		// img-Tag pro Thumbnail erstellen				
 		$href = $frontend->create_href_thumbnail_tag($bild, $thumbsize, $type);
 
-		// den Rahmen für das 2. Bild vorsorglich verbergen, falls kein 2. Bild mehr angezeigt werden soll
+		// den Rahmen fï¿½r das 2. Bild vorsorglich verbergen, falls kein 2. Bild mehr angezeigt werden soll
 		// $tpl->setVariable('display_bild2', HIDDEN); 
 		$tpl->setVariable('bild2', BLANK_GIF);
 		$tpl->setVariable('display_bild2', NO_BORDER); 
@@ -86,7 +86,7 @@ while ($bild = $bilder->fetchRow(MDB2_FETCHMODE_ASSOC))
 	}
 }
 
-// Pageslider anzeigen, falls nötig
+// Pageslider anzeigen, falls nï¿½tig
 $tpl->setCurrentBlock('pageslider');
 $tpl->setVariable('pageslider', $slider->toHtml());
 $tpl->parseCurrentBlock();

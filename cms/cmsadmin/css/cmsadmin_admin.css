@@ -15,8 +15,8 @@ body {
 }
 
 /* Links */
-*:focus, *:active { // verhindert die Umrandung eines Links
-	outline: none;
+*:focus, *:active { /* verhindert die Umrandung eines Links */
+ 	outline: none;
 }
 
 a {
@@ -32,7 +32,7 @@ a:hover  {
 }
 
 p, pre, h2, td {
-	padding:8px;
+	padding:7px;
 	margin:0px;
 	font-size: 12px;
 }
@@ -169,6 +169,12 @@ form {
 }
 
 /* Definitionen f�r "Navigation verwalten" */
+.navi_overview {
+  width: 90%;
+  min-width: 770px;
+  table-layout: fixed;
+}
+
 .navi_overview_titel {
 	font-size: 1.2em;
 	font-weight: bold;

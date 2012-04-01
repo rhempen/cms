@@ -360,7 +360,7 @@ class frontendGetData
 	 ******************************************************************************************/
 	public function get_random_bild()
 	{
-		$media_dir = MEDIA_BASE.'/header/';
+		$media_dir = MEDIA_BASE.'/header/_images/';
 		$ext_array = array('.png','.gif','.jpg');
 		$bilder_arr = array();
 		if (file_exists($media_dir)) {
@@ -378,12 +378,44 @@ class frontendGetData
 			if (count($bilder_arr) > 0) {
 				$numr = array_rand($bilder_arr,1);
 				$bild = $bilder_arr[$numr];
-				$html =  $bild != '' ? '<img src="'.HOST.$bild.'" alt="" />' : '';
+				$html =  $bild != '' ? '<img src="'.HOST.$bild.'" border="0" alt="" />' : '';
 			}
 			return $html;
 		}
 	}
 
+    /******************************************************************************************
+     * Es wird im Media-Verzeichnis nach dem Untervereichnis header gesucht und ob es darin
+	 * ein Verzeichnis "background" gibt und es da ein Bild drin hat.
+     * Ist ein Bild da, wird es im main_tpl.html im Headerbereich als Bild eingefügt
+     * Im Gegen satz zum CSS-Background kann das img-Tag mit width: 100% werden, so dass sich 
+     * das Hintergrund automatisch der Fenstergrösse anpasst
+     *******************************************************************************************/
+	public function get_header_bgimage()
+	{
+		$media_dir = MEDIA_BASE.'/header/background/';
+		$ext_array = array('.png','.gif','.jpg');
+		$bilder_arr = array();
+		if (file_exists($media_dir)) {
+			$handle  = opendir($media_dir);
+			while (false !== ($file = readdir($handle)))
+			{
+				// Pfad und Datei
+				$mediafile = $media_dir. $file;
+				$extension	= strrchr($file, ".");
+				if (is_file($mediafile) &&  in_array($extension, $ext_array) ) {
+					array_push($bilder_arr,$mediafile);
+				}
+			}
+			/* Zufallsgenerator waehlt ein Bild */
+			if (count($bilder_arr) > 0) {
+				$numr = array_rand($bilder_arr,1);
+				$bild = $bilder_arr[$numr];
+				$html =  $bild != '' ? '<img src="'.HOST.$bild.'" border="0" alt="" />' : '';
+			}
+			return $html;
+		}
+	}
 
 
 

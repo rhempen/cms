@@ -17,7 +17,7 @@ $type = 'P';
 $tpl->setCurrentBlock('inhalt');
 
 // Seitentitel zusammensetzen und anzeigen
-$frontend->create_titel($seiten_infos['kurztitel']);	
+$frontend->create_titel($seiten_infos['kurztitel'],$seiten_infos['template_name']);	
 
 // Link Uebersicht brauchen wir hier
 $frontend->create_uebersicht_link($tpl);
@@ -91,7 +91,7 @@ while ($bild = $bilder->fetchRow(MDB2_FETCHMODE_ASSOC))
 	}
 }
 
-// Pageslider anzeigen, falls nötig
+// Pageslider anzeigen, falls nï¿½tig
 $tpl->setCurrentBlock('pageslider');
 $tpl->setVariable('pageslider', $slider->toHtml());
 $tpl->parseCurrentBlock();

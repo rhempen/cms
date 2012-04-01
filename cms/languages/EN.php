@@ -73,6 +73,7 @@ $GLOBALS['CMS']['MENU08'] 								= 'Documentation';
 $GLOBALS['CMS']['MENU09'] 								= 'Logout';
 $GLOBALS['CMS']['MENU10'] 								= 'Configuration';
 $GLOBALS['CMS']['MENU11'] 								= 'Fragments';
+$GLOBALS['CMS']['MENU12'] 								= 'Addons';
 $GLOBALS['CMS']['TEXT_ANMELDEN'] 						= 'Please login';
 $GLOBALS['CMS']['TEXT_WAEHLEN'] 						= 'Please choose from the menu';
 
@@ -150,7 +151,8 @@ $GLOBALS['TEXTE']['TEXT_BILDER_HOCHLADEN'] 				= 'Upload images';
 $GLOBALS['TEXTE']['TEXT_EDIT_HAUPTNAVI'] 				= 'Edit Main-Navigation-Point';
 $GLOBALS['TEXTE']['TEXT_NEUE_UNTERNAVI'] 				= 'Insert a new Sub-Navigation-Point';
 $GLOBALS['TEXTE']['TEXT_DELE_HAUPTNAVI'] 				= 'Delete a Main-Navigation-Point';
-$GLOBALS['TEXTE']['TEXT_DELE_UNTERNAVI'] 				= 'Delete Sub-Navigation-Point?';
+$GLOBALS['TEXTE']['TEXT_DELE_UNTERNAVI'] 				= 'Delete Sub-Navigation-Point';
+$GLOBALS['TEXTE']['TEXT_COPY_HAUPTNAVI'] 				= 'Copy a Main-Navigation-Point';
 $GLOBALS['TEXTE']['TEXT_REIHENFOLGE'] 	 				= 'Change order, pull up image';
 $GLOBALS['TEXTE']['TEXT_EDIT_UNTERNAVI'] 				= 'Edit Sub-Navigation-Point';
 $GLOBALS['TEXTE']['TEXT_NEUE_HAUPTNAVI'] 				= 'New Main-Navigation-Point';
@@ -178,17 +180,19 @@ $GLOBALS['NAVI']['SERVICE']								= 'S';
  * Texte zur Klasse naviMaintain
  *********************************************************************************************************************/
 // Erfolgsmeldungen
-$GLOBALS['MESSAGES']['MSG_NAVI_SEITE_ANGELEGT'] 		= 'Navigation-Point and the associated page has been created';
+$GLOBALS['MESSAGES']['MSG_NAVI_SEITE_ANGELEGT'] 		= 'Navigation-Point %s and the associated page has been created';
 $GLOBALS['MESSAGES']['MSG_NAVI_SEITE_GESPEICHERT'] 		= 'Page %s was saved';
 $GLOBALS['MESSAGES']['MSG_NAVI_SEITE_GELOESCHT'] 		= 'Navigation-Point %s and all associated data were deleted';
 $GLOBALS['MESSAGES']['MSG_KAP_HOCHZIEHEN']				= 'Navigation-Point %s was pulled up';
 $GLOBALS['MESSAGES']['MSG_UKAP_HOCHZIEHEN']				= 'Sub-Navigation-Point %s was pulled up';
+$GLOBALS['MESSAGES']['MSG_NEU_SORTIERT']   				= 'Die Datens&auml;tze wurden neu sortiert!';
 
 // Fehlermeldungen
 $GLOBALS['MESSAGES']['MSG_NAVI_SEITE_NICHT_GESPEICHERT'] 		= 'Page %s was not saved';
 $GLOBALS['MESSAGES']['MSG_NAVI_SEITE_NICHT_ANGELEGT'] 	= 'The Navigation-Point %s was not created!';
 $GLOBALS['MESSAGES']['MSG_NAVI_SEITE_NICHT_GELOESCHT'] 	= 'Deleting Navigation-Point %s was erroneous!';
 $GLOBALS['MESSAGES']['MSG_NAVI_NICHT_LOESCHBAR']		= 'Still %s associated subpages - please first delete subpages!';
+$GLOBALS['MESSAGES']['MSG_NICHT_NEU_SORTIERT']   		= 'Die Datens&auml;tze konnten nicht neu sortiert werden!';
 
 /*********************************************************************************************************************
  * Labels zu Formularen navi_edit, page_edit

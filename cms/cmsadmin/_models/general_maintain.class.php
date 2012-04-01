@@ -127,6 +127,14 @@ class generalMaintain
 		return $enum;
 	}
 	
+    /* Kuerzel formatieren für Speicherung in cms_redirect */
+    public function format_kuerzel($text) 
+    {
+    	$text = convert_umlaute2(utf8_decode($text));
+		$kuerzel = str_replace(' ','_',$text);
+		return strtolower($kuerzel);
+    }    
+
 } 
 
 

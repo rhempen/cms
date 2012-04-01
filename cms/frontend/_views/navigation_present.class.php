@@ -35,21 +35,21 @@ class navigationPresent
     	global $eintrag;
     	global $tempid;
     	
-      	$tpl->setCurrentBlock('unavi_horiz');
       	$tpl->setVariable('ul_unavi_h_start', '<ul class="ebene02">');
     	// alle Unterpositionen pro Servicenavigationspunkt
 		foreach ($unav_array as $subid => $value)
 		{
-			list($kap, $ukap, $label) = explode('-',$value);
+			list($kap, $ukap, $label) = explode('|',$value);
 			if ($eintrag['kap'] != $kap) { continue; }
 			$nav_url = $redirect->set_navlink($tempid, $subid);
 			$link    = '<a href="'.urldecode($nav_url).'">'.$label.'</a>';
+        	$tpl->setCurrentBlock('unavi_horiz');
 			$tpl->setVariable('unavi_h_link',$link);
 			$tpl->parseCurrentBlock();
 		}
+		$tpl->setCurrentBlock('navi_horiz');
 		$tpl->setVariable('ul_unavi_h_ende', "</ul>");
 		$tpl->parseCurrentBlock();
-		$tpl->setCurrentBlock('navi_horiz');
     }
     
     
@@ -81,7 +81,7 @@ class navigationPresent
 			foreach ($unav_array as $subid => $value) 
 			{
 			    $tpl->setCurrentBlock('subitem_'.SUBMENU_DIR);
-				list($kap, $ukap, $label, $type) = explode('-',$value);
+				list($kap, $ukap, $label, $type) = explode('|',$value);
 				if ($kap != $akt_kap) { continue; }
 				if ($type != $GLOBALS['NAVI']['HORIZONTAL']) { continue; } // hier sollen nur Nav-Typen = 'H' angezeigt werden
 		        $nav_url = $redirect->set_navlink($akt_navid, $subid);
@@ -118,7 +118,7 @@ class navigationPresent
 	    	$unavis = $unav_array;
     		foreach ($unavis as $subid => $value) 
     		{
-				list($kap, $ukap, $label, $type) = explode('-',$value);
+				list($kap, $ukap, $label, $type) = explode('|',$value);
 				if ($kap == $akt_kap && $type == $GLOBALS['NAVI']['HORIZONTAL']) { $rc = true; } 
 				else { continue; } 
     		}
@@ -146,7 +146,7 @@ class navigationPresent
       	$tpl->setCurrentBlock('unavigation');
 			foreach ($unav_array as $subid => $value)
 			{
-				list($kap, $ukap, $label) = explode('-',$value);
+				list($kap, $ukap, $label) = explode('|',$value);
 				if ($eintrag['kap'] != $kap) { continue; }
 
 				$ausgewaehlt = ''; $style = '';
@@ -177,7 +177,7 @@ class navigationPresent
     {
 		$ukap = 0;
 		foreach ($unav as $key => $value) {
-			list($val,$unterkap, $label) = explode("-",$value);
+			list($val,$unterkap, $label) = explode("|",$value);
 			if ($kap == $val) {
 				$ukap = $key;
 				break;
@@ -225,11 +225,71 @@ class navigationPresent
 		  case 'art4art/':
 			return '&nbsp;|&nbsp;';
 		  	break;
+          case 'e-njoy/':
+			return '&nbsp;|&nbsp;';
+		  	break;            
 		  default:
 			return '';
 			break;		
 		}
 	}
     
+    /* Ausgabe der Sprachauswahl, falls...
+     * 1. der $spracharray Werte enthält und
+     * 2. im Template ein Block mit "BEGIN sprachen" enthalten ist
+     */
+    public function sprachauswahl() 
+    {
+      global $general,$tpl,$cfg;
+      if (empty($GLOBALS['sprachen_erlaubt'])) { $cfg->sprachen_lesen(); } 
+      $sprachen = $GLOBALS['sprachen_erlaubt'];
+      $html = ''; $zaehler = 0;
+      $pipe = $this->set_pipe(THEME_SELECTED);
+      $anzs = count($sprachen); // Anzahl Sprachen
+      $sprb = $general->analyse_template('main_tpl.html',0,'/sprachen/');
+      // Sprachauswahl nur anzeigen, wenn 1. mehr als 1 Sprache definiert ist
+      // und 2. der Block "sprachen" im Tpl gefunden wurde
+      if ($anzs > 1 && sprb) {
+        $html = '<ul>';
+        foreach ($sprachen as $index => $sprache) {
+          $zaehler++;
+          $class = $sprache['wert1'] == $_SESSION[language] ? 'active' : '';
+          $html .= '<li class="navi"><a class="'.$class.'" '; 
+          // Link zusammensetze abhängig davon ob SMURL aktiviert ist oder nicht
+          if (SMURL == 'ja') {
+            $link = $_SERVER['REQUEST_URI'].'/'.$sprache['wert2'];
+          } else {
+            $link = $_SERVER['REQUEST_URI'];
+            // die Uri muss hier auseinander dividiert werden, um festzustellen
+            // wie der Parameter langu hinzugefügt werden muss
+            // 1. Aufteilen in URL und Parameter
+            list($self,$para) = explode('?',$_SERVER['REQUEST_URI']);
+            // 2. Parameter in einen Array aufsplitten
+            $params = explode('&',$para);
+            // 3. Link mit Parametern und Sprache zusammensetzen
+            $anz_params = 0;
+            $link = $self;
+            if (count(params) != 0) {
+              foreach($params as $index => $value) {
+                if ($value == '') continue;
+                if (preg_match('/langu/',$value)) continue;
+                $link .= $anz_params == 0 ? '?' : '&';
+                $link .= $value;
+                $anz_params++;
+              }
+              $link .= $anz_params == 0 ? '?' : '&';
+            }            
+            $link .= 'langu='.$sprache['wert2'];
+          }
+          $html .= 'href="'.$link.'">';
+          $html .= $sprache['wert3'].'</a></li>';
+          if ($zaehler < $anzs) { $html .= $pipe; }
+        }
+        $html .= '</ul>';        
+        $tpl->setCurrentBlock('sprachen');
+        $tpl->setVariable('sprachwahl',$html);
+        $tpl->parseCurrentBlock();
+      }
+    }
 }
 ?>

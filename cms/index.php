@@ -30,8 +30,20 @@ session_start();
 // wichtige Includes und Debuggingfunktion einbinden
 require('./includes/includes.php');
 
+// Menustruktur einlesen und die URL dagegen prüfen
+// wenn die Pürfung fehlschlägt, wird das Rendern der Seite beendet.
+$uri = $_SERVER['REQUEST_URI'];
+$redirect->check_uri();
+
+// ev. ist eine Umleitung auf die Startseite nötig!
+$redirect->redirect_to_first_navi();
+
 // SMURL 
 if (SMURL == 'ja') { $redirect->get_navid(); }
+
+// Sprache festlegen anhand $_GET['langu'] bzw. $_SESSION['language']
+$cfg->sprache_festlegen(); 
+
 // Fuer den Zugriff auf die Bilder-DB muss der Seiten-Type (Page oder Navi) bekannt sein
 $type = $_GET['pagid'] > 0 ? 'P' : 'N';
 // Startzahl zum Lesen der Bilder bzw. der Listitems
@@ -77,9 +89,12 @@ $tpl->parseCurrentBlock();
 
 // home_link
 $tpl->setCurrentBlock('home');
-$tpl->setVariable('home_link', ROOTDIR.'index.php');
+$tpl->setVariable('home_link', $naviget->get_startseite());
+//$tpl->setVariable('home_link', ROOTDIR.'index.php');
 $header_bild = $frontget->get_random_bild();
 $header_bild != '' ? $tpl->setVariable('header_bild',$header_bild) : '';
+$header_bgimage = $frontget->get_header_bgimage();
+$header_bgimage != '' ? $tpl->setVariable('header_background',$header_bgimage) : '';
 $tpl->setVariable('webroot', ROOTDIR); // ist nötig für Lightbox
 $tpl->setVariable('mediadir', str_replace('../../','',MEDIA_ROOT)); // ist nötig für footer
 $tpl->parseCurrentBlock();
@@ -191,6 +206,10 @@ else {
   			include_once(SITEMAP);
 			$controller = SITEMAP;
   			break;
+      case 'GOOGLEMAPS';
+            include_once(GOOGLEMAPS);
+            $controller = GOOGLEMAPS;
+            break;
 //	  case 'PAGES_OVERVIEW':
       default:
 		  	if ($akt_pagid > 0) {

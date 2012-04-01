@@ -11,7 +11,7 @@ Event.observe(window, "load", function() {
 });
 
 
-	function doOnLoad() {
+Event.observe(window, "load", function() {
 // Sortierbarkeit von LI-Elementen 
 		Sortable.create('frgmnts',{ tag:"LI",onUpdate:updateSortIndex,handle:"mnusort" });
 
@@ -22,7 +22,7 @@ Event.observe(window, "load", function() {
 //  	$$("ul#frgmnts div.divwork").each( function(element) {
 //	   element.observe( 'click', showOptions );
 //	   } );
-	}
+});
 	
 	showOptions = function(e) {
     $('msg').update(e.type+"\n"+this.id);

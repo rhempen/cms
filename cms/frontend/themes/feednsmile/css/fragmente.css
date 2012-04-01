@@ -3,7 +3,7 @@
   background-color: #FFF;
   border: 0px solid #dedede;
   width: 480px;
-  height: 400px;
+  height: auto;
   float: left;
   overflow: auto;
 }
@@ -13,7 +13,8 @@
   background-color: #FFF; 
   width: 220px;
   height: auto;
-  float: right;
+  float: left;
+  margin-left: 20px;
 }
 
 .teaserwrapper {

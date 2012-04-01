@@ -58,21 +58,37 @@ class naviPresent
 		$tpl->parseCurrentBlock();
 		
 		// Datenzeilen
+        $i = 0;
 		$tpl->setCurrentBlock('zeile');
 		while ($row = $navigation->fetchRow(MDB2_FETCHMODE_ASSOC)) 
 		{
 			$i++;
-			// CSS-Klasse festlegen
+            // den StartDiv für Drag/Drop/Sortable zusammensetzen und ausgeben, wenn ukap=0 oder $i=1
+            $sortableDivBegin = '<div id="div_'.$row['nav_id'].'" class="lielem navisort">';
+            if ($row['kap'] != $kap_old) { 
+              $tpl->setVariable('sortableDivBegin',$sortableDivBegin); 
+              $kap_old = $row['kap'];                            
+              }
+            // das End-DIV setzen, wenn es keine Ukaps (mehr) gibt
+            $ukap = $row[ukap]+10;
+            $anz_ukap = $naviga->read_anz_ukap_by_kap_ukap($kap_old, $ukap);
+            if ($anz_ukap == 0) { $tpl->setVariable('sortableDivEnd','</div>'); }
+            
+
+            // CSS-Klasse festlegen
 			$class = $row['ukap'] == 0 ? 'even' : 'odd'; 
 			// Variablen des Templates mit Werten belegen
 			$tpl->setVariable('class', $class);
-			$tpl->setVariable('kap', $row['kap']);			
+			$tpl->setVariable('kap', $row['kap']);            
+            $kap_ukap = $row['ukap'] == 0 ? $row['kap'] : $row['kap'].'_'.$row['ukap'];
+			$tpl->setVariable('kap_ukap', $kap_ukap);            
 			$tpl->setVariable('bezeichnung', $general->reslash($row['bezeichnung']));
 			$tr_id = $row['ukap'] == 0 ? $row['domain'] : $row['domain'].'_'.$row['ukap'];
 			$tpl->setVariable('tr_id', $tr_id);	
 			
 			// Icon zum aufklappen der Unterseiten anzeigen
 			if ($row['ukap'] == 0 && $hat_ukaps == 0) {
+				$icon_html  = '<img src="../gifs/spacer.gif" with="16" height="16" alt="" border="0" />'."\n";
 				$hat_ukaps = $naviga->read_anz_ukap_by_kap($row['kap']);
 				if ($hat_ukaps > 0 && $row['ukap'] == 0 ) {
 					$kap_id 	= 'kap_'.$row['kap'];
@@ -87,9 +103,9 @@ class naviPresent
 						$plus_minus = 'plus';
 					}
 					$icon_html .= '</a>'."\n";
-					$tpl->setVariable('ukap', $icon_html);
 					$hat_ukaps = 0;
 				}
+				$tpl->setVariable('ukap', $icon_html);
 			}
 						
 			// Flag fuer Startseite
@@ -141,15 +157,18 @@ class naviPresent
 				$icon_edi = '<a href="'.$_SERVER['PHP_SELF'].'?action=edit&dir='.$dir_thumbs.'&nav_id='.$row['nav_id'].'"><img src="../gifs/edit.gif" border="0" width="18" height="19" alt="'.$GLOBALS['TEXTE']['TEXT_EDIT_HAUPTNAVI'].'" title="'.$GLOBALS['TEXTE']['TEXT_EDIT_HAUPTNAVI'].'"></a>';
 				$icon_pic = '<a href="'.$href_pic.'"><img src="../gifs/jpeg.gif" border="0" width="18" height="19" alt="'.$GLOBALS['TEXTE']['TEXT_BILDER_HOCHLADEN'].'" title="'.$GLOBALS['TEXTE']['TEXT_BILDER_HOCHLADEN'].'"></a>';
 				$icon_pic_edit = '<a href="'.$href_pic_edit.'"><img src="../gifs/modify_16.png" border="0" width="18" height="19" alt="'.$GLOBALS['TEXTE']['TEXT_BILDER_EDIT'].'" title="'.$GLOBALS['TEXTE']['TEXT_BILDER_EDIT'].'"></a>';
-				$icon_neu = '<a href="'.$_SERVER['PHP_SELF'].'?action=neu&kap='.$row['kap'].'&nav_id='.$row['nav_id'].'"><img src="../gifs/new.gif" border="0" width="16" height="15" alt="'.$GLOBALS['TEXTE']['TEXT_NEUE_UNTERNAVI'].'" title="'.$GLOBALS['TEXTE']['TEXT_NEUE_UNTERNAVI'].'"></a>';
-				$confirm = "return confirm('".$GLOBALS['TEXTE']['TEXT_DELE_HAUPTNAVI']."')";
-				$icon_del = '<a href="'.$_SERVER['PHP_SELF'].'?action=del&nav_id='.$row['nav_id'].'" onclick="'.$confirm.'"><img src="../gifs/delete.gif" border="0" width="16" height="16" alt="'.$GLOBALS['TEXTE']['TEXT_DELE_HAUPTNAVI'].'" title="'.$GLOBALS['TEXTE']['TEXT_DELE_HAUPTNAVI'].'"></a>';
+				$icon_neu = '<a href="'.$_SERVER['PHP_SELF'].'?action=neuUkap&nav_id='.$row['nav_id'].'"><img src="../gifs/new.gif" border="0" width="16" height="15" alt="'.$GLOBALS['TEXTE']['TEXT_NEUE_UNTERNAVI'].'" title="'.$GLOBALS['TEXTE']['TEXT_NEUE_UNTERNAVI'].'"></a>';
+				$confirm_del = "return confirm('".$GLOBALS['TEXTE']['TEXT_DELE_HAUPTNAVI']."?')";
+				$confirm_cop = "return confirm('".$GLOBALS['TEXTE']['TEXT_COPY_HAUPTNAVI']."?')";
+				$icon_del = '<a href="'.$_SERVER['PHP_SELF'].'?action=del&nav_id='.$row['nav_id'].'" onclick="'.$confirm_del.'"><img src="../gifs/delete.gif" border="0" width="16" height="16" alt="'.$GLOBALS['TEXTE']['TEXT_DELE_HAUPTNAVI'].'" title="'.$GLOBALS['TEXTE']['TEXT_DELE_HAUPTNAVI'].'"></a>';
+				$icon_cop = '<a href="'.$_SERVER['PHP_SELF'].'?action=copy&nav_id='.$row['nav_id'].'" onclick="'.$confirm_cop.'"><img src="../gifs/copy_object.gif" border="0" width="16" height="16" alt="'.$GLOBALS['TEXTE']['TEXT_COPY_HAUPTNAVI'].'" title="'.$GLOBALS['TEXTE']['TEXT_COPY_HAUPTNAVI'].'"></a>';
 				$icon_spa = '<img src="../gifs/spacer.gif" border="0" width="10" height="14" />';
 				if ($row['kap'] > 1)
 				{
 					$icon_ups = '<a href="'.$_SERVER['PHP_SELF'].'?action=kap&nav_id='.$row['nav_id'].'&kap='.$row['kap'].'&ukap='.$row['ukap'].'"><img src="../gifs/up.gif" border="0" width="14" height="14" vspace="2" alt="'.$GLOBALS['TEXTE']['TEXT_REIHENFOLGE'].'" title="'.$GLOBALS['TEXTE']['TEXT_REIHENFOLGE'].'"></a></span>'; 
 				}
-				$links = $icon_pic . '&nbsp;&nbsp;' . $icon_pic_edit . '&nbsp;&nbsp;' . $icon_edi . '&nbsp;&nbsp;' . $icon_del . '&nbsp;&nbsp;' . $icon_neu . '&nbsp;&nbsp;' . $icon_ups;
+                $icon_ups = '<span class="navisort">'.$general->compose_sorticon().'</span>';
+				$links = $icon_pic . '&nbsp;&nbsp;' . $icon_pic_edit . '&nbsp;&nbsp;' . $icon_edi . '&nbsp;&nbsp;' . $icon_cop . '&nbsp;&nbsp;' . $icon_neu . '&nbsp;&nbsp;' . $icon_del . '&nbsp;&nbsp;' . $icon_ups;
 			}
 			// Unternavigationspunkt
 			else { 
@@ -158,11 +177,12 @@ class naviPresent
 				$icon_pic = '<a href="'.$href_pic.'"><img src="../gifs/jpeg.gif" border="0" width="18" height="19" alt="Bilder hochladen"></a>';
 				$icon_pic_edit = '<a href="'.$href_pic_edit.'"><img src="../gifs/modify_16.png" border="0" width="18" height="19" alt="'.$GLOBALS['TEXTE']['TEXT_BILDER_EDIT'].'" title="'.$GLOBALS['TEXTE']['TEXT_BILDER_EDIT'].'"></a>';
 				$confirm = "return confirm('".$GLOBALS['TEXTE']['TEXT_DELE_UNTERNAVI']."')";
-				$icon_del = '<a href="'.$_SERVER['PHP_SELF'].'?action=del&nav_id='.$row['nav_id'].'&kap='.$row['kap'].'&ukap='.$row['ukap'].'" onclick="'.$confirm.'"><img src="../gifs/delete.gif" border="0" width="16" height="16" alt="'.$GLOBALS['TEXTE']['TEXT_DELE_UNTERNAVI'].'" title="'.$GLOBALS['TEXTE']['TEXT_DELE_UNTERNAVI'].'"></a>';
+				$icon_del = '<a href="'.$_SERVER['PHP_SELF'].'?action=del&nav_id='.$row['nav_id'].'" onclick="'.$confirm.'"><img src="../gifs/delete.gif" border="0" width="16" height="16" alt="'.$GLOBALS['TEXTE']['TEXT_DELE_UNTERNAVI'].'" title="'.$GLOBALS['TEXTE']['TEXT_DELE_UNTERNAVI'].'"></a>';
 				$icon_ups = '<img src="../gifs/spacer.gif" border="0" width="10" height="14" />';
 				if ($row['ukap'] > 10)
 				{
-					$icon_ups = '<a href="'.$_SERVER['PHP_SELF'].'?action=ukap&nav_id='.$row['nav_id'].'&kap='.$row['kap'].'&ukap='.$row['ukap'].'"><img src="../gifs/pfeil_up.gif" border="0" width="10" height="14" vspace="2" alt="'.$GLOBALS['TEXTE']['TEXT_REIHENFOLGE'].'" title="'.$GLOBALS['TEXTE']['TEXT_REIHENFOLGE'].'"></a></span>'; 
+//					$icon_ups = '<a href="'.$_SERVER['PHP_SELF'].'?action=ukap&nav_id='.$row['nav_id'].'&kap='.$row['kap'].'&ukap='.$row['ukap'].'"><img src="../gifs/pfeil_up.gif" border="0" width="10" height="14" vspace="2" alt="'.$GLOBALS['TEXTE']['TEXT_REIHENFOLGE'].'" title="'.$GLOBALS['TEXTE']['TEXT_REIHENFOLGE'].'"></a></span>'; 
+					$icon_ups = '<a href="'.$_SERVER['PHP_SELF'].'?action=ukap&nav_id='.$row['nav_id'].'"><img src="../gifs/pfeil_up.gif" border="0" width="10" height="14" vspace="2" alt="'.$GLOBALS['TEXTE']['TEXT_REIHENFOLGE'].'" title="'.$GLOBALS['TEXTE']['TEXT_REIHENFOLGE'].'"></a></span>'; 
 				}			
 				$links = $icon_pic . '&nbsp;&nbsp;' . $icon_pic_edit . '&nbsp;&nbsp;'  .  $icon_edi . '&nbsp;&nbsp;' . $icon_del . '&nbsp;&nbsp;' . $icon_ups;
 				
@@ -170,7 +190,9 @@ class naviPresent
 				$disp_none = 'style="display:none;"';
 				if ($plus_minus == 'plus') { $tpl->setVariable('ukap_hide', $disp_none); }
 			}
-			$tpl->setVariable('links', $links);			
+			$tpl->setVariable('links', $links);
+            // den akutellen Kap merken wegen UKaps
+            $kap_old = $row['kap'];             
 			// die Zeile parsen
 			$tpl->parseCurrentBlock();
 		}

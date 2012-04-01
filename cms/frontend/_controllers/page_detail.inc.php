@@ -6,7 +6,7 @@ $page 	= $pages->read_page($_GET['pagid']);
 $tpl->setCurrentBlock('inhalt');
 
 // Seitentitel zusammensetzen und anzeigen
-$frontend->create_titel($seiten_infos['kurztitel']);	
+$frontend->create_titel($seiten_infos['kurztitel'],$seiten_infos['template_name']);	
 	
 // Link Uebersicht/zurueck erstellen
 $frontend->create_uebersicht_link($tpl);

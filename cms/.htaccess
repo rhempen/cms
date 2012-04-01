@@ -26,3 +26,6 @@ RewriteRule ^(.*)$ index.php?/$1 [L]
 # AuthType Basic
 # AuthUserFile /htdocs/cms/.htpasswd
 # require valid-user
+
+# allow file_open via URL
+php_value allow_url_fopen On

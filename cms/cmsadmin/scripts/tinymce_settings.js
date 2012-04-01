@@ -14,7 +14,7 @@ var main_css = cms + 'cmsadmin/css/cms_tinymce.css';
 //alert(main_css);
 
 tinyMCE.init ({
-  /* mode : "textareas", */
+  /*mode : "textareas",*/
   languages : "de",
   mode : "exact",
   elements: "longtxt, longtxt2, frgcontent",
@@ -31,7 +31,8 @@ tinyMCE.init ({
   theme_advanced_resizing : true,
   theme_advanced_resize_horizontal : false,
   theme_advanced_resizing_use_cookie : false,
-  event_elements : "a,div,h1,h2,h3,h4,h5,h6,img,p,span",
+  event_elements : "a,div,h1,h2,h3,h4,h5,h6,img,p,span,iframe[*]",
+  cleanup : "true",
   font_size_style_values : "xx-small,x-small,small,medium,large,x-large,xx-large",
   save_enablewhendirty : true,
   entities : "160,nbsp,60,lt,62,gt",
@@ -40,19 +41,16 @@ tinyMCE.init ({
   document_base_url : base_url,
   relative_urls : false, 
 //  plugins : "autosave,contextmenu,emotions,save,searchreplace,visualchars,advimage,fullscreen,table",
-  plugins : "contextmenu,fullscreen,searchreplace,table,advimage,paste,preview,imagemanager,ibrowser,imanager",
+  plugins : "contextmenu,fullscreen,searchreplace,table,advimage,paste,preview,imagemanager,ibrowser,imanager,media",
   theme_advanced_more_colors : false,
   theme_advanced_toolbar_location : "top",
   theme_advanced_toolbar_align : "left",
   theme_advanced_statusbar_location : "bottom",
   theme_advanced_source_editor_width : "700",
-  /* theme_advanced_resizing : true,*/
+  theme_advanced_resizing : true,
   theme_advanced_blockformats : "a,p,h1,h2,h3",
-//  theme_advanced_buttons1 : "formatselect,separator,forecolor,backcolor,separator,bold,italic,underline,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,bullist,numlist,separator,outdent,indent",
-  theme_advanced_buttons1 : ",newdocument,fullscreen,separator,cut,copy,pastetext,pasteword,separator,formatselect,separator,bold,italic,underline,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,bullist,numlist,separator,outdent,indent,separator,cleanup",
-//  theme_advanced_buttons2 : "newdocument,separator,fullscreen,separator,anchor,separator,link,unlink,separator,sub,sup,separator,charmap,separator,undo,redo,separator,search,replace,separator,visualchars,removeformat,separator,cleanup,code",
-  theme_advanced_buttons2 : "anchor,separator,link,unlink,separator,charmap,separator,undo,redo,separator,search,replace,separator,tablecontrols,separator,image,insertimage,code",
-//  theme_advanced_buttons3 : "separator,insertimage,separator,ibrowser,separator,imanager,separator",
+  theme_advanced_buttons1 : ",newdocument,fullscreen,separator,cut,copy,pastetext,pasteword,separator,formatselect,separator,bold,italic,underline,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,bullist,numlist,separator,outdent,indent,separator,cleanup,code",
+  theme_advanced_buttons2 : "anchor,separator,link,unlink,separator,charmap,separator,undo,redo,separator,search,replace,separator,tablecontrols,separator,image,imagemanager,media",
   theme_advanced_buttons3 : "",
   debug : false
 });
