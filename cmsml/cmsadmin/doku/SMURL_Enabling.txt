@@ -1,0 +1,98 @@
+SMURL Enabling:
+---------------
+
+[Zweck]
+Es soll möglich sein, die URL's suchmaschinenfreundlich auszugeben:
+statt hero/cms/index.php?navid=1&subid=9 soll die URL so aufgebaut werden:
+hero/cms/index.php/news/news_10
+
+Die Index.php kann auf einem Linux-Server ausserdem mittels mod_rewrite weg-
+gelassen werden, so dass die URL schliesslich so aussehen wird:
+hero/cms/news/news_10
+
+Fakultativ kann an den hintersten Eintrag noch die Datei-Endung .html angefügt 
+werden
+
+Das bedingt, dass einerseits die URL aufgelöst werden muss und die GET-Parameter 
+durch nachlesen einer Index-Tabelle gefüllt werden müssen, bevor die Selektion
+ausgeführt werden kann. Und andererseits müssen die Id's der selektierten Sätze 
+durch die passenden Kürzel ersetzt werden müssen.
+
+Index-Tabelle:
+cms_redirect:  Felder: navid, subid, pagid, kuerzel
+
+Klassen: 
+frontend/_models/navigation_redirect.class.php --> In dieser Klasse sind die 
+nötigen Methoden enthalten, um die URL's sowohl smurl-mässig, als auch als GET-
+Parameter auszugeben.
+
+cmsadmin/_models/redirect_maintain.class.php --> in dieser Klasse sind die 
+nötigen Methoden enthalten, um beim Anlgen, Ändern oder Löschen von Unterseiten
+die Tabelle cms_redirect zu aktualisieren.
+
+
+
+
+CMSadmin:
+Im cmsadmin muss je ein Eintrag in die Index-Tabelle cms_redirect eingefügt 
+werden, wenn 1. ein neuer Hauptnavigationspunkt, 2. ein neuer Unternavigations-
+punkt und 3. eine Unterseite zu einem Navigationspunkt angelegt wird.
+
+Entsprechend muss ein Eintrag in der Index-Tabelle gelöscht werden, wenn ein
+Navigations-, bzw. Unternavigationspunkt oder eine Unterseite gelöscht wird.
+
+Wird das Kürzel auf einer Seite geändert, muss auch das Kürzel in der Index-
+Tabelle geändert werden 
+
+
+
+[Frontend]
+----------
+1. Navigation:
+Für die Navigation sind navid und subid relevant, dh. sowohl in der Haupt-
+navigation, als auch in der Servicenavigation müssen die URL's entsprechend 
+aufgebaut werden
+
+Aufrufe: 
+[nav.php]   
+Servicenavigation -> redirect->set_navlink($tempid)
+  Unterpositionen -> $naviout->positionen_dropdown() 
+                     -> $nav_url = $redirect->set_navlink($tempid, $subid)
+                  -> $naviout->positionen_submenu()
+                     -> $nav_url = $redirect->set_navlink($akt_navid, $subid)
+
+Hauptnavigation   -> $nav_url = $redirect->set_navlink($tempid, $ukap_navid);
+  Unterpositionen -> $naviout->positionen_hauptnavigation()
+                     -> $nav_url = $redirect->set_navlink($akt_navid, $subid)
+                     
+2. Controllers:
+[home.inc.php]    -> $weiter_link = $redirect->set_link($row['page_id'])
+[index.inc.php]   
+Link auf Unterseite (pagid) -> $frontend->create_uebersicht_link($tpl)
+                              -> $uebersicht_link = $redirect->set_link()
+[page_detail.inc.php]
+Link Übersicht/Retour       -> $frontend->create_uebersicht_link($tpl)
+                              -> $uebersicht_link = $redirect->set_link()
+
+[page_detail_thumbs.inc.php]
+Link Übersicht/Retour       -> $frontend->create_uebersicht_link($tpl)
+                              -> $uebersicht_link = $redirect->set_link()
+
+[page_overview.inc.php]
+Link Weiter/Retour          -> $frontend->create_uebersicht_link($row['page_id'])
+                              -> $uebersicht_link = $redirect->set_link()
+                       
+[frontend_present.class.php]  -> Seitenübergreifende Links Link1 und Link2
+                                 in display_texte()
+  -> $frontget->create_cross_pages_link($row['linkid1']);                             
+  -> $frontget->create_cross_pages_link($row['linkid2']);                             
+                                                
+[CMSADMIN]
+----------
+navi_co_maintain.php
+- Neuer Hauptnavigationspunkt ->  $navi->neuer_kap($kap)
+- Neuer Unternavigationspunkt ->  $navi->neuer_ukap($kap)
+- Löschen Haupt-/Unternavi    ->  $navi->delete_navigationspunkt($row,$message)
+- Neue Unterseite             ->  pages_co_maintain.php -> $action = save
+
+                     

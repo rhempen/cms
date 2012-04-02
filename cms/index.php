@@ -30,15 +30,14 @@ session_start();
 // wichtige Includes und Debuggingfunktion einbinden
 require('./includes/includes.php');
 
-// Menustruktur einlesen und die URL dagegen prüfen
-// wenn die Pürfung fehlschlägt, wird das Rendern der Seite beendet.
-$uri = $_SERVER['REQUEST_URI'];
-$redirect->check_uri();
+// die CSS-Klasse des Header-Bereiches aus der Session beschaffen
+$classHeader = preg_match('/(hide|show)/',$_SESSION['classHeader']) ? $_SESSION['classHeader'] : 'show';
 
+$uri = $_SERVER['REQUEST_URI'];
 // ev. ist eine Umleitung auf die Startseite nötig!
 $redirect->redirect_to_first_navi();
 
-// SMURL 
+// SMURL
 if (SMURL == 'ja') { $redirect->get_navid(); }
 
 // Sprache festlegen anhand $_GET['langu'] bzw. $_SESSION['language']
@@ -97,6 +96,7 @@ $header_bgimage = $frontget->get_header_bgimage();
 $header_bgimage != '' ? $tpl->setVariable('header_background',$header_bgimage) : '';
 $tpl->setVariable('webroot', ROOTDIR); // ist nötig für Lightbox
 $tpl->setVariable('mediadir', str_replace('../../','',MEDIA_ROOT)); // ist nötig für footer
+$tpl->setVariable('classheader',$classHeader); // ist nötig für Headerbereich 
 $tpl->parseCurrentBlock();
 
 // Copyright

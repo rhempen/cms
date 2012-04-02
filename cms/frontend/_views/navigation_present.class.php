@@ -257,7 +257,9 @@ class navigationPresent
           $html .= '<li class="navi"><a class="'.$class.'" '; 
           // Link zusammensetze abhängig davon ob SMURL aktiviert ist oder nicht
           if (SMURL == 'ja') {
-            $link = $_SERVER['REQUEST_URI'].'/'.$sprache['wert2'];
+//            $link = $_SERVER['REQUEST_URI'].'/'.$sprache['wert2'];
+            $link = ROOTDIR. str_replace(ROOTDIR,'',$_SERVER['REQUEST_URI']).'/'.$sprache['wert2'];
+            $link = str_replace('//','/',$link);
           } else {
             $link = $_SERVER['REQUEST_URI'];
             // die Uri muss hier auseinander dividiert werden, um festzustellen

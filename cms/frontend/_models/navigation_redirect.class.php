@@ -40,49 +40,100 @@ class navigationRedirect
     */
     public function check_uri() 
     {
-      global $cfg;
+      global $naviget;
       $uri = $_SERVER['REQUEST_URI'];
+      $qst = $_SERVER['QUERY_STRING'];
       $nav = str_replace(ROOTDIR,'',$uri);
-      $arr = explode('/',$nav);
       $this->fill_redirect_buffer();
-      foreach($arr as $index => $value) {
-        if (preg_match('/start/',$value) || $value == '' || $value == 'index.php') { continue; }
-        $rc = 8;
-        if (SMURL == 'ja') {
-          if ($cfg->check_sprachcode($value)) { $rc = 0; }
-          if (in_array($value,$GLOBALS['allredirections'])) { $rc = 0; }
+      if (SMURL == 'ja') {
+        if ($nav == '' || $nav == 'index.php') {
+          $rc = 8;
         } else {
-          $navid = $subid = $pagid = $rc = 0;
-          if (count($_GET) > 0) {
+          $arr = explode('/',$nav);
+          foreach($arr as $index => $value) {
             $rc = 8;
-            foreach($_GET as $name => $value) {
-              switch($name) {
-                case 'navid': 
-                  $navid = $value;
-                  break;
-                case 'subid':
-                  $subid = $value;
-                  break;
-                case 'pagid':
-                  $pagid = $value;
-                  break;
-              }
+            if ($this->is_exception($value) || 
+                $this->is_redirection($value) || 
+                $this->is_sprachcode($value)) {
+              $rc = 0;
             }
           }
-          $params = $navid.'_'.$subid.'_'.$pagid;
-          if (in_array($params,$GLOBALS['allredirections'])) { $rc = 0; }          
         }
+      } else {
+        $navid = $subid = $pagid = $rc = 0;
+        if (count($_GET) > 0) {
+          $rc = 8;
+          foreach($_GET as $name => $value) {
+            switch($name) {
+              case 'navid': 
+                $navid = $value;
+                break;
+              case 'subid':
+                $subid = $value;
+                break;
+              case 'pagid':
+                $pagid = $value;
+                break;
+            }
+          }
+        }
+        $params = $navid.'_'.$subid.'_'.$pagid;
+        if (in_array($params,$GLOBALS['allredirections'])) { $rc = 0; }              
       }
-      // wenn die URI bzw. Parameter ohne ROOTDIR nicht in einem der Array's 
-      // enthalten ist, kann das Rendern getrost abgebrochen werden, bzw. es 
-      // wird das Root-Verzeichnis der Website angesteuert
-      if ($rc > 0) { 
-        header('Location: ' . ROOTDIR);
-        exit;         
-        }
+      return $rc;
     }
     
-	/* saemtliche Einträge aus cms_redirect einlesen 
+	/* Prüfen eines URL-Ausschnittes gegenüber definierten Ausnahmen 
+     * @params: $value = der URL-Ausschnitt
+     * @return: true oder false 
+	*/
+    private function is_exception($value) 
+    {
+      $arr_exclude = array(0 => '',1 => 'index.php',2 => 'start', 3 => 'addon');
+      if (preg_match('/start/',$value) || 
+          in_array($value,$arr_exclude)) { 
+        return true;         
+      }         
+      return false;
+    }
+    
+	/* Prüfen eines URL-Ausschnittes gegenüber Einträgen in der cms_redirection 
+     * @params: $value = der URL-Ausschnitt
+     * @return: true oder false 
+	*/
+    private function is_redirection($value) 
+    {
+      if (in_array($value,$GLOBALS['allredirections'])) { return true; }
+      return false;
+    }
+
+	/* Prüfen eines URL-Ausschnittes gegenüber definierten Sprachcodes 
+     * @params: $value = der URL-Ausschnitt
+     * @return: true oder false 
+	*/
+    private function is_sprachcode($value) 
+    {
+      global $cfg;
+      if ($cfg->check_sprachcode($value)) { return true; }
+      return false;
+    }
+
+	/* Prüfen der URL ob es sich um eine AddOn-Url handelt
+     * @return: $addon_uri = gekürzte URL 
+	*/
+    private function is_addon($uri) 
+    {
+      if (stristr($uri,'addon')) 
+      {
+        // Addons sind im Frontend-Verzeichnis abgelegt
+        $addon_uri = explode('/frontend',$uri);
+        return $addon_uri[0];
+      }
+      return $uri;
+    }
+
+    
+    /* saemtliche Einträge aus cms_redirect einlesen 
 		@return: $GLOBALS['allredirections']
 	*/
 	public function fill_redirect_buffer()
@@ -121,6 +172,7 @@ class navigationRedirect
     {
       global $naviget;
       $url = $_SERVER['REQUEST_URI'];
+      // Aufsplitten der URL abhängig von SMURL
       if (SMURL == 'nein') {
         $params = explode('?',$url);
         $anzahl = count($params);
@@ -129,12 +181,10 @@ class navigationRedirect
         } else {
           return;
         }       
+      } else {
+        $rc = $this->check_uri();
       }
-      $index = !preg_match('/index/',$url) 
-              ? $index = str_replace('//','/',$_SERVER['REQUEST_URI'].'/index.php')
-              : $url;
-
-      if ($url == ROOTDIR || $url == $index) {
+      if ($rc != 0) {
         $url_new = $naviget->get_startseite();
         header('Location: ' . $url_new);
         exit;
@@ -152,8 +202,12 @@ class navigationRedirect
         global $db, $cfg;
 		$tab_prefix = $this->mPrefix;
 		unset($_GET);
-		$uri = $_SERVER['REQUEST_URI'];
-        $request_uri = explode('/',$uri);
+		$request_uri = $_SERVER['REQUEST_URI'];
+        
+        $request_uri = $this->is_addon($request_uri);
+        $uri = $request_uri;
+
+//        $rc = $this->check_uri();
 
 //  aus $uri wird nur der String in ROOTDIR entfernt, weil nur die folgenden 
 //	Parameter gültig sind.		
@@ -190,10 +244,10 @@ class navigationRedirect
 							
                     // Sprachcode
                     if ($cfg->check_sprachcode($t)) {
-                      // Wenn ein Sprachcode iden$cfg->check_sprachcode($t)tifiziert wurde, muss er aus dem
+                      // Wenn ein Sprachcode in $cfg->check_sprachcode($t) identifiziert wurde, muss er aus dem
                       // Request_Uri herausgelöscht werden
-                      array_pop($request_uri); 
-                      $_SERVER['REQUEST_URI'] = implode('/',$request_uri);
+                      array_pop($uri); 
+                      $_SERVER['REQUEST_URI'] = implode('/',$uri);
                       $_GET['langu'] = strtolower($t);
                       $_SESSION['language'] = strtoupper($t);
                       continue;

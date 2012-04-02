@@ -1,0 +1,121 @@
+/*************************************************
+* Navigation
+*************************************************/
+
+#navigation_liste
+{
+	padding: 0; 
+	margin: 0;
+	background-color: #9E987E;
+	width: auto;
+}
+
+#navigation_liste li
+{
+  margin: 0;
+	list-style: none;
+}
+ 
+#navigation_liste a,
+#navigation_liste strong
+{
+	display: block;
+	padding: 0.2em 0.25em 0.2em 0.75em;
+	border-bottom: 1px solid #504539;
+	height: auto;
+}
+
+/* IE hasLayout korrigiert den white-space Error im IE 5.* und 6 */
+* html #navigation_liste ul,
+* html #navigation_liste a,
+* html #navigation_liste strong 
+{
+  height: 1%;
+}
+
+
+#navigation_liste li a:link
+{
+	color: #1C5069;
+}
+
+#navigation_liste li a:visited
+{
+	color: #1C5069;
+}
+
+#navigation_liste li a:hover
+{
+	background-color: #9B8C14;
+	color: #F0FFFF;
+}
+
+#navigation_liste li a:focus {
+	background-color: #9E987E;
+}
+ 
+.aktiv  {
+	border-left: 0em solid #504539;
+	background-color: #C1AD79;
+  color: #F0FFFF;
+}
+
+#navigation_liste li ul
+{
+  margin: 0;
+}
+
+#navigation_liste li li
+{
+  padding: 0;
+  margin: 0;
+}
+
+/* Unterpositionen */
+#navigation_liste li li a:link, 
+#navigation_liste li li a:visited
+{
+	color: #1C5069;
+	background-color:  #9E987E;
+	padding: 0.3em 0.8em;
+	border-left: 1em solid #1C5069; /* #9B8C14;*/
+	text-decoration: none;
+	font-size: 0.9em;
+}
+
+#navigation_liste li li a:hover
+{
+	background-color: #9B8C14;
+	color: #F0FFFF;
+}
+
+/* hover und aktiver link der 1. und 2. Ebene der Hauptnavigation */
+#navigation_liste ul li.aktiv, #navigation_liste ul li a.aktiv  {
+	background-color: #9B8C14;
+	color: #F0FFFF;
+	font-weight: bold;
+}
+
+/* Accordion redefinitionen */
+.accordion_toggle {
+/*	background: #1C5069 url(img/menubg1.jpg) repeat-x; */
+	background: #434343;
+  border-bottom: 1px solid #F0F0F0;
+	color: #F0F0F0;
+	line-height: 21px;
+	height: 21px;
+}
+
+.accordion_toggle_active {
+/*	background: #9B8C14 url(img/menubg2.jpg) repeat-x;*/
+	background: #9B8C14;
+	color: #fff;
+	border-bottom: 1px solid white;
+}
+
+div#vertical_container h2:hover 
+{
+	color: #FFFFFF;
+	background-color: #1B4F68;
+}
+

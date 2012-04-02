@@ -250,18 +250,17 @@ class configMaintain
         $sprachcode = $cfg->getBrowserLanguage();         
       }
 
-      // Globale Daten loeschen 
-      unset($_SESSION['language']);
-      unset($_GET['langu']);
-
       if ($sprachcode != '') {
         // Jetzt den Sprachcode überprüfen gem. definierten Sprachen in cms_spezial
         $rc = $this->check_sprachcode($sprachcode);  
         // Globale Daten neu setzen
-        if ($rc) {
-          $_SESSION['language'] = strtoupper($sprachcode);
-          $_GET['langu'] = strtolower($sprachcode);
-        }
+        if (!$rc) { $sprachcode = $cfg->getBrowserLanguage(); }
+        // Globale Daten loeschen 
+        unset($_SESSION['language']);
+        unset($_GET['langu']);
+        // neuer Sprachcode setzen
+        $_SESSION['language'] = strtoupper($sprachcode);
+        $_GET['langu'] = strtolower($sprachcode);        
       }
     }
     

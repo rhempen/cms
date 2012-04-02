@@ -1,0 +1,23 @@
+# .htaccess für www.hempenweb.ch - cms
+
+# Default Character Set
+# AddDefaultCharset ISO-8859-1
+ AddDefaultCharset utf-8
+
+# .htaccess unsichtbar machen für alle
+<Files .htaccess>
+  order allow,deny
+  deny from all
+</Files>
+
+#  mod_rewrite in use
+RewriteEngine On
+
+# Wo gilt das mod_rewrite
+RewriteBase /
+
+# URL ohne index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^(/index\.php|/images|/js|/css|/robots\.txt|/favicon\.ico)
+RewriteRule ^(.*)$ index.php?/$1 [L]

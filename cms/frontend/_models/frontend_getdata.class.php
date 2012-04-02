@@ -84,7 +84,7 @@ class frontendGetData
 		$where_navid = $navid != 0 ? ' AND nav_id='.$navid : '';
 		$datum_abfrage = $this->set_datum_abfrage();
 		$query = 'SELECT count(*) AS total FROM ' .$this->mPrefix.'pages'. 
-					' WHERE aktiv="j"'.$where_navid; //.' AND '.$datum_abfrage;
+					' WHERE aktiv="j"'.$where_navid.' AND '.$datum_abfrage;
 		$total = $db->queryOne($query);
 		return $total;
 	}    
@@ -104,7 +104,7 @@ class frontendGetData
     { 
 		$db = $this->mDb;		
 		$datum_abfrage 	= $this->set_datum_abfrage();
-		$where  		= ' nav_id='.$navid.' AND aktiv="j"'; // AND '.$datum_abfrage;
+		$where  		= ' nav_id='.$navid.' AND aktiv="j" AND '.$datum_abfrage;
 		$felder 		= 'page_id, kennzeichen, fach, name, datum_von, datum_bis, aktiv, kurztext, bild1, bild2';
 		$order  		= 'fach, datum_von DESC, sort_id, name';
 
