@@ -169,7 +169,8 @@ class naviPresent
 					$icon_ups = '<a href="'.$_SERVER['PHP_SELF'].'?action=kap&nav_id='.$row['nav_id'].'&kap='.$row['kap'].'&ukap='.$row['ukap'].'"><img src="../gifs/up.gif" border="0" width="14" height="14" vspace="2" alt="'.$GLOBALS['TEXTE']['TEXT_REIHENFOLGE'].'" title="'.$GLOBALS['TEXTE']['TEXT_REIHENFOLGE'].'"></a></span>'; 
 				}
                 $icon_ups = '<span class="navisort">'.$general->compose_sorticon().'</span>';
-				$links = $icon_pic . '&nbsp;&nbsp;' . $icon_pic_edit . '&nbsp;&nbsp;' . $icon_edi . '&nbsp;&nbsp;' . $icon_cop . '&nbsp;&nbsp;' . $icon_neu . '&nbsp;&nbsp;' . $icon_del . '&nbsp;&nbsp;' . $icon_ups;
+				$icon_tra = '<a href="'.$_SERVER['PHP_SELF'].'?action=trans&nav_id='.$row['nav_id'].'"><img src="../gifs/translate.gif" border="0" width="18" height="19" alt="'.$GLOBALS['TEXTE']['TEXT_TRANSLATE'].'" title="'.$GLOBALS['TEXTE']['TEXT_TRANSLATE'].'"></a>';
+				$links = $icon_pic.'&nbsp;&nbsp;'.$icon_pic_edit.'&nbsp;&nbsp;'.$icon_edi.'&nbsp;&nbsp;'.$icon_cop.'&nbsp;&nbsp;'.$icon_neu.'&nbsp;&nbsp;'.$icon_tra.'&nbsp;&nbsp;'.$icon_del.'&nbsp;&nbsp;'.$icon_ups;
 			}
 			// Unternavigationspunkt
 			else { 
@@ -185,7 +186,8 @@ class naviPresent
 //					$icon_ups = '<a href="'.$_SERVER['PHP_SELF'].'?action=ukap&nav_id='.$row['nav_id'].'&kap='.$row['kap'].'&ukap='.$row['ukap'].'"><img src="../gifs/pfeil_up.gif" border="0" width="10" height="14" vspace="2" alt="'.$GLOBALS['TEXTE']['TEXT_REIHENFOLGE'].'" title="'.$GLOBALS['TEXTE']['TEXT_REIHENFOLGE'].'"></a></span>'; 
 					$icon_ups = '<a href="'.$_SERVER['PHP_SELF'].'?action=ukap&nav_id='.$row['nav_id'].'"><img src="../gifs/pfeil_up.gif" border="0" width="10" height="14" vspace="2" alt="'.$GLOBALS['TEXTE']['TEXT_REIHENFOLGE'].'" title="'.$GLOBALS['TEXTE']['TEXT_REIHENFOLGE'].'"></a></span>'; 
 				}			
-				$links = $icon_pic . '&nbsp;&nbsp;' . $icon_pic_edit . '&nbsp;&nbsp;'  .  $icon_edi . '&nbsp;&nbsp;' . $icon_del . '&nbsp;&nbsp;' . $icon_ups;
+				$icon_tra = '<a href="'.$_SERVER['PHP_SELF'].'?action=trans&nav_id='.$row['nav_id'].'"><img src="../gifs/translate.gif" border="0" width="18" height="19" alt="'.$GLOBALS['TEXTE']['TEXT_TRANSLATE'].'" title="'.$GLOBALS['TEXTE']['TEXT_TRANSLATE'].'"></a>';
+				$links = $icon_pic.'&nbsp;&nbsp;'.$icon_pic_edit.'&nbsp;&nbsp;'.$icon_edi.'&nbsp;&nbsp;'.$icon_tra.'&nbsp;&nbsp;'.$icon_del.'&nbsp;&nbsp;'.$icon_ups;
 				
 				// Unterkapitel verbergen oder zeigen
 				$disp_none = 'style="display:none;"';

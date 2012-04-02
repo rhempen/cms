@@ -265,6 +265,7 @@ $GLOBALS['TEXTE']['TEXT_BILDER_EDIT'] 					= "Kommentar zu Bildern bearbeiten\nR
 $GLOBALS['TEXTE']['TEXT_BILD_DELETE'] 					= 'Dieses Bild l&ouml;schen';
 $GLOBALS['TEXTE']['TEXT_DIR_DELETE'] 					= 'Dieses Verzeichnis l&ouml;schen';
 $GLOBALS['TEXTE']['TEXT_FILETYPE'] 						= 'Verzeichnis &ouml;ffnen';
+$GLOBALS['TEXTE']['TEXT_TRANSLATE']						= '&Uuml;bersetzen';
 
 // Texte zu Medienbrowser
 $GLOBALS['TEXTE']['TEXT_SEITE'] 						= 'Seite: ';

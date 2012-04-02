@@ -263,6 +263,7 @@ $GLOBALS['TEXTE']['TEXT_BILDER_EDIT'] 					= "Modifica commento delle immagini\n
 $GLOBALS['TEXTE']['TEXT_BILD_DELETE'] 					= 'Elimina questa immagine';
 $GLOBALS['TEXTE']['TEXT_DIR_DELETE'] 					= 'Elimina questa directory';
 $GLOBALS['TEXTE']['TEXT_FILETYPE'] 						= 'Apri la directory';
+$GLOBALS['TEXTE']['TEXT_TRANSLATE']						= 'Tradurre';
 
 // Texte zu Medienbrowser
 $GLOBALS['TEXTE']['TEXT_SEITE'] 						= 'Pagina: ';

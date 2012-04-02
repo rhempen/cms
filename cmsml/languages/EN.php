@@ -265,6 +265,7 @@ $GLOBALS['TEXTE']['TEXT_BILDER_EDIT'] 					= "Edit comment to image\nChange Orde
 $GLOBALS['TEXTE']['TEXT_BILD_DELETE'] 					= 'Delete Image';
 $GLOBALS['TEXTE']['TEXT_DIR_DELETE'] 					= 'Delete folder';
 $GLOBALS['TEXTE']['TEXT_FILETYPE'] 						= 'Open folder';
+$GLOBALS['TEXTE']['TEXT_TRANSLATE']						= 'Translate';
 
 // Texte zu Medienbrowser
 $GLOBALS['TEXTE']['TEXT_SEITE'] 						= 'Page: ';
