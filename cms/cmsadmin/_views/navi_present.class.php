@@ -160,8 +160,8 @@ class naviPresent
 				$icon_neu = '<a href="'.$_SERVER['PHP_SELF'].'?action=neuUkap&nav_id='.$row['nav_id'].'"><img src="../gifs/new.gif" border="0" width="16" height="15" alt="'.$GLOBALS['TEXTE']['TEXT_NEUE_UNTERNAVI'].'" title="'.$GLOBALS['TEXTE']['TEXT_NEUE_UNTERNAVI'].'"></a>';
 				$confirm_del = "return confirm('".$GLOBALS['TEXTE']['TEXT_DELE_HAUPTNAVI']."?')";
 				$confirm_cop = "return confirm('".$GLOBALS['TEXTE']['TEXT_COPY_HAUPTNAVI']."?')";
-				$icon_del = '<a href="'.$_SERVER['PHP_SELF'].'?action=del&nav_id='.$row['nav_id'].'" onclick="'.$confirm_del.'"><img src="../gifs/delete.gif" border="0" width="16" height="16" alt="'.$GLOBALS['TEXTE']['TEXT_DELE_HAUPTNAVI'].'" title="'.$GLOBALS['TEXTE']['TEXT_DELE_HAUPTNAVI'].'"></a>';
-				$icon_cop = '<a href="'.$_SERVER['PHP_SELF'].'?action=copy&nav_id='.$row['nav_id'].'" onclick="'.$confirm_cop.'"><img src="../gifs/copy_object.gif" border="0" width="16" height="16" alt="'.$GLOBALS['TEXTE']['TEXT_COPY_HAUPTNAVI'].'" title="'.$GLOBALS['TEXTE']['TEXT_COPY_HAUPTNAVI'].'"></a>';
+				$icon_del = '<a href="'.$_SERVER['PHP_SELF'].'?action=del&nav_id='.$row['nav_id'].'" onclick="'.$confirm_del.'"><img src="../gifs/delete.gif" border="0" width="16" height="16" alt="'.stripslashes($GLOBALS['TEXTE']['TEXT_DELE_HAUPTNAVI']).'" title="'.stripslashes($GLOBALS['TEXTE']['TEXT_DELE_HAUPTNAVI']).'"></a>';
+				$icon_cop = '<a href="'.$_SERVER['PHP_SELF'].'?action=copy&nav_id='.$row['nav_id'].'" onclick="'.$confirm_cop.'"><img src="../gifs/copy_object.gif" border="0" width="16" height="16" alt="'.stripslashes($GLOBALS['TEXTE']['TEXT_COPY_HAUPTNAVI']).'" title="'.stripslashes($GLOBALS['TEXTE']['TEXT_COPY_HAUPTNAVI']).'"></a>';
 				$icon_spa = '<img src="../gifs/spacer.gif" border="0" width="10" height="14" />';
 				if ($row['kap'] > 1)
 				{
@@ -177,7 +177,7 @@ class naviPresent
 				$icon_pic = '<a href="'.$href_pic.'"><img src="../gifs/jpeg.gif" border="0" width="18" height="19" alt="Bilder hochladen"></a>';
 				$icon_pic_edit = '<a href="'.$href_pic_edit.'"><img src="../gifs/modify_16.png" border="0" width="18" height="19" alt="'.$GLOBALS['TEXTE']['TEXT_BILDER_EDIT'].'" title="'.$GLOBALS['TEXTE']['TEXT_BILDER_EDIT'].'"></a>';
 				$confirm = "return confirm('".$GLOBALS['TEXTE']['TEXT_DELE_UNTERNAVI']."')";
-				$icon_del = '<a href="'.$_SERVER['PHP_SELF'].'?action=del&nav_id='.$row['nav_id'].'" onclick="'.$confirm.'"><img src="../gifs/delete.gif" border="0" width="16" height="16" alt="'.$GLOBALS['TEXTE']['TEXT_DELE_UNTERNAVI'].'" title="'.$GLOBALS['TEXTE']['TEXT_DELE_UNTERNAVI'].'"></a>';
+				$icon_del = '<a href="'.$_SERVER['PHP_SELF'].'?action=del&nav_id='.$row['nav_id'].'" onclick="'.$confirm.'"><img src="../gifs/delete.gif" border="0" width="16" height="16" alt="'.stripslashes($GLOBALS['TEXTE']['TEXT_DELE_UNTERNAVI']).'" title="'.stripslashes($GLOBALS['TEXTE']['TEXT_DELE_UNTERNAVI']).'"></a>';
 				$icon_ups = '<img src="../gifs/spacer.gif" border="0" width="10" height="14" />';
 				if ($row['ukap'] > 10)
 				{

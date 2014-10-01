@@ -1,4 +1,4 @@
-<!?xml version="1.0" encoding="utf-8">
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/2000/REC-xhtml1-20000126/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -11,6 +11,7 @@
 <script src="../../lib/scriptaculous.js" type="text/javascript"></script>
 <script src="../../lib/effects.js" type="text/javascript"></script>
 <script src="../../lib/controls.js" type="text/javascript"></script>
+<script src="../scripts/general_cmsadmin.js" type="text/javascript" charset="utf-8"></script>
 <script src="../scripts/navi_overview.js" type="text/javascript" charset="utf-8"></script>
 
 <link rel="stylesheet" type="text/css" href="../css/cmsadmin_admin.css" media="screen"/>
@@ -24,7 +25,7 @@
       <div id="navisWrapper">
         <table id="navis" width="100%" cellspacing="1">
 		  <tr> 
-		    <td colspan="7"> 
+		    <td colspan="8"> 
 				<ul id="tabnav">
 					<!-- BEGIN tabnav -->
 					<li>
@@ -36,7 +37,7 @@
 		  </tr>
 	      <!-- BEGIN message_block -->
 		  <tr>
-			<td colspan="7">
+			<td colspan="8">
 				{meldung}
 			</td>
 			<td>&nbsp;</td>
@@ -47,18 +48,20 @@
         <!-- BEGIN titel -->
         <table class="navi_overview" cellspacing="1">
           <colgroup>
-            <col width="50"></col>
-            <col width="55"></col>
+            <col width="40"></col>
+            <col width="45"></col>
             <col width="280"></col>
-            <col width="55"></col>
-            <col width="55"></col>
-            <col width="55"></col>
-            <col width="210"></col>
+            <col width="45"></col>
+            <col width="45"></col>
+            <col width="45"></col>
+            <col width="45"></col>
+            <col width="240"></col>            
           </colgroup>
 		  <tr class="{class}">
 			<td align="center">{label_kap}</td>
 			<td align="center">{label_ukap}</td>
 			<td align="left">{label_bezeichnung}</td>
+            <td>&nbsp;</td>
 			<td align="center">{label_start}</td>
 			<td align="center">{label_nav_type}</td>
 			<td align="center">{label_aktiv}</td>
@@ -71,20 +74,27 @@
           {sortableDivBegin}
             <table class="navi_overview" cellspacing="1">
               <colgroup>
-                <col width="50"></col>
-                <col width="55"></col>
+                <col width="40"></col>
+                <col width="45"></col>
                 <col width="280"></col>
-                <col width="55"></col>
-                <col width="55"></col>
-                <col width="55"></col>
-                <col width="210"></col>
+                <col width="45"></col>
+                <col width="45"></col>
+                <col width="45"></col>
+                <col width="45"></col>
+                <col width="240"></col>
               </colgroup>
               <tr class="{class}" id="{tr_id}"{ukap_hide}>
                 <td align="center" id="{kap_ukap}" class="sortid">{kap}</td>
                 <td align="center">{ukap}</td>
                 <td>
-                    <span class="bezeichnung" id="{nav_id}">{bezeichnung}</span>
+                  <table id="{lang_id}" width="100%">
+                    <tr id="tr{nav_id}_de" class="{class_de}"><td width="10%">{lang_de}</td><td><span class="bezeichnung" id="{nav_id}_de">{bezeich_de}</span></td></tr>
+                    <tr id="tr{nav_id}_en" class="{class_en}"><td width="10%">{lang_en}</td><td><span class="bezeichnung" id="{nav_id}_en">{bezeich_en}</span></td></tr>
+                    <tr id="tr{nav_id}_fr" class="{class_fr}"><td width="10%">{lang_fr}</td><td><span class="bezeichnung" id="{nav_id}_fr">{bezeich_fr}</span></td></tr>
+                    <tr id="tr{nav_id}_it" class="{class_it}"><td width="10%">{lang_it}</td><td><span class="bezeichnung" id="{nav_id}_it">{bezeich_it}</span></td></tr>
+                  </table>                
                 </td>
+                <td align="center">{button_translate}</td>
                 <td align="center">
                     <span class="startflag" id="{startid}" title="{starttitle}">{startseite}</span> 
                 </td>
@@ -94,7 +104,18 @@
                 <td align="center">
                     <span class="aktivflag" id="{aktivid}" style="color:{farbe}">{aktiv}</span>
                 </td>
-                <td align="left" nowrap>{links}</td>
+                <td align="left" nowrap>
+                  <table><tr>
+                    <td>{button_upload}</td>
+                    <td>{button_bilder_edit}</td>
+                    <td>{button_edit}</td>
+                    <td>{button_copy}</td>
+                    <td>{button_create}</td>
+                    <td>{button_delete}</td>
+                    <td>{button_move}{button_move_up}</td>
+                  </tr></table>
+                  {links}
+                </td>
               </tr>
             </table>
           {sortableDivEnd}

@@ -5,10 +5,12 @@
  *           www.hempenweb.ch
  * ----------------------------------------------------------
  *
- * Klasse f�r die Verwaltung der Navigation und zugeh�riger Seiten
+ * Klasse fuer die Verwaltung der Navigation und zugehoeriger Seiten
  * @author      Roland Hempen
  * @copyright   Frei einsetz- und veraenderbar, wenn der Autor erw�hnt wird
  * @version     1.0 | 2007-07-14
+ * @package     CMSADMIN/Configuration
+ * 
  */
 
 class configMaintain
@@ -78,7 +80,8 @@ class configMaintain
         $db->query($update);
     }
 
-    /* mit dieser Funktion werden die Pfade auf die Media-Dateien aktualisiert,
+    /**
+     * mit dieser Funktion werden die Pfade auf die Media-Dateien aktualisiert,
      * nachdem die DB-gewechselt wurde
      */
     public function update_website_media()
@@ -93,25 +96,25 @@ class configMaintain
         return $msg;
     }
 		
-    /* script fuer Google-Analytics erstellen 
-    	@params: Kontonummer
-    	@return: $ga_script	- JavaScript
+    /**
+     * script fuer Google-Analytics erstellen 
+     * @param: Kontonummer
+     * @return: $ga_script	- JavaScript
     */
     public function google_analytics($kontonr)
     {
     	if (preg_match('/UA/', $kontonr)) {
     		$ga_script 	 = '<script type="text/javascript">'."\n";
-    		$ga_script 	.= 'var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");'."\n";
-			$ga_script 	.= 'document.write(unescape("%3Cscript src=\'" + gaJsHost + "google-analytics.com/ga.js\' type=\'text/javascript\'%3E%3C/script%3E"));'."\n";
-    		$ga_script 	.= '</script>'."\n";
-    		$ga_script 	.= '<script type="text/javascript">'."\n";
-    		$ga_script 	.= 'try {'."\n";
-    		$ga_script 	.= 'var pageTracker = _gat._getTracker("'.GOOGLE_ANALYTICS.'");'."\n";
-    		$ga_script	.= 'pageTracker._trackPageview();'."\n";
-    		$ga_script	.= '} catch(err) {}'."\n";
+    		$ga_script 	.= 'var _gaq = _gaq || [];'."\n";
+			$ga_script 	.= '_gaq.push(["_setAccount", "'.GOOGLE_ANALYTICS.'"]);'."\n";
+    		$ga_script 	.= '_gaq.push(["_trackPageview"]);'."\n";
+    		$ga_script 	.= '(function() {'."\n";
+    		$ga_script 	.= 'var ga = document.createElement("script"); ga.type = "text/javascript"; ga.async = true;'."\n";
+    		$ga_script 	.= 'ga.src = ("https:" == document.location.protocol ? "https://ssl" : "http://www") + ".google-analytics.com/ga.js";'."\n";
+    		$ga_script	.= 'var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ga, s);'."\n";
+            $ga_script  .= '})()'."\n";
     		$ga_script	.= '</script>'."\n";
-//    		$ga_script 	 = '<script type="text/javascript">google_analytics("'.GOOGLE_ANALYTICS.'");</script>';
-    		return $ga_script;	
+            return $ga_script;	
     	}
     }
 
@@ -177,6 +180,18 @@ class configMaintain
         $db->query($update);
         return $feldvalue;		
     }
+    
+    /* Den Wert "aktiv" in cms_spezial updaten.   Aufruf: bei Action = aktivSaveSpez 	*/
+    public function spezial_aktiv_update($name, $feldname, $feldvalue)
+    {
+        global $db;
+        $update = 'UPDATE '.$this->mPrefix.'spezial SET '. $feldname.'="'.$feldvalue.'"';
+        $update .= ' WHERE thema="'.THEME.'" AND name="'.$name.'"';
+        $db->query($update);
+        $response = $feldvalue.'/';
+        $response .=  $feldvalue == 'j' ? $GLOBALS['TEXTE']['TEXT_AKTIV'] : $GLOBALS['TEXTE']['TEXT_INAKTIV'];        
+        return $response;		
+    }
 
     /* das Thema aus der Config lesen und daraus die Bildergroessen ableiten 
         Dabei soll der Name eines Records mit 'M' = Masse beginnen
@@ -189,7 +204,8 @@ class configMaintain
                    inner join cms_spezial as b on a.value = b.thema
                    where a.category="general" and a.param="THEME"
                    and a.value = b.thema
-                   and b.name like "M%"';
+                   and b.name like "M%"
+                   and b.aktiv = "j"';
       $rows = $db->query($query);
       while ($row = $rows->fetchRow(MDB2_FETCHMODE_ASSOC)) {
           $bildgroessen[] = $row;
@@ -197,7 +213,33 @@ class configMaintain
       return $bildgroessen;
     }
 
+   /* Bildgroessen aus der cms_templates - Tabelle lesen 
+    * die Werte (zB. 400x400) werden auseinander genommen und als Einzelwerte
+    * in den Array $bildgroessen übernommen, falls nicht schon vorhanden
+      @return: $bildgroessen
+    */
+    public function bildgroessen_lesen_from_templates() 
+    { 
+      $bildgroessen = array();
+      global $db;
+      $query = 'select thumbsize from '.$this->mPrefix.'templates';
+      $rows = $db->query($query);
+      while ($row = $rows->fetchRow(MDB2_FETCHMODE_ASSOC)) {
+        // Werte wie 400x400 auseinander nehmen
+          list($value1,$value2) = explode('x',$row['thumbsize']);
+          // nur neuen Array bilden, wenn $value1 und $value2 einen Wert haben
+          if ($value1 != '' && $value2 !='') {
+            $thumbsize = array('wert1' => $value1, 'wert2' => $value2);
+            // nur in Array übernehmen, wenn nicht schon drin
+            if (!in_array($thumbsize,$bildgroessen)) {
+              $bildgroessen[] = $thumbsize;
+            }
+          }
+      }
+      return $bildgroessen;
+    }
 
+    
     /* Verfügbare Sprachen lesen. Wenn keine Sprache in cms_spezial gepflegt 
      * wurde, wird die Standardsprache aus dem Browser ermittelt. 
      * @return: $GLOBALS['sprachcodes'] - Array der verfügbaren Sprachen inkl. Text
@@ -209,7 +251,7 @@ class configMaintain
       $sprachcodes = array();
       $sprachen_erlaubt = array();
       $query = 'SELECT * FROM '.$this->mPrefix.'spezial WHERE thema="'.THEME.'" 
-               AND name like "LANG%"';
+               AND name like "LANG%" AND aktiv="j"';
       $result = $db->query($query);
       while ($row = $result->fetchRow(MDB2_FETCHMODE_ASSOC)) {
           $sprachcodes[] = $row['wert2']; // Sprachcode in Kleinschrift
@@ -238,6 +280,8 @@ class configMaintain
     public function sprache_festlegen() 
     {   
       global $cfg;
+      // Als Erstes muss ein Sprachenwechsel erkannt werden
+      $this->get_sprache_from_url();
       // 1. Fall: es wurde eine Sprache mitgegeben
       if (isset($_GET['langu'])) { 
         $sprachcode = strtoupper($_GET['langu']); 
@@ -250,24 +294,50 @@ class configMaintain
         $sprachcode = $cfg->getBrowserLanguage();         
       }
       
-      if ($sprachcode == '') { $sprachcode = 'DE'; } 
-      
       if ($sprachcode != '') {
         // Jetzt den Sprachcode überprüfen gem. definierten Sprachen in cms_spezial
         $rc = $this->check_sprachcode($sprachcode);  
-        // Globale Daten neu setzen
-        if (!$rc) { $sprachcode = $cfg->getBrowserLanguage(); }
-        // Globale Daten loeschen 
-        unset($_SESSION['language']);
-        unset($_GET['langu']);
-        // neuer Sprachcode setzen
+
+        // der Sprachcode entspricht nicht den erlaubten Sprachcodes
+        // --> jetzt wird der erste Sprachcode aus cms_spezial gesetzt.
+        if (!$rc) $sprachcode = $this->set_sprachcode_from_sprachen();
+        // keinen Sprachcode gefunden...
+        if ($sprachcode == '') { $sprachcode = $cfg->getBrowserLanguage(); }
+
+        // neuer Sprachcode in Globalen Daten neu setzen
         $_SESSION['language'] = strtolower($sprachcode);
-        $_GET['langu'] = strtolower($sprachcode);
-        $language = $_SESSION['language'];
+        // Definition des Sprachressourcen-Files
+        $_SESSION['language_file'] = strtoupper($sprachcode).'.php';
+        require_once (LANGUDIR.$_SESSION['language_file']);
+      }
+    }
+
+    /* Sprachenwechsel erkennen anhand Parameter in der URL
+     * @params: $_SERVER['REUQUEST_URI'] - URL 
+     * @return: $_GET['langu'] - Sprache im GET-Parameter speichern 
+     * @return: $_SESSION['language'] - Sprache in der SESSION speichern
+    */
+    public function get_sprache_from_url() 
+    {
+      global $cfg;
+      if (SMURL == 'ja') {
+        $uri = $_SERVER['REQUEST_URI'];
+        $uri_arr = explode('/',$uri);
+        foreach($uri_arr as $key => $value) {
+          $rc = $cfg->check_sprachcode($value);
+          if ($rc) {
+            $_GET['langu'] = $value;
+            $_SESSION['language'] = $value;
+            break;
+          }
+        }
+      } else {
+        if (isset($_GET['langu']) && $_GET['langu'] != $_SESSION['language']) {
+          $_SESSION['language'] = $_GET['langu'];  
+        }
       }
     }
     
-  
     /* Standardsprache des Browsers auslesen 
      * Erläuterungen zu dieser Funktion sind zu finden auf...
      * http://aktuell.de.selfhtml.org/artikel/php/httpsprache/#z61
@@ -330,7 +400,36 @@ class configMaintain
       $lang = explode('-',$current_lang);
       return strtoupper($lang[0]);
     }
+    
+    private function set_sprachcode_from_sprachen() {
+      $sprachen = $GLOBALS['sprachcodes'];
+      $sprachcode = array_shift($sprachen);
+      return $sprachcode;
+    }
+    
+    /* Den Sprachcode für die Anzeige ( Frontend und Backend ) holen
+     * @return: $language - Der Sprachcode aus der Session */
+    public function get_disp_language_code() {
+      return $_SESSION['language'];
+    }
 
+    /* Den Sprachcode für die Übersetzungen im Backend setzen
+     * @param: $_GET['langu_tra'] = Language Code
+     * @return: $_SESSION['langu_tra'] - Der Sprachcode in der  Session gespeichert */
+    public function set_language_tra() {
+      $_SESSION['language_tra'] = isset($_GET['langu_tra']) ? strtolower($_GET['langu_tra']) : $_SESSION['language'];
+      if ($_SESSION['language_tra'] == '') { $_SESSION['language_tra'] = 'de'; }
+      return $_SESSION['language_tra'];
+    }
+    
+    /* Den Sprachcode für die Übersetzungen im Backend holen - damit wird in der 
+     * Sprachwahl-Selektbox die gewählte Sprache als selected eingestellt
+     * @return: $language - Der Sprachcode aus der Session */
+    public function get_language_tra() {
+      return $_SESSION['language_tra'];
+    }
+
+    
 } 
 
 ?>

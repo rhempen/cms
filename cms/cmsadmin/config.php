@@ -33,7 +33,7 @@ define('DELTREE_ALLOWED', true);
 define('LANGUAGE_FILE', LANGUAGE.'.php');
 
 /* Max. Dateigroesse von Bildern beim Uplaod auf 50 KB beschr�nken */
-$size = 400*1024; // 400 Kb
+$size = 500*1024; // 500 Kb
 define('MAX_IMAGE_SIZE', $size);
 
 /* Definitionen fuer das Erstellen von Thumbnails */

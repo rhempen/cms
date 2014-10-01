@@ -21,7 +21,6 @@ ul#tabnav li {
   border: 1px solid purple; 
 }
 
-
 ul#tabnav a:link {
 	display: inline;
 	background-color: transparent;
@@ -45,6 +44,10 @@ ul#tabnav a:hover {
 	padding: 6px 0px;
 	background-color: transparent;
 	color: purple;
+}
+
+select.selboxEdit {
+  width: 600px;
 }
 
 /* CSS f�r Fragmente */
@@ -82,10 +85,8 @@ div.divelem {
 
 div.divwork {
 	float: left;
-	line-height: 30px;
-    padding-top: 10px;
+	height: 40px;
     padding-left: 10px;
-	width: 110px;
 	text-align: center;
 	border-left: 2px solid #999999;
 }
@@ -103,6 +104,12 @@ div.mnusort {
 span.navisort {
     /*position: relative;*/
 	cursor: move;  
+}
+
+span.navisort img {
+  width: 24px;
+  height: 24px;
+  border: 1px solid #323232;
 }
 
 ul {

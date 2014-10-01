@@ -1,0 +1,337 @@
+/* zuruecksetzen der Innen und Aussenabstaende fuer alle Html Elemente */
+ * {
+ margin:0; 
+ padding: 0;
+ }
+ 
+/* (de) Erzwingen vertikaler Scrollbalken in Netscape, Firefox und Safari Browsern */
+html{
+  height: 100%
+}
+
+body{ 
+  min-height: 101%;
+/* (de) Vorgabe der Standardfarben und Textausrichtung */
+  color: #424242;
+  background-color: #ffffff;
+  text-align: left;
+  font-family: Arial, "Sans Serife", Helvetica;
+  font-size: 14px;
+}
+
+h1 {
+  color: #FF3300;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+h2 {
+  color: #336699;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+p {
+	line-height: 20px;
+	}
+
+/* Member-Login */
+#memberLogin {
+  width: 380px;
+  padding: 10px;
+  background-color: #2E5068; 
+  position: absolute;
+  left: 33%;
+  right: 33%;
+  margin: auto;
+}
+
+#memberLogin fieldset {
+  background-color: #ffffff;
+  padding: 5px 10px;
+}
+
+#memberLogin label {
+  min-width: 120px;
+  width: auto;
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+#memberLogin input {
+  width: 98%;
+}
+
+#memberLogin input#login {
+  cursor: pointer;
+  width: auto;
+  background-color: #dedede;
+  border-right: 2px solid #434343;
+  border-bottom: 2px solid #434343;  
+}
+
+#memberLogin #memberLinks {
+  width: 100%;
+  background-color: #2E5068;
+}
+
+#memberLogin .memberLink {
+  padding: 0 10px;
+  cursor: pointer;  
+  color: #FFFFFF;
+}
+
+#memberLogin .memberLink:hover {
+  font-weight: bold;
+  color: #FFFF66;
+}
+
+#memberLogin div#message {
+  font-weight: bold;
+  padding-bottom: 10px; 
+}
+
+#memberData {
+  position: absolute;
+  right: 0;
+  width: 20%;
+  height: 22px;
+  color: #ffffff;
+}
+
+#memberData #memberlogout {
+  cursor: pointer;  
+}
+
+
+/* das folgende Statemant verhindert, dass ein Link umrahmt wird, wenn man draufklickt */
+*:focus, *:active  {
+  outline: none; 
+}
+
+/* (de) Layout: Breite, Hintergrund, Rahmen */
+#page_margins
+{
+  width: 100%;
+  height: 100%;
+  margin: 0px auto;
+  border: 0px;
+  text-align:left;
+}
+
+#page
+{
+  min-height: 400px;
+  height: 100%;
+  position: relative;
+  top: 0;
+  z-index: 70;
+  margin: 0 auto;
+}
+
+/* skalierbares Hintergrundbild  
+   http://www.webdesign-lohmann.de/index.php/blog-leser/items/hintergrundbilder-mit-css-skalieren.html */
+#bg 
+{
+  position:fixed;
+  width:100%;
+  height:100%;
+}
+
+#bg img 
+{
+  min-height:100%;
+  height:auto !important;
+  height:100%;
+  min-width:100%;
+  width:auto !important;
+  width:100%;
+  margin:0 auto;
+  display:block;
+  position:absolute;
+  top:0;
+  right:0;
+}
+
+
+iframe#addon_canvas 
+{
+  width: 900px;
+  height: 570px;
+  margin-bottom: 40px;
+  border: none;
+  overflow-y: auto;
+}
+
+a:link, a:visited, a:active 
+{
+  color: #434343;
+  font-weight: bold;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+a:hover
+{
+  color: #FF3300;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+#header
+{
+  height: 100px;
+  width: 210px;
+  padding: 0;
+  position: fixed;
+  top: 20px; 
+  left: 70px;
+  z-index: 1;
+  
+}
+
+#header_home_wrapper {
+  margin: 0 auto;
+}
+
+#home_bild {
+  padding: 0;
+}
+
+#home_bild img {
+  height: 100px;
+  width: 207px;
+}
+
+#home_link
+{
+  height: 100px;
+  width: 207px;
+  background-color: transparent;
+  background-image: url(../img/logo.png); /* 265x128 */
+  background-repeat: no-repeat;
+  padding: 0;
+  cursor: pointer;
+}
+
+#main
+{
+  clear: both;
+  width: auto; /*880px;*/
+  /*min-height: 400px;*/
+  background-color: #ffffff;
+  padding: 20px 20px;
+  position: fixed;
+  left: 285px;
+  top: 140px;
+  right: 70px;
+  overflow: auto;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)"; /* IE8 */
+  filter:Alpha(Opacity=70); /* IE7 */
+  opacity: 0.7;
+}
+
+/* (de) Definition 2 Kolonnen (navigation und spalte 1 */
+#navigation
+{
+  position: absolute; /*fixed;*/
+  top: 350px;
+  left: -45px;
+  float: left;
+  width: 250px;
+  border: 0;
+  margin: 0;
+}
+
+
+#spalte3
+{
+  border: 0;
+  border-left: 0px solid #f0f0f0;
+  border-right: 0px solid #f0f0f0;  
+}
+
+#spalte3_inhalt
+{
+  padding: 0px;
+  min-height: 400px;
+}
+
+* html #spalte3_inhalt {
+  height: 400px;
+}
+
+#spalte2
+{
+  visibility: hidden;
+  width: 1px;
+  background-color: red;
+  float: right;
+  border: 0;
+  min-height: 400px;
+}
+
+* html #spalte2 {
+  height: 400px;
+}
+
+.clearfix
+{
+  display: block;
+}
+
+#footer
+{
+  color: #ffffff;
+  background-color: #ffffff; /*#2e5068;*/
+  clear: both;
+  height: 22px;
+  line-height: 20px;
+  position: fixed;
+  left: 5%;
+  bottom: 0px;
+  width: 69%;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)"; /* IE8 */
+  filter:Alpha(Opacity=70); /* IE7 */
+  opacity: 0.7;
+  display: none;
+}
+
+#copyright {
+  float: left;
+  line-height: 22px;  
+  width: 50%;
+  display: inline;
+  padding-left: 20px;
+  color: #434343;
+}
+
+#sprachen {
+  width: 130px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  position: fixed; 
+  top: 20px;
+  left: 670px;
+  background-color: transparent;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+  filter:Alpha(Opacity=70);
+  opacity: 0.7;
+}
+
+.even {
+  background-color: #F3F3F3;
+}
+
+.odd {
+  background-color: #FFFFFF;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}

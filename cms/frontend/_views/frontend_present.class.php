@@ -204,7 +204,9 @@ class frontendPresent
 			if ($row['langtext'] != '') { 
 				// fragmente ermitteln und im Langtext ersetzen
 				$newtext = $this->replenish_text_with_fragments($row['langtext']);
-				$row['langtext'] = $newtext;
+                // Linkliste erstellen und ans Ende des Inhaltstextes anhängen
+                $linkliste = $frontget->create_unterseiten_link_liste($row);
+				$row['langtext'] = $newtext.$linkliste;
 				$tpl->setVariable('langtext', $row['langtext']); 
 			}
 
@@ -228,15 +230,24 @@ class frontendPresent
 	*/
 	public function display_inhalt2($row)
 	{
-		global $tpl, $frontget, $general;
-		$tplname = $row['template_name'];
-		if ($general->analyse_template($tplname,0,'/{inhalt2}/')) {
-			$tpl->setCurrentBlock('inhalt2');
-			$newtext = $this->replenish_text_with_fragments($row['inhalt2']);
-			$row['inhalt2'] = $newtext;
-			$tpl->setVariable('inhalt2', $row['inhalt2']);
-			$tpl->parseCurrentBlock();
-		}
+      global $tpl, $frontget, $general, $seiten_infos, $language, $type;
+      if ($type == 'N') { // NavigationsSeite
+        $tplname = $seiten_infos['template_name'];
+        $rc = $general->analyse_template($tplname,0,'/{inhalt2}/');
+      } else { // Unterseite
+        $tplnumr = $row['template'];
+        $rc = $general->analyse_template('',$tplnumr,'/{inhalt2}/');          
+      }
+      if ($rc) {
+        $tpl->setCurrentBlock('inhalt2');
+    	// fragmente ermitteln und im Langtext ersetzen
+        $newtext = $this->replenish_text_with_fragments($row['inhalt2']);
+        // Linkliste erstellen und VOR den Inhaltstext2 stellen
+        $linkliste = $frontget->create_unterseiten_link_liste($row);
+        $row['inhalt2'] = $newtext.$linkliste;
+        $tpl->setVariable('inhalt2', $row['inhalt2']);        
+        $tpl->parseCurrentBlock();
+      }
 	}
 	
 	/**

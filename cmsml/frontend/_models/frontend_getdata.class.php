@@ -59,14 +59,18 @@ class frontendGetData
     public function read_seiten_infos($navid) 
     {
 		$db = $this->mDb;
-    	$abfrage = 'SELECT s.nav_id, s.kurztitel, s.zusatztext, s.inhalt1, s.inhalt2, s.bild1, s.modul, s.galerie, s.template,
-					t.template_name, t.thumbsize
-		            FROM '.$this->mPrefix.'seiten s
-		            INNER JOIN '.$this->mPrefix.'templates t ON s.template = t.template_id
-		            WHERE s.nav_id =' .$navid. '
-					ORDER BY nummer';
+//    	$abfrage = 'SELECT s.nav_id, s.kurztitel, s.zusatztext, s.inhalt1, s.inhalt2, s.bild1, s.modul, s.galerie, s.template,
+//					t.template_name, t.thumbsize
+//		            FROM '.$this->mPrefix.'seiten s
+//		            INNER JOIN '.$this->mPrefix.'templates t ON s.template = t.template_id
+//		            WHERE s.nav_id =' .$navid. '
+//					ORDER BY nummer';
 		
-		$seiten_infos = $db->queryRow($abfrage);
+    	$abfrage = 'SELECT s.*, t.template_name, t.thumbsize FROM '.$this->mPrefix.'seiten s
+		            INNER JOIN '.$this->mPrefix.'templates t ON s.template = t.template_id
+		            WHERE s.nav_id='.$navid;
+
+        $seiten_infos = $db->queryRow($abfrage);
 		return $seiten_infos;
     }
     
@@ -104,10 +108,14 @@ class frontendGetData
     public function read_pages_pro_navid ($navid, $start=0) 
     { 
 		$db = $this->mDb;		
+        global $language;
+        
 		$datum_abfrage 	= $this->set_datum_abfrage();
 		$where  		= ' nav_id='.$navid.' AND aktiv="j" AND '.$datum_abfrage;
-		$felder 		= 'page_id, kennzeichen, fach, name, datum_von, datum_bis, aktiv, kurztext, bild1, bild2';
-		$order  		= 'fach, datum_von DESC, sort_id, name';
+		$felder 		= 'page_id, kennzeichen, fach_'.$language.', name_'.$language.', '; 
+        $felder        .= 'datum_von, datum_bis, aktiv, kurztext_'.$language.', bild1, bild2';
+//        $felder         = '*';
+		$order  		= 'fach_'.$language.', datum_von DESC, sort_id, name_'.$language;
 
  		// nur MAX_LIST_ITEMS lesen (fuer Blaetterfunktion im Frontend)
 		$anzahl = $start + MAX_LIST_ITEMS;
@@ -146,8 +154,9 @@ class frontendGetData
     */
     public function read_galerie_pro_nav_id($nav_id, $type)
     {
+        global $language;
     	$bilder = array();
-		$abfrage = 'SELECT bildpfad, kommentar FROM '.$this->mPrefix.'galerien
+		$abfrage = 'SELECT bildpfad, kommentar_'.$language.' FROM '.$this->mPrefix.'galerien
 		   			 WHERE ref_id='.$nav_id.' AND type="'.$type.'" ORDER BY sortkey';		
 		$bilder =& $this->mDb->query($abfrage);	
 		return $bilder;	
@@ -170,9 +179,7 @@ class frontendGetData
 		// Datensatz lesen
 		$query = 'SELECT '.$feld.' FROM '.$this->mPrefix.'navigation
 		  	       WHERE aktiv="j" 
-		  	         AND nav_id='.$nav_id.'
-		  	         AND ukap > 0
-		  	      ORDER BY ukap';
+		  	         AND nav_id='.$nav_id;
 		$value = $this->mDb->queryOne($query);
 		return $value;
 	}
@@ -184,14 +191,12 @@ class frontendGetData
 	*/
 	public function create_cross_pages_link($linkid, $linknr) 	
 	{
-		global $redirect;
+		global $db, $redirect, $language;
 		$kap_ukap = '';
-		$query = 'SELECT DISTINCT p.page_id, p.domain, p.name, n.nav_id, n.kap, n.ukap, n.kuerzel
-			  		FROM '.$this->mPrefix.'pages p
-			  INNER JOIN '.$this->mPrefix.'navigation n
-			          ON p.nav_id = n.nav_id
-			       WHERE p.page_id='.$linkid.'
-			         AND p.aktiv="j"';
+		$query  = 'SELECT DISTINCT p.page_id, p.domain, p.name_'.$language.', ';
+        $query .= 'n.nav_id, n.kap, n.ukap, n.kuerzel_'.$language.' ';
+		$query .= 'FROM '.$this->mPrefix.'pages p INNER JOIN '.$this->mPrefix.'navigation n ';
+		$query .= 'ON p.nav_id = n.nav_id WHERE p.page_id='.$linkid.' AND p.aktiv="j"';
 		$nav = $this->mDb->queryRow($query);
 		
 		// jetzt pruefen, ob es eine ukap gibt
@@ -204,9 +209,9 @@ class frontendGetData
 			// nav_id der Unternavigation
 			$subid = $nav['nav_id'];
 			// nav_id der Hauptnavigation dazulesen
-			$query = 'SELECT DISTINCT nav_id FROM '.$this->mPrefix.'navigation
-					   WHERE kap='.$nav['kap'].' AND ukap=0';
-			$navid = $this->mDb->queryOne($query);
+			$query  = 'SELECT DISTINCT nav_id FROM '.$this->mPrefix.'navigation ';
+            $query .= 'WHERE kap='.$nav['kap'].' AND ukap=0';
+			$navid = $db->queryOne($query);
 			$link = $redirect->set_navlink($navid, $subid, $nav['page_id']);		
 		} elseif ($nav && $nav['kap'] > 0) {
 			// nav_id Hauptnavigation, es gibt keine Unternavigation
@@ -215,7 +220,7 @@ class frontendGetData
 		
 		// SMURL !!
 		if ($link) { 
-			$href_text = $GLOBALS['LINKS']['SIEHE_AUCH'].$nav['name'];
+			$href_text = $GLOBALS['LINKS']['SIEHE_AUCH'].$nav['name_'.$language];
 			$linkclass = $linknr == '1' ? 'clslink1' : 'clslink2';
 			$href = '<p class="'.$linkclass.'"><a href="'.$link.'" onclick="javascript:setLinkCookie(location.href);">'.$href_text.'</a></p>';
 		}
@@ -223,6 +228,66 @@ class frontendGetData
 	}
 	
 
+	/* Auf Unterseiten kann eine Link-Liste aller Unterseiten eines Navigationspunktes erstellt werden
+		@param: $feld - zu lesender Wert des Feldes 
+		@param: $nav_id - Id der Navigation
+		@return: $html - eine UL-Liste mit den links auf die Unterseiten
+	*/    
+    public function create_unterseiten_link_liste($row) 
+    {
+      global $redirect, $language;
+      $count;
+      $navid = $row['nav_id'];
+      $pagid = $row['page_id'];
+      if ($navid > 0 && $pagid > 0) {
+		$query = 'SELECT p.sort_id, p.page_id, p.name_'.$language.',';
+        $query .= 'n.nav_id, n.kap, n.ukap, n.kuerzel_'.$language;
+		$query .= ' FROM '.$this->mPrefix.'pages p';
+		$query .= ' INNER JOIN '.$this->mPrefix.'navigation n';
+		$query .= ' ON p.nav_id = n.nav_id';
+		$query .= ' WHERE p.nav_id='.$navid.' AND p.aktiv="j"';
+        $query .= ' ORDER BY p.sort_id';
+		$rows = $this->mDb->query($query);
+        $count = $rows->numRows();
+      }
+      
+      // jetzt die Linkliste aufbauen, falls mehr als 1 Link da sind!!
+      if ($count > 1) {
+        $html = '<div class="linkliste"><ul>';      
+        while ($nav = $rows->fetchRow(MDB2_FETCHMODE_ASSOC)) {
+          if ($nav && $nav['ukap'] > 0) {
+            $link = $this->create_link($nav);
+            if ($nav['page_id'] == $pagid) {
+              $html .= '<li><a class="active" href="'.$link.'">'.$nav['name_'.$language].'</a></li>';              
+            } else {
+              $html .= '<li><a href="'.$link.'">'.$nav['name_'.$language].'</a></li>';              
+            }
+          }
+        };
+        $html .= '</ul></div>';
+        return $html;
+      }
+    }
+
+	/* Einen Link anhand der Navigations-Id's navid, pagid, subid ermitteln
+		@param: $nav - Array aus dem SELECT-Statement
+		@return: $link - eine URL 
+	*/    
+    private function create_link($nav) 
+    {
+      global $redirect;
+      // nav_id der Unternavigation
+      $subid = $nav['nav_id'];
+      // nav_id der Hauptnavigation dazulesen
+      $query = 'SELECT DISTINCT nav_id FROM '.$this->mPrefix.'navigation
+                 WHERE kap='.$nav['kap'].' AND ukap=0';
+      $navid = $this->mDb->queryOne($query);
+      // SMURL!!
+      $link = $redirect->set_navlink($navid, $subid, $nav['page_id']);
+      return $link;
+    } 
+    
+    
 	/*******************************************************************************
 	 *	Selectionen auf cms_modules
 	 ******************************************************************************/
@@ -275,7 +340,7 @@ class frontendGetData
 	/******************************************************************************************
 	 *	Selectionen auf cms_spezial
 	 ******************************************************************************************/
-	/* CSS-Klassen aus der Tabelle cms_spezial f�r ein Thema lesen zZ. f�r das Thema "martina"
+	/* CSS-Klassen aus der Tabelle cms_spezial fuer ein Thema lesen zZ. fuer das Thema "martina"
 		@params: THEME_SELECTED
 		@return: Array mit CSS-Klassen zum gew�hlten Thema 
 	*/
@@ -286,7 +351,8 @@ class frontendGetData
 				   inner join '.$this->mPrefix.'spezial as b on a.value = b.thema
  				   where a.category="general" and a.param="THEME"
  	 				 and a.value = b.thema
-					 and b.name like "CSS%"';
+					 and b.name like "CSS%"
+                     and b.aktiv = "j"';
 		$rows = $db->query($query);
 		while ($row = $rows->fetchRow(MDB2_FETCHMODE_ASSOC)) {
 			$css[] = $row;
@@ -301,7 +367,8 @@ class frontendGetData
 	public function read_single_spez($theme,$name) 
 	{
 		global $db;
-		$query = 'SELECT * FROM '.$this->mPrefix.'spezial WHERE thema="'.$theme.'" AND name="'.$name.'"';
+		$query = 'SELECT * FROM '.$this->mPrefix.'spezial WHERE thema="'.$theme.'" ';
+        $query .= 'AND name="'.$name.'" AND aktiv = "j"';
 		$row = $db->queryRow($query);
 		return $row;
 	}
@@ -317,14 +384,32 @@ class frontendGetData
 	public function read_longtext_fragment($name) 
 	{
 		global $db;
-		$name = str_replace("%","",$name);
-		$query = 'SELECT DISTINCT content FROM '.$this->mPrefix.'fragmente WHERE name="'.$name.'"';
-		$longtext = $db->queryOne($query);
+        if (empty($GLOBALS['fragmente'])) { $this->read_fragment_names(); }
+        if (in_array($name,$GLOBALS['fragmente'])) {
+          $name = str_replace("%","",$name);
+          $query = 'SELECT DISTINCT content FROM '.$this->mPrefix.'fragmente WHERE name="'.$name.'"';
+          $longtext = $db->queryOne($query);
+        }
 		return $longtext;
 		
 	}
 	
-	
+    /*
+     * Einlesen der Fragmentnamen, speichern in $GLOBALS[fragmente], um Lesefehler
+     * auf der DB zu verhindern, falls zB. im Langtext Links mit %-Zeichen vorkommen
+     */
+	private function read_fragment_names() 
+    {
+      global $db;
+      $fragmente = array();
+      $query = 'SELECT DISTINCT name FROM '.$this->mPrefix.'fragmente';
+      $rows = $db->query($query);
+      while ($row = $rows->fetchRow(MDB2_FETCHMODE_ASSOC)) {
+          $fragmente[] = $row['name'];
+      };
+      $GLOBALS['fragmente'] = $fragmente;
+    }
+  
 	/******************************************************************************************
 	  Durchsuchen des Theme-Verzeichnisses nach themenspezifischen Scripts
 	 	wird ein oder mehrere Scripts gefunden, wird der HTML-Code zum Einbinden der Scripts
@@ -353,6 +438,38 @@ class frontendGetData
 		return $html;
 	}
 
+	/******************************************************************************************
+	  Es wird im Media-Verzeichnis nach dem Untervereichnis background gesucht und ob es darin
+	  Bilder gibt. Wenn ja, werden diese in einen Array gelesen, aus welchem dann ein zufälliges
+	  Bild ausgewählt und zurückgeliefert wird. (randomize)
+	  Zudem werden nur File-Typen gemäss dem Array $ext_array ausgewählt
+	 ******************************************************************************************/
+    public function get_random_bgimage() 
+    {
+		$media_dir = MEDIA_BASE.'/background/_images/';
+		$ext_array = array('.png','.gif','.jpg');
+		$bilder_arr = array();
+		if (file_exists($media_dir)) {
+			$handle  = opendir($media_dir);
+			while (false !== ($file = readdir($handle)))
+			{
+				// Pfad und Datei
+				$mediafile = $media_dir. $file;
+				$extension	= strrchr($file, ".");
+				if (is_file($mediafile) &&  in_array($extension, $ext_array) ) {
+					array_push($bilder_arr,$mediafile);
+				}
+			}
+			/* Zufallsgenerator waehlt ein Bild */
+			if (count($bilder_arr) > 0) {
+				$numr = array_rand($bilder_arr,1);
+				$bild = $bilder_arr[$numr];
+				$html =  $bild != '' ? '<img src="'.HOST.$bild.'" border="0" alt="" />' : '';
+			}
+			return $html;
+		}      
+    }
+    
 	/******************************************************************************************
 	  Es wird im Media-Verzeichnis nach dem Untervereichnis header gesucht und ob es darin
 	  Bilder gibt. Wenn ja, werden diese in einen Array gelesen, aus welchem dann ein zufälliges

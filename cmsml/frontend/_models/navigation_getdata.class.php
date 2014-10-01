@@ -56,23 +56,27 @@ class navigationGetData
     
 	/* die URL für die Startseite (Link im Headerbereich) zusammensetzen
      * 1. muss die niedrigste NavId ermittelt werden
-     * 2. muss nachgelesen werden, ob es Unterseiten zur NavId gibt
+     * 2. muss nachgelesen werden, ob es Unterseiten zur NavId gibt, 
+     *    falls SUBNAV_SOFORT = 'ja' ist.
      * 3. Abhängig davon, ob SMURL aktiviert ist, wird die URL zusammengesetzt 
      * @return: $url	- URL der Startseite
 	*/ 	
     public function get_startseite() 
     {
       global $redirect;
-      $url = '';
+      $url = ''; $navid = $subid = 0;
 //      Alternativ könnte auch die Seite mit der niedrigsten Kap-Nr gelesen werden
 //      $navi_kap = $this->get_single_navi_with_lowest_kap();
-      $navid = $this->get_home_navid();
+      $navid = $this->get_home_navid();      
       $navi_kap = $this->get_single_navigation($navid);
-      if (is_array($navi_kap)) {
-        // es wurde also ein DS gefunden, Jetzt schauen, ob es UNAV's gibt
-        $navi_ukap = $this->get_single_navi_with_ukap($navi_kap['kap']);
+      // falls direkt in eine Unternavigation verzweigt werden soll
+      if (SUBNAV_SOFORT == 'ja') {
+        if (is_array($navi_kap)) {
+          // es wurde also ein DS gefunden, Jetzt schauen, ob es UNAV's gibt
+          $navi_ukap = $this->get_single_navi_with_ukap($navi_kap['kap']);     
+        }
+        if (is_array($navi_ukap)) { $subid = $navi_ukap['nav_id']; }
       }
-      if (is_array($navi_ukap)) { $subid = $navi_ukap['nav_id']; }
       // URL zusammensetzen, abhängig von SMURL
       if (SMURL == 'ja') {
         $url = $redirect->set_navlink($navid,$subid);

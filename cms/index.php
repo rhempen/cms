@@ -33,15 +33,15 @@ require('./includes/includes.php');
 // die CSS-Klasse des Header-Bereiches aus der Session beschaffen
 $classHeader = preg_match('/(hide|show)/',$_SESSION['classHeader']) ? $_SESSION['classHeader'] : 'show';
 
-$uri = $_SERVER['REQUEST_URI'];
 // ev. ist eine Umleitung auf die Startseite nötig!
-$redirect->redirect_to_first_navi();
+$startSeite = $redirect->redirect_to_startseite();
 
 // SMURL
 if (SMURL == 'ja') { $redirect->get_navid(); }
 
 // Sprache festlegen anhand $_GET['langu'] bzw. $_SESSION['language']
 $cfg->sprache_festlegen(); 
+//var_dump($_GET);
 
 // Fuer den Zugriff auf die Bilder-DB muss der Seiten-Type (Page oder Navi) bekannt sein
 $type = $_GET['pagid'] > 0 ? 'P' : 'N';
@@ -86,9 +86,18 @@ $html_for_scripts = $frontget->read_theme_scripts();
 $html_for_scripts != '' ? $tpl->setVariable('theme_js',$html_for_scripts) : '';
 $tpl->parseCurrentBlock();
 
+// skalierbares Hintergrundbild, falls erwuenscht
+if ($general->analyse_template('main_tpl.html',0,'/{backgroundImage}/') ) {
+  $tpl->setCurrentBlock('background');
+  $bgImage = $frontget->get_random_bgimage();
+  $bgImage != '' ? $tpl->setVariable('backgroundImage',$bgImage) : '';
+  $tpl->parseCurrentBlock();
+}
+
 // home_link
 $tpl->setCurrentBlock('home');
-$tpl->setVariable('home_link', $naviget->get_startseite());
+$url_startseite = $naviget->get_startseite();
+$tpl->setVariable('home_link', $url_startseite);
 //$tpl->setVariable('home_link', ROOTDIR.'index.php');
 $header_bild = $frontget->get_random_bild();
 $header_bild != '' ? $tpl->setVariable('header_bild',$header_bild) : '';
@@ -112,6 +121,19 @@ $tpl->setCurrentBlock('nav_block');
 require_once './includes/nav.php';
 $s_id = isset($_GET['subid']) ?  $_GET['subid'] : $n_id;
 
+// Hidden Fields ins HTML rendern
+if ($general->analyse_template('main_tpl.html',$tplnr,'/{hidden_fields}/')) {
+  $tpl->setCurrentBlock('hidden_fields');
+  // Versteckte Informationen für die Lightbox
+  $tpl->setVariable('webroot', ROOTDIR); // ist nötig für Lightbox
+  $tpl->setVariable('mediadir', str_replace('../../','',MEDIA_ROOT)); // ist nötig für footer
+  $tpl->setVariable('classheader',$classHeader); // ist nötig für Headerbereich 
+  // feststellen, ob die Startseite angezeigt werden soll
+  $startseite = $frontget->read_single_field_from_navi('start', $s_id);
+  $tpl->setVariable('startseite',$startseite); // Flag wird per Javascript ausgwertet 
+  $tpl->parseCurrentBlock();
+}  
+
 // Name Content-Template aus DB holen, Template einbinden und verarbeiten
 $tpl->setCurrentBlock('content');
 $seiten_infos = $frontget->read_seiten_infos($s_id);
@@ -120,11 +142,13 @@ $seiten_infos = $frontget->read_seiten_infos($s_id);
 $useragent = $general->detect_user_agent();
 //if ($useragent != 'msie') {
 // "iso-8859-1"
-	$xml_notation = '<?xml version="1.0" encoding="utf-8" ?>' . "\n";
-	$tpl->setCurrentBlock('xml');
-	$tpl->setVariable('xml_notation', $xml_notation);
-	$tpl->parseCurrentBlock();
-//}
+// Mit HTML5 ist das nicht mehr noetig!!
+if ($general->analyse_template('main_tpl.html',$tplnr,'/{xml_notation}/')) {
+  $xml_notation = '<?xml version="1.0" encoding="utf-8"?>'."\n";
+  $tpl->setCurrentBlock('xml');
+  $tpl->setVariable('xml_notation', $xml_notation);
+  $tpl->parseCurrentBlock();
+}
 
 // Title-Tag setzen
 $titletag = COPYRIGHT != ''  ? COPYRIGHT.' &#8211; '.$seiten_infos['kurztitel'] : $seiten_infos['kurztitel'];

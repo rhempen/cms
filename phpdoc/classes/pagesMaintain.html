@@ -1,0 +1,662 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>phpDocumentor » \pagesMaintain</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">phpDocumentor</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/CMSADMIN.html"><i class="icon-folder-open"></i> CMSADMIN</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">364</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods</li>
+<li class="method public "><a href="#__construct" title="__construct :: "><span class="description">__construct()
+        </span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#count_pages" title="count_pages :: Die Anzahl Seiten pro Navid zaehlen"><span class="description">Die Anzahl Seiten pro Navid zaehlen</span><pre>count_pages()</pre></a></li>
+<li class="method public "><a href="#count_pages_per_domain" title="count_pages_per_domain :: Die Anzahl Seiten pro Domaene (exp, eve, art) zaehlen"><span class="description">Die Anzahl Seiten pro Domaene (exp, eve, art) zaehlen</span><pre>count_pages_per_domain()</pre></a></li>
+<li class="method public "><a href="#create_page" title="create_page :: eine neue Seite anlegen - Ermitteln des n�chst verf�gbaren Kennzeichens und der Page_id f�r die neue Seite"><span class="description">eine neue Seite anlegen - Ermitteln des n�chst verf�gbaren Kennzeichens und der Page_id f�r die neue Seite</span><pre>create_page()</pre></a></li>
+<li class="method public "><a href="#delete_page" title="delete_page :: Eine einzelne Seite loeschen"><span class="description">Eine einzelne Seite loeschen</span><pre>delete_page()</pre></a></li>
+<li class="method public "><a href="#move_up_page" title="move_up_page :: Eine Seite in der Reihenfolge hochziehen"><span class="description">Eine Seite in der Reihenfolge hochziehen</span><pre>move_up_page()</pre></a></li>
+<li class="method public "><a href="#page_update" title="page_update :: Eine Seite updaten. Dabei koennen einzelne Felder dynamisch uebergeben werden
+	Diese Funktion wird per Ajax aufgerufen"><span class="description">Eine Seite updaten. Dabei koennen einzelne Felder dynamisch uebergeben werden
+	Diese Funktion wird per Ajax aufgerufen</span><pre>page_update()</pre></a></li>
+<li class="method public "><a href="#read_all_pages" title="read_all_pages :: Alle Pages lesen"><span class="description">Alle Pages lesen</span><pre>read_all_pages()</pre></a></li>
+<li class="method public "><a href="#read_fieldarray_from_pages" title="read_fieldarray_from_pages :: Ein einzelnes Feld aus art_pages lesen, der einen Array zurueckliefert"><span class="description">Ein einzelnes Feld aus art_pages lesen, der einen Array zurueckliefert</span><pre>read_fieldarray_from_pages()</pre></a></li>
+<li class="method public "><a href="#read_link_name" title="read_link_name :: Den Namen zu einer Link-id aus der DB lesen"><span class="description">Den Namen zu einer Link-id aus der DB lesen</span><pre>read_link_name()</pre></a></li>
+<li class="method public "><a href="#read_page" title="read_page :: Eine einzelne Seite aus der DB lesen"><span class="description">Eine einzelne Seite aus der DB lesen</span><pre>read_page()</pre></a></li>
+<li class="method public "><a href="#read_page_per_kennzeichen" title="read_page_per_kennzeichen :: Eine Seite pro Kennzeichen lesen zur Bestimmung der page_id"><span class="description">Eine Seite pro Kennzeichen lesen zur Bestimmung der page_id</span><pre>read_page_per_kennzeichen()</pre></a></li>
+<li class="method public "><a href="#read_page_template" title="read_page_template :: Das Template einer einzelnen Seite aus der DB lesen"><span class="description">Das Template einer einzelnen Seite aus der DB lesen</span><pre>read_page_template()</pre></a></li>
+<li class="method public "><a href="#read_page_with_latest_date" title="read_page_with_latest_date :: Die page_id der Seite aus der DB lesen, welche das juengste Von-Datum enthaelt --&gt; Anzeige auf der Seite home"><span class="description">Die page_id der Seite aus der DB lesen, welche das juengste Von-Datum enthaelt --&gt; Anzeige auf der Seite home</span><pre>read_page_with_latest_date()</pre></a></li>
+<li class="method public "><a href="#read_pages_overview" title="read_pages_overview :: Alle Datensaetze pro Area lesen"><span class="description">Alle Datensaetze pro Area lesen</span><pre>read_pages_overview()</pre></a></li>
+<li class="method public "><a href="#read_pages_per_domain" title="read_pages_per_domain :: Die Seiten pro Domaene (exp, eve, art) generisch lesen fuer AutoComplete"><span class="description">Die Seiten pro Domaene (exp, eve, art) generisch lesen fuer AutoComplete</span><pre>read_pages_per_domain()</pre></a></li>
+<li class="method public "><a href="#read_pages_with_latest_date" title="read_pages_with_latest_date :: aktuellste News lesen fuer die Frontseite --&gt; max. 10 wenn beim Aufruf nichts angegeben wurde"><span class="description">aktuellste News lesen fuer die Frontseite --&gt; max. 10 wenn beim Aufruf nichts angegeben wurde</span><pre>read_pages_with_latest_date()</pre></a></li>
+<li class="method public "><a href="#read_single_value_from_pages" title="read_single_value_from_pages :: Ein einzelner Feldwert aus art_pages lesen"><span class="description">Ein einzelner Feldwert aus art_pages lesen</span><pre>read_single_value_from_pages()</pre></a></li>
+<li class="method public "><a href="#read_thumbnails" title="read_thumbnails :: zur aktuellen Page_id sollen die zugehörigen Thumbnails ermittelt werden"><span class="description">zur aktuellen Page_id sollen die zugehörigen Thumbnails ermittelt werden</span><pre>read_thumbnails()</pre></a></li>
+<li class="method public "><a href="#reorg_sort_ids" title="reorg_sort_ids :: Die SortId's einer Page reorganisieren"><span class="description">Die SortId's einer Page reorganisieren</span><pre>reorg_sort_ids()</pre></a></li>
+<li class="method public "><a href="#save_page" title="save_page :: Eine Seite sichern"><span class="description">Eine Seite sichern</span><pre>save_page()</pre></a></li>
+<li class="method public "><a href="#update_bildpfade" title="update_bildpfade :: "><span class="description">update_bildpfade()
+        </span><pre>update_bildpfade()</pre></a></li>
+<li class="method public "><a href="#validate_inputs" title="validate_inputs :: Alle Felder auf Richtigkeit �berpr�fen
+-&gt; Diese Funktion wird nicht genutzt!! Statt dessen wird die Pruefung der Felder mit JavaScript gemacht"><span class="description">Alle Felder auf Richtigkeit �berpr�fen
+-&gt; Diese Funktion wird nicht genutzt!! Statt dessen wird die Pruefung der Felder mit JavaScript gemacht</span><pre>validate_inputs()</pre></a></li>
+<li class="nav-header private">» Private</li>
+<li class="method private "><a href="#alle_unterseiten_laden" title="alle_unterseiten_laden :: "><span class="description">alle_unterseiten_laden()
+        </span><pre>alle_unterseiten_laden()</pre></a></li>
+<li class="method private "><a href="#check_datum" title="check_datum :: Ueberpruefung des Datums auf Gueltigkeit, sowohl betr. Format als auch Inhalt"><span class="description">Ueberpruefung des Datums auf Gueltigkeit, sowohl betr. Format als auch Inhalt</span><pre>check_datum()</pre></a></li>
+<li class="method private "><a href="#compare_von_bis_datum" title="compare_von_bis_datum :: Deutsches Format ins MySQL (ISO)-Format umwandeln zB 31.12.2005 ==&gt; 2005-12-31"><span class="description">Deutsches Format ins MySQL (ISO)-Format umwandeln zB 31.12.2005 ==&gt; 2005-12-31</span><pre>compare_von_bis_datum()</pre></a></li>
+<li class="method private "><a href="#date_german2mysql" title="date_german2mysql :: Deutsches Format ins MySQL (ISO)-Format umwandeln zB 31.12.2005 ==&gt; 2005-12-31"><span class="description">Deutsches Format ins MySQL (ISO)-Format umwandeln zB 31.12.2005 ==&gt; 2005-12-31</span><pre>date_german2mysql()</pre></a></li>
+<li class="method private "><a href="#get_next_kennzeichen" title="get_next_kennzeichen :: das naechst moegliche Kennzeichen fuer die gewaehlte Area ermitteln"><span class="description">das naechst moegliche Kennzeichen fuer die gewaehlte Area ermitteln</span><pre>get_next_kennzeichen()</pre></a></li>
+<li class="method private "><a href="#get_next_page_id" title="get_next_page_id :: die naechste verfuegbare Page_id in der Tabelle $this-&gt;mPrefix.pages ermitteln"><span class="description">die naechste verfuegbare Page_id in der Tabelle $this-&gt;mPrefix.pages ermitteln</span><pre>get_next_page_id()</pre></a></li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties</li>
+<li class="nav-header private">» Private</li>
+<li class="property private "><a href="#%24mDb" title="$mDb :: "><span class="description">$mDb</span><pre>$mDb</pre></a></li>
+<li class="property private "><a href="#%24mMsg" title="$mMsg :: "><span class="description">$mMsg</span><pre>$mMsg</pre></a></li>
+<li class="property private "><a href="#%24mPrefix" title="$mPrefix :: "><span class="description">$mPrefix</span><pre>$mPrefix</pre></a></li>
+</ul>
+</div>
+<div class="span8">
+<a name="%5CpagesMaintain" id="\pagesMaintain"></a><div href="../classes/pagesMaintain.html" class="element class">
+<p class="short_description">----------------------------------------------------------
+(c) 2007  Roland Hempen
+          www.hempenweb.ch
+----------------------------------------------------------</p>
+<div class="details">
+<p class="long_description">Klasse f�r die Verwaltung der Navigation und zugeh�riger Seiten</p>
+<table class="table table-bordered">
+<tr>
+<th>author</th>
+<td><a href="">Roland Hempen</a></td>
+</tr>
+<tr>
+<th>copyright</th>
+<td>Frei einsetz- und veraenderbar, wenn der Autor erw�hnt wird</td>
+</tr>
+<tr>
+<th>version</th>
+<td>1.0 | 2007-07-14</td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a name="__construct" id="__construct"></a><div class="element clickable method public __construct" data-toggle="collapse" data-target=".__construct .collapse">
+<h2>__construct()
+        </h2>
+<pre>__construct($db) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$db</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<a name="count_pages" id="count_pages"></a><div class="element clickable method public count_pages" data-toggle="collapse" data-target=".count_pages .collapse">
+<h2>Die Anzahl Seiten pro Navid zaehlen</h2>
+<pre>count_pages(\: $navid) : \:</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$navid</h4>
+<code>\:</code><p>= NavId</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\:</code>$total = Anzahl Seiten</div>
+</div></div>
+</div>
+<a name="count_pages_per_domain" id="count_pages_per_domain"></a><div class="element clickable method public count_pages_per_domain" data-toggle="collapse" data-target=".count_pages_per_domain .collapse">
+<h2>Die Anzahl Seiten pro Domaene (exp, eve, art) zaehlen</h2>
+<pre>count_pages_per_domain(\: $domain, $fach) : \:</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$domain</h4>
+<code>\:</code><p>= Kategorie</p>
+</div>
+<div class="subelement argument">
+<h4>$fach</h4>
+<code></code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\:</code>$total = Anzahl Seiten</div>
+</div></div>
+</div>
+<a name="create_page" id="create_page"></a><div class="element clickable method public create_page" data-toggle="collapse" data-target=".create_page .collapse">
+<h2>eine neue Seite anlegen - Ermitteln des n�chst verf�gbaren Kennzeichens und der Page_id f�r die neue Seite</h2>
+<pre>create_page(\: $area) : \:</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$area</h4>
+<code>\:</code><ul>
+<li>eine event, expo, kuenstler, etc. - Seite anlegen</li>
+</ul>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\:</code>$next_id_kz - page_id und kennzeichen</div>
+</div></div>
+</div>
+<a name="delete_page" id="delete_page"></a><div class="element clickable method public delete_page" data-toggle="collapse" data-target=".delete_page .collapse">
+<h2>Eine einzelne Seite loeschen</h2>
+<pre>delete_page($page_id, $msg) : \:</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$page_id</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$msg</h4>
+<code></code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\:</code>$message - Array mit Meldungstype und Meldungstext</div>
+</div></div>
+</div>
+<a name="move_up_page" id="move_up_page"></a><div class="element clickable method public move_up_page" data-toggle="collapse" data-target=".move_up_page .collapse">
+<h2>Eine Seite in der Reihenfolge hochziehen</h2>
+<pre>move_up_page(\: $page_id, \: $sort_id, \: $fach, $name) : \:</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$page_id</h4>
+<code>\:</code><ul>
+<li>id der Seite, die hochgezogen werden soll</li>
+</ul>
+</div>
+<div class="subelement argument">
+<h4>$sort_id</h4>
+<code>\:</code><ul>
+<li>Sortierschluessel der um 1 verringert werden soll</li>
+</ul>
+</div>
+<div class="subelement argument">
+<h4>$fach</h4>
+<code>\:</code><ul>
+<li>Gruppenzugehoerigkeit der hochzuziehenden Seite</li>
+</ul>
+</div>
+<div class="subelement argument">
+<h4>$name</h4>
+<code></code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\:</code>$message - Array mit Meldungstype und Meldungstext</div>
+</div></div>
+</div>
+<a name="page_update" id="page_update"></a><div class="element clickable method public page_update" data-toggle="collapse" data-target=".page_update .collapse">
+<h2>Eine Seite updaten. Dabei koennen einzelne Felder dynamisch uebergeben werden
+	Diese Funktion wird per Ajax aufgerufen</h2>
+<pre>page_update(\: $page_id, \: $feldname, \: $feldvalue) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$page_id</h4>
+<code>\:</code>
+</div>
+<div class="subelement argument">
+<h4>$feldname</h4>
+<code>\:</code>
+</div>
+<div class="subelement argument">
+<h4>$feldvalue</h4>
+<code>\:</code>
+</div>
+</div></div>
+</div>
+<a name="read_all_pages" id="read_all_pages"></a><div class="element clickable method public read_all_pages" data-toggle="collapse" data-target=".read_all_pages .collapse">
+<h2>Alle Pages lesen</h2>
+<pre>read_all_pages() : \:</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\:</code>Array mit allen aktiven Datensaetzen</div>
+</div></div>
+</div>
+<a name="read_fieldarray_from_pages" id="read_fieldarray_from_pages"></a><div class="element clickable method public read_fieldarray_from_pages" data-toggle="collapse" data-target=".read_fieldarray_from_pages .collapse">
+<h2>Ein einzelnes Feld aus art_pages lesen, der einen Array zurueckliefert</h2>
+<pre>read_fieldarray_from_pages($selectfeld, $wherefeld, $kriterium) : \:</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$selectfeld</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$wherefeld</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$kriterium</h4>
+<code></code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\:</code>$valuearray = Array mit Werten des gelesenen Feldes</div>
+</div></div>
+</div>
+<a name="read_link_name" id="read_link_name"></a><div class="element clickable method public read_link_name" data-toggle="collapse" data-target=".read_link_name .collapse">
+<h2>Den Namen zu einer Link-id aus der DB lesen</h2>
+<pre>read_link_name(\: $link_id) : \:</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$link_id</h4>
+<code>\:</code><p>= id der zu lesenden Seite</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\:</code>$name - Name</div>
+</div></div>
+</div>
+<a name="read_page" id="read_page"></a><div class="element clickable method public read_page" data-toggle="collapse" data-target=".read_page .collapse">
+<h2>Eine einzelne Seite aus der DB lesen</h2>
+<pre>read_page(\: $page_id) : \:</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$page_id</h4>
+<code>\:</code><p>= id der zu lesenden Seite</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\:</code>$page - Array mit Seiteninhalt</div>
+</div></div>
+</div>
+<a name="read_page_per_kennzeichen" id="read_page_per_kennzeichen"></a><div class="element clickable method public read_page_per_kennzeichen" data-toggle="collapse" data-target=".read_page_per_kennzeichen .collapse">
+<h2>Eine Seite pro Kennzeichen lesen zur Bestimmung der page_id</h2>
+<pre>read_page_per_kennzeichen(\: $kennzeichen) : \:</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$kennzeichen</h4>
+<code>\:</code><p>= Kennzeichen = Bilderverzeichnis</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\:</code>$result</div>
+</div></div>
+</div>
+<a name="read_page_template" id="read_page_template"></a><div class="element clickable method public read_page_template" data-toggle="collapse" data-target=".read_page_template .collapse">
+<h2>Das Template einer einzelnen Seite aus der DB lesen</h2>
+<pre>read_page_template(\: $page_id) : \:</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$page_id</h4>
+<code>\:</code><p>= id der zu lesenden Seite</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\:</code>$template - Nr. des Templates</div>
+</div></div>
+</div>
+<a name="read_page_with_latest_date" id="read_page_with_latest_date"></a><div class="element clickable method public read_page_with_latest_date" data-toggle="collapse" data-target=".read_page_with_latest_date .collapse">
+<h2>Die page_id der Seite aus der DB lesen, welche das juengste Von-Datum enthaelt --&gt; Anzeige auf der Seite home</h2>
+<pre>read_page_with_latest_date(\: $domain) : \:</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$domain</h4>
+<code>\:</code><p>der zu lesenden Seite --> gilt nur fuer art4art!!</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\:</code>$page_id der Seite</div>
+</div></div>
+</div>
+<a name="read_pages_overview" id="read_pages_overview"></a><div class="element clickable method public read_pages_overview" data-toggle="collapse" data-target=".read_pages_overview .collapse">
+<h2>Alle Datensaetze pro Area lesen</h2>
+<pre>read_pages_overview(\: $area, \: $referrer, $fach, $start, $language) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$area</h4>
+<code>\:</code>
+</div>
+<div class="subelement argument">
+<h4>$referrer</h4>
+<code>\:</code><ul>
+<li>ist gesetzt, wenn der Aufruf vom Frontend erfolgt -> dann muessen zusaetzliche Felder eingelesen werden</li>
+</ul>
+</div>
+<div class="subelement argument">
+<h4>$fach</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$start</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$language</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<a name="read_pages_per_domain" id="read_pages_per_domain"></a><div class="element clickable method public read_pages_per_domain" data-toggle="collapse" data-target=".read_pages_per_domain .collapse">
+<h2>Die Seiten pro Domaene (exp, eve, art) generisch lesen fuer AutoComplete</h2>
+<pre>read_pages_per_domain(\: $domain, $exp) : \:</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$domain</h4>
+<code>\:</code><p>= Kategorie</p>
+</div>
+<div class="subelement argument">
+<h4>$exp</h4>
+<code></code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\:</code>$result</div>
+</div></div>
+</div>
+<a name="read_pages_with_latest_date" id="read_pages_with_latest_date"></a><div class="element clickable method public read_pages_with_latest_date" data-toggle="collapse" data-target=".read_pages_with_latest_date .collapse">
+<h2>aktuellste News lesen fuer die Frontseite --&gt; max. 10 wenn beim Aufruf nichts angegeben wurde</h2>
+<pre>read_pages_with_latest_date(\: $domain, $anzahl) : \:</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$domain</h4>
+<code>\:</code><p>der zu lesenden Seite --> gilt nur fuer art4art!!</p>
+</div>
+<div class="subelement argument">
+<h4>$anzahl</h4>
+<code></code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\:</code>$page_id der Seite</div>
+</div></div>
+</div>
+<a name="read_single_value_from_pages" id="read_single_value_from_pages"></a><div class="element clickable method public read_single_value_from_pages" data-toggle="collapse" data-target=".read_single_value_from_pages .collapse">
+<h2>Ein einzelner Feldwert aus art_pages lesen</h2>
+<pre>read_single_value_from_pages(\: $feld, \: $page_id) : \:</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$feld</h4>
+<code>\:</code><ul>
+<li>das gewuenschte Feld</li>
+</ul>
+</div>
+<div class="subelement argument">
+<h4>$page_id</h4>
+<code>\:</code><ul>
+<li>Seiten-id</li>
+</ul>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\:</code>$feldwert = Wert des gelesenen Feldes</div>
+</div></div>
+</div>
+<a name="read_thumbnails" id="read_thumbnails"></a><div class="element clickable method public read_thumbnails" data-toggle="collapse" data-target=".read_thumbnails .collapse">
+<h2>zur aktuellen Page_id sollen die zugehörigen Thumbnails ermittelt werden</h2>
+<pre>read_thumbnails(\: $page_id) : \:</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$page_id</h4>
+<code>\:</code><p>--> die ID der Unterseite</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\:</code>$thumbnails</div>
+</div></div>
+</div>
+<a name="reorg_sort_ids" id="reorg_sort_ids"></a><div class="element clickable method public reorg_sort_ids" data-toggle="collapse" data-target=".reorg_sort_ids .collapse">
+<h2>Die SortId's einer Page reorganisieren</h2>
+<pre>reorg_sort_ids(\: $nav_id) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$nav_id</h4>
+<code>\:</code>
+</div>
+</div></div>
+</div>
+<a name="save_page" id="save_page"></a><div class="element clickable method public save_page" data-toggle="collapse" data-target=".save_page .collapse">
+<h2>Eine Seite sichern</h2>
+<pre>save_page(\: $page_id, $action, \: $dbaction) : \:</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$page_id</h4>
+<code>\:</code>
+</div>
+<div class="subelement argument">
+<h4>$action</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$dbaction</h4>
+<code>\:</code><ul>
+<li>Update oder Insert</li>
+</ul>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\:</code>$meldung</div>
+</div></div>
+</div>
+<a name="update_bildpfade" id="update_bildpfade"></a><div class="element clickable method public update_bildpfade" data-toggle="collapse" data-target=".update_bildpfade .collapse">
+<h2>update_bildpfade()
+        </h2>
+<pre>update_bildpfade() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<a name="validate_inputs" id="validate_inputs"></a><div class="element clickable method public validate_inputs" data-toggle="collapse" data-target=".validate_inputs .collapse">
+<h2>Alle Felder auf Richtigkeit �berpr�fen
+-&gt; Diese Funktion wird nicht genutzt!! Statt dessen wird die Pruefung der Felder mit JavaScript gemacht</h2>
+<pre>validate_inputs() : \:</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\:</code>$message</div>
+</div></div>
+</div>
+<a name="alle_unterseiten_laden" id="alle_unterseiten_laden"></a><div class="element clickable method private alle_unterseiten_laden" data-toggle="collapse" data-target=".alle_unterseiten_laden .collapse">
+<h2>alle_unterseiten_laden()
+        </h2>
+<pre>alle_unterseiten_laden() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<a name="check_datum" id="check_datum"></a><div class="element clickable method private check_datum" data-toggle="collapse" data-target=".check_datum .collapse">
+<h2>Ueberpruefung des Datums auf Gueltigkeit, sowohl betr. Format als auch Inhalt</h2>
+<pre>check_datum(\: $datum) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$datum</h4>
+<code>\:</code><ul>
+<li>das eingegebene Datum</li>
+</ul>
+</div>
+</div></div>
+</div>
+<a name="compare_von_bis_datum" id="compare_von_bis_datum"></a><div class="element clickable method private compare_von_bis_datum" data-toggle="collapse" data-target=".compare_von_bis_datum .collapse">
+<h2>Deutsches Format ins MySQL (ISO)-Format umwandeln zB 31.12.2005 ==&gt; 2005-12-31</h2>
+<pre>compare_von_bis_datum($datum_von, $datum_bis) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$datum_von</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$datum_bis</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<a name="date_german2mysql" id="date_german2mysql"></a><div class="element clickable method private date_german2mysql" data-toggle="collapse" data-target=".date_german2mysql .collapse">
+<h2>Deutsches Format ins MySQL (ISO)-Format umwandeln zB 31.12.2005 ==&gt; 2005-12-31</h2>
+<pre>date_german2mysql(\: $datum) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$datum</h4>
+<code>\:</code>
+</div>
+</div></div>
+</div>
+<a name="get_next_kennzeichen" id="get_next_kennzeichen"></a><div class="element clickable method private get_next_kennzeichen" data-toggle="collapse" data-target=".get_next_kennzeichen .collapse">
+<h2>das naechst moegliche Kennzeichen fuer die gewaehlte Area ermitteln</h2>
+<pre>get_next_kennzeichen(\: $area) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$area</h4>
+<code>\:</code>
+</div>
+</div></div>
+</div>
+<a name="get_next_page_id" id="get_next_page_id"></a><div class="element clickable method private get_next_page_id" data-toggle="collapse" data-target=".get_next_page_id .collapse">
+<h2>die naechste verfuegbare Page_id in der Tabelle $this-&gt;mPrefix.pages ermitteln</h2>
+<pre>get_next_page_id() : \:</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\:</code>$next_page_id - die nächste PageId für eine neue Unterseite</div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a name="%24mDb" id="$mDb"> </a><div class="element clickable property private $mDb" data-toggle="collapse" data-target=".$mDb .collapse">
+<h2>$mDb</h2>
+<pre>$mDb </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<a name="%24mMsg" id="$mMsg"> </a><div class="element clickable property private $mMsg" data-toggle="collapse" data-target=".$mMsg .collapse">
+<h2>$mMsg</h2>
+<pre>$mMsg </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<a name="%24mPrefix" id="$mPrefix"> </a><div class="element clickable property private $mPrefix" data-toggle="collapse" data-target=".$mPrefix .collapse">
+<h2>$mPrefix</h2>
+<pre>$mPrefix </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a3</a> and<br>
+            generated on </footer></div>
+</div>
+</body>
+</html>

@@ -377,8 +377,14 @@ body
 .clslink1 {
 	padding-top: 25px;
 	padding-bottom: 0px;
+    display: none;
 }
 
 .clslink2 {
 	padding-top: 3px;
+    display: none;
+}
+
+.linkliste {
+  padding-top: 30px;
 }

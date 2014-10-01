@@ -10,6 +10,8 @@
  * @author      Roland Hempen
  * @copyright   Frei einsetz- und veraenderbar, wenn der Autor erw�hnt wird
  * @version     1.0 | 2007-08-19
+ * @package     CMSADMIN/General
+ * 
  */
 
 class generalPresent
@@ -53,11 +55,14 @@ class generalPresent
 	 */
 	public function print_seiten_info() {
 		global $row, $tpl;
+        $language = $_SESSION['language'];
 		$tpl->setVariable('text_seite', '|-> '. $GLOBALS['TEXTE']['TEXT_SEITE']);
-		if ($row['kurztitel'] != '') { // Seite der Navigation
-			$tpl->setVariable('seiten_info', $row['kurztitel']);
-		} elseif ($row['name'] != '') { // Unterseite
-			$tpl->setVariable('seiten_info', $row['name']);					
+		if ($row['kurztitel_'.$language] != '') { // Seite der Navigation
+			$tpl->setVariable('seiten_info', $row['kurztitel_'.$language]);
+        } elseif ($row['bezeich_'.$language] != '') {        
+			$tpl->setVariable('seiten_info', $row['bezeich_'.$language]);            
+        } elseif ($row['name_'.$language] != '') { // Unterseite
+			$tpl->setVariable('seiten_info', $row['name_'.$language]);
 		}
 	}
 	
@@ -76,12 +81,46 @@ class generalPresent
     */
     public function compose_sorticon() 
     {
-      $html = '<img src="../gifs/move.png" height="20" width="20" border="0" alt="'.$GLOBALS['TEXTE']['TEXT_MOVE'].'" title="'.$GLOBALS['TEXTE']['TEXT_MOVE'].'" />';
-//      $html .= '<img src="../gifs/down.gif" height="15" width="12" border="0" alt="'.$GLOBALS['TEXTE']['TEXT_MOVE'].'" title="'.$GLOBALS['TEXTE']['TEXT_MOVE'].'" />';
+      $html = '<img src="../gifs/move_neu.png" border="0" alt="'.$GLOBALS['TEXTE']['TEXT_MOVE'].'" title="'.$GLOBALS['TEXTE']['TEXT_MOVE'].'" />';
       return $html;
     }
 
-	
+	/**
+	 * mit den Sprachen in $GLOBALS['sprachen_erlaubt'] eine Selectbox erstellen, wobei die Sprache 
+     * als selektiert eingestellt wird, welche entweder in $_SESSION['language_tra'] oder in der 
+     * globalen Variablen LANGUAGE gespeichert ist.
+     * $_SESSION['language_tra'] wird beim Wechsel der Sprache im Edit-Formular einer Seite per AJAX
+     * gesetzt und ist so unabhängig von der vom Benutzer eingestellten Sprache (LANGUAGE)
+	 * @param: $template - zeigt an, in welchem Template die Funktion aufgerufen wird -> wird an JS weitergereicht  
+	 * @param: $GLOBALS['sprachen_erlaubt'] - Sprachdefinition aus cms_spezial  
+	 * @return: $selectbox - HTML-Code fuer eine Selectbox inkl. Werten
+	 */
+	public function create_sprachen_selectbox($edit_id,$template='navi')
+	{ 
+        global $cfg;
+        if (!is_array($GLOBALS['sprachen_erlaubt'])) $cfg->sprachen_lesen();
+        $sprachen = $GLOBALS['sprachen_erlaubt'];
+        $onfocus_script  = "setLanguForSave(this.value);";
+        $onchange_script = "setLanguForTranslation(this.value,'$edit_id','$template');";
+		$selectbox_start = '<select id="sprachen" class="selboxEdit" name="sprache" size="1" onchange="'.$onchange_script.'" onfocus="'.$onfocus_script.'">' . "\n";
+		$selectbox_ende  = '</select>';
+		$option = '';
+        foreach($sprachen as $key => $row) {
+          if (isset($_SESSION['language_tra']) && $row['wert2'] == $_SESSION['language_tra']) {
+              $option .= '<option selected ';
+          } elseif (defined(LANGUAGE) && $row['wert1'] == LANGUAGE) {
+              $option .= '<option selected ';            
+          } else {
+              $option .= '<option ';      
+          }
+//			$row['wert1'] == LANGUAGE ? $option .= '<option selected ' : $option .= '<option ';          
+          $option .= 'value="'.$row['wert2'].'">'.$row['wert3'].'</option>' . "\n"; 
+		}	
+		$selectbox = $selectbox_start . $option . $selectbox_ende;
+		return $selectbox;	
+	}
+
+    
 	/**
 	 * mit den Templates eine Selectbox erstellen, wobei die von der Seite eingelesene Nummer vorselektiert sein soll.
 	 * @param: $templates - Alle Templates  
@@ -90,7 +129,7 @@ class generalPresent
 	 */
 	public function create_tpl_selectbox($templates, $tplnr)
 	{
-		$selectbox_start = '<select id="template" name="templates" size="1" style="width:605px;" onchange="">' . "\n";
+		$selectbox_start = '<select id="template" class="selboxEdit" name="templates" size="1" onchange="">' . "\n";
 		$selectbox_ende  = '</select>';
 		$option = '';
 		while ($row = $templates->fetchRow(MDB2_FETCHMODE_ASSOC)) 
@@ -111,7 +150,7 @@ class generalPresent
 	 */
 	public function create_mod_selectbox($modules, $modulnummer)
 	{
-		$selectbox_start = '<select id="module" name="modules" size="1" style="width:605px;" onchange="">' . "\n";
+		$selectbox_start = '<select id="module" class="selboxEdit" name="modules" size="1" onchange="">' . "\n";
 		$selectbox_ende  = '</select>';
 
 		if (count($modules) > 0) {
@@ -129,7 +168,29 @@ class generalPresent
 		return $selectbox;	
 	}
 
-		
+	/**
+	 * Eine Checkbox anbieten für das Memberlogin, wobei der von der DB eingelesene 
+     * Wert vorselektiert sein soll
+     * Beim Klick auf die Checkbox wird die JS-Funktion setMemberLoginText 
+     * (navi_edit.js) aufgrund des Click-Events ausgeführt und der Wert der 
+     * Checkbox entsprechend gesetzt.  
+	 * @param: $memberlogin - ist aktiviert (X) oder nicht ('') 
+	 * @return: $checkbox - HTML-Code fuer eine Checkbox mit eingestelltem Wert
+	 */
+	public function create_memberlogin_checkbox($memberlogin)
+	{
+      if ($memberlogin != '') { $checkvalue = 'X'; }
+      $text     = $checkvalue == 'X' ? $GLOBALS['LABELS']['ERFORDERLICH'] 
+                                     : $GLOBALS['LABELS']['NICHT_ERFORDERLICH'];
+      $class    = $checkvalue == 'X' ? 'success' : 'info';
+      $checked  = $checkvalue == 'X' ? 'checked="checked"' : '';
+      $checkbox = '<input id="memberLogin" type="checkbox" name="memberlogin" ' .$checked. ' value="'.$checkvalue.'"/>';
+      $checkbox .= '<span id="memberLoginText" class="'.$class.'">'.$text.'</span>';
+      $checkbox .= '<span id="mlErforderlich">'.$GLOBALS['LABELS']['ERFORDERLICH'].'</span>';
+      $checkbox .= '<span id="mlNichtErforderlich">'.$GLOBALS['LABELS']['NICHT_ERFORDERLICH'].'</span>';
+      return $checkbox;
+    }
+    
 	/**
 	 * mit den Navigationseintraegen eine Selectbox erstellen, wobei die von der Seite eingelesene Nummer vorselektiert sein soll.
 	 * @param: $unavi - Unternavigationspunkte
@@ -138,7 +199,8 @@ class generalPresent
 	 */
 	public function create_navi_selectbox($unavi, $navid)
 	{
-		$selectbox_start = '<select id="navigation" name="navid" size="1" style="width:605px;" onchange="">' . "\n";
+        global $langu_tra;
+		$selectbox_start = '<select id="navigation" class="selboxEdit" name="navid" size="1" onchange="">' . "\n";
 		$selectbox_ende  = '</select>';
 		$unavis = '';
 		
@@ -155,8 +217,8 @@ class generalPresent
 			foreach ($nav_array as $key => $row) {
 				$eintrag = '';
 				
-				if ($row['ukap'] == 0) { $kap = $row['bezeichnung']; }
-				if ($row['ukap'] != 0) { $eintrag =  ' - '. $row['bezeichnung']; }
+				if ($row['ukap'] == 0) { $kap = $row['bezeich_'.$langu_tra]; }
+				if ($row['ukap'] != 0) { $eintrag =  ' - '. $row['bezeich_'.$langu_tra]; }
 				// wenn der Navigationspunkt inaktiv ist, soll er in der Selectbox in roter Schrift erscheinen
 				$style = $row['aktiv'] != 'j' ? 'style="color:red;"' : '';
 				// Wenn Ukaps vorhanden sind --> count > 1, darf der Eintrag mit ukap = 0 nicht in die Selectbox aufgenommen werden 
@@ -189,7 +251,7 @@ class generalPresent
 		// erst mal die Festwerte aus dem feld galerie vom Type enum lesen
 		$enum = $genmain->read_enum($table, $field);
 		
-		$selectbox_start = '<select id="galerie_aktiv" name="galerie_aktiv" size="1" style="width:auto;" onchange="">' . "\n";
+		$selectbox_start = '<select id="galerie_aktiv" class="selboxEdit" name="galerie_aktiv" size="1" onchange="">' . "\n";
 	
 		foreach($enum as $index => $value) 
 		{
@@ -210,19 +272,6 @@ class generalPresent
 					break;
 			}
 		}
-		
-//		$option = $code == 'n' ? $option = $option .= '<option selected ' : $option .= '<option ';
-//		$option .= 'value="n">'.$GLOBALS['LINKS']['GALERIE_INAKTIV'].'</option>' . "\n"; 
-//		
-//		$option = $code == 'a' ? $option = $option .= '<option selected ' : $option .= '<option ';
-//		$option .= 'value="a">'.$GLOBALS['LINKS']['GALERIE_AKTIV'].'</option>' . "\n"; 
-//
-//		$option = $code == 'b' ? $option = $option .= '<option selected ' : $option .= '<option ';
-//		$option .= 'value="b">'.$GLOBALS['LINKS']['BILDLEISTE'].'</option>' . "\n"; 
-//
-//		$option = $code == 'c' ? $option = $option .= '<option selected ' : $option .= '<option ';
-//		$option .= 'value="c">'.$GLOBALS['LINKS']['AUTOBILDWECHSEL'].'</option>' . "\n"; 
-
 		$selectbox_ende  = '</select>';
 		$selectbox = $selectbox_start . $option . $selectbox_ende;
 		return $selectbox;	
@@ -315,7 +364,7 @@ class generalPresent
 	 */
 	public function show_inhalt2($tplnr) 
 	{
-		global $frontget, $tpl;
+		global $frontget, $tpl, $template;
 		if ($template['template_name'] != '' && !$this->analyse_template('',$tplnr,'/{inhalt2}/')) {
 			$tpl->setVariable('hide_inhalt2',HIDDEN);
 			$tpl->setVariable('evenodd2',$this->flipflop($i++));
@@ -339,12 +388,15 @@ class generalPresent
 	 */
 	public function analyse_template($tplname='',$tplnr=0,$pattern='') 
 	{
+      global $frontget;
       // Templatename- oder Nummer muss übergeben werden
       if ($tplname == '' && $tplnr > 0) {
-        $tplname = $frontget->read_single_template($tplnr); 
+        $template = $frontget->read_single_template($tplnr); 
+        $tplname = $template['template_name']; 
       }
       // Template mit absolutem Pfad ergänzen
       $intpl = $tplname !='' ? DOCUROOT.'/'.TEMPLATE_DIR.'/'.$tplname : '';  
+      $intpl = str_replace('//','/',$intpl);
       // Pattern, nach dem gesucht werden soll
       if ($pattern == '') { $pattern = '/{inhalt2}/'; }
       // ab PHP5.0 koennen folgende optionale Parameter mitgegeben werden
@@ -368,7 +420,8 @@ class generalPresent
 	}
 	
 	
-	/**
+
+    /**
 	 *	Funktionsbeschreibung DocBlock --> wichtig f�r phpDocumenter
 	 *  @param:
 	 *  @return:

@@ -130,11 +130,41 @@ class generalMaintain
     /* Kuerzel formatieren für Speicherung in cms_redirect */
     public function format_kuerzel($text) 
     {
-    	$text = convert_umlaute2(utf8_decode($text));
-		$kuerzel = str_replace(' ','_',$text);
-		return strtolower($kuerzel);
+      $rc = $this->is_utf8($text);
+      if ($rc) { $text = utf8_decode($text); }
+      $text = convert_umlaute2($text);
+      $kuerzel = str_replace('','',$text);
+      $kuerzel = str_replace(' ','_',$text);
+      return strtolower($kuerzel);
     }    
 
+    /* String auf UTF-8 Kodierung prüfen 
+		@params: $str - zu prüfender String
+		@return: true or false 
+    */
+    public function is_utf8($str){
+      $strlen = strlen($str);
+      for($i=0; $i<$strlen; $i++){
+        $ord = ord($str[$i]);
+        if($ord < 0x80) continue; // 0bbbbbbb
+        elseif (($c & 0xE0) == 0xC0) $n=1; # 110bbbbb
+        elseif (($c & 0xF0) == 0xE0) $n=2; # 1110bbbb
+        elseif (($c & 0xF8) == 0xF0) $n=3; # 11110bbb
+        elseif (($c & 0xFC) == 0xF8) $n=4; # 111110bb
+        elseif (($c & 0xFE) == 0xFC) $n=5; # 1111110b
+        else return false; # Does not match any model        
+//        elseif(($ord&0xE0)===0xC0 && $ord>0xC1) $n = 1; // 110bbbbb (exkl C0-C1)
+//        elseif(($ord&0xF0)===0xE0) $n = 2; // 1110bbbb
+//        elseif(($ord&0xF8)===0xF0 && $ord<0xF5) $n = 3; // 11110bbb (exkl F5-FF)
+//        else return false; // ungültiges UTF-8-Zeichen
+        for($c=0; $c<$n; $c++) // $n Folgebytes? // 10bbbbbb
+          if(++$i===$strlen || (ord($str[$i])&0xC0)!==0x80)
+            return false; // ungültiges UTF-8-Zeichen
+      }
+      return true; // kein ungültiges UTF-8-Zeichen gefunden
+    }
+    
+    
 } 
 
 

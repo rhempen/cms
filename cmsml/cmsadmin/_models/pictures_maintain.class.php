@@ -5,11 +5,13 @@
  *           www.hempenweb.ch
  * ----------------------------------------------------------
  *
- * Klasse f�r die Verwaltung der Navigation
+ * Klasse fuer die Verwaltung der Navigation
  *
  * @author      Roland Hempen
  * @copyright   Frei einsetz- und veraenderbar, wenn der Autor erw�hnt wird
  * @version     1.0 | 2007-07-14
+ * @package     CMSADMIN/Pictures
+ * 
  */
 
 class picturesMaintain
@@ -115,13 +117,21 @@ class picturesMaintain
 	// Fileowner bestimmen, aber nicht auf Windows
 	private function file_owner($file, $type) 
 	{
-		if (file_exists($file) && SERVER_OS != 'WIN') {
+		if (file_exists($file))  { //&& SERVER_OS != 'WIN') {
 			if ($type == 'owner') { 
 				$owner = fileowner($file);
-				$owner_array = posix_getpwuid($owner); 
+                if (function_exists('posix_getpwuid')) {
+                  $owner_array = posix_getpwuid($owner); 
+                } else {
+                  $owner_array['name'] = $owner;                  
+                }
 			} else { 
 				$owner = filegroup($file);
-				$owner_array = posix_getgrgid($owner); 
+                if (function_exists('posix_getgrgid')) {
+                  $owner_array = posix_getgrgid($owner);                 
+                } else {
+                  $owner_array['name'] = $owner;
+                }
 			}
 		    return $owner_array['name'];
 		}
@@ -402,79 +412,82 @@ class picturesMaintain
 	public function upload_files($aktdir='')
 	{
 		//		print_r($_FILES);
-		global $bilddb;
-		for($count=1; $count <= 10; $count++) {
-			// lokale Variablen festlegen
-			$dateiname = strtolower($_FILES["file".$count]['name']);
-			$dateiexte = strchr($dateiname, ".");
-			$dateitype = $_FILES["file".$count]['type'];
-			$dateisize = $_FILES["file".$count]['size'];
-			$dateitemp = $_FILES["file".$count]['tmp_name'];
-			$dateipfad = $this->set_dateipfad($aktdir);
-			$create_thumbnails = isset($_POST['thumbnails']) ? $_POST['thumbnails'] : '';
-			$pfad_thumbs = $dateipfad . THUMBS;
-			$pfad_images = $dateipfad . IMAGES;
-			$thumbs_possible = array('.jpg','.png');
-			list($breite, $hoehe) = explode('x', $_POST['thumbdim']);
-			
+	global $bilddb;
+    $pattern = '/[^a-zA-Z0-9]/';
+	for($count=1; $count <= 10; $count++) {
+      // lokale Variablen festlegen
+      $dateiname = strtolower($_FILES["file".$count]['name']);
+      $filenamen = pathinfo($dateiname,PATHINFO_FILENAME);
+      $extension = pathinfo($dateiname,PATHINFO_EXTENSION);
+      $dateiname = preg_replace($pattern,'',$filenamen).".".$extension;
+      $dateiexte = strchr($dateiname, ".");
+      $dateitype = $_FILES["file".$count]['type'];
+      $dateisize = $_FILES["file".$count]['size'];
+      $dateitemp = $_FILES["file".$count]['tmp_name'];
+      $dateipfad = $this->set_dateipfad($aktdir);
+      $create_thumbnails = isset($_POST['thumbnails']) ? $_POST['thumbnails'] : '';
+      $pfad_thumbs = $dateipfad . THUMBS;
+      $pfad_images = $dateipfad . IMAGES;
+      $thumbs_possible = array('.jpg','.png');
+      list($breite, $hoehe) = explode('x', $_POST['thumbdim']);
 
-			// ist eigentlich ein Filename angegeben?
-			if ($dateiname != '' && $dateitype != '') {
-				// pr�fen, ob ein erlaubter Filetype �bertragen wurde
-				$subrc = $this->check_filetype($dateitype);
-				if ($subrc!=0) { $this->mMeldung[] = 'error'; $this->mMeldung[] = sprintf($GLOBALS['MESSAGES']['MSG_FALSCHER_DATEITYP'], $dateiname); }
-				
-				// pr�fen, ob die Bild-Datei nicht zu gross ist - PDF-Dateien werden nicht nach Gr�sse �berpr�ft
-				if ($subrc == 0 && $dateitype != 'application/pdf') {
-					$subrc = $this->check_filesize($dateisize);
-					if ($subrc!=0) {
-						$size_kb = round(MAX_IMAGE_SIZE / 1024);
-						$this->mMeldung[] = 'error'; $this->mMeldung[] = sprintf($GLOBALS['MESSAGES']['MSG_DATEI_ZU_GROSS'], $dateiname, $size_kb);
-					}
-				}
 
-				// pr�fen, ob im gew�hlten Verzeichnis die Unterverzeichnisse thumbs und images vorhanden sind. Bei Bedarf anlegen
-				$this->check_subdirectories($pfad_thumbs);
-				$this->check_subdirectories($pfad_images);
+      // ist eigentlich ein Filename angegeben?
+      if ($dateiname != '' && $dateitype != '') {
+        // pr�fen, ob ein erlaubter Filetype �bertragen wurde
+        $subrc = $this->check_filetype($dateitype);
+        if ($subrc!=0) { $this->mMeldung[] = 'error'; $this->mMeldung[] = sprintf($GLOBALS['MESSAGES']['MSG_FALSCHER_DATEITYP'], $dateiname); }
 
-				if ($subrc == 0 && $aktdir != '') {
-					// sehen, ob die Datei existiert --> dann darf nicht uploaded werden
-					$path_file = $this->set_bildpfad($dateitype, $dateipfad, $dateiname);
-					if (file_exists($path_file)) {
-						$this->mMeldung[] = 'error'; $this->mMeldung[] = sprintf($GLOBALS['MESSAGES']['MSG_DATEI_EXISTIERT_SCHON'], $dateiname);
-					} else {						
-						// Bildmasse �berpr�fen, um das Bild nach dem Upload ev. zu verkleinern
-						$imagesize = getimagesize($dateitemp);
-						$file_width  = $imagesize[0];  // Bildbreite
-						$file_height = $imagesize[1];  // Bildh�he
-						// Upload durchf�hren und Berechtigungen setzen
-						if (move_uploaded_file($dateitemp, $path_file) && chmod($path_file, 0755 )) {
-							$this->mMeldung[] = 'success'; $this->mMeldung[] = sprintf($GLOBALS['MESSAGES']['MSG_DATEI_HOCHGELADEN'], $dateiname);				    
-							// Das upgeloadete Bild verkleinern falls n�tig
-							if ($file_width > IMAGE_MAX_WIDTH || $file_height > IMAGE_MAX_HEIGHT) {
-								$subrc = $this->resize_picture($path_file, $path_file, IMAGE_MAX_WIDTH, IMAGE_MAX_HEIGHT);
-								$this->mMeldung[] = 'success'; $this->mMeldung[] = sprintf($GLOBALS['MESSAGES']['MSG_DATEI_RESIZED'], $dateiname, IMAGE_MAX_WIDTH, IMAGE_MAX_HEIGHT);							
-							}
-						} 
-						else {
-							$this->mMeldung[] = 'error'; $this->mMeldung[] = sprintf($GLOBALS['MESSAGES']['MSG_DATEI_NICHT_HOCHGELADEN'], $dateiname);
-						}
-						
-						// falls Thumbnails erstellt und die Datei als Thumbnail verkleinert werden kann, so geschieht das hier
-						if ($create_thumbnails && in_array($dateiexte, $thumbs_possible)) {
-							$this->create_thumbnail($path_file, $pfad_thumbs, $breite, $hoehe);
-						}
-						// und jetzt werden die Bildinformationen auch noch in der DB-Tabelle art_galerien gespeichert
-						if ($_SESSION['ref_id']  > 0 && $dateitype != 'application/pdf') {
-							$kommentar = '';
-							$this->mMeldung = $bilddb->bild_in_db_speichern($_SESSION['ref_id'], $path_file, $kommentar, 'insert', $this->mMeldung);
-						}
-					}
-				}
+        // pr�fen, ob die Bild-Datei nicht zu gross ist - PDF-Dateien werden nicht nach Gr�sse �berpr�ft
+        if ($subrc == 0 && $dateitype != 'application/pdf') {
+          $subrc = $this->check_filesize($dateisize);
+          if ($subrc!=0) {
+            $size_kb = round(MAX_IMAGE_SIZE / 1024);
+            $this->mMeldung[] = 'error'; $this->mMeldung[] = sprintf($GLOBALS['MESSAGES']['MSG_DATEI_ZU_GROSS'], $dateiname, $size_kb);
+          }
+        }
 
-			}
-		}
-		return $this->mMeldung;
+        // pr�fen, ob im gew�hlten Verzeichnis die Unterverzeichnisse thumbs und images vorhanden sind. Bei Bedarf anlegen
+        $this->check_subdirectories($pfad_thumbs);
+        $this->check_subdirectories($pfad_images);
+
+        if ($subrc == 0 && $aktdir != '') {
+          // sehen, ob die Datei existiert --> dann darf nicht uploaded werden
+          $path_file = $this->set_bildpfad($dateitype, $dateipfad, $dateiname);
+          if (file_exists($path_file)) {
+              $this->mMeldung[] = 'error'; $this->mMeldung[] = sprintf($GLOBALS['MESSAGES']['MSG_DATEI_EXISTIERT_SCHON'], $dateiname);
+          } else {						
+              // Bildmasse �berpr�fen, um das Bild nach dem Upload ev. zu verkleinern
+              $imagesize = getimagesize($dateitemp);
+              $file_width  = $imagesize[0];  // Bildbreite
+              $file_height = $imagesize[1];  // Bildh�he
+              // Upload durchf�hren und Berechtigungen setzen
+              if (move_uploaded_file($dateitemp, $path_file) && chmod($path_file, 0755 )) {
+                $this->mMeldung[] = 'success'; $this->mMeldung[] = sprintf($GLOBALS['MESSAGES']['MSG_DATEI_HOCHGELADEN'], $dateiname);				    
+                // Das upgeloadete Bild verkleinern falls n�tig
+                if ($file_width > IMAGE_MAX_WIDTH || $file_height > IMAGE_MAX_HEIGHT) {
+                  $subrc = $this->resize_picture($path_file, $path_file, IMAGE_MAX_WIDTH, IMAGE_MAX_HEIGHT);
+                  $this->mMeldung[] = 'success'; $this->mMeldung[] = sprintf($GLOBALS['MESSAGES']['MSG_DATEI_RESIZED'], $dateiname, IMAGE_MAX_WIDTH, IMAGE_MAX_HEIGHT);							
+                }
+              } 
+              else {
+                $this->mMeldung[] = 'error'; $this->mMeldung[] = sprintf($GLOBALS['MESSAGES']['MSG_DATEI_NICHT_HOCHGELADEN'], $dateiname);
+              }
+
+              // falls Thumbnails erstellt und die Datei als Thumbnail verkleinert werden kann, so geschieht das hier
+              if ($create_thumbnails && in_array($dateiexte, $thumbs_possible)) {
+                $this->create_thumbnail($path_file, $pfad_thumbs, $breite, $hoehe);
+              }
+              // und jetzt werden die Bildinformationen auch noch in der DB-Tabelle art_galerien gespeichert
+              if ($_SESSION['ref_id']  > 0 && $dateitype != 'application/pdf') {
+                $kommentar = '';
+                $this->mMeldung = $bilddb->bild_in_db_speichern($_SESSION['ref_id'], $path_file, $kommentar, 'insert', $this->mMeldung);
+              }
+            }
+          }
+        }
+      }
+      return $this->mMeldung;
 	}
 
 	/* Erlaubte Dateitypen festlegen und �berpr�fen

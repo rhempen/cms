@@ -109,6 +109,7 @@ class configPresent
 		$tpl->setVariable('label_wert1', $GLOBALS['TEXTE']['CONFIG_VALUE'].' 1');
 		$tpl->setVariable('label_wert2', $GLOBALS['TEXTE']['CONFIG_VALUE'].' 2');
 		$tpl->setVariable('label_wert3', $GLOBALS['TEXTE']['CONFIG_VALUE'].' 3');
+		$tpl->setVariable('label_aktiv', $GLOBALS['TEXTE']['TEXT_AKTIV']);
 		$tpl->parseCurrentBlock();
 		
 		// Datenzeilen 
@@ -129,16 +130,47 @@ class configPresent
 			$tpl->setVariable('wert1', $row['wert1']);
 			$tpl->setVariable('wert2', $row['wert2']);
 			$tpl->setVariable('wert3', $row['wert3']);
+            
+            // Aktiv-Inaktiv-Button erstellen und anzeigen
+            $button_freed = $this->create_button("freed");
+            $button_blocked = $this->create_button("blocked");
+            $aktiv = $row['aktiv'] == "j" ? $button_freed : $button_blocked; 
+            $tpl->setVariable('aktiv', $aktiv);
+            
 			$tpl->setVariable('classedit', 'spezial');
 			$tpl->setVariable('configid1', $row['name'].'_1');
 			$tpl->setVariable('configid2', $row['name'].'_2');
 			$tpl->setVariable('configid3', $row['name'].'_3');
-	
+			$tpl->setVariable('configid4', $row['name'].'_4');
 			// die Zeile parsen
 			$tpl->parseCurrentBlock();
-		}			
-		
+		}		
 	}
+
+	/**
+	 * Das Code-Snippet für einen Button zusammenstellen
+	 * @param:	$type = Type des Buttons: Submit, Button, Reset
+	 * @param:  $row  = der Datensatz der Seite, um den Link zusammenzustellen
+     * @return: $button = das HTML-Snippet
+	*/
+	private function create_button($class,$row=NULL)      
+	{
+      global $language;
+      $script = $title = $confrm = '';
+      $click  = ' onclick="%s"';
+      $type   = 'button';
+      $button = '<button type="%s" class="%s" title="%s" %s></button>';
+      switch($class) {
+        case 'freed':
+          $title = $GLOBALS['TEXTE']['TEXT_AKTIV'];
+          break;
+        case 'blocked':
+          $title = $GLOBALS['TEXTE']['TEXT_INAKTIV'];
+          break;
+      }
+      $button = sprintf($button,$type,$class,$title,$script);
+      return $button;
+    }
 	
 	/* Anzeigen des cms_spezial */
 	private function present_config($config) {

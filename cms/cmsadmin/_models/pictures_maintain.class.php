@@ -116,12 +116,17 @@ class picturesMaintain
 	private function file_owner($file, $type) 
 	{
 		if (file_exists($file) && SERVER_OS != 'WIN') {
+//		if (file_exists($file)) {
 			if ($type == 'owner') { 
 				$owner = fileowner($file);
 				$owner_array = posix_getpwuid($owner); 
+//                $stat_array = stat($file);
+                $owner_array['name'] = $stat_array['uid'];
 			} else { 
 				$owner = filegroup($file);
 				$owner_array = posix_getgrgid($owner); 
+//                $stat_array = stat($file);
+                $owner_array['name'] = $stat_array['gid'];
 			}
 		    return $owner_array['name'];
 		}
@@ -403,9 +408,13 @@ class picturesMaintain
 	{
 		//		print_r($_FILES);
 		global $bilddb;
+        $pattern = '/[^a-zA-Z0-9]/';
 		for($count=1; $count <= 10; $count++) {
 			// lokale Variablen festlegen
 			$dateiname = strtolower($_FILES["file".$count]['name']);
+            $filenamen = pathinfo($dateiname,PATHINFO_FILENAME);
+            $extension = pathinfo($dateiname,PATHINFO_EXTENSION);
+            $dateiname = preg_replace($pattern,'',$filenamen).".".$extension;
 			$dateiexte = strchr($dateiname, ".");
 			$dateitype = $_FILES["file".$count]['type'];
 			$dateisize = $_FILES["file".$count]['size'];
@@ -414,7 +423,7 @@ class picturesMaintain
 			$create_thumbnails = isset($_POST['thumbnails']) ? $_POST['thumbnails'] : '';
 			$pfad_thumbs = $dateipfad . THUMBS;
 			$pfad_images = $dateipfad . IMAGES;
-			$thumbs_possible = array('.jpg','.png');
+			$thumbs_possible = array('.jpg','.png','.gif');
 			list($breite, $hoehe) = explode('x', $_POST['thumbdim']);
 			
 

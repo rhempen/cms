@@ -11,9 +11,11 @@
 
 // Inhalt der Seite soll ebenfalls angezeigt werden
 include_once 'index.inc.php'; 
+$language = $language != '' ? $language : $_SESSION['language'];
 
 // Includieren des Addons in einem iFrame
-$gmapindex = ROOTDIR . 'frontend/_addons/gmaps/index.php';
+$gmapindex = ROOTDIR . 'frontend/_addons/gmaps/index.php?langu='.$language;
+
 
 $html = '<iframe id="addon_canvas" scrolling="auto" src="' .$gmapindex. '"></iframe>';
 

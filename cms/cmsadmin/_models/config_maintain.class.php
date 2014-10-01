@@ -255,9 +255,6 @@ class configMaintain
         $rc = $this->check_sprachcode($sprachcode);  
         // Globale Daten neu setzen
         if (!$rc) { $sprachcode = $cfg->getBrowserLanguage(); }
-        // Globale Daten loeschen 
-        unset($_SESSION['language']);
-        unset($_GET['langu']);
         // neuer Sprachcode setzen
         $_SESSION['language'] = strtoupper($sprachcode);
         $_GET['langu'] = strtolower($sprachcode);        

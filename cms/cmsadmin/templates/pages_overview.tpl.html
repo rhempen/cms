@@ -33,9 +33,15 @@ a, a:link {
 </head>
 
 <body>
-<table id="pages" cellpadding="0" cellspacing="1" border="0" width="100%">
+<table class="pages_overview" cellpadding="0" cellspacing="1" border="0">
+  <colgroup>
+    <col width="350"></col>
+    <col width="100"></col>
+    <col width="75"></col>
+    <col width="175"></col>
+  </colgroup>
   <tr> 
-    <td colspan="8"> 
+    <td colspan="4"> 
 		<ul id="tabnav">
 			<!-- BEGIN tabnav -->
 			<li>
@@ -47,35 +53,33 @@ a, a:link {
   </tr>
   <!-- BEGIN message_block -->
   <tr> 
-    <td colspan="8">{meldung}</td>
+    <td colspan="4">{meldung}</td>
   </tr>
   <!-- END message_block -->
 
 <!-- BEGIN list_block -->
   <tr class="{class_gruppe}"> 
-    <td width="25"> 
+    <td colspan="4"> 
 	    <a href="#"> 
-		<img src="../gifs/{plus_minus}" id="{name_plus_minus}" name="{name_plus_minus}" with="16" height="16" alt="{text_plus_minus}" title="{text_plus_minus}" border="0" 
-			onclick="toggle_visibility('{gruppe}');" /> 
-	    </a>
-	</td>
-    <td width="600"><span>{fach}</span> </td>
-    <td width="175" colspan="4" align="left">&nbsp; </td>
+				<img src="../gifs/{plus_minus}" id="{name_plus_minus}" name="{name_plus_minus}" with="16" height="16" alt="{text_plus_minus}" title="{text_plus_minus}" border="0" 
+						onclick="toggle_visibility('{gruppe}');" /> 
+	    </a>&nbsp;<span>{fach}</span>
+		</td>
   </tr>
   
   <!-- BEGIN titel -->
   <tr id="{gruppen_id}" class="{class}" style="{style}">
-	<td width="400" colspan="2">{label_bezeichnung}</td>
+	<td>{label_bezeichnung}</td>
 	<td align="center">{label_gueltigkeit}</td>
-	<td width="100" align="center">{label_aktiv}</td>
+	<td align="center">{label_aktiv}</td>
 	<td align="center" nowrap>{label_links}</td>
   </tr>
   <!-- END titel -->
   
-  <tr id="{gruppen_id}" class="{class_liste}" style="{style}">   
-	<td width="400" colspan="2"><span id={page_id} class="name">{name}</span></td>
+  <tr id="{gruppen_id}" class="{class_liste}" style="{style}"> 
+	<td><span id={page_id} class="name">{name}</span></td>
 	<td align="center"><span title="{datum_bis}" class="klein">{datum_von}<br />{datum_bis}</span></td>
-	<td width="100" align="center" class="aktivflag" id="{aktivid}" style="color:{farbe}">{aktiv}</td>
+	<td align="center" class="aktivflag" id="{aktivid}" style="color:{farbe}">{aktiv}</td>
 	<td align="center" nowrap>
 		<a href="{link_upload}"><img src="../gifs/jpeg.gif" alt="{text_upload}" title="{text_upload}" border="0"/></a>&nbsp;
 		<a href="{link_bilder_edit}"><img src="../gifs/modify_16.png" alt="{text_bilder_edit}" title="{text_bilder_edit}" border="0"/></a>&nbsp;

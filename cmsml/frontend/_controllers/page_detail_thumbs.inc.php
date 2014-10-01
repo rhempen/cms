@@ -1,15 +1,13 @@
 <?php
 
 // die gewuenschte Unterseite aus der DB lesen
-$page  	= $pages->read_page($_GET['pagid']);
-$total 	= $pictdb->count_bilder_pro_pageid($_GET['pagid']);
-$bilder	= $pictdb->bilder_pro_pageid_lesen($_GET['pagid'], $start);
+$page_infos	= $pages->read_page($_GET['pagid']);
+$total      = $pictdb->count_bilder_pro_pageid($_GET['pagid']);
+$bilder     = $pictdb->bilder_pro_pageid_lesen($_GET['pagid'], $start);
 
 // Instanz der Klasse pageslider
 if (!$slider)	{ $slider = new pageSlider(MAX_THUMBS, $total, $start); }
 
-// Aktuelle Page 
-$page_infos = $page->fetchRow(MDB2_FETCHMODE_ASSOC);
 // zugeordnete Thumbnail-Masse lesen
 $thumbsize = $frontget->read_thumbsize_by_tplid($page_infos['template']);
 $type = 'P';

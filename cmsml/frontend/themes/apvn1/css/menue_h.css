@@ -1,0 +1,479 @@
+/* Icon-Font laden 
+@import url(http://weloveiconfonts.com/api/?family=fontawesome);
+*/
+
+/* fontawesome 
+[class*="fontawesome-"]:before {
+	font-family: 'fontawesome', sans-serif;
+}
+*/
+.aufklappmenu {
+  background: url(../gifs/menu.png) no-repeat right top transparent;
+  right: 20px;
+  position: absolute;
+  display: none;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+}
+
+/*======================================================
+  01 Das umgebende DIV gestalten
+  ====================================================== */
+#navibereich_horizontal {
+  position: fixed;
+  top: 67px;
+  left: 285px;
+  right: 70px;
+  width: auto;
+/*  min-width: 330px; */
+  height: 52px;
+  line-height: 40px;
+  background-color: #fff;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=85)"; /* IE8 */
+  filter:Alpha(Opacity=85); /* IE7 */
+  opacity: 0.85;
+  border: 0px solid #888;
+  border-radius: 10px;
+	box-shadow: 0px 0px 20px rgba(0,0,0,0.5) inset, 0px 0px 10px rgba(0,0,0,0.2);  
+  z-index: 100;
+}
+
+#filler {
+  float: left;
+  width: 0px;
+  height: 25px;
+  cursor: pointer;
+}
+
+#navi {
+  display: inline-block; 
+}
+
+.ebene01 {
+  background-color: transparent;
+  padding-right: 15px;
+}
+
+#navi.right {
+  float: right;
+}
+
+#navi.left {
+  float: left;
+}
+
+#navi {
+	margin: 0; 
+}
+
+#navi ul ul {
+	display: none;
+}
+
+
+	#navi ul li:hover > ul {
+		display: block;
+	}
+
+
+#navi ul {
+	background: transparent; 
+	padding: 0 10px;
+/*	border-radius: 10px;  */
+	list-style-type: none;
+	position: relative;
+	display: inline-block;
+}
+
+#navi ul:after {
+		content: ""; clear: both; display: block;
+	}
+
+	#navi ul li {
+		float: left;
+		-moz-transition:all 0.2s linear;		
+		-webkit-transition:all 0.2s linears;		
+		transition:all 0.2s linear;
+		position: relative;
+	}
+	
+		#navi ul li:hover {
+			background: #ffffff;
+			border-radius: 5px;
+/*			border: 1px solid #0099cc; */
+/*			box-shadow: 0px 0px 5px rgba(0,0,0,0.5) inset; */
+		}
+				
+			#navi ul li:hover a, nav ul li a:hover, .active {
+				color: #0099cc !important;
+			}
+		
+		
+		#navi ul li a {
+			display: block; 
+			padding: 6px 10px;
+			color: #434343; 
+		}
+			
+		
+	#navi ul ul {
+		background: #434343; 
+		background: #dfdfdf; 
+		border-radius: 0; 
+		padding: 0;
+		position: absolute;
+		top: 100%;
+		height:auto;
+		z-index: 200;
+		border-radius: 0 0 10px 10px;
+	}
+		#navi ul ul li {
+			float: none; 
+			position: relative;
+			box-shadow: 0px 0px 2px rgba(0,0,0,0.5) inset;
+			width: 15em;			
+		}
+
+			#navi ul ul li:last-child, #navi ul ul li:last-child a:hover  {
+				border-radius: 0 0 10px 10px;
+			}
+
+			#navi ul ul li a {
+				padding: 1px 20px;
+				-moz-transition:all 0.2s linear;		
+				-webkit-transition:all 0.2s linear;		
+				transition:all 0.2s linear;
+			}	
+
+				#navi ul ul li a:hover {
+					background: #888;
+					opacity: 1.0;
+					/*box-shadow: 0px 0px 8px rgba(255,255,255,0.5) inset;*/
+					color: #ffffff !important;
+				}
+		
+	#navi ul ul ul {
+		position: absolute; 
+		left: 100%; 
+		top:0;
+	}
+
+/* Bereich auf #navi zum Auf/zuklappen des Headerbereiches */
+#klappe {
+  position: fixed;
+  left: 273px;
+  top: 90px;
+  z-index: 100;
+}
+
+#klappe .collapse {
+  position: absolute;
+  background: url("../../../shared/gifs/icon-collapse.gif") no-repeat 0 5px transparent;
+  width: 16px;
+  height: 15px;
+  }
+
+#klappe .expand {
+  position: absolute;
+  background: url("../../../shared/gifs/icon-expand.gif") no-repeat 0 5px transparent;
+  width: 16px;
+  height: 15px;
+  }
+
+#klappe ul li.navi, #sprachen ul li.navi {
+  display: none;
+  color: #FFFFFF;
+}
+
+.topbottom {
+	text-align: center;
+	padding: 0 20px;	
+	height: 20px;
+	color: white;
+	display: block;
+  position: relative;
+}
+
+#top.topbottom {
+	background-color: #FFFFFF;
+	height: 20px;
+	}
+
+#bottom.topbottom {
+	background-color: #0099CC;
+	height: 60px;
+	}
+
+
+
+
+
+/*======================================================
+  03 Hyperlinks der Ebene 1 gestalten
+  ======================================================*/
+#klappe a, #sprachen a {
+  color: #434343;
+  background-color: transparent; 
+  font-weight: bold;
+  padding-left: 20px;
+}
+
+#klappe a {
+  padding: 0.3em 0.5em;
+}
+
+#klappe a:hover, #sprachen a:hover {
+  color: #0099cc; /* blaue Farbe aus dem Logo */
+  background-color: transparent;
+  text-decoration: none;
+}
+
+#sprachen a:hover {
+  color: #0099cc; /* blaue Farbe aus dem Logo */ 
+}
+
+/* -------------------- Linkliste für Untermenu-Positionen -------------------- */
+.linkliste ul {
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
+  width: 300px;
+  margin-bottom: 10px;
+}
+
+.linkliste ul li {
+  opacity: 0.85;
+  padding: 0px;
+  border-bottom: 1px dotted #555555;
+}
+
+.linkliste ul li a:before {
+  content: "> ";
+  padding-bottom: 3px;
+}
+ 
+.linkliste ul li:hover a {
+  color: #0099cc !important;
+  display: block;
+  width: 100%;
+}
+
+/* die Linkliste in der rechten Spalte wird erst im Smartphorm angezeigt 
+   dafür wird dann die Linkliste in der linken Spalte ausgeblendet
+*/
+.spalte_500_right .linkliste {
+  display: none;
+}
+
+
+/* -------------------- Media Queries -------------------- */
+@media only screen and (max-width: 1024px) 
+{ 
+	.topbottom {
+		display: block;
+	}
+
+	#top.topbottom {
+		border-top-left-radius: 10px;	
+		border-top-right-radius: 10px;	
+	}
+
+	#bottom.topbottom {
+		border-bottom-left-radius: 10px;	
+		border-bottom-right-radius: 10px;	
+	}
+
+	#header {
+		left: 30px;	
+		width: 134px;
+		position: absolute;
+	}
+	
+	#home_link {
+		background-image: url("../img/logo-kurz.png");
+	}
+
+	#servicebereich, #navibereich_horizontal, #main {
+		left: 175px !important;
+		right: 30px !important;
+		border-radius: 10px !important;
+		position: absolute !important;
+	}
+
+	#navibereich_horizontal	{
+		top: 70px !important;
+	}
+	
+	#main { 
+		top: 140px;
+		padding: 0px;
+		margin-bottom: 20px;
+	}
+	
+	#subnavibereich_horizontal {
+		left: 30px !important;
+		width: 134px !important;
+		position: absolute !important;
+	}
+
+  .spalte_300_left .linkliste ul li a {
+    line-height: 25px;
+  }
+	
+}
+
+@media only screen and (max-width: 860px) 
+{ 
+
+	#page {
+		top: 10px;
+		position: absolute;
+	}
+	
+	#header {
+		display: none;	
+	}
+
+	#servicebereich, #navibereich_horizontal, 
+	#subnavibereich_horizontal, #main {
+		position: relative !important; 
+		left: 0px !important;
+		right: 0px !important;
+		top: 0px !important;
+		margin: 0px 15px 10px 15px !important;
+		border-radius: 10px !important;
+		clear: both;
+		display: block;
+		width: auto !important;
+		opacity: 0.95 !important;
+	}
+
+	#navibereich_horizontal	{
+		height: 40px;
+		line-height: 34px;
+	}
+	
+	#navi ul li a {
+		padding: 3px 15px;
+	}
+
+	#subnavibereich_horizontal {
+		min-height: 60px !important;
+	}
+
+	#subnavibereich_horizontal ul {
+		padding: 4px 5px !important;
+	}
+	
+  .spalte_300_left .linkliste ul li a {
+    line-height: 25px;
+  }
+
+}
+
+@media only screen and (max-width: 480px) 
+{
+	#page {
+		top: 0px;
+	}
+
+	.topbottom {
+		border-radius: 0px !important;
+	}
+
+	#servicebereich, #navibereich_horizontal, 
+	#subnavibereich_horizontal, #main  {
+		position: relative !important;
+		top: 0px !important;
+		left: 0px !important;
+		right: 0px !important;
+		border-radius: 0px !important;
+		opacity: 0.95;
+		margin: 0px 0px !important;
+	}
+	
+	#navibereich_horizontal  {
+		display: block;
+		height: auto;
+		line-height: 25px;
+	}
+
+	#subnavibereich_horizontal ul {
+		padding: 0px !important;
+	}
+	
+	#navi {
+		width: auto;
+		background-color: #ffffff;
+		margin: 0;
+		width: 100%;
+	}
+	
+	#navi ul {
+		width: 100%;
+		position: relative;
+		padding: 0 !important;
+		margin: 0 !important;
+		display: block;
+	}
+	
+	#navi ul li {
+		clear: both;
+		width: 100%;
+		padding: 0px;
+		border-bottom: 1px dotted #555555;
+	}
+	
+	#navi ul li a {
+		padding: 0px 20px;
+	}
+
+	#navi ul li a:before {
+		content: "> ";
+	}
+
+
+	#subnavibereich_horizontal {
+		display: block;
+		border-radius: 0px !important;
+		margin-bottom: 0px !important;
+	}
+
+	.fontawesome-align-justify {
+		display: block;
+		float: right;
+		padding-right: 15px;
+		color: #434343;
+		line-height: 30px;	
+		font-size: 28px;
+		cursor: pointer;
+		position: relative;
+	}
+    
+    .aufklappmenu {
+      display: block;
+    }
+    
+    .spalte_300_left .linkliste {
+      display: none;
+    }
+    
+    .spalte_500_right .linkliste {
+      display: block;
+      margin-top: 10px;
+    }
+    
+    .spalte_500_right .linkliste ul li a {
+      line-height: 25px;
+    }
+    
+} 
+
+@media only screen and (max-width: 325px) 
+{
+	#servicebereich, #navibereich_horizontal, 
+	#subnavibereich_horizontal, #main {
+		margin: 0px !important;
+	}
+}

@@ -27,11 +27,14 @@ define('KONTAKTFORMULAR', './frontend/_controllers/kontakt.inc.php');
 define('WEBMAIL', './frontend/_controllers/webmail.inc.php');
 define('SITEMAP', './frontend/_controllers/sitemap.inc.php');
 define('GOOGLEMAPS', './frontend/_controllers/gmaps.inc.php');
-//define('GOOGLEMAPS', './frontend/_addons/index.php');
 define('PAGES_OVERVIEW', './frontend/_controllers/pages_overview.inc.php');
 define('PAGE_DETAIL', './frontend/_controllers/page_detail.inc.php');
 define('PAGE_DETAIL_THUMBS', './frontend/_controllers/page_detail_thumbs.inc.php');
 define('NAVI_DETAIL_THUMBS', './frontend/_controllers/navi_detail_thumbs.inc.php');
+
+/* Frontend Views */
+define('MEMBER_LOGIN', './frontend/_views/member_login.inc.php');
+define('RENDER_WEBSITE', './frontend/_views/render_website.inc.php');
 
 // Style Hidden
 define('HIDDEN', 'display:none;');

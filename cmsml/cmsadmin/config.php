@@ -33,17 +33,12 @@ define('DELTREE_ALLOWED', true);
 define('LANGUAGE_FILE', LANGUAGE.'.php');
 
 /* Max. Dateigroesse von Bildern beim Uplaod auf 50 KB beschr�nken */
-$size = 400*1024; // 400 Kb
+$size = 900*1024; // 500 Kb
 define('MAX_IMAGE_SIZE', $size);
 
 /* Definitionen fuer das Erstellen von Thumbnails */
 define('THUMB_PREFIX', 'th_');
-/*
-define('THUMB_PAGE_MAX_WIDTH', THUMB_PAGE_MAX_WIDTH);
-define('THUMB_PAGE_MAX_HEIGHT', THUMB_PAGE_MAX_HEIGHT);
-define('THUMB_NAVI_MAX_WIDTH', THUMB_NAVI_MAX_WIDTH);
-define('THUMB_NAVI_MAX_HEIGHT', THUMB_NAVI_MAX_HEIGHT);
-*/
+
 /* Definitionen fuer die Anzeige von Images im CMS */
 define('IMAGE_SHOW_MAX_WIDTH', 300);
 define('IMAGE_SHOW_MAX_HEIGHT', 300);

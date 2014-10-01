@@ -9,6 +9,8 @@
  * @author      Roland Hempen
  * @copyright   Frei einsetz- und veraenderbar, wenn der Autor erw�hnt wird
  * @version     1.0 | 2010-01-15
+ * @package     CMSADMIN/Fragments
+ * 
  */
 
 class frgmntsMaintain

@@ -6,9 +6,7 @@ for ($i=1; $i<=2; $i++) {
 	
 	$page_id = $pages->read_page_with_latest_date($domain);
 	if ($page_id != 0 && $page_id != null) {
-		$page = $pages->read_page($page_id);        
-        if ($page == null) { continue; }
-        $row_page = $page->fetchRow(MDB2_FETCHMODE_ASSOC);
+		$row_page = $pages->read_page($page_id);        
         if ($row_page == null) { continue; }
         // aus cms_redirect die Koordinaten des anzuzeigenden Satzes lesen. Das ist nötig, 
         // weil die akutelle nav_id auf Home zeigt und daher der weiter-Link auf der expo oder dem event

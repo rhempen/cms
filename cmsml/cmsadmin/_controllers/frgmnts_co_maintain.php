@@ -5,7 +5,7 @@
 // $_GET-Parameter abholen
 	$action		= isset($_GET['action']) ? $_GET['action'] : '';
 	$srtids		= isset($_POST['srtids']) ? $_POST['srtids'] : '';
-	$tab		  = isset($_GET['tab']) ? $_GET['tab'] : $GLOBALS['TEXTE']['FRAGMENTE'];
+	$tab		= isset($_GET['tab']) ? $_GET['tab'] : $GLOBALS['TEXTE']['FRAGMENTE'];
 	$frgid		= isset($_GET['frgid']) ? $_GET['frgid'] : '';
 	$view		= ''; // steuert die Anzeige der Daten
 

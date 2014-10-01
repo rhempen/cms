@@ -52,6 +52,7 @@
 // CSS-Klasse per Ajax in der PHP-Session speichern  
   function saveClassHeader( iClassHeader ) {
     var lWebroot = $("webroot").value;
+    lWebroot = (lWebroot == '/') ? '' : lWebroot;
     var lUrl = lWebroot+"/frontend/_models/frontend_setdata.php?action=saveHeaderClass&class="+iClassHeader 
     var myAjax = new Ajax.Request( lUrl,
         {   
@@ -71,6 +72,17 @@ var zeige_fehler = function(r)
 {
    $("meldung").innerHTML = "Fehler: " + r.status + " / " + r.statusText;
 }
+
+/*-------------------------------------------------------------------------------
+  Niftycubes initialisieren bei onLoad
+  -------------------------------------------------------------------------------*/
+    var niftycubes = function() {
+      var agent = navigator.userAgent;
+//    NiftyCorners funktionieren nur ab IE 8
+//      if (agent.match(/MSIE/) && agent.match(/[MSIE\s]\d/) < 8) { return; }  
+      Nifty("div#memberLogin","big");
+      Nifty("fieldset","normal");
+    }
 
 /*-------------------------------------------------------------------------------
   Kompatibilitaet fuer IE6 bei Dropdown-Menus 
@@ -100,8 +112,8 @@ var zeige_fehler = function(r)
     Event.observe(window, "load", function() {
       Event.observe($("klappe"),'click', function() { 
         saveClassHeader($("header").className);
-//        setCookie("classHeader",$("header").className);
       });
     } );
-  //Event.observe(window, 'load', niftycubes, false);
+    // Nifty-Cubes
+    Event.observe(window, 'load', niftycubes, false);
 

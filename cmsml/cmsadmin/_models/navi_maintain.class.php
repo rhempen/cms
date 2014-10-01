@@ -5,10 +5,12 @@
  *           www.hempenweb.ch
  * ----------------------------------------------------------
  *
- * Klasse f�r die Verwaltung der Navigation und zugeh�riger Seiten
+ * Klasse fuer die Verwaltung der Navigation und zugehoeriger Seiten
  * @author      Roland Hempen
  * @copyright   Frei einsetz- und veraenderbar, wenn der Autor erw�hnt wird
  * @version     1.0 | 2007-07-14
+ * @package     CMSADMIN/Navigation
+ * 
  */
 
 class naviMaintain
@@ -48,16 +50,16 @@ class naviMaintain
     public function read_navigation_by_bildpfad($pfad) 
     { 
 		global $db;
-		$query = 'SELECT * FROM '.$this->mPrefix.'navigation WHERE bildpfad="'.$pfad.'"';
-		$navi = $db->query($query);
+		$query = 'SELECT DISTINCT * FROM '.$this->mPrefix.'navigation WHERE bildpfad="'.$pfad.'"';
+		$navi = $db->queryRow($query);
 		return $navi;
     }
     
 	// Einen bestimmten Navigationspunkte lesen anhand der nav_id
     public function read_bezeichnung_by_area($area) 
     { 
-		global $db;
-		$query = 'SELECT bezeichnung FROM '.$this->mPrefix.'navigation WHERE domain="'.$area.'" and ukap=0';
+		global $db,$language;
+		$query = 'SELECT bezeich_'.$language.' FROM '.$this->mPrefix.'navigation WHERE domain="'.$area.'" and ukap=0';
 		$bezeichnung = $db->queryOne($query);
 		return $bezeichnung;
     }
@@ -140,14 +142,16 @@ class naviMaintain
 	// Neuen Unternavigationspunkt eroeffnen
 	public function neuer_ukap($nav_id) 
 	{				
-      global $db;
+      global $db, $language;
       $row = $this->read_navigation_by_id($nav_id);
       $kap         = $row['kap'];
-      $bezeichnung = $row['bezeichnung'];
+      $bezeichnung = $row['bezeich_'.$language];
       $domain      = $row['domain'];
       $navid_kap   = $row['nav_id'];
       $ukap_nummer = $this->getNextUkap($kap); // naechste Ukap-Nummer um 10 erhoehen
       $kap_bez     = $bezeichnung . "_" . $ukap_nummer;
+      $kap_bez     = str_replace(" ","_",$kap_bez);
+      $kap_bez_low = strtolower($kap_bez);
 
       // Unterdirectory fuer diese Seite bestimmen und dann auch gleich anlegen
       $bildpfad = $row['domain'].'_'.$ukap_nummer; 
@@ -159,17 +163,22 @@ class naviMaintain
       }
       // Insert des neuen Unternavigationspunktes plus Insert einer zugehoerigen Seite
       $nav_id = $this->getNextNavid();
-      $insert_navi = 'INSERT INTO '.$this->mPrefix.'navigation (nav_id,domain,kap,ukap,bildpfad,bezeichnung,kuerzel,aktiv) 
-                           VALUES ('.$nav_id.',"'.$domain.'",'.$kap.','.$ukap_nummer.',"'.$bildpfad.'","'.$kap_bez.'","'.strtolower($kap_bez).'","n")';
-
+      $insert_navi  = 'INSERT INTO '.$this->mPrefix.'navigation ';
+      $insert_navi .= '(nav_id,domain,kap,ukap,bildpfad,bezeich_de,bezeich_en,bezeich_fr,bezeich_it,';
+      $insert_navi .= 'kuerzel_de,kuerzel_en,kuerzel_fr,kuerzel_it,aktiv) ';
+      $insert_navi .= 'VALUES ('.$nav_id.',"'.$domain.'",'.$kap.','.$ukap_nummer.',"'.$bildpfad.'",';
+      $insert_navi .= '"'.$kap_bez.'","'.$kap_bez.'","'.$kap_bez.'","'.$kap_bez.'",';
+      $insert_navi .= '"'.$kap_bez_low.'","'.$kap_bez_low.'","'.$kap_bez_low.'","'.$kap_bez_low.'","n")';
+      
       // Insert neuer Eintrag in die Tabelle cms_redirect (SMURL) 
-      $insert_redirect = 'INSERT INTO '.$this->mPrefix.'redirect (navid,subid,pagid,kuerzel) 
-                           VALUES ('.$navid_kap.','.$nav_id.',0,"'.strtolower($kap_bez).'")';		
+      $insert_redirect  = 'INSERT INTO '.$this->mPrefix.'redirect (navid,subid,pagid,kuerzel_de,kuerzel_en,kuerzel_fr,kuerzel_it) ';
+      $insert_redirect .= 'VALUES ('.$navid_kap.','.$nav_id.',0,"'.$kap_bez_low.'","'.$kap_bez_low.'","'.$kap_bez_low.'","'.$kap_bez_low.'")';		
 
       // Insert einer neuen Seite zum gerade eingefuegten Unternavigationspunkt
       $seiten_id = $this->getNextSeitenid();
-      $insert_page = 'INSERT INTO '.$this->mPrefix.'seiten (seiten_id,nav_id,nummer,kurztitel,galerie) 
-                           VALUES ('.$seiten_id.','.$nav_id.',1,"'.$kap_bez.'","n")';
+      $insert_page  = 'INSERT INTO '.$this->mPrefix.'seiten ';
+      $insert_page .= '(seiten_id,nav_id,nummer,kurztitel_de,kurztitel_en,kurztitel_fr,kurztitel_it,galerie) ';
+      $insert_page .= 'VALUES ('.$seiten_id.','.$nav_id.',1,"'.$kap_bez.'","'.$kap_bez.'","'.$kap_bez.'","'.$kap_bez.'","n")';
 
       if ($db->query($insert_navi) && $db->query($insert_redirect) && $db->query($insert_page))
       {
@@ -180,7 +189,7 @@ class naviMaintain
       return $this->mMeldung;
 	}
 
-	// Neuen Hauptnavigationspunkt er�ffnen
+	// Neuen Hauptnavigationspunkt eroeffnen
 	public function neuer_kap() 
 	{				
       global $db;
@@ -192,6 +201,7 @@ class naviMaintain
       if ($neuer_sid < 100) { $neuer_sid = sprintf('%03s', $neuer_sid); }      
       $bildpfad .= 'navi_'.$neuer_nid;  // an den Bildpfad wird neu die Navid zugefuegt, so ist es bestimmt einmalig!
       $kap_bez  = $bildpfad;
+      $kap_bez_low = strtolower($kap_bez);
       $domain   = $bildpfad;
 
       // Unterdirectory fuer diese Seite bestimmen und dann auch gleich anlegen
@@ -204,16 +214,21 @@ class naviMaintain
           $this->mMeldung[] = 'error'; $this->mMeldung[] = sprintf($GLOBALS['MESSAGES']['MSG_DIR_NICHT_ANGELEGT'], $bildpfad);		
       }
       // Insert des neuen Navigationspunktes plus Insert einer zugehoerigen Seite plus Insert Eintrag in cms_redirect
-      $insert_navi = 'INSERT INTO '.$this->mPrefix.'navigation (nav_id,domain,kap,ukap,bildpfad,bezeichnung,kuerzel,aktiv,nav_type) 
-                           VALUES ('.$neuer_nid.',"'.$domain.'",'.$neuer_kap.','.$ukap.',"'.$bildpfad.'","'.$kap_bez.'","'.strtolower($kap_bez).'","n","H")';
+      $insert_navi = 'INSERT INTO '.$this->mPrefix.'navigation ';
+      $insert_navi .= '(nav_id,domain,kap,ukap,bildpfad,bezeich_de,bezeich_en,bezeich_fr,bezeich_it,';
+      $insert_navi .= 'kuerzel_de,kuerzel_en,kuerzel_fr,kuerzel_it,aktiv,nav_type) ';
+      $insert_navi .= 'VALUES ('.$neuer_nid.',"'.$domain.'",'.$neuer_kap.','.$ukap.',"'.$bildpfad.'",';
+      $insert_navi .= '"'.$kap_bez.'","'.$kap_bez.'","'.$kap_bez.'","'.$kap_bez.'",';
+      $insert_navi .= '"'.$kap_bez_low.'","'.$kap_bez_low.'","'.$kap_bez_low.'","'.$kap_bez_low.'","n","H")';
 
       // Insert neuer Eintrag in die Tabelle cms_redirect (SMURL) 
-      $insert_redirect = 'INSERT INTO '.$this->mPrefix.'redirect (navid,subid,pagid,kuerzel) 
-                           VALUES ('.$neuer_nid.',0,0,"'.strtolower($kap_bez).'")';		
+      $insert_redirect  = 'INSERT INTO '.$this->mPrefix.'redirect (navid,subid,pagid,kuerzel_de,kuerzel_en,kuerzel_fr,kuerzel_it) ';
+      $insert_redirect .= 'VALUES ('.$neuer_nid.',0,0,"'.$kap_bez_low.'","'.$kap_bez_low.'","'.$kap_bez_low.'","'.$kap_bez_low.'")';
 
       // Insert einer neuen Seite zum gerade eingefuegten Unternavigationspunktes
-      $insert_seite = 'INSERT INTO '.$this->mPrefix.'seiten (seiten_id,nav_id,nummer,kurztitel,galerie) 
-                           VALUES ('.$neuer_sid.','.$neuer_nid.',1,"'.$kap_bez.'","n")';
+      $insert_seite  = 'INSERT INTO '.$this->mPrefix.'seiten (seiten_id,nav_id,nummer,';
+      $insert_seite .= 'kurztitel_de,kurztitel_en, kurztitel_fr, kurztitel_it,galerie) ';
+      $insert_seite .= 'VALUES ('.$neuer_sid.','.$neuer_nid.',1,"'.$kap_bez.'","'.$kap_bez.'","'.$kap_bez.'","'.$kap_bez.'","n")';
 
       if ($db->query($insert_navi) && $db->query($insert_redirect) && $db->query($insert_seite))
       {
@@ -307,15 +322,24 @@ class naviMaintain
 	}
 	
 	/* Eine Navigationspunkt editieren / bearbeiten */
+	public function read_navi_page_by_seiten_id($seiten_id)
+	{
+      global $db;
+      $read_page = 'SELECT * FROM '.$this->mPrefix.'seiten WHERE seiten_id='.$seiten_id;
+      $page = $db->queryRow($read_page);
+      return $page;
+	}
+            
+	/* Eine Navigationspunkt editieren / bearbeiten */
 	public function read_navi_page($nav_id)
 	{
       global $db;
       $read_page = 'SELECT * FROM '.$this->mPrefix.'seiten WHERE nav_id='.$nav_id;
-      $page = $db->query($read_page);
+      $page = $db->queryRow($read_page);
       return $page;
 	}
 	
-	/* Einen Navigationspunkt plus Seite kopieren */
+    /* Einen Navigationspunkt plus Seite kopieren */
 	public function copy_navi_page($navigation, $navi_page)
 	{
       global $db, $genmain;
@@ -331,22 +355,37 @@ class naviMaintain
 
       // Insert des neuen Navigationspunktes plus Insert einer zugehoerigen Seite plus Insert Eintrag in cms_redirect
       $row_navi['kap'] = $kap+1; // Kap um 1 erhoehen 
-      $insert_navi = 'INSERT INTO '.$this->mPrefix.'navigation (nav_id,domain,kap,ukap,bildpfad,bezeichnung,kuerzel,aktiv,start,nav_type) 
-                           VALUES ('.$row_navi['nav_id'].',"'.$row_navi['domain'].'",'.$row_navi['kap'].','.$row_navi['ukap'].',
-                                  "'.$row_navi['bildpfad'].'","'.$row_navi['bezeichnung'].'","'.$row_navi['kuerzel'].'","n",
-                                  "'.$row_navi['start'].'","'.$row_navi['nav_type'].'")';
+      $insert_navi  = 'INSERT INTO '.$this->mPrefix.'navigation ';
+      $insert_navi .= '(nav_id,domain,kap,ukap,bildpfad,bezeich_de,bezeich_en,bezeich_fr,bezeich_it,';
+      $insert_navi .= 'kuerzel_de,kuerzel_en,kuerzel_fr,kuerzel_it,aktiv,start,nav_type) ';
+      $insert_navi .= 'VALUES ('.$row_navi['nav_id'].',"'.$row_navi['domain'].'",'.$row_navi['kap'].','.$row_navi['ukap'].',"'.$row_navi['bildpfad'].'",';
+      $insert_navi .= '"'.$row_navi['bezeich_de'].'","'.$row_navi['bezeich_en'].'","'.$row_navi['bezeich_fr'].'","'.$row_navi['bezeich_it'].'",';
+      $insert_navi .= '"'.$row_navi['kuerzel_de'].'","'.$row_navi['kuerzel_en'].'","'.$row_navi['kuerzel_fr'].'","'.$row_navi['kuerzel_it'].'","n",';
+      $insert_navi .= '"'.$row_navi['start'].'","'.$row_navi['nav_type'].'")';
       
       // Insert neuer Eintrag in die Tabelle cms_redirect (SMURL) 
-      $kuerzel = $genmain->format_kuerzel($row_navi['kuerzel']);
-      $insert_redirect = 'INSERT INTO '.$this->mPrefix.'redirect (navid,subid,pagid,kuerzel) 
-                           VALUES ('.$row_navi['nav_id'].',0,0,"'.$kuerzel.'")';		
+      $kuerzel_de = $genmain->format_kuerzel($row_navi['kuerzel_de']);
+      $kuerzel_en = $genmain->format_kuerzel($row_navi['kuerzel_en']);
+      $kuerzel_fr = $genmain->format_kuerzel($row_navi['kuerzel_fr']);
+      $kuerzel_it = $genmain->format_kuerzel($row_navi['kuerzel_it']);
+      $insert_redirect  = 'INSERT INTO '.$this->mPrefix.'redirect (navid,subid,pagid,kuerzel_de,kuerzel_en,kuerzel_fr,kuerzel_it) '; 
+      $insert_redirect .= 'VALUES ('.$row_navi['nav_id'].',0,0,"'.$kuerzel_de.'","'.$kuerzel_en.'","'.$kuerzel_fr.'","'.$kuerzel_it.'")';
 
       // Insert einer neuen Seite zum gerade eingefuegten Navigationspunkt
-      $insert_seite = 'INSERT INTO '.$this->mPrefix.'seiten (seiten_id,nav_id,nummer,kurztitel,zusatztext,template,modul,inhalt1,inhalt2,bild1,galerie) 
-                        VALUES ('.$row_seite['seiten_id'].','.$row_seite['nav_id'].','.$row_seite['nummer'].',
-                               "'.$db->escape($row_seite['kurztitel']).'","'.$db->escape($row_seite['zusatztext']).'",
-                                '.$row_seite['template'].','.$row_seite['modul'].',"'.$db->escape($row_seite['inhalt1']).'",
-                               "'.$db->escape($row_seite['inhalt2']).'","'.$row_seite['bild1'].'","'.$row_seite['galerie'].'")';
+      $insert_seite  = 'INSERT INTO '.$this->mPrefix.'seiten ';
+      $insert_seite .= '(seiten_id,nav_id,nummer,kurztitel_de,kurztitel_en,kurztitel_fr,kurztitel_it,';
+      $insert_seite .= 'zusatz_de,zusatz_en,zusatz_fr,zusatz_it,template,modul,bild1,galerie,';
+      $insert_seite .= 'inhalt1_de,inhalt1_en,inhalt1_fr,inhalt1_it,inhalt2_de,inhalt2_en,inhalt2_fr,inhalt2_it) '; 
+      $insert_seite .= 'VALUES ('.$row_seite['seiten_id'].','.$row_seite['nav_id'].','.$row_seite['nummer'].',';
+      $insert_seite .= '"'.$db->escape($row_seite['kurztitel_de']).'","'.$db->escape($row_seite['kurztitel_en']).'",';
+      $insert_seite .= '"'.$db->escape($row_seite['kurztitel_fr']).'","'.$db->escape($row_seite['kurztitel_it']).'",';
+      $insert_seite .= '"'.$db->escape($row_seite['zusatz_de']).'","'.$db->escape($row_seite['zusatz_en']).'",';
+      $insert_seite .= '"'.$db->escape($row_seite['zusatz_fr']).'","'.$db->escape($row_seite['zusatz_it']).'",';
+      $insert_seite .= $row_seite['template'].','.$row_seite['modul'].',"'.$row_seite['bild1'].'","'.$row_seite['galerie'].'",';
+      $insert_seite .= '"'.$db->escape($row_seite['inhalt1_de']).'","'.$db->escape($row_seite['inhalt1_en']).'",';
+      $insert_seite .= '"'.$db->escape($row_seite['inhalt1_fr']).'","'.$db->escape($row_seite['inhalt1_it']).'",';
+      $insert_seite .= '"'.$db->escape($row_seite['inhalt2_de']).'","'.$db->escape($row_seite['inhalt2_de']).'",';
+      $insert_seite .= '"'.$db->escape($row_seite['inhalt2_fr']).'","'.$db->escape($row_seite['inhalt2_it']).'")';
 
       if ($db->query($update_kap) && $db->query($insert_navi) && $db->query($insert_redirect) && $db->query($insert_seite))
       {
@@ -362,60 +401,87 @@ class naviMaintain
     {
       $row_navi = $navigation;
       $row_navi['nav_id']       = $this->getNextNavid();
-      $row_navi['bezeichnung']  = 'Copy: '. $row_navi['bezeichnung'];
-      $row_navi['kuerzel']      = $row_navi['bezeichnung'];
+      $row_navi['bezeich_de']  = 'Copy: '. $row_navi['bezeich_de'];
+      $row_navi['bezeich_en']  = 'Copy: '. $row_navi['bezeich_en'];
+      $row_navi['bezeich_fr']  = 'Copy: '. $row_navi['bezeich_fr'];
+      $row_navi['bezeich_it']  = 'Copy: '. $row_navi['bezeich_it'];
+      $row_navi['kuerzel_de']  = $row_navi['bezeich_de'];
+      $row_navi['kuerzel_en']  = $row_navi['bezeich_en'];
+      $row_navi['kuerzel_fr']  = $row_navi['bezeich_fr'];
+      $row_navi['kuerzel_it']  = $row_navi['bezeich_it'];
+      $row_navi['bildpfad']    = 'navi_'.$row_navi['nav_id'];
       return $row_navi;
     }
     
     /* die zu kopierende Seite zum Hauptnavigationspunkt (=Kap) vorbereiten */
     private function prepare_copy_seite($navi_page)
     {
-      $row_seite  = $navi_page->fetchRow(MDB2_FETCHMODE_ASSOC);
+//      $row_seite  = $navi_page->fetchRow(MDB2_FETCHMODE_ASSOC);
+      $row_seite  = $navi_page;
       $row_seite['seiten_id'] = $this->getNextSeitenid();
       $row_seite['nav_id']    = $this->getNextNavid();
-      $row_seite['kurztitel'] = 'Copy: '.$row_seite['kurztitel'];
+      $row_seite['kurztitel_de'] = 'Copy: '.$row_seite['kurztitel_de'];
+      $row_seite['kurztitel_en'] = 'Copy: '.$row_seite['kurztitel_en'];
+      $row_seite['kurztitel_fr'] = 'Copy: '.$row_seite['kurztitel_fr'];
+      $row_seite['kurztitel_it'] = 'Copy: '.$row_seite['kurztitel_it'];
       return $row_seite;
     }
-     
-    
-    /* Eine Navigationspunkt-Seite editieren / bearbeiten */
+         
+    /* Eine Navigationspunkt-Seite speichern.
+     * Der Save erfolgt entweder mit der Sprache in $_POST['sprache'] = 
+     * die gewählte Sprache. Der Benutzer hat dann auf den Button Sichern geklickt,...
+     * oder mit der Sprache in $_POST['langu_sav'] = dieses Feld wird gefüllt, 
+     * wenn die Sprach-Selectbox angeklickt wird. Wird die Sprache gewechselt, 
+     * erfolgt per Ajax ein Save! 
+     * @param: $seiten_id = die ID der zu speichernden Seite
+     * @param: $_POST = alle Felder aus dem Formular 
+     * @return: $msg = Erfolgs- oder Misserfolgsmeldung
+     */
 	public function save_navi_page($seiten_id)
 	{
       global $db, $general;
+      $memberlogin = isset($_POST['memberlogin']) ? $_POST['memberlogin'] : '';
+      // der Save erfolgt in der Sprache, welche zur Zeit aktiv ist
+      $language = $_POST['langu_sav'] != '' ? strtolower($_POST['langu_sav']) : strtolower($_POST['sprache']);
       $update = 'UPDATE '.$this->mPrefix.'seiten SET';
-      $update .= ' kurztitel="'.$db->escape($_POST['kurztitel']).'",';
-      $update .= ' zusatztext="'.$db->escape($_POST['zusatztext']).'",';
       $update .= ' template='.$_POST['templates'].',';
       $update .= ' modul='.$_POST['modules'].',';
-      $update .= ' inhalt1="'.$db->escape($_POST['inhalt1']).'",';
-      $update .= ' inhalt2="'.$db->escape($_POST['inhalt2']).'",';
+      $update .= ' memberlogin="'.$memberlogin.'",';
+      $update .= ' kurztitel_'.$language.'="'.$db->escape($_POST['kurztitel']).'",';
+      $update .= ' zusatz_'.$language.'="'.$db->escape($_POST['zusatztext']).'",';
+      $update .= ' inhalt1_'.$language.'="'.$db->escape($_POST['inhalt1']).'",';
+      $update .= ' inhalt2_'.$language.'="'.$db->escape($_POST['inhalt2']).'",';
       $update .= ' bild1="'.$db->escape($_POST['thumb1']).'",';
       $update .= ' galerie="'.$db->escape($_POST['galerie_aktiv']).'"';
       $update .= ' WHERE seiten_id='.$seiten_id ;
-
+      
       $affected =& $db->exec($update);
       if (PEAR::isError($affected)) {
           $msg[] = 'error'; $msg[] = $affected->getMessage().' '.$affected->getDebugInfo();
       } else {
           $msg[] = 'success'; $msg[] = sprintf($GLOBALS['MESSAGES']['MSG_NAVI_SEITE_GESPEICHERT'], $_POST['kurztitel']);
       }	
-      return $msg;
+      // Ausgabe der Message abhängig, ob der Request per Ajax oder normal erfolgt.
+      if (isset($_POST['langu_sav']) && $_POST['langu_sav'] != '') {
+        echo $msg[1].' ('.$_POST['langu_sav'].')';
+      } else {
+      }
+      return $msg;        
   }
 
   /* Einen Navigationspunkt updaten. Dabei koennen einzelne Felder dynamisch uebergeben werden 
       Aufruf: bei Action = naviSave und aktivSave
   */
-  public function navi_update($nav_id, $feldname, $feldvalue)
+  public function navi_update($nav_id, $feldname, $feldvalue, $language="de")
   {
       global $db, $general;
-      $language = strtolower(LANGUAGE);
       // bei bezeichnung wird auch kuerzel upgedatet
       if ($feldname == 'bezeichnung') {
           $bezeichnung = $feldvalue;
           $kuerzel = str_replace(' ', '', $bezeichnung);
 
           // es wird auch gleich der Titel in der Seite angepasst
-          $update = 'UPDATE '.$this->mPrefix.'seiten SET kurztitel="'.$bezeichnung.'" WHERE nav_id='.$nav_id;
+          $update = 'UPDATE '.$this->mPrefix.'seiten SET kurztitel_'.$language.'="'.$bezeichnung.'" WHERE nav_id='.$nav_id;
           $affected =& $db->exec($update);
           if (PEAR::isError($affected)) { echo $affected->getMessage().' '.$affected->getDebugInfo(); }
       }

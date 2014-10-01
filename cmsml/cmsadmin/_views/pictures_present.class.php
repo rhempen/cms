@@ -1,14 +1,16 @@
 <?php
-/* ----------------------------------------------------------
+/**
+ * ----------------------------------------------------------
  * (c) 2007  Roland Hempen
  *           www.hempenweb.ch
  * ----------------------------------------------------------
- * Klasse f�r die Pr�sentation von Medien am Bildschirm 
+ * Klasse fuer die Praesentation von Medien am Bildschirm 
  *
  * @author      Roland Hempen
  * @copyright   Frei einsetz- und veraenderbar, wenn der Autor erw�hnt wird
  * @version     1.0 | 2007-08-18
- * ---------------------------------------------------------- 
+ * @package     CMSADMIN/Pictures
+ * 
  */
  
 class picturesPresent
@@ -29,18 +31,19 @@ class picturesPresent
 	 ************************************************************************************************/
 	public function bilder_anzeigen($aktdir, $files, $message, $zeige_bilder)
 	{
-		global $general;
+		global $general, $navi, $pages;
 		global $tpl;
 		
 		// der GET-Parameter 'ref_id' steuert die Navigation innerhalb des Browsers.
 		// wenn der Medienbrowser von der Seitenverwaltung aufgerufen wurde, soll sich der Benutzer 
 		// nur im Verzeichnis der zugeh�rigen Seite bewegen k�nnen. dh. $dir_up darf nie = MEDIA_ROOT sein.
-		// bzw. das h�chste Verzeichnis hat zB. die Form MEDIA_ROOT/art0001 .
+		// bzw. das hoechste Verzeichnis hat zB. die Form MEDIA_ROOT/art0001 .
 		// Entsprechend wird hier festgelegt, ob der Up-Button angezeigt und ob der Paramter den 
 		// anderen Buttons mitgegeben werden soll
 		if (isset($_GET['ref_id']) && $_GET['ref_id'] > 0) {
 			$p_ref_id = '&ref_id='.$_GET['ref_id'];
 		}
+        $type = $_SESSION['type'];
 		
 		// current_dir = $aktdir - MEDIA_ROOT
 		$current_dir = substr($aktdir, strlen(MEDIA_ROOT), strlen($aktdir));
@@ -56,16 +59,19 @@ class picturesPresent
 
 		// Platzhalter f�llen
 		$tpl->setVariable('class', 'navi_overview_titel');
-		// f�r welche Seite erfolgt diese Aktion?
+		// fuer welche Seite erfolgt diese Aktion?
 		$general->print_seiten_info();
 		
 		$tpl->setVariable('text_current_folder', $GLOBALS['TEXTE']['TEXT_AKT_VERZEICHNIS']);
 		$tpl->setVariable('media_base', MEDIA_BASE);
 		$tpl->setVariable('current_dir', $current_dir);
 
-		// das n�chsth�here Verzeichnis bestimmen
+		// das naechsthoehere Verzeichnis bestimmen
 		$dir_up = $this->bilder_verzeichnis($aktdir);
-		$tpl->setVariable('parent_dir_link', $_SERVER['PHP_SELF'].'?action=images&dir='.$dir_up.'&type='.$_SESSION['type'].$p_ref_id );
+        $parentDirLink = $_SERVER['PHP_SELF'].'?action=images&dir='.$dir_up;
+        if ($type != '') { $parentDirLink .= '&type='.$type; }
+        if ($p_ref_id != '') { $parentDirLink .= $p_ref_id; } 
+		$tpl->setVariable('parent_dir_link', $parentDirLink );
 		
 		// wenn $current_dir leer ist -> up-Button nicht anzeigen
 		$current_dir == '' ? $hide = 'hide' : $hide = '';
@@ -83,7 +89,15 @@ class picturesPresent
 		{ 
 		  foreach($files as $index => $file) {
 			$tpl->setCurrentBlock('list_block');
-						
+
+            // Type bestimmt, falls noetig
+            $row_navi = $navi->read_navigation_by_bildpfad($file['datei']); 
+            if ($row_navi['bildpfad'] != '') { $type = 'N'; }
+            if ($type == '') { 
+              $row_page = $pages->read_page_per_kennzeichen($file['datei']); 
+              if ($row_page['kennzeichen'] != '') { $type = 'P'; }            
+            }
+            
 			// Dateiname und Klasse
 			$class = $index % 2 == 0 ? 'even' : 'odd'; 
 			$tpl->setVariable('class', $class);
@@ -106,7 +120,7 @@ class picturesPresent
 
 				if ($file['extension'] != '.pdf') { $tpl->setVariable('filedimensions', $file['imgsize']); }
 				$tpl->setVariable('filesize', $file['fsz'].' KB');
-				$tpl->setVariable('link_delete', $_SERVER['PHP_SELF'].'?action=delete&dir='.$aktdir.'&filename='.$file['datei'].'&type='.$_SESSION['type']. $p_ref_id);
+				$tpl->setVariable('link_delete', $_SERVER['PHP_SELF'].'?action=delete&dir='.$aktdir.'&filename='.$file['datei'].'&type='.$type. $p_ref_id);
 				$tpl->setVariable('confirm_delete', $GLOBALS['TEXTE']['TEXT_CONFIRM_DELETE_FILE']);
 				// Bilder anzeigen, falls erw�nscht und der Dateityp nicht .pdf ist
 				if ($zeige_bilder == 'yes' && $file['extension'] != '.pdf') {
@@ -122,13 +136,13 @@ class picturesPresent
 			}
 			// Filetype: Verzeichnis
 			else if ($file['filetype'] == 'dir') {
-				$tpl->setVariable('link', $_SERVER['PHP_SELF'].'?action=images&dir='.$aktdir.'/'.$file['datei'].'&type='.$_SESSION['type'].$p_ref_id  );
+				$tpl->setVariable('link', $_SERVER['PHP_SELF'].'?action=images&dir='.$aktdir.'/'.$file['datei'].'&type='.$type.$p_ref_id  );
 				$tpl->setVariable('filetype_icon', '../gifs/folder_16.png');
 				$tpl->setVariable('text_filetype', $GLOBALS['TEXTE']['TEXT_FILETYPE']);			
 				$tpl->setVariable('show_bild', 'hide');
 				$tpl->setVariable('display_show', 'hide');
 				$tpl->setVariable('text_bild_delete', $GLOBALS['TEXTE']['TEXT_DIR_DELETE']);			
-				$tpl->setVariable('link_delete', $_SERVER['PHP_SELF'].'?action=delete&dir='.$aktdir.'&filename='.$file['datei'].'&type='.$_SESSION['type'].$p_ref_id);
+				$tpl->setVariable('link_delete', $_SERVER['PHP_SELF'].'?action=delete&dir='.$aktdir.'&filename='.$file['datei'].'&type='.$type.$p_ref_id);
 				$tpl->setVariable('confirm_delete', $GLOBALS['TEXTE']['TEXT_CONFIRM_DELETE_DIR']);	
 				$tpl->setVariable('permissions', $file['fileperms']);			
 				$tpl->setVariable('filegroup', $file['filegroup']) .'/';			
@@ -196,7 +210,7 @@ class picturesPresent
 	 ************************************************************************************************/
 	public function kommentare_anzeigen($filelist, $aktdir, $message, $zeige_bilder, $type, $ref_id) 
 	{	
-		global $tpl, $row;
+		global $tpl, $row, $cfg, $general, $language;
 		$tpl->loadTemplatefile('browser.tpl.html', true, true);
 		global $general;
 		// horizontales Menu anzeigen
@@ -253,9 +267,22 @@ class picturesPresent
 				$bild = array_pop(explode('/',$file['bild']));
 				
 				$tpl->setVariable('filename', $comment.' '.$bild);
-				$tpl->setVariable('kid', $file['bildid']);
-				$tpl->setVariable('kommentar', $file['kommentar']);
-				// Link zum Reihenfolge �ndern
+                // Kommentare abhängig von den definierten Sprachen anzeigen
+                if (!is_array($GLOBALS['sprachcodes'])) $cfg->sprachen_lesen();
+                $sprachen = $GLOBALS['sprachcodes'];
+                if (count($sprachen) == 0) $sprachen[0] = $language;	
+                $tpl->setVariable('hide_show_de', 'hide');
+                $tpl->setVariable('hide_show_en', 'hide');
+                $tpl->setVariable('hide_show_fr', 'hide');
+                $tpl->setVariable('hide_show_it', 'hide');
+                foreach($sprachen as $key => $sprache) {
+                  $tpl->setVariable('lang_'.$sprache, strtoupper($sprache).': ');
+                  $tpl->setVariable('kid', $file['bildid']);
+                  $tpl->setVariable('kommentar_'.$sprache, $general->reslash($file['kommentar_'.$sprache]));
+                  $tpl->setVariable('hide_show_'.$sprache, 'display_inline');
+                }
+                
+				// Link zum Reihenfolge aendern
 				if ($index == 1) { $tpl->setVariable('display_up', hide); }
 				$tpl->setVariable('link_up', $_SERVER['PHP_SELF'].'?action=bildup&ref_id='.$file['ref_id'].'&sortkey='.$file['sortkey'].'&type='.$type.'&dir='.$aktdir);		
 				$tpl->setVariable('text_bild_up', $GLOBALS['TEXTE']['TEXT_REIHENFOLGE']);
@@ -278,7 +305,11 @@ class picturesPresent
 		$this->show_tabnav($link_zurueck, $GLOBALS['MENUE']['TEXT_ZURUECK']);
 		// Block show_bild aktivieren
 		$tpl->setCurrentBlock('show_bild');
-		$img = '<img src="'.$bild.'" border="0" alt="'.$bild.'" title="'.$bild.'" />';
+        if (preg_match('/pdf/',$bild)) {
+          $img = '<iframe frameborder="0" width="100%" height="500" src="'.$bild.'"></iframe>';
+        } else {
+          $img = '<img src="'.$bild.'" border="0" alt="'.$bild.'" title="'.$bild.'" />';
+        }
 		$tpl->setVariable('bild', $img);
 		// Block parsen
 		$tpl->parseCurrentBlock();
@@ -381,7 +412,7 @@ class picturesPresent
 			$akt_verzeichnis = str_replace('../../', '', $aktdir);
 			$tpl->setVariable('text_verzeichnisse', $GLOBALS['TEXTE']['TEXT_AKT_VERZEICHNIS'] . ': '. $akt_verzeichnis);		
 			$tpl->setVariable('style_ziel_verzeichnis', 'display:none;');
-			// f�r welche Seite erfolgt diese Aktion?
+			// fuer welche Seite erfolgt diese Aktion?
 			$general->print_seiten_info();
 		} else {
 			$tpl->setVariable('text_verzeichnisse', $GLOBALS['TEXTE']['TEXT_AKT_VERZEICHNIS']);		
@@ -402,25 +433,33 @@ class picturesPresent
 		$tpl->show();
 	}
 	
-	/* Selectbox f�r verschiedene Gr�ssen der Thumbnails erstellen */
+	/* Selectbox fuer verschiedene Groessen der Thumbnails erstellen */
 	private function selectbox_thumbnail_groessen($thumbsize) {
 		global $cfg;
-		// Die Selectbox f�r Bildergr�ssen werden neu abh�ngig vom Thema ausgegeben.
-		// Die Bildgr�ssen werden aus der Tabelle cms_bildgroessen ausgelesen
+		// Die Selectbox fuer Bildergroessen werden neu abhaengig vom Thema ausgegeben.
+		// Die Bildgroessen werden aus der Tabelle cms_spezial ausgelesen 
 		$bildgroessen = $cfg->bildgroessen_lesen();
-		//var_dump($bildgroessen);
 		
+        // falls keine Bildgroessen in cms_spezial gepflegt wurden, werden die Masse aus cms_templates gelesen
+        if (count($bildgroessen) == 0) {
+          $bildgroessen = $cfg->bildgroessen_lesen_from_templates();
+        }
+        
 		$selectbox_start = '<select id="thumbdimensions" name="thumbdim" size="1" style="width:100px;">';
 		$selectbox_ende  = '</select>';
 
-		if (count($bildgroessen) > 0) {
+        // Wurden Bildmasse in cms_spezial gepflegt, übersteuern diese die Masse in cms_templates
+        // Es kann in diesem Fall nicht mit Sicherheit eine Option als selected markiert werden
+        // ausser eine Grösse ist identisch zur Grösse, welche im aktuelle Template gepflegt ist.
+		if (count($bildgroessen) > 0) {  
 			foreach ($bildgroessen as $index => $bild) {
 				$value_page = $bild['wert1'].'x'.$bild['wert2'];
 				$option .= $value_page == $thumbsize ? '<option selected ' : '<option ';				
 				$option .= 'value="'.$value_page.'">'.$value_page.'</option>' . "\n"; 				
 			}
-		} else {		
-			// options zusammensetzen. Wenn $aktdir vorkommt, wird dieses als selected markiert
+		} else {
+        // Es wurden keine Bildmasse in cms_spezial oder cms_template gepflegt 
+        // --> dann werden die Bildmasse aus der cms_config angezeigt
 			$option = '';
 			// Thumbnails f�r Unterseiten sollen 98x98 px gross sein.
 			$option .= $_SESSION['type'] == 'P' ?  '<option selected ' : '<option ';				

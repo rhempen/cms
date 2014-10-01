@@ -7,6 +7,8 @@
 
 //<![CDATA[
   var phpfile = "ajax_gmxml_geocoding.php";
+  var gLangu = getParameterByName("langu");
+  var gLanguFile = "languages/datatable_"+gLangu+".txt";
   var gQuery = getParameterByName("query"); // wurde ein Suchstring eingegeben?
   var gPhpfile = phpfile+location.search;
   var gZoom = gQuery != '' ? 11 : 8; // Zoomfaktor abhängig vom Suchstring
@@ -15,6 +17,7 @@
   var gLat, gLng;
   var gZentrum;
   var gAnzahl, gModus;
+  var gBtnMap, gBtnList;
   var map;
 
   var customIcons = {
@@ -124,20 +127,20 @@
   // Init jQuery-Table
   function initTable() {
     $(document).ready(function() { 
-    oTable = $('#resulttable').dataTable( {
+      var oTable = $('#resulttable').dataTable( {
                 "bJQueryUI" : true,
                 "bProcessing" : true,
                 "bStateSave": true,
                 "bPaginate": true,
-                "sPaginationType" : "full_numbers"
+                "sPaginationType" : "full_numbers",
+                "oLanguage": { "sUrl": gLanguFile }
       }	);
     } );
   }
   
   // Initialisierung der Maintenance-Tabelle
   function initMaintenance() {
-//  	$("#ajaxLoad").show();
-		// Ajax-Request ausführen   
+    // Ajax-Request ausführen   
     downloadUrl(gPhpfile, function(data) {
       var i;
       var xml = parseXml(data);
@@ -164,25 +167,28 @@
   }
   
   // Init jQuery-Table for Mainenance
-  function initTableMaintain() {
-    $(document).ready(function() {       
+  function initTableMaintain() {    
+    $(document).ready(function() {
       var oTable = $('#resulttable').dataTable( {
                       "bJQueryUI" : true,
                       "bStateSave": true,
 			          "bProcessing" : true,
                       "bFilter": true,
                       "bPaginate": true,
-                      "sPaginationType" : "full_numbers"
+                      "sPaginationType": "full_numbers"
+//                      "oLanguage": { "sUrl": gLanguFile } 
+//                --> localisation funktionier leider noch nicht
       }	);
       
-    $('#resulttable').dataTable().makeEditable( {
+//    $('#resulttable').dataTable().makeEditable( {
+      oTable.makeEditable( {
         sUpdateURL: "UpdateData.php",
         sAddURL: "AddData.php",
         sDeleteURL: "DeleteData.php",
         "aoColumns": [
                         {
                             type: 'select',
-                            onchange: 'submit',
+                            onblur: 'submit',
                             data: "{'lager':'lager','onlineshop':'onlineshop'}"
                         },
                         {   cssclass: "required",
@@ -530,7 +536,7 @@
     });
   }
 
-  function switchView()
+  function switchView(iTxtLst, iTxtMap)
   {
     var lDivMap = document.getElementById("map");
     var lDivLst = document.getElementById("lst");
@@ -538,11 +544,11 @@
     if (lDivLst.className == 'hide') {
       lDivMap.className = 'hide';
       lDivLst.className = 'show';
-      lLstBut.innerHTML = 'Map';
+      lLstBut.innerHTML = iTxtMap;
     } else {
       lDivMap.className = 'show';
       lDivLst.className = 'hide';
-      lLstBut.innerHTML = 'Liste';
+      lLstBut.innerHTML = iTxtLst;
     }    
   }
 

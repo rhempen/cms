@@ -200,28 +200,76 @@ class frontendGetData
 		// 1. $param fuer kuerzel navid und subid erstellen
 		
 		if ($nav && $nav['ukap'] > 0) {
-			// nav_id der Unternavigation
-			$subid = $nav['nav_id'];
-			// nav_id der Hauptnavigation dazulesen
-			$query = 'SELECT DISTINCT nav_id FROM '.$this->mPrefix.'navigation
-					   WHERE kap='.$nav['kap'].' AND ukap=0';
-			$navid = $this->mDb->queryOne($query);
-			$link = $redirect->set_navlink($navid, $subid, $nav['page_id']);		
-		} elseif ($nav && $nav['kap'] > 0) {
-			// nav_id Hauptnavigation, es gibt keine Unternavigation
-			$link = $redirect->set_navlink($nav['nav_id'],0, $nav['page_id']);		
-		}
-		
+          $link = $this->create_link($nav);
 		// SMURL !!
-		if ($link) { 
+          if ($link) { 
 			$href_text = $GLOBALS['LINKS']['SIEHE_AUCH'].$nav['name'];
 			$linkclass = $linknr == '1' ? 'clslink1' : 'clslink2';
 			$href = '<p class="'.$linkclass.'"><a href="'.$link.'" onclick="javascript:setLinkCookie(location.href);">'.$href_text.'</a></p>';
-		}
+          }            
+        }
 		return $href;
 	}
-	
 
+	/* Auf Unterseiten kann eine Link-Liste aller Unterseiten eines Navigationspunktes erstellt werden
+		@param: $feld - zu lesender Wert des Feldes 
+		@param: $nav_id - Id der Navigation
+		@return: $html - eine UL-Liste mit den links auf die Unterseiten
+	*/    
+    public function create_unterseiten_link_liste($row) 
+    {
+      global $redirect;
+      $count;
+      $navid = $row['nav_id'];
+      $pagid = $row['page_id'];
+      if ($navid > 0 && $pagid > 0) {
+		$query = 'SELECT p.sort_id, p.page_id, p.name, n.nav_id, n.kap, n.ukap, n.kuerzel
+			  		FROM '.$this->mPrefix.'pages p
+			  INNER JOIN '.$this->mPrefix.'navigation n
+			          ON p.nav_id = n.nav_id
+			       WHERE p.nav_id='.$navid.'
+			         AND p.aktiv="j"
+                   ORDER BY p.sort_id';
+		$rows = $this->mDb->query($query);
+        $count = $rows->numRows();
+      }
+      
+      // jetzt die Linkliste aufbauen, falls mehr als 1 Link da sind!!
+      if ($count > 1) {
+        $html = '<div class="linkliste"><ul>';      
+        while ($nav = $rows->fetchRow(MDB2_FETCHMODE_ASSOC)) {
+          if ($nav && $nav['ukap'] > 0) {
+            $link = $this->create_link($nav);
+            if ($nav['page_id'] == $pagid) {
+              $html .= '<li><a class="active" href="'.$link.'">'.$nav['name'].'</a></li>';              
+            } else {
+              $html .= '<li><a href="'.$link.'">'.$nav['name'].'</a></li>';              
+            }
+          }
+        };
+        $html .= '</ul></div>';
+        return $html;
+      }
+    }
+
+	/* Einen Link anhand der Navigations-Id's navid, pagid, subid ermitteln
+		@param: $nav - Array aus dem SELECT-Statement
+		@return: $link - eine URL 
+	*/    
+    private function create_link($nav) 
+    {
+      global $redirect;
+      // nav_id der Unternavigation
+      $subid = $nav['nav_id'];
+      // nav_id der Hauptnavigation dazulesen
+      $query = 'SELECT DISTINCT nav_id FROM '.$this->mPrefix.'navigation
+                 WHERE kap='.$nav['kap'].' AND ukap=0';
+      $navid = $this->mDb->queryOne($query);
+      // SMURL!!
+      $link = $redirect->set_navlink($navid, $subid, $nav['page_id']);
+      return $link;
+    } 
+    
 	/*******************************************************************************
 	 *	Selectionen auf cms_modules
 	 ******************************************************************************/
@@ -351,6 +399,38 @@ class frontendGetData
 		}
 		return $html;
 	}
+
+	/******************************************************************************************
+	  Es wird im Media-Verzeichnis nach dem Untervereichnis background gesucht und ob es darin
+	  Bilder gibt. Wenn ja, werden diese in einen Array gelesen, aus welchem dann ein zufälliges
+	  Bild ausgewählt und zurückgeliefert wird. (randomize)
+	  Zudem werden nur File-Typen gemäss dem Array $ext_array ausgewählt
+	 ******************************************************************************************/
+	public function get_random_bgimage() 
+	{
+		$media_dir = MEDIA_BASE.'/background/_images/';
+		$ext_array = array('.png','.gif','.jpg');
+		$bilder_arr = array();
+		if (file_exists($media_dir)) {
+			$handle  = opendir($media_dir);
+			while (false !== ($file = readdir($handle)))
+			{
+				// Pfad und Datei
+				$mediafile = $media_dir. $file;
+				$extension	= strrchr($file, ".");
+				if (is_file($mediafile) &&  in_array($extension, $ext_array) ) {
+					array_push($bilder_arr,$mediafile);
+				}
+			}
+			/* Zufallsgenerator waehlt ein Bild */
+			if (count($bilder_arr) > 0) {
+				$numr = array_rand($bilder_arr,1);
+				$bild = $bilder_arr[$numr];
+				$html =  $bild != '' ? '<img src="'.HOST.$bild.'" border="0" alt="" />' : '';
+			}
+			return $html;
+		}      
+  }
 
 	/******************************************************************************************
 	  Es wird im Media-Verzeichnis nach dem Untervereichnis header gesucht und ob es darin

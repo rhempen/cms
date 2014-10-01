@@ -182,7 +182,7 @@
         "aoColumns": [
                         {
                             type: 'select',
-                            onchange: 'submit',
+                            onblur: 'submit',
                             data: "{'lager':'lager','onlineshop':'onlineshop'}"
                         },
                         {   cssclass: "required",

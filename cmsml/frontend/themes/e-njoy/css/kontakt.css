@@ -66,7 +66,12 @@ font-style: normal;
 text-align: center; 
 clear: both; 
 }
+
 .error
 { 
-color: #fff;
+  color: #ff3300;
+}
+
+.success {
+  color: #008800;
 }

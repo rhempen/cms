@@ -38,50 +38,50 @@ class navigationRedirect
      * @params: $_GET
      * @return: $rc (true oder false)
     */
-    public function check_uri() 
-    {
-      global $naviget;
-      $uri = $_SERVER['REQUEST_URI'];
-      $qst = $_SERVER['QUERY_STRING'];
-      $nav = str_replace(ROOTDIR,'',$uri);
-      $this->fill_redirect_buffer();
-      if (SMURL == 'ja') {
-        if ($nav == '' || $nav == 'index.php') {
-          $rc = 8;
-        } else {
-          $arr = explode('/',$nav);
-          foreach($arr as $index => $value) {
-            $rc = 8;
-            if ($this->is_exception($value) || 
-                $this->is_redirection($value) || 
-                $this->is_sprachcode($value)) {
-              $rc = 0;
-            }
-          }
-        }
-      } else {
-        $navid = $subid = $pagid = $rc = 0;
-        if (count($_GET) > 0) {
-          $rc = 8;
-          foreach($_GET as $name => $value) {
-            switch($name) {
-              case 'navid': 
-                $navid = $value;
-                break;
-              case 'subid':
-                $subid = $value;
-                break;
-              case 'pagid':
-                $pagid = $value;
-                break;
-            }
-          }
-        }
-        $params = $navid.'_'.$subid.'_'.$pagid;
-        if (in_array($params,$GLOBALS['allredirections'])) { $rc = 0; }              
-      }
-      return $rc;
-    }
+//    public function check_uri() 
+//    {
+//      global $naviget;
+//      $uri = $_SERVER['REQUEST_URI'];
+//      $qst = $_SERVER['QUERY_STRING'];
+//      $nav = str_replace(ROOTDIR,'',$uri);
+//      $redirs = $this->fill_redirect_buffer();
+//      if (SMURL == 'ja') {
+//        if ($nav == '' || $nav == 'index.php') {
+//          $rc = 8;
+//        } else {
+//          $arr = explode('/',$nav);
+//          foreach($arr as $index => $value) {
+//            $rc = 8;
+//            if ($this->is_exception($value) || 
+//                $this->is_redirection($value) || 
+//                $this->is_sprachcode($value)) {
+//              $rc = 0;
+//            }
+//          }
+//        }
+//      } else {
+//        $navid = $subid = $pagid = $rc = 0;
+//        if (count($_GET) > 0) {
+//          $rc = 8;
+//          foreach($_GET as $name => $value) {
+//            switch($name) {
+//              case 'navid': 
+//                $navid = $value;
+//                break;
+//              case 'subid':
+//                $subid = $value;
+//                break;
+//              case 'pagid':
+//                $pagid = $value;
+//                break;
+//            }
+//          }
+//        }
+//        $params = $navid.'_'.$subid.'_'.$pagid;
+//        if (in_array($params,$GLOBALS['allredirections'])) { $rc = 0; }              
+//      }
+//      return $rc;
+//    }
     
 	/* Prüfen eines URL-Ausschnittes gegenüber definierten Ausnahmen 
      * @params: $value = der URL-Ausschnitt
@@ -151,6 +151,7 @@ class navigationRedirect
         }
       }
       $GLOBALS['allredirections'] = $redir_array;
+      return $redir_array;
     }
 
     /* alle Datensätze aus redirect lesen für Überprüfung der URL 
@@ -167,30 +168,81 @@ class navigationRedirect
   
 	/* Wenn die Website mittels index.php oder ohne index.php gestartet wird,
      * muss eventuell ein Redirect auf die 1. Navigationsseite gemacht werden
+     * @return: $startseite = $_SERVER['REQUEST_URI'] = $url_startseite, falls nötig.
 	*/
-    public function redirect_to_first_navi() 
+    public function redirect_to_startseite() 
     {
       global $naviget;
-      $url = $_SERVER['REQUEST_URI'];
-      // Aufsplitten der URL abhängig von SMURL
-      if (SMURL == 'nein') {
-        $params = explode('?',$url);
-        $anzahl = count($params);
-        if ( $anzahl == 1) { // es gibt keine GET-Parameter
-          $index = str_replace('index.php','',$params[0]);          
-        } else {
-          return;
-        }       
+      // angeforderte URL
+      $uri = $_SERVER['REQUEST_URI'];
+      $queryString = $_SERVER['QUERY_STRING'];
+      // /index.php /index.htm(l) entfernen
+      $uri = preg_replace('/\/index.(php|html|htm)/','',$uri);
+      $startseite = $uri;
+      // Buffer füllen mit allen gültigen URL-Pfaden
+      $redirs = $this->fill_redirect_buffer();
+      // die URL zur mögliche Startseite ermitteln 
+      $url_startseite = $naviget->get_startseite();
+      //  aus $uri wird der String in ROOTDIR entfernt, weil nur die folgenden 
+      //  Parameter gültig sind.		
+      if (defined('ROOTDIR') && stristr($uri,ROOTDIR) && ROOTDIR != '/') {
+        $uri = str_replace(ROOTDIR,"",$uri);
       } else {
-        $rc = $this->check_uri();
+        $uri = preg_replace("/\//","",$uri,1);
       }
-      if ($rc != 0) {
-        $url_new = $naviget->get_startseite();
-        header('Location: ' . $url_new);
-        exit;
-      }        
+
+      // Umleitung, falls die URL / QueryString nicht im Array gefunden wird
+      if (SMURL == 'ja') {
+        $uri_array = explode('/',$uri);
+        foreach($uri_array as $key => $part_of_uri) { 
+          if (!in_array($part_of_uri,$redirs) &&
+              !$this->is_sprachcode($part_of_uri) &&
+              !preg_match('/start/',$part_of_uri)) {
+            $_SERVER['REQUEST_URI'] = $url_startseite;
+            $startseite = $url_startseite;
+            break;
+          }
+        }
+      } else {
+        $redir = $this->split_query_string($queryString);
+        if (!in_array($redir, $redirs)) {
+          $_SERVER['REQUEST_URI'] =  $url_startseite;
+          $startseite = $url_startseite; 
+          $queryString = preg_split('/\?/',$url_startseite);
+          // Querystring aufsplitten und $_GET-Parameter füllen
+          $redir = $this->split_query_string($queryString[1]);
+        }
+      }
+      return $startseite;
     }
-    
+ 
+    /* mit dieser Funktion kann der Querystring aus der URL (Kein SMURL!)
+     * in die einzelnen Parameter - Wert - Paare aufgesplittet werden
+     * @param: $querystring = der/die Parameter aus der URL
+     * @return: $redir = ein String in der Form 0_0_0, wobei die Ziffern die 
+     *          Id's von navid, subid, pagid representieren. 
+     */
+    private function split_query_string($queryString) 
+    {
+      $navid = $subid = $pagid = 0;
+      $queryArray = explode('&',$queryString);
+      foreach($queryArray as $key => $qstring ) {
+        if (preg_match('/navid/',$qstring)) {
+          list($navtxt,$navid)= explode('=',$qstring);
+          $_GET['navid'] = $navid;
+        }
+        if (preg_match('/subid/',$qstring)) {
+          list($subtxt,$subid)= explode('=',$qstring);
+          $_GET['subid'] = $subid;
+        }
+        if (preg_match('/pagid/',$qstring)) { 
+          list($pagtxt,$pagid)= explode('=',$qstring);
+          $_GET['pagid'] = $pagid;
+        }
+      }
+      $redir = $navid.'_'.$subid.'_'.$pagid;
+      return $redir;
+    }
   
 	/**
 	 * 	navid, subid oder pagid anhand der GET-Parameter ermitteln
@@ -203,16 +255,19 @@ class navigationRedirect
 		$tab_prefix = $this->mPrefix;
 		unset($_GET);
 		$request_uri = $_SERVER['REQUEST_URI'];
-        
         $request_uri = $this->is_addon($request_uri);
         $uri = $request_uri;
 
 //        $rc = $this->check_uri();
 
-//  aus $uri wird nur der String in ROOTDIR entfernt, weil nur die folgenden 
+//  aus $uri wird der String in ROOTDIR entfernt, weil nur die folgenden 
 //	Parameter gültig sind.		
 		if (defined('ROOTDIR') && stristr($uri,ROOTDIR)) {
-			$uri = str_replace(ROOTDIR,"",$uri);			
+          if (ROOTDIR != '/') {
+            $uri = str_replace(ROOTDIR,"",$uri);
+          } else {
+			$uri = preg_replace("/\//","",$uri,1);			
+          }
 		}
 
 		if (substr($uri,0,1) == '/')
@@ -371,10 +426,11 @@ class navigationRedirect
 		$navid = (int)$_GET['navid'];
 		$subid = (int)$_GET['subid'];
 		$pagid = (int)$pagid;
-        // Link zusammenbauen, abhängig davon, ob SMURL aktiviert ist
-        $link = $this->set_navlink($navid,$subid,$pagid);
-        // jetzt noch eine ev. vorhandene Startnr für Listitems anfügen
-        $link .= $this->add_start_to_url( );
+ 		// Link zusammenbauen, abhängig davon, ob SMURL aktiviert ist
+    $link = $this->set_navlink($navid,$subid,$pagid);
+    // jetzt noch eine ev. vorhandene Startnr für Listitems anfügen
+		// $link .= $this->add_start_to_url( );
+		// ist hier nicht noetig, da noch die Methode pageslider::toHtml() durchlaufen wird.
 		return $link;
 	}
 	

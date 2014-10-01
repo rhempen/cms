@@ -1,4 +1,4 @@
-<!?xml version="1.0" encoding="utf-8" ?> 
+<?xml version="1.0" encoding="utf-8"?> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/2000/REC-xhtml1-20000126/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -26,7 +26,9 @@ a, a:link {
 </style>
 
 <script type="text/javascript" src="../../lib/prototype.php" charset="utf-8"></script>
-<script type="text/javascript" src="../../lib/scriptaculous.js?load=effects, controls"></script>
+<script type="text/javascript" src="../../lib/scriptaculous.js"></script>
+<script type="text/javascript" src="../../lib/effects.js"></script>
+<script type="text/javascript" src="../../lib/controls.js"></script>
 <script type="text/javascript" src="../../lib/path_finder.js"></script>
 <script type="text/javascript" src="../../lib/lightbox.js"></script>
 <script type="text/javascript" src="../scripts/browser.js"></script>
@@ -50,16 +52,6 @@ a, a:link {
     </td>
 	</td>
   </tr>
-  <!--
-  <tr>
-	<td colspan="7" class="{menu_class}">
-		<a href="{create_dir}">{text_create_dir}</a>
-		<a href="{upload_files}">{text_upload_files}</a>
-		<span class="{menu2_class}"></span><a href="{goto_pics}">{text_goto_pics}</a></span>
-		<span class="{menu3_class}"></span><a href="{link_bilder}">{text_show_pics}</a></span>
-	</td>
-  </tr>
-  -->
 <!-- Ende {menu_procedure} --> 
 <!-- END menue_block -->
 <!-- BEGIN message_block -->
@@ -134,12 +126,34 @@ a, a:link {
 		<span class="{show_bild_pfad}"><img src="{pfad_und_bild}" border="0" alt="{filename}" title="{filename}" /></span><br />
 		<span class="{show_filename}">{filename}</span>
 	</td>
-	<td colspan="5" width="375" align="center">
+	<td colspan="5" width="375" align="left">
 		<span id="meldung{kid}"></span><br />
-		<form action="#" method="post" name="komment{kid}">  
-			<textarea id="{kid}" class="kommentar" cols="40" rows="4" name="kommentar" style="white-space:pre;">{kommentar}</textarea><br />
-			<input type="reset" name="reset" value="reset" /> &nbsp;
-			<input type="submit" name="speichern" value="speichern" onclick='update_kommentar($("{kid}").id, $("{kid}").value); return false;' /> 
+		<form action="#" method="post" name="komment{kid}">
+          <table id="{kid}">
+            <tr class="{hide_show_de}">
+              <td>{lang_de}</td>
+              <td><textarea id="{kid}_de" class="kommentar" cols="40" rows="0" name="kommentar">{kommentar_de}</textarea></td>
+            </tr>
+            <tr class="{hide_show_en}">
+              <td>{lang_en}</td>
+              <td><textarea id="{kid}_en" class="kommentar" cols="40" rows="0" name="kommentar">{kommentar_en}</textarea></td>
+            </tr>
+            <tr class="{hide_show_fr}">
+              <td>{lang_fr}</td>
+              <td><textarea id="{kid}_fr" class="kommentar" cols="40" rows="1" name="kommentar">{kommentar_fr}</textarea></td>
+            </tr>
+            <tr class="{hide_show_it}">
+              <td>{lang_it}</td>
+              <td><textarea id="{kid}_it" class="kommentar" cols="40" rows="1" name="kommentar">{kommentar_it}</textarea></td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <input type="reset" name="reset" value="reset" /> &nbsp;
+                <input type="submit" name="speichern" value="speichern" 
+                       onclick='update_kommentar($("{kid}").id); return false;' />                 
+              </td>
+            </tr>
+          </table>            
 		</form>
 	</td>
 	<td width="25" align="center">

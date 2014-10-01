@@ -80,6 +80,7 @@ class navigationPresent
 			// alle Unterpositionen pro Navigationspunkt (horizontal)
 			foreach ($unav_array as $subid => $value) 
 			{
+				if (SUBMENU_DIR == 'horizontal') { $tpl->setVariable('richtung_subnavi', HMENU_RICHTUNG); }
 			    $tpl->setCurrentBlock('subitem_'.SUBMENU_DIR);
 				list($kap, $ukap, $label, $type) = explode('|',$value);
 				if ($kap != $akt_kap) { continue; }
@@ -92,7 +93,6 @@ class navigationPresent
                     $link .= ' class="'.$style.' '.$class.'"';
                 }
 		        $link 	.= '>'.$label.'</a>';
-				if (SUBMENU_DIR == 'horizontal') { $tpl->setVariable('richtung_subnavi', HMENU_RICHTUNG); }
 				$tpl->setVariable('subnavi_link',$link);		
 		        if ($subid == $akt_subid) { $tpl->setVariable('subnavi_aktiv', ' class="active"'); }
 				$tpl->parseCurrentBlock();
@@ -240,25 +240,42 @@ class navigationPresent
      */
     public function sprachauswahl() 
     {
-      global $general,$tpl,$cfg;
+      global $general,$tpl,$cfg, $redirect;
       if (empty($GLOBALS['sprachen_erlaubt'])) { $cfg->sprachen_lesen(); } 
       $sprachen = $GLOBALS['sprachen_erlaubt'];
       $html = ''; $zaehler = 0;
       $pipe = $this->set_pipe(THEME_SELECTED);
       $anzs = count($sprachen); // Anzahl Sprachen
-      $sprb = $general->analyse_template('main_tpl.html',0,'/sprachen/');
       // Sprachauswahl nur anzeigen, wenn 1. mehr als 1 Sprache definiert ist
       // und 2. der Block "sprachen" im Tpl gefunden wurde
       if ($anzs > 1 && sprb) {
+        $navid = isset($_GET['navid']) ? $_GET['navid'] : '0';
+        $subid = isset($_GET['subid']) ? $_GET['subid'] : '0';
+        $pagid = isset($_GET['pagid']) ? $_GET['pagid'] : '0';    
+        $start = isset($_GET['start']) ? $_GET['start'] : ''; 
         $html = '<ul>';
         foreach ($sprachen as $index => $sprache) {
+          $langu =  $sprache['wert2'];
           $zaehler++;
-          $class = $sprache['wert2'] == $_SESSION[language] ? 'active' : '';
+          $class = $langu == $_SESSION[language] ? 'active' : '';
           $html .= '<li class="navi"><a class="'.$class.'" '; 
           // Link zusammensetze abhängig davon ob SMURL aktiviert ist oder nicht
           if (SMURL == 'ja') {
-//            $link = $_SERVER['REQUEST_URI'].'/'.$sprache['wert2'];
-            $link = ROOTDIR. str_replace(ROOTDIR,'',$_SERVER['REQUEST_URI']).'/'.$sprache['wert2'];
+            $link = ROOTDIR;
+            $redirectRow = $redirect->get_single_redirection($navid);
+            $link .= $redirectRow['kuerzel_'.$langu] .'/';
+            if ($subid != 0) {
+              $redirectRow = $redirect->get_single_redirection($navid,$subid);
+              $link .= $redirectRow['kuerzel_'.$langu] .'/';
+            }            
+            if ($pagid != 0) {
+              $redirectRow = $redirect->get_single_redirection($navid,$subid,$pagid);
+              $link .= $redirectRow['kuerzel_'.$langu] .'/';
+            }
+            if ($start != '') {
+              $link .= '/start_'.$start.'/';
+            }
+            $link .= $langu; 
             $link = str_replace('//','/',$link);
           } else {
             $link = $_SERVER['REQUEST_URI'];

@@ -51,7 +51,7 @@ $GLOBALS['TEXTE']['ALLE_FELDER_FUELLEN']				= 'Please fill in all requested fiel
 $GLOBALS['TEXTE']['USER_NOT_EXIST']						= 'User %s is unknown!';
 $GLOBALS['TEXTE']['NEW_PASSWORD_IS']					= 'The new Password is: ';
 $GLOBALS['TEXTE']['WRONG_EMAIL']						= 'Email-Adress is invalid ';
-$GLOBALS['TEXTE']['EMAIL_SENT']							= 'The new Password has been sent to: ';
+$GLOBALS['TEXTE']['EMAIL_SENT']							= 'The new Password has been sent to: %s';
 $GLOBALS['TEXTE']['EMAIL_SEND_FAILED']					= 'Send Email was erroneous - Please try again later!';
 $GLOBALS['TEXTE']['EMAIL_BETREFF']						= 'Your Account to the CMS';
 $GLOBALS['TEXTE']['EMAIL_TEXT']							= 'Hello,'."\n".'the new Password is %s'."\n".'Please change it immediatly'."\n".'Thank you very much'."\n".'info@hempenweb.ch';
@@ -158,7 +158,7 @@ $GLOBALS['TEXTE']['TEXT_EDIT_UNTERNAVI'] 				= 'Edit Sub-Navigation-Point';
 $GLOBALS['TEXTE']['TEXT_NEUE_HAUPTNAVI'] 				= 'New Main-Navigation-Point';
 $GLOBALS['TEXTE']['NAVI_GUELTIGKEIT'] 	 				= 'Validity';
 $GLOBALS['TEXTE']['NAVI_AKTIV']							= 'Active';
-$GLOBALS['TEXTE']['NAVI_BEZEICHNUNG'] 	 				= 'Eescription';
+$GLOBALS['TEXTE']['NAVI_BEZEICHNUNG'] 	 				= 'Description';
 $GLOBALS['TEXTE']['NAVI_BEARBEITEN'] 	 				= 'Maintenance';
 $GLOBALS['TEXTE']['NAVI_SERVICE'] 		 				= 'Type';
 $GLOBALS['TEXTE']['NAVI_START']							= 'Start';
@@ -200,6 +200,7 @@ $GLOBALS['MESSAGES']['MSG_NICHT_NEU_SORTIERT']   		= 'Die Datens&auml;tze konnte
 $GLOBALS['LABELS']['SIE_BEARBEITEN_SEITE']				= 'You edit page:';
 $GLOBALS['LABELS']['SEITEN_INFO']						= 'Pageinfo';
 $GLOBALS['LABELS']['SEITEN_INFO_VALUES']				= 'PageID: %s / NavID: %s / Directory: %s';
+$GLOBALS['LABELS']['MESSAGE']							= 'Message';
 $GLOBALS['LABELS']['TEMPLATE']							= 'Template';
 $GLOBALS['LABELS']['INTEGRATION']						= 'Integration';
 $GLOBALS['LABELS']['MODUL']								= 'Modul';
@@ -221,6 +222,9 @@ $GLOBALS['LABELS']['RESET']								= 'reset';
 $GLOBALS['LABELS']['SAVE']								= 'save';
 $GLOBALS['LABELS']['ZEICHEN']							= 'characters remaining: ';
 $GLOBALS['LABELS']['MAXZEICHEN']						= 'Max. characters: ';
+$GLOBALS['LABELS']['MEMBERLOGIN']						= 'Member Login';
+$GLOBALS['LABELS']['ERFORDERLICH']						= 'required';
+$GLOBALS['LABELS']['NICHT_ERFORDERLICH']				= 'not necessary';
 
 /*********************************************************************************************************************
  * Texte zur Klasse redirectMaintain
@@ -245,7 +249,8 @@ $GLOBALS['TEXTE']['TEXT_UNTERSEITE']					= 'Subpage to ';
 
 // Texte zu SEITEN-Verwaltung
 $GLOBALS['TEXTE']['TEXT_PLUS_MINUS'] 					= 'Open or close';
-$GLOBALS['TEXTE']['TEXT_UPLOAD'] 						= "Managing Pictures:\nImageinfos\nUpload images\nDelete images";
+//$GLOBALS['TEXTE']['TEXT_UPLOAD'] 						= "Managing Pictures:\nImageinfos\nUpload images\nDelete images";
+$GLOBALS['TEXTE']['TEXT_UPLOAD'] 						= "Managing Pictures";
 $GLOBALS['TEXTE']['TEXT_EDIT'] 							= 'Edit';
 $GLOBALS['TEXTE']['TEXT_DELETE'] 						= 'Delete';
 $GLOBALS['TEXTE']['TEXT_PAGE_EDIT'] 					= 'Edit content';
@@ -382,8 +387,51 @@ $GLOBALS['LINKS']['BILDLEISTE'] 						= 'Provide a image bar with links to image
 $GLOBALS['LINKS']['AUTOBILDWECHSEL'] 					= 'Auto image change';
 
 $GLOBALS['LINKS']['SIEHE_AUCH'] 						= '&gt; ';
+$GLOBALS['WEBMAIL']['TITEL'] 							= 'Webmail Login';
+
+/*********************************************************************************************************************
+ * Kontaktformular
+ *********************************************************************************************************************/
 $GLOBALS['KONTAKTFORM']['TITEL'] 						= 'Contactform';
 $GLOBALS['KONTAKTFORM']['SENT'] 						= 'Thank you for contacting us!'."<br />\n";
-$GLOBALS['WEBMAIL']['TITEL'] 							= 'Webmail Login';
+$GLOBALS['KONTAKTFORM']['NOT_SENT']						= 'The email could not be sent!'."<br />\n";
+$GLOBALS['KONTAKTFORM']['DATA_SENT']					= 'The following information has been submitted: '."<br />\n";
+$GLOBALS['KONTAKTFORM']['OBLIGATORY']                   = '* Please complete all fields!';
+$GLOBALS['KONTAKTFORM']['NAME']                         = 'Name *';
+$GLOBALS['KONTAKTFORM']['ADRESSE']                      = 'Address *';
+$GLOBALS['KONTAKTFORM']['PLZ_ORT']                      = 'ZIP / City *';
+$GLOBALS['KONTAKTFORM']['TELEFON']                      = 'Phone *';
+$GLOBALS['KONTAKTFORM']['EMAIL']                        = 'Email*';
+$GLOBALS['KONTAKTFORM']['MITTEILUNG']                   = 'Message';
+$GLOBALS['KONTAKTFORM']['BILDCODE']                     = 'Image code *';
+$GLOBALS['KONTAKTFORM']['SENDEN']                       = 'send';
+$GLOBALS['KONTAKTFORM']['RESET']                        = 'reset';
+$GLOBALS['KONTAKTFORM']['CODE_FALSCH']                  = 'The security code is incorrect!';
+$GLOBALS['KONTAKTERROR']['MARKEDFIELDS']                = 'Please complete the highlighted fields!';
+$GLOBALS['KONTAKTERROR']['WRONGEMAIL']                  = 'The email address is invalid!';
+
+
+/*********************************************************************************************************************
+ * Texte zum Member-Login
+ *********************************************************************************************************************/
+$GLOBALS['MEMBER']['TITLE_LOGIN']                       = 'Logon';
+$GLOBALS['MEMBER']['TITLE_FORGOTTEN']                   = 'Request new password';
+$GLOBALS['MEMBER']['TITLE_CHANGE']                      = 'Changing the password';
+$GLOBALS['MEMBER']['TITLE_REGISTER']                    = 'New registration';
+$GLOBALS['MEMBER']['LBL_EXECUTE']                       = 'Perform';
+$GLOBALS['MEMBER']['EMAIL']                             = 'Email';
+$GLOBALS['MEMBER']['CHANGE_PW']                         = 'Do you want to change your password?';
+$GLOBALS['MEMBER']['CHANGE_PW_MELDUNG']                 = 'Your password was successfully changed!';
+$GLOBALS['MEMBER']['FORGOTTEN']                         = 'Did you forget your password?';
+$GLOBALS['MEMBER']['REGISTER']                          = 'Do you want to register?';
+$GLOBALS['MEMBER']['REGISTER_MELDUNG']    				= 'Your registration was successfully completed - Please sign up now.';
+$GLOBALS['MEMBER']['EXEC_LOGIN']                        = 'Login';
+$GLOBALS['MEMBER']['EXEC_FORGOTTEN']                    = 'Request new password';
+$GLOBALS['MEMBER']['EXEC_REGISTER']                     = 'Registration to run';
+$GLOBALS['MEMBER']['LOGIN_AND_PASSWORD']                = 'Please enter valid credentials!';
+$GLOBALS['MEMBER']['EMAIL_SEND_FAILED']					= 'Your new password can not be sent by email - please try again later, thank you!';
+$GLOBALS['MEMBER']['USER_NOT_EXISTS']   				= 'User %s is NOT stored in the system!';
+$GLOBALS['MEMBER']['USER_ALREADY_EXISTS']				= 'User %s is already stored in the system!';
+$GLOBALS['MEMBER']['SAVE_FAILED']        				= 'An error has occurred!';
 
 ?>

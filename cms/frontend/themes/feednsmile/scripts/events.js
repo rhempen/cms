@@ -25,7 +25,9 @@
 //    NiftyCorners funktionieren nur ab IE 8
       if (agent.match(/MSIE/) && agent.match(/[MSIE\s]\d/) < 8) { return; }  
       Nifty("div#page","big");
-//      Nifty("div#header","tl big, tr big");
+      Nifty("div#header","tl big, tr big");
+//      Nifty("div#home_bild","tr big");
+      
       Nifty("div.teaser","big");
       Nifty("div.teasertext,p.teasertext","normal");
 
@@ -34,8 +36,30 @@
     }
 
 /*-------------------------------------------------------------------------------
+  Tabelle "Preisliste" soll ein Zebramuster erhalten 
+  -------------------------------------------------------------------------------*/
+ 	var zebraPreisliste = function() {
+    var lClass, lDiv, allTrs;
+    if ($("preisliste")) 
+    {
+    	allTrs = $$('#preisliste tr');
+    	allTrs.each(function(el, index) {
+  			lDiv = index % 2;
+  			el.className = '';
+  			if (lDiv == 0) { 
+  				el.addClassName('even');
+  			} else {
+  				el.addClassName('odd');	
+  			}
+  		});
+    }
+	}
+
+
+/*-------------------------------------------------------------------------------
   Events bei onLoad registrieren
   -------------------------------------------------------------------------------*/
     Event.observe(window, 'load', sfHover, false);
     Event.observe(window, 'load', niftycubes, false);
+    Event.observe(window, 'load', zebraPreisliste, false);
 

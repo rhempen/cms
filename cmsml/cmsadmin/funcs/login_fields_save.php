@@ -4,7 +4,7 @@ $html = '';
 
 switch ($action) {
 	case 'CHANGE':
-		// Passwort ändern
+		// Passwort aendern
 		$html .= '<div id="change">' . "\n";
 		$html .= '<h2>'.$GLOBALS['TEXTE']['LBL_CHANGE_PASSWORD'].'</h2>' . "\n";
 		$html .= '<form name="changeform" method="post" action="'.$_SERVER['PHP_SELF'].'" onsubmit="return logincheck();" >' . "\n";

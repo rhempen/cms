@@ -6,6 +6,27 @@ session_start();
 $session_name = session_name();
 $session_id   = session_id();
 
+function printTitelZeile($action) {
+  $timestamp = date("d.m.Y - H:i:s")."&nbsp;&nbsp;";
+  switch($action) {
+    case 'NAVIGA': $text = $GLOBALS['CMS']['MENU01']; break;
+    case 'SEITEN': $text = $GLOBALS['CMS']['MENU02']; break;
+    case 'FRGMNT': $text = $GLOBALS['CMS']['MENU11']; break;
+    case 'ADDONS': $text = $GLOBALS['CMS']['MENU12']; break;
+    case 'MEDIEN': $text = $GLOBALS['CMS']['MENU03']; break;
+    case 'XLINKS': $text = $GLOBALS['CMS']['MENU06']; break;
+    case 'BACKUP': $text = $GLOBALS['CMS']['MENU07']; break;
+    case 'DOCU':   $text = $GLOBALS['CMS']['MENU08']; break;
+    case 'CONFIG': $text = $GLOBALS['CMS']['MENU10']; break;
+    case 'LOGIN':  $text = $GLOBALS['CMS']['TEXT_ANMELDEN']; break;
+    case 'CHANGE': $text = $GLOBALS['CMS']['TEXT_ANMELDEN']; break;
+    case 'FORGOT': $text = $GLOBALS['CMS']['TEXT_ANMELDEN']; break;
+    default: $text = $GLOBALS['CMS']['TEXT_WAEHLEN']; break;
+  }
+  echo '<div id="inhaltTitel"><h2>'.$text.'</h2></div><div id="inhaltZeit"><h2>'.$timestamp.'</h2></div>';
+}
+
+
 require_once '../includes/includes.php';
 require_once 'config.php';
 $language = LANGUAGE;
@@ -168,84 +189,73 @@ echo copyright();
 </div>
 </form>
 
+
 <div id="inhalt">
-<?php
-// hier wird das relevante Include aufgerufen
-switch($action) {
-  case 'NAVIGA':
-    echo '<h2>' .$GLOBALS['CMS']['MENU01']. '</h2>';
-	echo '<iframe name="files" frameborder="0" marginheight="0" marginwidth="0" scrolling="auto" width="100%" height="800" src="_controllers/navi_co_maintain.php"></iframe>';
-	break;
-	
-  case "SEITEN":
-	echo '<h2>' .$GLOBALS['CMS']['MENU02']. '</h2>';
-	echo '<iframe name="pages" frameborder="0" marginheight="0" marginwidth="0" scrolling="auto" width="100%" height="800" src="_controllers/pages_co_maintain.php"></iframe>';
-	break;
-	
-  case "FRGMNT":
-	echo '<h2>' .$GLOBALS['CMS']['MENU11']. '</h2>';
-	echo '<iframe name="pages" frameborder="0" marginheight="0" marginwidth="0" scrolling="auto" width="100%" height="800" src="_controllers/frgmnts_co_maintain.php"></iframe>';
-	break;
+  <?php
+  // hier wird das relevante Include aufgerufen
+  printTitelZeile($action);
+  switch($action) {
+    case 'NAVIGA':
+      echo '<iframe name="files" frameborder="0" marginheight="0" marginwidth="0" scrolling="auto" width="100%" height="800" src="_controllers/navi_co_maintain.php"></iframe>';
+      break;
 
-  case "ADDONS":
-	echo '<h2>' .$GLOBALS['CMS']['MENU12']. '</h2>';
-	echo '<iframe name="addons" frameborder="0" scrolling="auto" width="100%" height="800" src="../frontend/_addons/gmaps/maintain.php"></iframe>';
-	break;
+    case "SEITEN":
+      echo '<iframe name="pages" frameborder="0" marginheight="0" marginwidth="0" scrolling="auto" width="100%" height="800" src="_controllers/pages_co_maintain.php"></iframe>';
+      break;
 
-  case "MEDIEN": 
-	echo '<h2>' .$GLOBALS['CMS']['MENU03']. '</h2>';
-	echo '<iframe name="medien" frameborder="0" scrolling="auto" width="100%" height="800" src="_controllers/pictures_co_maintain.php"></iframe>';
-	break;
-	
-  case "EXPLOR": 
-	echo '<h2>' .$GLOBALS['CMS']['MENU04']. '</h2>';
-	echo '<iframe name="explor" frameborder="0" scrolling="auto" width="100%" height="600" src="../ajaxfilemanager/index.php"></iframe>';
-	break;
+    case "FRGMNT":
+      echo '<iframe name="pages" frameborder="0" marginheight="0" marginwidth="0" scrolling="auto" width="100%" height="800" src="_controllers/frgmnts_co_maintain.php"></iframe>';
+      break;
 
-  case "XLINKS":
-	echo '<h2>' .$GLOBALS['CMS']['MENU06']. '</h2>';
-	echo '<iframe name="xlinks" frameborder="0" scrolling="auto" width="100%" height="800" src="links.php"></iframe>';
-	break;
+    case "ADDONS":
+      $langu = strtolower(LANGUAGE);
+      echo '<iframe name="addons" frameborder="0" scrolling="auto" width="100%" height="800" src="../frontend/_addons/gmaps/maintain.php?langu='.$langu.'"></iframe>';
+      break;
 
-  case "BACKUP":
-	echo '<h2>' .$GLOBALS['CMS']['MENU07']. '</h2>';
-	echo '<iframe name="backup" frameborder="0" scrolling="auto" width="100%" height="800" src="backup/index.php"></iframe>';
-	break;
+    case "MEDIEN": 
+      echo '<iframe name="medien" frameborder="0" scrolling="auto" width="100%" height="800" src="_controllers/pictures_co_maintain.php"></iframe>';
+      break;
 
-  case "DOCU":
-	echo '<h2>' .$GLOBALS['CMS']['MENU08']. '</h2>';
-	echo '<iframe name="docu" frameborder="0" scrolling="auto" width="100%" height="800" src="doku.php"></iframe>';
-	break;
+    case "EXPLOR": 
+      echo '<iframe name="explor" frameborder="0" scrolling="auto" width="100%" height="600" src="../ajaxfilemanager/index.php"></iframe>';
+      break;
 
-  case "LOGOUT":
-	echo '<h2>' .$GLOBALS['CMS']['MENU09']. '</h2>';
-	break;
+    case "XLINKS":
+      echo '<iframe name="xlinks" frameborder="0" scrolling="auto" width="100%" height="800" src="links.php"></iframe>';
+      break;
 
-  case "CONFIG":
-	echo '<h2>' .$GLOBALS['CMS']['MENU10']. '</h2>';
-	echo '<iframe name="backup" frameborder="0" scrolling="auto" width="100%" height="800" src="_controllers/config_co_maintain.php"></iframe>';
-	break;
+    case "BACKUP":
+      echo '<iframe name="backup" frameborder="0" scrolling="auto" width="100%" height="800" src="backup/index.php"></iframe>';
+      break;
 
-  case "LOGIN":
-	echo '<h2>' .$GLOBALS['CMS']['TEXT_ANMELDEN']. '</h2>';
-	break;
+    case "DOCU":
+      echo '<iframe name="docu" frameborder="0" scrolling="auto" width="100%" height="800" src="doku.php"></iframe>';
+      break;
 
-  case "CHANGE":
-	echo '<h2>' .$GLOBALS['CMS']['TEXT_ANMELDEN']. '</h2>';
-	break;
+    case "LOGOUT":
+      echo '<h2>' .$GLOBALS['CMS']['MENU09']. '</h2>';
+      break;
 
-  case "FORGOT":
-	echo '<h2>' .$GLOBALS['CMS']['TEXT_ANMELDEN']. '</h2>';
-	break;
-	
-  default:
-	echo '<h2>' .$GLOBALS['CMS']['TEXT_WAEHLEN']. '</h2>';
-	break;
+    case "CONFIG":
+      echo '<iframe name="backup" frameborder="0" scrolling="auto" width="100%" height="800" src="_controllers/config_co_maintain.php"></iframe>';
+      break;
 
-}	
-// Schliessen der DB-Verbindung
-$db->disconnect();
-?>
+    case "LOGIN":
+      break;
+
+    case "CHANGE":
+      break;
+
+    case "FORGOT":
+      break;
+
+    default:
+      break;
+
+  }	
+  // Schliessen der DB-Verbindung
+  $db->disconnect();
+  ?>  
 </div>
 
 </body>

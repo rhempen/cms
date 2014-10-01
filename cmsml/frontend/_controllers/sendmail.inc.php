@@ -1,6 +1,6 @@
 <?php 
 
-// zuerst den Sicherheitscode prüfen 
+// zuerst den Sicherheitscode prï¿½fen 
 if (isset($_POST['email'])) {
 	if (!isset($_SESSION['code']) || $_SESSION['code'] != $_POST['code'])
 	{
@@ -13,6 +13,7 @@ if (isset($_POST['email'])) {
 # An welche Adresse sollen die Mails gesendet werden?
 # $strEmpfaenger = 'info@'.$_SERVER['HTTP_HOST'].'.ch';
 if (EMAIL_RECEIVER == '') { 'hempen@bluewin.ch'; }
+$strEmpfaenger = $member->encode_email(EMAIL_RECEIVER); // funktioniert nicht!!
 $strEmpfaenger = EMAIL_RECEIVER;
 
 # Welche Adresse soll als Absender angegeben werden?
@@ -62,7 +63,7 @@ if($_POST)
   $strMailtext = stripslashes($strMailtext);
  }
  
-// utf8 Dekodieren, falls nötig
+// utf8 Dekodieren, falls nï¿½tig
 //echo mb_check_encoding($strMailtext);
 //if (mb_check_encoding($strMailtext, "UTF-8") === true)
 //{

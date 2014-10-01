@@ -5,7 +5,7 @@
  *           www.hempenweb.ch
  * ----------------------------------------------------------
  *
- * Controller f�r die Ausgabe der Sitemap
+ * Controller fuer die Ausgabe der Sitemap
  *
  * @author      Roland Hempen
  * @copyright   Frei einsetz- und veraenderbar, wenn der Autor erw�hnt wird

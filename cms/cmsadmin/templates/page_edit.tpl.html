@@ -13,30 +13,27 @@
 <link rel="stylesheet" type="text/css" href="../css/cmsadmin_tabnav.css" media="screen">
 
 <!-- Einbinden der TinyMCE-scripts und Customizing des Editors f�r diese Seite -->
-<script type="text/javascript" src="../../lib/prototype.php"></script>
+<script type="text/javascript" src="../../lib/prototype.js"></script>
 <script type="text/javascript" src="../../lib/scriptaculous.js"></script>
 <script type="text/javascript" src="../../tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
 <script type="text/javascript" src="../../lib/path_finder.js"></script>
 <script type="text/javascript" src="../scripts/tinymce_settings.js"></script>
 <script type="text/javascript" src="../scripts/general_cmsadmin.js"></script>
 
-<script type="text/javascript" charset="utf-8">
-Event.observe(window, "load", function(){
-   new Ajax.Autocompleter("exp1","explist1","{auto_complete_exe}", { afterUpdateElement: set_link_id1 
-    });
-   new Ajax.Autocompleter("exp2","explist2","{auto_complete_exe}", { afterUpdateElement: set_link_id2 });
-});
-function set_link_id1(text, li) { $("linkid1").value = li.value; }
-function set_link_id2(text, li) { $("linkid2").value = li.value; }
-</script>
-
 </head>
 
 <body id="top">
 
 	<div id="content">		
-<!--	<form id="page_edit" action="" method="post" onsubmit="javascript:return validate_form();">	-->
-	  <!-- BEGIN row -->
+      <!-- BEGIN row -->
+      <script type="text/javascript" charset="utf-8">
+        Event.observe(window, "load", function(){
+           new Ajax.Autocompleter("exp1","explist1","{auto_complete_exe}", { afterUpdateElement: set_link_id1 });
+           new Ajax.Autocompleter("exp2","explist2","{auto_complete_exe}", { afterUpdateElement: set_link_id2 });
+        });
+        function set_link_id1(text, li) { $("linkid1").value = li.value; }
+        function set_link_id2(text, li) { $("linkid2").value = li.value; }
+      </script>
 		<form id="page_edit" name="page_edit" action="{action_url}" method="post" onsubmit="javascript:return check_felder_pages();">			
 			<table width="730" cellpadding="1" cellspacing="1">
 			  <tr> 

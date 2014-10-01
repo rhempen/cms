@@ -85,41 +85,72 @@ class frgmntsPresent
     while ($row = $frgmnts->fetchRow(MDB2_FETCHMODE_ASSOC)) 
     {
       $i++;
+
+      // Buttons erstellen pro Zeile
+      $button_edit = $this->create_button("fragment_edit",$row['frag_id']);
+      $button_copy = $this->create_button("fragment_copy",$row['frag_id']);
+      $button_dele = $this->create_button("fragment_dele",$row['frag_id']);
+      $button_move = $this->create_button("fragment_move",$row['frag_id']);
+
+      
       // CSS-Klasse festlegen
       $class = $class == 'odd' ? 'even' : 'odd';
       $tpl->setVariable('sortid',$row['sort_id']);
       $tpl->setVariable('class', $class);
       $tpl->setVariable('nr', $row['frag_id']);
       $tpl->setVariable('frgname', $row['name']);
-      $tpl->setVariable('bearbeiten', $this->compose_workmenu($row['frag_id'],$row['name']));
-      $tpl->setVariable('sorticon', $general->compose_sorticon());
+      $tpl->setVariable('button_edit', $button_edit);
+      $tpl->setVariable('button_copy', $button_copy);
+      $tpl->setVariable('button_dele', $button_dele);
+      $tpl->setVariable('button_move', $button_move);
       // die Zeile parsen
       $tpl->parseCurrentBlock();
     }		
   }
 
-  /* Workmenu zusammenstellen 
-    @params: $frgid - Aktuelle Fragment-id
-    @return: $html  - html f�r das anzuzeigende Menu
-  */
-  public function compose_workmenu($frgid,$frgname)
-  {
-    if ((int)$frgid > 0) {
-      $url  = '../_controllers/frgmnts_co_maintain.php?frgid='.$frgid.'&action=';
-      $html  = '<ul id="workmenu">';
-      $script = 'javascript:setModus(\'edit\','.$frgid.');';
-      $html .= '<li class="workitem"><a href="#"><img src="../gifs/edit.gif" alt="'.$GLOBALS['TEXTE']['TEXT_EDIT'].'" title="'.$GLOBALS['TEXTE']['TEXT_EDIT'].'" onclick="'.$script.'" /></a></li>';
-      $script = 'javascript:if (confirm(\''.sprintf($GLOBALS["TEXTE"]["FRGMNT_CONFIRM_DELETE"],$frgname).'\')) setModus(\'dele\','.$frgid.');';
-      $html .= '<li class="workitem"><a href="#"><img src="../gifs/delete.gif" alt="'.$GLOBALS['TEXTE']['TEXT_DELETE'].'" title="'.$GLOBALS['TEXTE']['TEXT_DELETE'].'" onclick="'.$script.'"/></a></li>';
-      $script = 'javascript:setModus(\'copy\','.$frgid.');';
-      $html .= '<li class="workitem"><a href="#"><img src="../gifs/copy_object.gif" alt="'.$GLOBALS['TEXTE']['TEXT_COPY'].'" title="'.$GLOBALS['TEXTE']['TEXT_COPY'].'" onclick="'.$script.'" /></a></li>';
-      $script = 'javascript:setModus(\'crea\','.$frgid.');';
-      $html .= '<li class="workitem"><a href="#"><img src="../gifs/create.gif" alt="'.$GLOBALS['TEXTE']['TEXT_CREATE'].'" title="'.$GLOBALS['TEXTE']['TEXT_CREATE'].'" onclick="'.$script.'" /></a></li>';
-      $html .= '</ul>';      
-    }
-    return $html;
-  }
-
+	/**
+	 * Das Code-Snippet für einen Button zusammenstellen
+	 * @param:	$class  = CSS-Klasse
+	 * @param:  $row    = der Datensatz der Seite, um den Link zusammenzustellen
+     * @return: $button = das HTML-Snippet
+	 */
+	public function create_button($class,$row)
+	{
+      global $language, $general;
+      $script = $title = $confrm = '';
+      $click  = ' onclick="setModus(\'%s\','.$row.');"';
+      $type   = 'button';
+      $button = '<button type="%s" class="%s" title="%s" %s></button>';
+      switch($class) {
+        case 'translate':
+          $langId = 'lang_'.$row['nav_id'];
+          $script = "toggle_navi_trans('".$langId."','".LANGUAGE."');"; 
+          $script = sprintf($click,$script);
+          break;
+       case 'fragment_edit':
+          $title  = $GLOBALS['TEXTE']['TEXT_EDIT'];
+          $script = sprintf($click,'edit');
+          break;
+        case 'fragment_copy':
+          $title  = $GLOBALS['TEXTE']['TEXT_COPY'];
+          $script = sprintf($click,'copy');
+          break;
+        case 'fragment_dele':
+          $title  = $GLOBALS['TEXTE']['TEXT_DELETE'];
+          $script = sprintf($click,'dele');
+          break;        
+        case 'fragment_move':
+          $div    = '<div class="fragment_move">%s</div>';
+          $image      = $general->compose_sorticon();
+          $button = sprintf($div,$image);
+          $title  = $GLOBALS['TEXTE']['TEXT_MOVE'];
+          break;
+      }
+      $button = sprintf($button,$type,$class,$title,$script);
+      return $button;
+	
+	}
+  
   /* output - einen Platzhalter in der View mit einem Wert ausgeben 
     @params: $platzhalter - der {Platzhalter} im Template
     @return: $value - Der Wert, der den Platzhalter f�llt

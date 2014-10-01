@@ -1,0 +1,144 @@
+<!doctype html public "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <!--
+
+      /*****************************************************
+      ** Title........: Hightech
+      ** Filename.....: voting_hightech.tpl.html
+      ** Author.......: Jaroslaw Tomanek
+      ** Homepage.....:
+      ** Contact......: neon@go2.pl
+      ** Version......: 0.3
+      ** Notes........:
+      ** Last changed.: 2004-03-1
+      ** Last change..:
+      *****************************************************/
+
+    -->
+    <title>{vote_title} - {txt_script_name} {txt_script_version}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset={txt_charset}" />
+    <style type="text/css">
+    <!--
+
+      body {
+          font-family:Verdana, Helvetica, Sans-serif;
+          font-size:9pt;
+          background-color:#EFEFEF;
+      }
+
+      td {
+          font-size:8pt;
+      }
+
+      a {
+          color:#5F5F5F;
+      }
+
+      #poweredby {
+          text-align:center;
+          text-align:right;
+          margin:10px;
+      }
+
+    -->
+    </style>
+  </head>
+
+  <body>
+
+
+    <!--
+    ######################################
+    # Message
+    -->
+
+    <loop name="message">
+      <table width="350" cellpadding="5" cellspacing="0"  style="border:1px solid #646464; background-color:#DFDFDF;margin-bottom:10px;">
+        <tr>
+          <td style="width:40px; background-color:#F8D135; border-width:0px 1px 0px 0px; border-style:solid; border-color:#DFDFDF;">&nbsp;</td>
+          <td style="background-color:#DFDFDF;">{message}</td>
+        </tr>
+      </table>
+    </loop name="message">
+
+
+
+
+    <!--
+    ######################################
+    # Form
+    -->
+
+    <if name="display_form">
+      <form name="vote" action="{script_self}" method="post">
+        <table width="250" cellpadding="5" cellspacing="0" style="border:1px solid #646464; background-color:#DFDFDF;">
+          <tr>
+            <td colspan="5" style="color:#000000; background-color:#F8D135; border-bottom:1px solid #646464;"> {vote_text} </td>
+          </tr>
+          <tr>
+            <td style="padding-top:5px; padding-bottom:10px;">
+              {vote_form_fields}
+            </td>
+          </tr>
+          <tr>
+            <td style="background-color:#CCCCCC; text-align: center; padding-bottom: 0px">
+              <input type="submit" name="send" value="{txt_submit}">
+            </td>
+          </tr>
+          <tr>
+            <td style="background-color:#CCCCCC; text-align: right; padding-top: 0px">
+              <a href="{document_self}?result=true">{txt_display_results}</a>
+            </td>
+          </tr>
+          </tr>
+        </table>
+      </form>
+    </if name="display_form">
+
+
+
+
+    <!--
+    ######################################
+    # Results
+    -->
+
+    <if name="display_results">
+      <table width="330" cellpadding="5" cellspacing="0" style="border:1px solid #646464; background-color:#DFDFDF;">
+        <tr>
+          <td colspan="6" style="color:#000000; background-color:#F8D135; border-bottom:1px solid #646464;"> {vote_text} </td>
+        </tr>
+        <loop name="vote_result">
+        <tr bordercolor="#DFDFDF">
+          <td width="50">{vote_option}</td>
+          <td style="text-align:right;">{vote_number}</td>
+          <td style="text-align:right;">&nbsp;&nbsp;({relation}%)</td>
+          <td width="160">
+            <table cellspacing="0" cellpadding="0" style="height:10px; background-color:#F8D135; border-style:solid; border-width:1px; border-color:#F5F5F5 #7B7B7B #7B7B7B #F5F5F5;">
+              <tr>
+                <td width="{bar_width}"></td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        </loop name="vote_result">
+        <tr>
+          <td style="height:15px; background-color:#DFDFDF;">&nbsp;</td>
+        </tr>
+        <tr style="background-color:#646464;">
+          <td colspan="3">
+            <IF NAME="display_link">
+              <a href="{document_self}" style="color:#FFFFFF;">{txt_display_form}</a>
+            </IF NAME="display_link"></td>
+          <td colspan="3" style="text-align:right; color:#FFFFFF;">
+          {txt_total_votes}: {total_votes}
+          </td>
+        </tr>
+      </table>
+    </if name="display_results">
+
+
+ </body>
+</html>

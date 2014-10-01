@@ -9,16 +9,15 @@ if (preg_match('/^hero/',$_SERVER['HTTP_HOST']) || $_SERVER['HTTP_HOST'] == 'loc
 elseif ($_SERVER['HTTP_HOST'] == 'www.publicdev.ch' || $_SERVER['HTTP_HOST'] == 'publicdev.ch')
 { 
 	ini_set('include_path', ini_get('include_path'));
-  $login_file = '/home/httpd/vhosts/publicdev.ch/httpdocs/'.ROOTDIR.'db/db_login_pear.php';
+    $login_file = '/home/httpd/vhosts/publicdev.ch/httpdocs/'.ROOTDIR.'db/db_login_pear.php';
 } 
 // www.e-njoy.ch
-elseif ($_SERVER['HTTP_HOST'] == 'www.e-njoy.ch' || $_SERVER['HTTP_HOST'] == 'e-njoy.ch' || 
-				$_SERVER['HTTP_HOST'] == 'e-njoy.ch.emerson.ch-meta.net')
+elseif ($_SERVER['HTTP_HOST'] == 'www.e-njoy.ch' || $_SERVER['HTTP_HOST'] == 'e-njoy.ch')
 { 
 	ini_set('include_path', ini_get('include_path'));
-//  $login_file = '/home/httpd/vhosts/e-njoy.ch/httpdocs/db/db_login_pear.php';
-  $login_file = '/home/httpd/vhosts/e-njoy.ch/httpdocs/db/db_login_pear.php';
-} 
+    $login_file = '/home/httpd/vhosts/e-njoy.ch/httpdocs/'.ROOTDIR.'db/e-njoy/db_login_pear.php';
+}
+$login_file = str_replace('//','/',$login_file);
 require_once($login_file);
 
 // Einbinden des PEAR-Paketes MDB2

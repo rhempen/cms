@@ -1,6 +1,9 @@
-<!-- BEGIN xml -->{xml_notation}<!-- END xml --><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- BEGIN xml -->{xml_notation}<!-- END xml -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/2000/REC-xhtml1-20000126/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
+  
 
 	<!-- main_tpl.html V.20120224 e-njoy.ch -->
 
@@ -26,14 +29,13 @@
 	<title><!-- BEGIN title -->{titletag}<!-- END title --></title>
 
 	<!-- BEGIN themes -->
-  <!-- <link href="{host}frontend/shared/css/shared_global.css" rel="stylesheet" type="text/css" media="screen" /> -->
 	<link href="{host}{themes_dir}{theme}css/{theme_global}.css" rel="stylesheet" type="text/css"/>
 	<link rel="shortcut icon"  href="{host}{themes_dir}{theme}img/favicon.ico" type="image/x-icon" />
 	<script type="text/javascript" src="{host}lib/prototype.js"></script> 
 	<script type="text/javascript" src="{host}lib/scriptaculous.js"></script> 
 	<script type="text/javascript" src="{host}lib/path_finder.js"></script> 
 	<script type="text/javascript" src="{host}lib/lightbox.js"></script> 
-<!--	<script type="text/javascript" src="{host}frontend/scripts/niftycorners.js"></script> -->
+	<script type="text/javascript" src="{host}frontend/scripts/niftycorners.js"></script>
 	<script type="text/javascript" src="{host}frontend/scripts/global.js"></script>
 	{theme_js}
 	<!-- END themes -->
@@ -45,7 +47,7 @@
 			<div id="page">
 				<div id="header_balken_oben" class="header_balken"></div>
 				<div id="header">
-				  <!-- BEGIN home -->
+                    <!-- BEGIN home -->
                     <div class="header_background">{header_background}</div>
                     <div id="header_home_wrapper"> 
                       <div id="home_link" title="Startseite" onclick="location.href='{home_link}';"></div>
@@ -102,7 +104,7 @@
 
  				<!-- BEGIN subnavi_horizontal -->
 				<div id="subnavibereich_horizontal">
-	          <div id="filler_subnavi_horizontal" class="{shnav}"></div>
+                <div id="filler_subnavi_horizontal" class="{shnav}"></div>
 	  				<div id="subnavi_horizontal" class="{richtung_subnavi}">
   						{ul_subitem_start}						  
   							<!-- BEGIN subitem_horizontal -->
@@ -157,6 +159,11 @@
                      {sprachwahl}                
                   </div>     
                 <!-- END sprachen -->
+                <!-- BEGIN member_data -->
+                  <div id="memberData">
+                     {member_login}                
+                  </div>     
+                <!-- END member_data -->                
 				</div> <!-- ende footer -->
 			</div> <!-- ende page -->
 		</div> <!-- ende page_margins --> 

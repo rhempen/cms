@@ -1,5 +1,5 @@
 // JavaScript Document
-<!--//--><![CDATA[//><!--
+//--><![CDATA[//><!--
 
 /* Root-Verzeichnis des CMS aus dem pathname ermitteln
  * die Funktionen zum Ermitteln des Root- und MEDIA-Verzeichnisses
@@ -11,7 +11,7 @@ var werte		 = new werteListe(location.search);
 var mediadir = mediaDir(werte['dir']);
 var base_url = cms + mediadir;
 var main_css = cms + 'cmsadmin/css/cms_tinymce.css';
-//alert(main_css);
+//alert(cms);
 
 tinyMCE.init ({
   /*mode : "textareas",*/

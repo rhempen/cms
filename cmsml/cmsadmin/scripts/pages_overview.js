@@ -86,7 +86,7 @@ function create_request() {
         } catch (failed) { XMLHttp = null; }
     }
   }
-  if (XMLHttp == null) { alert("Ajax nicht unterstützt"); }
+  if (XMLHttp == null) { alert("Ajax nicht unterstï¿½tzt"); }
   return XMLHttp;
 }
 
@@ -96,7 +96,7 @@ function create_request() {
 *
 /*********************************************************************************/
 // Events deklarieren 
-// Inplace-Editor für die Titelzeile
+// Inplace-Editor fï¿½r die Titelzeile
 Event.observe(window, "load", function() {
 // 1. Eine Instantz pro Element mit der Klasse "name" erstellen --> InPlaceEditor
 	$A($$(".name")).each( function(element) {
@@ -105,7 +105,7 @@ Event.observe(window, "load", function() {
 
 // Das Aktivflag updaten bei Mausklick
 // Event.observe(window, "load", function() {
-// 2. Eine Instantz pro Element mit der Klasse "aktivflag" erstellen --> AJAX-Request für den Update auf der DB
+// 2. Eine Instantz pro Element mit der Klasse "aktivflag" erstellen --> AJAX-Request fï¿½r den Update auf der DB
 	$A($$(".aktivflag")).each(function(element) {
 		Event.observe(element, "click", function() {
 			update_aktivflag_pages(element.id);
@@ -115,7 +115,7 @@ Event.observe(window, "load", function() {
 
 /**********************************************************************************
 *
-* Einen AJAX-Request ausführen
+* Einen AJAX-Request ausfï¿½hren
 *
 /*********************************************************************************/
 function update_aktivflag_pages(id) {
@@ -124,13 +124,13 @@ function update_aktivflag_pages(id) {
 	if (led != -1) { wert = 'inaktiv'; } else { wert = 'aktiv'; }
 	var pageid = id.substr(1, id.length);  
 	var	url = "../_controllers/pages_co_maintain.php?action=aktivSave&wert=" + wert + "&page_id=" + pageid;
-	// AJAX-Request kreiieren und ausführen
+	// AJAX-Request kreiieren und ausfï¿½hren
 	XMLHttp = create_request();
 	execute_request("GET", url, true, id, "aktivSave");
 }
 
 /*------------------------------------------------------------------------------
-  Funktion: execute_request -> ausführen des xmlhttp-Requests
+  Funktion: execute_request -> ausfï¿½hren des xmlhttp-Requests
 ------------------------------------------------------------------------------*/ 
 function execute_request(iMethod, iUrl, iType, iId, iAction) {
 	var id = iId;
@@ -143,11 +143,13 @@ function execute_request(iMethod, iUrl, iType, iId, iAction) {
   			  // responseText j/aktiv bzw. n/inaktiv in einen Array splitten
   			  var responseText = XMLHttp.responseText.split('/'); 
    				if (responseText[0] == 'j') {
-						$(id).innerHTML  = '<img src="../gifs/freed.gif" border="0" width="16" height="14" alt="'+responseText[1]+'" title="'+responseText[1]+'" />'; 
+//						$(id).innerHTML  = '<img src="../gifs/freed.gif" border="0" width="16" height="14" alt="'+responseText[1]+'" title="'+responseText[1]+'" />'; 
+						$(id).innerHTML  = '<button type="button" class="freed" title="'+responseText[1]+'" />'; 
 						$(id).title = responseText[1]; 
 						$(id).setStyle({ color:'green' });
 			  		} else {
-						$(id).innerHTML  = '<img src="../gifs/blocked.gif" border="0" width="16" height="14" alt="'+responseText[1]+'" title="'+responseText[1]+'" />'; 
+//						$(id).innerHTML  = '<img src="../gifs/blocked.gif" border="0" width="16" height="14" alt="'+responseText[1]+'" title="'+responseText[1]+'" />'; 
+						$(id).innerHTML  = '<button type="button" class="blocked" title="'+responseText[1]+'" />'; 
 						$(id).title = responseText[1]; 
 						$(id).setStyle({ color:'red' });
 			  		}
@@ -164,7 +166,7 @@ function execute_request(iMethod, iUrl, iType, iId, iAction) {
   Funktion: toggle_visibility 
 ------------------------------------------------------------------------------*/ 
 function toggle_visibility(id) {
-/*  Anhand eines Loops über das tr-Tag wird der Stil des Elementes auf block oder none gesetzt,
+/*  Anhand eines Loops ï¿½ber das tr-Tag wird der Stil des Elementes auf block oder none gesetzt,
 	falls die Id des tr-Tags der zusammengesetzten newid entspricht.
 	Zudem wird das Plus und Minus zeichen ausgetauscht
 	Der Internet Explorer versteht die CSS-Anweisung display = table-row nicht, daher muss 
@@ -246,5 +248,44 @@ function getCookie(iName) {
   var lMatch = document.cookie.match(new RegExp(iName+"=(.*?);"));
   return lMatch ? unescape( lMatch[1] ) : "";
 }
+
+/*--------------------------------------------------------------------------------------------
+  Funktion: toggle_page_trans -> Auf- und Zuklappen Pages Seitentitel zum Uebersetzen
+  Dabei wird auf die gerade eingestellte Backend-Sprache geachtet. Ein Satz mit dieser Sprache
+  muss immer angezeigt werden.
+----------------------------------------------------------------------------------------------*/ 
+function toggle_page_trans(iLangId,iLang) { 
+    var lElements = new Array();
+    var lLang, elSave;
+    // Alle TR-Elemente unterhalb Table Tbody sammeln
+    lElements = $(iLangId).children[0].rows;
+    gAnzShow = 0; // ZÃ¤hler zurÃ¼cksetzen
+    // dann fÃ¼r jedes Element die Richtige Klasse setzen
+    $A(lElements).each(function(el,index) {
+      // Die Sprache des Elements aus der ID in TR-Tag lesen
+      lLang = el.id.split("_")[1]; 
+      if (lLang.toUpperCase() != iLang.toUpperCase())  {
+        if (el.className.match(/show/)) {
+          el.removeClassName('show');
+          el.removeClassName('underline');
+          el.addClassName('hide');
+        } else {
+          el.removeClassName('hide');
+          el.addClassName('show');
+          el.addClassName('underline');
+          gAnzShow++;
+        }
+      } else {
+        elSave = el;
+      }      
+    });
+    // Wenn nur 1 Sprache angezeigt wird, soll kein Understrich gezeigt werden
+    if (gAnzShow == 0) {
+      elSave.removeClassName('underline');
+    } else {
+      elSave.addClassName('underline');      
+    }
+}
+
 
 //]]>

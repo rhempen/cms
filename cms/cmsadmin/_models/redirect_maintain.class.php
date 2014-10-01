@@ -67,27 +67,27 @@ class redirectMaintain
 	*/
     public function page_update_redirect() 
     { 
-		global $akt_redir, $db, $msg, $genmain;
-		$nav_id_neu = isset($_POST['navid']) ? $_POST['navid'] : 0;
+      global $akt_redir, $db, $msg, $genmain;
+      $nav_id_neu = isset($_POST['navid']) ? $_POST['navid'] : 0;
 
-		$kuerzel = $_POST['name'] != '' ? $_POST['name'] : $_POST['seite'];
-		$kuerzel = $genmain->format_kuerzel($kuerzel);
-		
-		// wurde die Zuordnung ge�ndert? 
-		$ids 	= $this->get_navids($nav_id_neu);
-		$subid 	= isset($ids['subid']) ? $ids['subid'] : 0;
-		$navid 	= isset($ids['navid']) ? $ids['navid'] : 0;
-		
-		// Wenn alte und neue ID's nicht identisch sind -> l�schen alt, insert neu
-		if ($navid != $akt_redir['navid'] || $subid != $akt_redir['subid']) {
-			$msg = $this->delete_redirect($akt_redir['navid'], $akt_redir['subid'], $akt_redir['pagid']);
-			$msg = $this->insert_redirect($navid, $subid, $akt_redir['pagid'], $kuerzel);			
-		} 
-		// Ev. muss nur das K�rzel ge�ndert werden
-		elseif ($kuerzel != $akt_redir['kuerzel']) {
-			$msg = $this->update_redirect($navid, $subid, $akt_redir['pagid'], $kuerzel);
-		}		
-		return $msg;
+      $kuerzel = $_POST['name'] != '' ? $_POST['name'] : $_POST['seite'];
+      $kuerzel = $genmain->format_kuerzel($kuerzel);
+
+      // wurde die Zuordnung ge�ndert? 
+      $ids 	= $this->get_navids($nav_id_neu);
+      $subid 	= isset($ids['subid']) ? $ids['subid'] : 0;
+      $navid 	= isset($ids['navid']) ? $ids['navid'] : 0;
+
+      // Wenn alte und neue ID's nicht identisch sind -> l�schen alt, insert neu
+      if ($navid != $akt_redir['navid'] || $subid != $akt_redir['subid']) {
+          $msg = $this->delete_redirect($akt_redir['navid'], $akt_redir['subid'], $akt_redir['pagid']);
+          $msg = $this->insert_redirect($navid, $subid, $akt_redir['pagid'], $kuerzel);			
+      } 
+      // Ev. muss nur das K�rzel ge�ndert werden
+      elseif ($kuerzel != $akt_redir['kuerzel']) {
+          $msg = $this->update_redirect($navid, $subid, $akt_redir['pagid'], $kuerzel);
+      }		
+      return $msg;
     }
     
     	
@@ -97,22 +97,22 @@ class redirectMaintain
 	*/
     public function page_delete_redirect($row) 
     { 
-		global $db, $msg;
-		$navid = $row['nav_id'];
-		$pagid = $row['page_id'];
-		$subid = 0;
-		$ids   = array();
-		
-		if ($navid != 0) {
-			$ids = $this->get_navids($navid);
-			$subid = isset($ids['subid']) ? $ids['subid'] : 0;
-			$navid = isset($ids['navid']) ? $ids['navid'] : 0;
-			// Eintrag l�schen
-			$msg = $this->delete_redirect($navid, $subid, $pagid);			
-		} else {
-			$msg[] = 'error'; $msg[] = $GLOBALS['MESSAGES']['REDIRECT_NO_NAVID'];			
-		}
-		return $msg;
+      global $db, $msg;
+      $navid = $row['nav_id'];
+      $pagid = $row['page_id'];
+      $subid = 0;
+      $ids   = array();
+
+      if ($navid != 0) {
+          $ids = $this->get_navids($navid);
+          $subid = isset($ids['subid']) ? $ids['subid'] : 0;
+          $navid = isset($ids['navid']) ? $ids['navid'] : 0;
+          // Eintrag l�schen
+          $msg = $this->delete_redirect($navid, $subid, $pagid);			
+      } else {
+          $msg[] = 'error'; $msg[] = $GLOBALS['MESSAGES']['REDIRECT_NO_NAVID'];			
+      }
+      return $msg;
     }
     
 
@@ -122,38 +122,39 @@ class redirectMaintain
 	*/
     public function page_read_redirect($pagid, $navid) 
     { 
-		global $db;
-		// erst nach Hauptnavigation suchen
-    	$query = 'SELECT * FROM '.$this->mPrefix.'redirect WHERE navid='.$navid.' AND pagid='.$pagid;
-		$row = $db->queryRow($query);
-		if ($db->queryOne('SELECT FOUND_ROWS()') == 0) {
-			// Wenn kein Datensatz gefunden, Eintrag zu einer Unternavigation suchen
-	    	$query = 'SELECT * FROM '.$this->mPrefix.'redirect WHERE subid='.$navid.' AND pagid='.$pagid;
-			$row = $db->queryRow($query);			
-		} 
-		return $row;
+      global $db;
+      // erst nach Hauptnavigation suchen
+      $query = 'SELECT * FROM '.$this->mPrefix.'redirect WHERE navid='.$navid.' AND pagid='.$pagid;
+      $row = $db->queryRow($query);
+      if ($db->queryOne('SELECT FOUND_ROWS()') == 0) {
+          // Wenn kein Datensatz gefunden, Eintrag zu einer Unternavigation suchen
+          $query = 'SELECT * FROM '.$this->mPrefix.'redirect WHERE subid='.$navid.' AND pagid='.$pagid;
+          $row = $db->queryRow($query);			
+      } 
+      return $row;
     }
     	
-    /* K�rzel aus Update des K�rzels in cms_navigation updaten
+    /* Kuerzel aus Update des Kuerzels in cms_navigation / cms_pages updaten
        	@params: $navid -> dies kann die navid eines Haupt- oder Unternavigationspunktes sein
     	@return: Kein Returnwert, da der Update mittels AJAX erfolgt.
     */
-    public function navi_update($navid, $kuerzel) 
+    public function navi_update($navid, $kuerzel, $pageid=0) 
     {
-		global $naviga, $db, $general;
-		$subid = 0;
-		$ids   = array();
-		$kuerzel = convert_umlaute2(utf8_decode($kuerzel));
-		$kuerzel = strtolower(str_replace(' ','_',$kuerzel));
+      global $naviga, $db, $general, $genmain;
+      $subid = 0;
+      $ids   = array();
 
-		if ($navid != 0 && $navid != null) {
-			$ids = $this->get_navids($navid);
-			$subid = isset($ids['subid']) ? $ids['subid'] : 0;
-			$navid = isset($ids['navid']) ? $ids['navid'] : 0;
-			$update = 'UPDATE '.$this->mPrefix.'redirect SET kuerzel="'. $kuerzel .'"';
-			$update .= ' WHERE navid='.$navid.' AND subid='.$subid.' AND pagid=0';
-			$db->query($update);
-		}
+      $kuerzel = $genmain->format_kuerzel($kuerzel);
+//		$kuerzel = strtolower(str_replace(' ','_',$kuerzel));
+
+      if ($navid != 0 && $navid != null) {
+          $ids = $this->get_navids($navid);
+          $subid = isset($ids['subid']) ? $ids['subid'] : 0;
+          $navid = isset($ids['navid']) ? $ids['navid'] : 0;
+          $update = 'UPDATE '.$this->mPrefix.'redirect SET kuerzel="'. $kuerzel .'"';
+          $update .= ' WHERE navid='.$navid.' AND subid='.$subid.' AND pagid='.$pageid;
+          $db->query($update);
+      }
     }
     
     
@@ -182,29 +183,31 @@ class redirectMaintain
     private function smurl_navi_insert() 
     {
     	global $db, $naviga, $msg, $genmain;
-			$msg[] = 'message'; $msg[] = $GLOBALS['CMS']['MENU01'];
+		$msg[] = 'message'; $msg[] = $GLOBALS['CMS']['MENU01'];
     	$navigation = $naviga->navigation_laden();
-			while ($row = $navigation->fetchRow(MDB2_FETCHMODE_ASSOC)) 
-			{
-				$pagid = 0;
-				$subid = 0;
-				$kuerzel = $genmain->format_kuerzel($row['bezeichnung']);
+        while ($row = $navigation->fetchRow(MDB2_FETCHMODE_ASSOC)) 
+        {
+            $pagid = 0;
+            $subid = 0;
+//                $bezeichnung = utf8_encode($row['bezeichnung']);
+            $bezeichnung = $row['bezeichnung'];
+            $kuerzel = $genmain->format_kuerzel($bezeichnung);
 
-				if ($row['ukap'] == 0) { 
-					$kap_save = $row['kap']; 
-					$navid_save = $row['nav_id'];
-					$navid = $row['nav_id'];
-				}
+            if ($row['ukap'] == 0) { 
+                $kap_save = $row['kap']; 
+                $navid_save = $row['nav_id'];
+                $navid = $row['nav_id'];
+            }
 
-				if ($row['ukap'] != 0 && $row['kap'] == $kap_save) {
-					$navid = $navid_save;
-					$subid = $row['nav_id'];
-				} 
+            if ($row['ukap'] != 0 && $row['kap'] == $kap_save) {
+                $navid = $navid_save;
+                $subid = $row['nav_id'];
+            } 
 
-				// Neuer Datensatz ins cms_redirect einf�gen
-				$msg = $this->insert_redirect($navid, $subid, $pagid, $kuerzel);
-				}
-			return $msg;
+            // Neuer Datensatz ins cms_redirect einf�gen
+            $msg = $this->insert_redirect($navid, $subid, $pagid, $kuerzel);
+            }
+        return $msg;
     }    
 
     /* Index-Tabelle cms_redirect aus cms_navigation updaten */
@@ -213,33 +216,23 @@ class redirectMaintain
     	global $db, $pages, $msg, $genmain;
         $msg[] = 'message'; $msg[] = $GLOBALS['CMS']['MENU02'];
     	$allpages = $pages->read_all_pages();
-			while ($row = $allpages->fetchRow(MDB2_FETCHMODE_ASSOC)) 
-			{
-				unset($ids);
-				$subid = 0;
-				$pagid = $row['page_id'];
-				$kuerzel = $genmain->format_kuerzel($row['name']);
-				// Zuordnung aus cms_navigation ermitteln? 
-				$ids 	= $this->get_navids($row['nav_id']);
-				$subid 	= isset($ids['subid']) ? $ids['subid'] : 0;
-				$navid 	= isset($ids['navid']) ? $ids['navid'] : 0;			
-				// Neuer Datensatz ins cms_redirect einf�gen
-				$msg = $this->insert_redirect($navid, $subid, $pagid, $kuerzel);
-			}
-			return $msg;    	
+        while ($row = $allpages->fetchRow(MDB2_FETCHMODE_ASSOC)) 
+        {
+            unset($ids);
+            $subid = 0;
+            $pagid = $row['page_id'];
+            $name = $row['name'];
+            $kuerzel = $genmain->format_kuerzel($name);
+            // Zuordnung aus cms_navigation ermitteln? 
+            $ids 	= $this->get_navids($row['nav_id']);
+            $subid 	= isset($ids['subid']) ? $ids['subid'] : 0;
+            $navid 	= isset($ids['navid']) ? $ids['navid'] : 0;			
+            // Neuer Datensatz ins cms_redirect einf�gen
+            $msg = $this->insert_redirect($navid, $subid, $pagid, $kuerzel);
+        }
+        return $msg;    	
     }
     
-    
-    
-    /* Kuerzel formatieren --> verlagert in general_maintain.class.php */
-//    private function format_kuerzel($text) 
-//    {
-//    	$text = convert_umlaute2(utf8_decode($text));
-//		$kuerzel = str_replace(' ','_',$text);
-//		return strtolower($kuerzel);
-//    }    
-    
-       
     /* Datensatz in cms_redirect einf�gen
 	   @params: $navid, $subid, $pagid 
 	   @return: $msg -> Meldung
@@ -247,20 +240,20 @@ class redirectMaintain
     private function insert_redirect($navid, $subid, $pagid, $kuerzel) 
     {
     	global $db, $msg;
-			$par = '-> $navid-$subid-$pagid-$kuerzel='.$navid.'-'.$subid.'-'.$pagid.'-'.$kuerzel;    	
-			if ($navid !=0) {	
-				// Eintrag einf�gen
-				$insert = 'INSERT INTO '.$this->mPrefix.'redirect (navid,subid,pagid,kuerzel)'.
-				$insert .= ' VALUES ('.$navid.','.$subid.','.$pagid.',"'.$kuerzel.'")';
+        $par = '-> $navid-$subid-$pagid-$kuerzel='.$navid.'-'.$subid.'-'.$pagid.'-'.$kuerzel;    	
+        if ($navid !=0) {	
+            // Eintrag einf�gen
+            $insert = 'INSERT INTO '.$this->mPrefix.'redirect (navid,subid,pagid,kuerzel)'.
+            $insert .= ' VALUES ('.$navid.','.$subid.','.$pagid.',"'.$kuerzel.'")';
 
-				if ($db->query($insert)) {
-					$msg[] = 'success'; $msg[] = sprintf($GLOBALS['MESSAGES']['REDIRECT_GESPEICHERT'], $par);		
-				} else {
-					$msg[] = 'error'; $msg[] = sprintf($GLOBALS['MESSAGES']['REDIRECT_NICHT_GESPEICHERT'], $par);
-				}
-			} else {
-				$msg[] = 'error'; $msg[] = sprintf($GLOBALS['MESSAGES']['REDIRECT_NO_NAVID'], $par);
-			}
+            if ($db->query($insert)) {
+                $msg[] = 'success'; $msg[] = sprintf($GLOBALS['MESSAGES']['REDIRECT_GESPEICHERT'], $par);		
+            } else {
+                $msg[] = 'error'; $msg[] = sprintf($GLOBALS['MESSAGES']['REDIRECT_NICHT_GESPEICHERT'], $par);
+            }
+        } else {
+            $msg[] = 'error'; $msg[] = sprintf($GLOBALS['MESSAGES']['REDIRECT_NO_NAVID'], $par);
+        }
     	return $msg;
     }
     
@@ -272,20 +265,20 @@ class redirectMaintain
     private function update_redirect($navid, $subid, $pagid, $kuerzel) 
     {
     	global $db, $msg;
-			$par = '-> key='.$navid.'-'.$subid.'-'.$pagid.'-'.$kuerzel;    	
-			if ($navid !=0 && $pagid !=0) {	
-				// Eintrag einf�gen
-				$update = 'UPDATE '.$this->mPrefix.'redirect SET kuerzel="'.$kuerzel.'"'.
-				$update .= ' WHERE navid='.$navid.' AND subid='.$subid.' AND pagid='.$pagid;
+        $par = '-> key='.$navid.'-'.$subid.'-'.$pagid.'-'.$kuerzel;    	
+        if ($navid !=0 && $pagid !=0) {	
+            // Eintrag einf�gen
+            $update = 'UPDATE '.$this->mPrefix.'redirect SET kuerzel="'.$kuerzel.'"'.
+            $update .= ' WHERE navid='.$navid.' AND subid='.$subid.' AND pagid='.$pagid;
 
-				if ($db->query($update)) {
-					$msg[] = 'success'; $msg[] = sprintf($GLOBALS['MESSAGES']['REDIRECT_GESPEICHERT'], $par);		
-				} else {
-					$msg[] = 'error'; $msg[] = sprintf($GLOBALS['MESSAGES']['REDIRECT_NICHT_GESPEICHERT'], $par);
-				}
-			} else {
-				$msg[] = 'error'; $msg[] = sprintf($GLOBALS['MESSAGES']['REDIRECT_NO_NAVID'], $par);
-			}
+            if ($db->query($update)) {
+                $msg[] = 'success'; $msg[] = sprintf($GLOBALS['MESSAGES']['REDIRECT_GESPEICHERT'], $par);		
+            } else {
+                $msg[] = 'error'; $msg[] = sprintf($GLOBALS['MESSAGES']['REDIRECT_NICHT_GESPEICHERT'], $par);
+            }
+        } else {
+            $msg[] = 'error'; $msg[] = sprintf($GLOBALS['MESSAGES']['REDIRECT_NO_NAVID'], $par);
+        }
     	return $msg;
     }
 
@@ -328,14 +321,14 @@ class redirectMaintain
     {
     	global $naviga, $ids;
 	    unset($ids);
-			$row = $naviga->read_navigation_by_id($navid);
-			if ($row['kap'] != 0 && $row['ukap'] != 0) {
-				$ids['subid'] = $row['nav_id'];
-				$ids['navid'] = $naviga->read_navid_by_kap($row['kap']);
-			} else {
-				$ids['navid'] = $row['nav_id'];
-			}
-	    	return $ids;
+        $row = $naviga->read_navigation_by_id($navid);
+        if ($row['kap'] != 0 && $row['ukap'] != 0) {
+            $ids['subid'] = $row['nav_id'];
+            $ids['navid'] = $naviga->read_navid_by_kap($row['kap']);
+        } else {
+            $ids['navid'] = $row['nav_id'];
+        }
+        return $ids;
 	  }
 } 
 

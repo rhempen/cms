@@ -21,6 +21,8 @@ try {
 	}
 }
 
+var gAnzShow = 0; // globaler Zähler
+
 /**********************************************************************************
 *
 * AJAX-Events deklarieren
@@ -58,14 +60,14 @@ Event.observe(window, "load", function() {
 
 Event.observe(window, "load", function() {
 // Sortierbarkeit von DIV-Elementen 
-	Sortable.create('navisDivs',{ tag:"DIV",onUpdate:updateSortIndex,handle:"navisort",only:"navisort" });
+	Sortable.create('navisDivs',{tag:"DIV",onUpdate:updateSortIndex,handle:"navisort",only:"navisort"});
   });
 
   var updateSortIndex = function(e) {
     var elements  = Sortable.serialize('navisDivs');  //$('debug').update(elements);
     var url       = '../_controllers/navi_co_maintain.php?action=naviSort&srtids='+elements; 
     var lRequest  = new Ajax.Request(url, { 
-                    parameters: { action:"naviSort", srtids:elements }, 
+                    parameters: {action:"naviSort", srtids:elements}, 
                         method: 'post',
                      onSuccess: updateMessage
   		} );
@@ -100,7 +102,7 @@ Event.observe(window, "load", function() {
 function update_aktivflag(id) {
 	var wert = $(id).innerHTML;
 	var led = wert.search(/blocked/);
-	if (led != -1) { wert = 'nein'; } else { wert = 'ja'; }
+	if (led != -1) {wert = 'nein';} else {wert = 'ja';}
 	var navid = id.substr(1, id.length);
 	var	url = "../_controllers/navi_co_maintain.php?action=aktivSave&wert=" + wert + "&nav_id=" + navid; 
 	// alert(url);
@@ -113,17 +115,15 @@ function update_aktivflag(id) {
 				if (XMLHttp.status == 200) {
 				  var responseText = XMLHttp.responseText.split('/'); // responseText j/Ja in einen Array splitten
 					if (responseText[0] == 'j') {
-//						$(id).innerHTML  = 'ja'; 
-						$(id).innerHTML  = '<img src="../gifs/freed.gif" border="0" width="16" height="14" alt="'+responseText[1]+'" title="'+responseText[1]+'" />'; 
+						$(id).innerHTML  = '<button class="freed" title="aktiv" type="button"></button>'; 
 						$(id).title = responseText[1]; 
-						$(id).setStyle({ color:'green' });						
+						$(id).setStyle({color:'green'});						
 			  		} else {
-//						$(id).innerHTML  = 'nein'; 		
-						$(id).innerHTML  = '<img src="../gifs/blocked.gif" border="0" width="16" height="14" alt="'+responseText[1]+'" title="'+responseText[1]+'" />'; 
+						$(id).innerHTML  = '<button class="blocked" title="inaktiv" type="button"></button>'; 
 						$(id).title = responseText[1]; 
-						$(id).setStyle({ color:'red' });						
+						$(id).setStyle({color:'red'});						
 			  	}
-				}
+              }
 			}
 		};
 		XMLHttp.send(null);
@@ -131,7 +131,7 @@ function update_aktivflag(id) {
 }
 
 /*------------------------------------------------------------------------------
-  Funktion: update_aktivflag -> Funktionsaufruf aus Event .typeflag
+  Funktion: update_typeflag -> Funktionsaufruf aus Event .typeflag
 ------------------------------------------------------------------------------*/ 
 function update_typeflag(id) {
 	var wert = $(id).innerHTML;
@@ -149,15 +149,15 @@ function update_typeflag(id) {
 					if (responseText[0] == 'S') {
 						$(id).innerHTML = 'S'; 
 						$(id).title = responseText[1]; 
-						$(id).setStyle({ color:'red' });						
+						$(id).setStyle({color:'red'});						
 			  		} else if (responseText[0] == 'V') {
 						$(id).innerHTML  = 'V'; 		
 						$(id).title = responseText[1]; 
-						$(id).setStyle({ color:'purple' });						
+						$(id).setStyle({color:'purple'});						
 			  		} else {
 						$(id).innerHTML  = 'H'; 		
 						$(id).title = responseText[1]; 
-						$(id).setStyle({ color:'green' });
+						$(id).setStyle({color:'green'});
 			  		}
 			  	}
 			}
@@ -167,12 +167,12 @@ function update_typeflag(id) {
 }
 
 /*------------------------------------------------------------------------------
-  Funktion: update_aktivflag -> Funktionsaufruf aus Event .startflag
+  Funktion: update_startflag -> Funktionsaufruf aus Event .startflag
 ------------------------------------------------------------------------------*/ 
 function update_startflag(id) {
 	var wert = $(id).innerHTML;
 	var led = wert.search(/red/);
-	if (led != -1) { wert = 'nein'; } else { wert = 'ja'; }
+	if (led != -1) {wert = 'nein';} else {wert = 'ja';}
 	var navid = id.substr(2, id.length);
 	var	url = "../_controllers/navi_co_maintain.php?action=startSave&wert=" + wert + "&nav_id=" + navid; 
 	// alert(url);
@@ -186,12 +186,12 @@ function update_startflag(id) {
 				  var responseText = XMLHttp.responseText.split('/'); // responseText j/Ja in einen Array splitten
 					if (responseText[0] == 'j') {
 						$(id).innerHTML  = '<img src="../gifs/ledgreen.gif" border="0" width="16" height="14" alt="'+responseText[1]+'" title="'+responseText[1]+'" />'; 
-						$(id).setStyle({ color:'green' });						
+						$(id).setStyle({color:'green'});						
 			  		} else {
 						$(id).innerHTML  = '<img src="../gifs/ledred.gif" border="0" width="16" height="14" alt="'+responseText[1]+'" title="'+responseText[1]+'" />'; 		
-						$(id).setStyle({ color:'red' });						
+						$(id).setStyle({color:'red'});						
 			  	}
-				}
+              }
 			}
 		};
 		XMLHttp.send(null);

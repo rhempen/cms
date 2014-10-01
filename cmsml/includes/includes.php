@@ -27,6 +27,7 @@ require_once(CMSADMIN.'_views/general_present.class.php');
 require_once(FRONTEND.'_models/frontend_getdata.class.php');
 require_once(FRONTEND.'_models/navigation_getdata.class.php');
 require_once(FRONTEND.'_models/navigation_redirect.class.php');
+require_once(FRONTEND.'_models/member_login.class.php');
 require_once(FRONTEND.'_views/frontend_present.class.php');
 require_once(FRONTEND.'_views/navigation_present.class.php');
 require_once(FRONTEND.'_views/pageslider.class.php');
@@ -42,6 +43,7 @@ if (!$pictdb)	{ $pictdb   = new picturesDbMaintain($db); }
 if (!$cfg)		{ $cfg		= new configMaintain($db); }
 if (!$redir)	{ $redir	= new redirectMaintain($db); }
 if (!$general)	{ $general 	= new generalPresent($tpl); }
+if (!$member)	{ $member 	= new memberLogin($db); }
 
 /* nachdem alle wichtigen Deklarationen gemacht sind, muss geprueft werden
  * ob die DB gewechselt wurde. Daraus ergibt sich die Konstanten-Definition
@@ -62,9 +64,6 @@ if (WEBSITE) {
 	$cfg->update_website_db( );
 }
 
-// Sprache in der Session speichern
-$cfg->sprache_festlegen();
-
 /* Das PEAR ITX-Package laden --> Template Engine 
  * Eine Instanz der HTML_Template_ITX-Klasse erzeugen mit Angabe des tpl-Verzeichnisses
  */
@@ -83,8 +82,16 @@ if (!$naviout)	{ $naviout	= new navigationPresent($tpl); }
 require_once(CMSADMIN.'/config.php');
 require_once(DOCUROOT.'/config_frontend.php');
 
-/* Sprachenfile laden */
-require_once(LANGUDIR.LANGUAGE_FILE);
+/* Sprachenwechsel bei Bedarf erkennen und prüfen, ob die Sprache erlaubt ist
+ * 1. es wird geprüft, ob in der URL ein Sprachcode mitgegeben wurde, oder
+ * 2. es wird der Wert aus der SESSION['language'] gezogen, oder
+ * 3. es wird die Browsersprache ermittelt. Dann...
+ * a) der ermittelte Sprachcode, wird gegen die in der cms_spezial definierten Sprachcodes geprüft. 
+ * b) wenn die Prüfung nicht erfolgreich war, wird der 1. mögliche Wert aus den definierten Sprachcodes gesetzt
+ * c) ist dies auch nicht erfolgreich, wird die Sprache aus dem Browser gezogen.
+ * danach wird die SESSION['language'] und das entspr. Sprachenfile (zB. DE.php) neu definiert und geladen
+*/ 
+$cfg->sprache_festlegen();
 
 /* Formularfunktionen */
 require_once FUNKTION.'form_fus.php';

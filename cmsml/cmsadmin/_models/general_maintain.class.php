@@ -9,6 +9,8 @@
  * @author      Roland Hempen
  * @copyright   Frei einsetz- und veraenderbar, wenn der Autor erwaehnt wird
  * @version     1.0 | 2007-07-14
+ * @package     CMSADMIN/General
+ * 
  */
 
 class generalMaintain

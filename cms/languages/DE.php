@@ -51,10 +51,10 @@ $GLOBALS['TEXTE']['ALLE_FELDER_FUELLEN']				= 'Bitte alle Felder ausf&uuml;llen'
 $GLOBALS['TEXTE']['USER_NOT_EXIST']						= 'Der Benutzer %s ist unbekannt!';
 $GLOBALS['TEXTE']['NEW_PASSWORD_IS']					= 'Das neue Passwort lautet: ';
 $GLOBALS['TEXTE']['WRONG_EMAIL']						= 'Emailadresse ist ung&uuml;ltig ';
-$GLOBALS['TEXTE']['EMAIL_SENT']							= 'Das neue Passwort wurde an folgende Adresse gesendet: ';
+$GLOBALS['TEXTE']['EMAIL_SENT']							= 'Das neue Passwort wurde an folgende Adresse gesendet: %s';
 $GLOBALS['TEXTE']['EMAIL_SEND_FAILED']					= 'Der Emailversand hat nicht geklappt - Bitte sp&auml;ter wieder versuchen ';
 $GLOBALS['TEXTE']['EMAIL_BETREFF']						= 'Ihre Zugangsdaten zum CMS';
-$GLOBALS['TEXTE']['EMAIL_TEXT']							= 'Guten Tag,'."\n".'Ihr neues Passwort lautet %s'."\n".'Bitte �ndern Sie es sofort nach Erhalt.'."\n".'Vielen Dank und freundliche Gr�sse'."\n".'info@hempenweb.ch';
+$GLOBALS['TEXTE']['EMAIL_TEXT']							= 'Guten Tag,'."\n".'Ihr neues Passwort lautet %s'."\n".'Bitte ändern Sie es sofort nach Erhalt.'."\n".'Vielen Dank und freundliche Grüsse'."\n".'info@hempenweb.ch';
 
 
 /*********************************************************************************************************************
@@ -153,7 +153,8 @@ $GLOBALS['TEXTE']['TEXT_NEUE_UNTERNAVI'] 				= 'Neuen Unternavigations-Punkt ein
 $GLOBALS['TEXTE']['TEXT_DELE_HAUPTNAVI'] 				= 'Hauptnavigations-Punkt l&ouml;schen';
 $GLOBALS['TEXTE']['TEXT_DELE_UNTERNAVI'] 				= 'Unternavigations-Punkt l&ouml;schen';
 $GLOBALS['TEXTE']['TEXT_COPY_HAUPTNAVI'] 				= 'Hauptnavigations-Punkt kopieren';
-$GLOBALS['TEXTE']['TEXT_REIHENFOLGE'] 	 				= 'Reihenfolge &auml;ndern, Bild hochziehen';
+//$GLOBALS['TEXTE']['TEXT_REIHENFOLGE'] 	 				= 'Reihenfolge &auml;ndern, Bild hochziehen';
+$GLOBALS['TEXTE']['TEXT_REIHENFOLGE'] 	 				= 'Reihenfolge &auml;ndern';
 $GLOBALS['TEXTE']['TEXT_EDIT_UNTERNAVI'] 				= 'Unternavigations-Punkt bearbeiten';
 $GLOBALS['TEXTE']['TEXT_NEUE_HAUPTNAVI'] 				= 'Neuer Hauptnavigationspunkt';
 $GLOBALS['TEXTE']['NAVI_GUELTIGKEIT'] 	 				= 'G&uuml;ltigkeit';
@@ -200,9 +201,11 @@ $GLOBALS['MESSAGES']['MSG_NICHT_NEU_SORTIERT']   		= 'Die Datens&auml;tze konnte
 $GLOBALS['LABELS']['SIE_BEARBEITEN_SEITE']				= 'Sie bearbeiten die Seite:';
 $GLOBALS['LABELS']['SEITEN_INFO']						= 'Seiteninfo';
 $GLOBALS['LABELS']['SEITEN_INFO_VALUES']				= 'SeitenID: %s / NavID: %s / Verzeichnis: %s';
+$GLOBALS['LABELS']['MESSAGE']							= 'Meldung';
 $GLOBALS['LABELS']['TEMPLATE']							= 'Template';
 $GLOBALS['LABELS']['INTEGRATION']						= 'Integration';
 $GLOBALS['LABELS']['MODUL']								= 'Modul';
+$GLOBALS['LABELS']['MEMBERLOGIN']						= 'Member-Login';
 $GLOBALS['LABELS']['SEITENTITEL']						= 'Seitentitel<br />(60 Zeichen)';
 $GLOBALS['LABELS']['ZUSATZTEXT']						= 'Zusatztext<br />(60 Zeichen)';
 $GLOBALS['LABELS']['KURZTEXT']							= 'Kurztext';
@@ -221,6 +224,9 @@ $GLOBALS['LABELS']['RESET']								= 'zur&uuml;cksetzen';
 $GLOBALS['LABELS']['SAVE']								= 'sichern';
 $GLOBALS['LABELS']['ZEICHEN']							= 'Restl. Zeichen: ';
 $GLOBALS['LABELS']['MAXZEICHEN']						= 'Max. Zeichen: ';
+$GLOBALS['LABELS']['MEMBERLOGIN']						= 'Member-Login';
+$GLOBALS['LABELS']['ERFORDERLICH']						= 'erforderlich';
+$GLOBALS['LABELS']['NICHT_ERFORDERLICH']				= 'nicht erforderlich';
 
 /*********************************************************************************************************************
  * Texte zur Klasse redirectMaintain
@@ -245,7 +251,8 @@ $GLOBALS['TEXTE']['TEXT_UNTERSEITE']					= 'Unterseite zu ';
 
 // Texte zu SEITEN-Verwaltung
 $GLOBALS['TEXTE']['TEXT_PLUS_MINUS'] 					= 'Auf- oder Zuklappen';
-$GLOBALS['TEXTE']['TEXT_UPLOAD'] 						= "Bilder verwalten:\nInformationen zu Bilder\nBilder hochladen\nBilder l&ouml;schen";
+// $GLOBALS['TEXTE']['TEXT_UPLOAD'] 						= "Bilder verwalten: Informationen zu Bilder / Bilder hochladen / Bilder l&ouml;schen";
+$GLOBALS['TEXTE']['TEXT_UPLOAD'] 						= "Bilder verwalten";
 $GLOBALS['TEXTE']['TEXT_EDIT'] 							= 'Bearbeiten';
 $GLOBALS['TEXTE']['TEXT_DELETE'] 						= 'L&ouml;schen';
 $GLOBALS['TEXTE']['TEXT_PAGE_EDIT'] 					= 'Seiteninhalt bearbeiten';
@@ -261,10 +268,11 @@ $GLOBALS['TEXTE']['TEXT_INAKTIV'] 						= 'inaktiv';
 $GLOBALS['TEXTE']['TEXT_AUFWAERTS'] 					= '^Aufw&auml;rts';
 $GLOBALS['TEXTE']['TEXT_SHOW'] 							= 'Anzeigen';
 $GLOBALS['TEXTE']['TEXT_BILD_SHOW'] 					= 'Bild in voller Gr&ouml;sse anzeigen';
-$GLOBALS['TEXTE']['TEXT_BILDER_EDIT'] 					= "Kommentar zu Bildern bearbeiten\nReihenfolge &auml;ndern";
+$GLOBALS['TEXTE']['TEXT_BILDER_EDIT'] 					= "Kommentar zu Bildern bearbeiten / Reihenfolge &auml;ndern";
 $GLOBALS['TEXTE']['TEXT_BILD_DELETE'] 					= 'Dieses Bild l&ouml;schen';
 $GLOBALS['TEXTE']['TEXT_DIR_DELETE'] 					= 'Dieses Verzeichnis l&ouml;schen';
 $GLOBALS['TEXTE']['TEXT_FILETYPE'] 						= 'Verzeichnis &ouml;ffnen';
+$GLOBALS['TEXTE']['TEXT_TRANSLATE']						= '&Uuml;bersetzen';
 
 // Texte zu Medienbrowser
 $GLOBALS['TEXTE']['TEXT_SEITE'] 						= 'Seite: ';
@@ -382,8 +390,52 @@ $GLOBALS['LINKS']['BILDLEISTE'] 						= 'Bildleiste mit Links auf Bilder anbiete
 $GLOBALS['LINKS']['AUTOBILDWECHSEL'] 					= 'Automatischer Bildwechsel';
 
 $GLOBALS['LINKS']['SIEHE_AUCH'] 						= '&gt; ';
+$GLOBALS['WEBMAIL']['TITEL'] 							= 'Webmail Login';
+
+/*********************************************************************************************************************
+ * Kontaktformular
+ *********************************************************************************************************************/
 $GLOBALS['KONTAKTFORM']['TITEL'] 						= 'Kontaktformular';
 $GLOBALS['KONTAKTFORM']['SENT'] 						= 'Vielen Dank f&uuml;r Ihre Kontaktaufnahme!'."<br />\n";
-$GLOBALS['WEBMAIL']['TITEL'] 							= 'Webmail Login';
+$GLOBALS['KONTAKTFORM']['NOT_SENT']						= 'Das Mail konnte leider nicht gesendet werden!'."<br />\n";
+$GLOBALS['KONTAKTFORM']['DATA_SENT']					= 'Folgende Daten wurden gesendet: '."<br />\n";
+$GLOBALS['KONTAKTFORM']['OBLIGATORY']                   = 'Bitte alle * Felder ausf&uuml;llen!';
+$GLOBALS['KONTAKTFORM']['NAME']                         = 'Name *';
+$GLOBALS['KONTAKTFORM']['ADRESSE']                      = 'Adresse *';
+$GLOBALS['KONTAKTFORM']['PLZ_ORT']                      = 'Plz / Ort *';
+$GLOBALS['KONTAKTFORM']['TELEFON']                      = 'Telefon *';
+$GLOBALS['KONTAKTFORM']['EMAIL']                        = 'E-Mail *';
+$GLOBALS['KONTAKTFORM']['MITTEILUNG']                   = 'Mitteilung';
+$GLOBALS['KONTAKTFORM']['BILDCODE']                     = 'Bild-Code *';
+$GLOBALS['KONTAKTFORM']['SENDEN']                       = 'senden';
+$GLOBALS['KONTAKTFORM']['RESET']                        = 'zur&uuml;cksetzen';
+$GLOBALS['KONTAKTFORM']['CODE_FALSCH']                  = 'Der Sicherheitscode ist nicht korrekt!';
+$GLOBALS['KONTAKTERROR']['MARKEDFIELDS']                = 'Bitte f&uuml;llen Sie die markierten Felder aus';
+$GLOBALS['KONTAKTERROR']['WRONGEMAIL']                  = 'Die Emailadresse ist ung&uuml;ltig!';
+
+/*********************************************************************************************************************
+ * Texte zum Member-Login
+ *********************************************************************************************************************/
+$GLOBALS['MEMBER']['TITLE_LOGIN']                       = 'Anmelden';
+$GLOBALS['MEMBER']['TITLE_FORGOTTEN']                   = 'Neues Passwort anfordern';
+$GLOBALS['MEMBER']['TITLE_CHANGE']                      = 'Passwort &auml;ndern';
+$GLOBALS['MEMBER']['TITLE_REGISTER']                    = 'Neue Registrierung';
+$GLOBALS['MEMBER']['LBL_EXECUTE']                       = 'Ausf&uuml;hren';
+$GLOBALS['MEMBER']['EMAIL']                             = 'Email';
+$GLOBALS['MEMBER']['CHANGE_PW']                         = 'Wollen Sie Ihr Passwort &auml;ndern?';
+$GLOBALS['MEMBER']['CHANGE_PW_MELDUNG']                 = 'Ihr Passwort wurde erfolgreich ge&auml;ndert!';
+$GLOBALS['MEMBER']['FORGOTTEN']                         = 'Haben Sie Ihr Passwort vergessen?';
+$GLOBALS['MEMBER']['REGISTER']                          = 'Wollen Sie sich neu registrieren?';
+$GLOBALS['MEMBER']['REGISTER_MELDUNG']    				= 'Ihre Registrierung wurde erfolgreich abgschlossen - Bitte melden Sie sich jetzt an.';
+$GLOBALS['MEMBER']['EXEC_LOGIN']                        = 'Login ausf&uuml;hren';
+$GLOBALS['MEMBER']['EXEC_FORGOTTEN']                    = 'Neues Passwort anfordern';
+$GLOBALS['MEMBER']['EXEC_REGISTER']                     = 'Registrierung ausf&uuml;hren';
+$GLOBALS['MEMBER']['LOGIN_AND_PASSWORD']                = 'Bitte geben Sie g&uuml;ltige Anmeldedaten ein!';
+$GLOBALS['MEMBER']['EMAIL_SEND_FAILED']					= 'Ihr neues Passwort konnte nicht per Email gesendet werden - Bitte versuchen Sie es sp&auml;ter wieder, Danke!';
+$GLOBALS['MEMBER']['IHR_NEUES_PASSWORT']                = 'Ihr neues Passwort für den Memberbereich';
+$GLOBALS['MEMBER']['USER_NOT_EXISTS']   				= 'Der Benutzer %s ist NICHT im System gespeichert!';
+$GLOBALS['MEMBER']['USER_ALREADY_EXISTS']				= 'Der Benutzer %s ist bereits im System gespeichert!';
+$GLOBALS['MEMBER']['SAVE_FAILED']        				= 'Beim Speichern Ihrer Anmeldedaten ist ein Fehler aufgetreten!';
+
 
 ?>

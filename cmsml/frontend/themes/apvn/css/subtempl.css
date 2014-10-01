@@ -1,0 +1,647 @@
+/**********************************************
+Styles fuer templates
+************************************************ */
+
+.subcontainer
+{
+height: auto;
+width: 100%;
+overflow: hidden;
+}
+
+/*___________________________________________________________
+spalten fuer drei-spaltiges Template mit Gesamtbreite 960px
+Breite der Spalten soll individuell einstellbar sein,
+Vorlage: links 400px, mitte 400px, rechts 160px 
+_____________________________________________________________*/
+#spalten_wrapper 
+{
+width: 960px;
+height: auto;
+background-color: red;
+/* IE6 Bug -> http://www.positioniseverything.net/explorer/expandingboxbug.html */
+overflow: hidden; 
+}
+
+.spalte_links
+{
+width: 400px;
+float: left;
+/* IE6 Bug -> http://www.positioniseverything.net/explorer/expandingboxbug.html */
+overflow: hidden; 
+}
+
+.spalte_mitte
+{
+width: 400px;
+/* IE6 Bug -> http://www.positioniseverything.net/explorer/expandingboxbug.html */
+overflow: hidden; 
+float: left;
+}
+
+.spalte_rechts
+{
+width: 80px;
+float: right;
+/* IE6 Bug -> http://www.positioniseverything.net/explorer/expandingboxbug.html */
+overflow: hidden; 
+}
+
+/*_____________________________________________
+spalten fuer home
+_______________________________________________*/
+.spalte_340_l
+{
+width: auto;
+/* IE6 Bug -> http://www.positioniseverything.net/explorer/expandingboxbug.html */
+overflow: hidden; 
+}
+
+.spalte_420_r
+{
+float: right;
+width: 420px;
+}
+
+* html div.spalte_420_r {
+w\idth:400px;    /* IE Version 6 */
+}
+
+/*______________________________________________
+spalten fuer tpl zweispaltig_420_340
+________________________________________________*/
+.spalte_420_l
+{
+width: 420px;
+float: left;
+/* IE6 Bug -> http://www.positioniseverything.net/explorer/expandingboxbug.html */
+overflow: hidden; 
+}
+
+.spalte_340_r
+{
+width: auto;
+margin-left: 420px;
+}
+
+/*______________________________________________
+spalten fuer tpl zweispaltig_360_360
+________________________________________________*/
+.spalte_360_l
+{
+width: 360px;
+float: left;
+/* IE6 Bug -> http://www.positioniseverything.net/explorer/expandingboxbug.html */
+overflow: hidden; 
+}
+
+.spalte_360_r
+{
+width: auto;
+margin-left: 360px;
+}
+
+/*______________________________________________
+spalten fuer tpl zweispaltig_300x_400x
+________________________________________________*/
+.spalte_300_left
+{
+width: 300px;
+float: left;
+/* IE6 Bug -> http://www.positioniseverything.net/explorer/expandingboxbug.html */
+overflow: hidden; 
+margin-right: 50px;
+border: 0px solid #dedede;
+}
+
+.spalte_500_right
+{
+  width: auto;
+  position: absolute;
+  left: 350px;
+  z-index: 2;
+  padding-right: 20px;
+  
+}
+/*______________________________________________
+spalten fuer tpl zweispaltig_400x_400x
+________________________________________________*/
+.spalte_400_left
+{
+width: 400px;
+float: left;
+/* IE6 Bug -> http://www.positioniseverything.net/explorer/expandingboxbug.html */
+overflow: hidden; 
+margin-right: 50px;
+border: 0px solid #dedede;
+}
+
+.spalte_400_right
+{
+  width: 400px;
+  position: absolute;
+  left: 440px;
+  z-index: 2;
+  
+}
+
+.subspalte_left, .subspalte_right {
+  width: auto;
+  padding: 0;
+  border: 0px solid #669999;
+}
+/*__________________________________________________________
+spalten fuer tpl zweispaltig_480_240 (birchler-architektur)
+____________________________________________________________*/
+.spalte_480_l
+{
+float: left;
+width: 480px;
+overflow: hidden; 
+}
+
+.spalte_240_r
+{
+float: right;
+min-width: 200px;
+width: auto;
+min-height: 40px;
+}
+
+/*_____________________________________________
+spalten fuer einspaltiges Layout
+_______________________________________________ */
+.spalte_760
+{
+  width: 760px;
+  margin: 0 auto;
+}
+
+.spalte_900 
+{
+  width: 900px;
+}
+
+.subspalte_900 {
+  width: 100%;
+  padding: 0 1px;  
+}
+
+/*______________________________________________
+spalten fuer medien
+________________________________________________*/
+.spalte_500_l
+{
+width: 500px;
+float: left;
+/* IE6 Bug -> http://www.positioniseverything.net/explorer/expandingboxbug.html */
+overflow: hidden; 
+}
+
+.spalte_260_r
+{
+width: auto;
+margin-left: 500px;
+}
+
+
+/*______________________________________________
+inhaltscontainer fuer home
+________________________________________________*/
+.subspalte_home_l
+{
+width: auto;
+padding: 15px 10px 0 10px;
+}
+
+/*______________________________________________
+inhaltscontainer fuer home
+________________________________________________*/
+.subspalte_home_r
+{
+width: auto;
+padding: 15px 10px 0 20px;
+}
+
+/*______________________________________________
+inhaltscontainer 
+________________________________________________*/
+.subspalte_detail_l
+{
+	width: 99.8;
+	padding: 10px 0 0 0px;
+}
+
+/*______________________________________________
+inhaltscontainer 
+________________________________________________*/
+.subspalte_detail_r
+{
+	width: auto;
+	padding: 10px 0px 0px 10px;
+}
+
+/*______________________________________________
+inhaltscontainer fuer auswahlseiten
+________________________________________________*/
+.subspalte_auswahl
+{
+	width: auto;
+	padding: 0px 20px;
+}
+
+/*______________________________________________
+Container fuer kurztext und thumbnail in auswahlseiten
+________________________________________________*/
+.kurztxt_container
+{
+	width: auto;
+	line-height: 20px;
+	padding-bottom: 20px;
+}
+
+/*______________________________________________
+Container fuer langtext detailseiten
+________________________________________________*/
+.texte_container
+{
+	clear: both;
+	width: 100%;
+	padding: 0;
+}
+
+/*______________________________________________
+Container fuer langtext detailseite template 760h
+________________________________________________*/
+.texte_container_bilder 
+{
+	clear: both;
+	width: auto;
+	margin-right: 95px;
+	padding: 0px 20px 5px 0px;
+}
+
+
+/*______________________________________________
+Container fuer kontaktform
+________________________________________________*/
+.kontaktform
+{
+	width: auto;
+	margin-bottom: 20px;
+}
+
+/*------------------------------------------------
+  Container fuer Seitentitel h1
+-------------------------------------------------*/
+.h1mod {
+/*	font-family: "Lucida Handwriting", "Sans Serive", Helvetica; */
+	font-family: Arial, Verdana, Helvetica;
+	font-weight: normal;
+	color: #FF3300;
+}
+
+.titel_seite
+{
+  width: 100%;
+  height: auto;
+}
+
+.titel_seite_rechts {
+  width: 44.5%;
+  padding-left: 330px; 
+}
+
+/*______________________________________________
+Container fuer Counter / Uebersicht
+________________________________________________*/
+.counter
+{
+	height: auto;
+	margin-bottom: 15px;
+	text-align: right;
+	clear: both;
+}
+
+.counter_items
+{
+	clear: both;
+	height: auto;
+	width: 760px;
+	margin-bottom: 0px;
+	text-align: center;
+}
+
+.counter_bilderseite
+{
+	height: auto;
+	margin-bottom: 0px;
+	margin-right: 95px;
+	text-align: center;
+	clear: both;
+}
+
+.left 
+{
+	text-align: left;
+}
+
+.right 
+{
+	text-align: right;
+}
+
+.center 
+{
+	text-align: center;
+}
+
+
+
+/*______________________________________________
+Container fuer Counter / Uebersicht - Auwahlseiten
+________________________________________________*/
+.counter_auswahl
+{
+	width: 460px;
+	height: auto;
+	margin-bottom: 0px;
+	text-align: right;
+}
+/*______________________________________________
+Container fuer Auswahl
+________________________________________________*/
+.container_auswahl
+{
+	float: none;
+	width: auto;
+	min-height: 100px;
+	margin-bottom: 20px;
+}
+
+/*______________________________________________
+Container fuer Bilder + Kurztexte in Auswahlseiten
+________________________________________________*/
+.kurztxt_container_auswahl
+{
+	clear: both;
+	width: 760px;
+	min-height: 100px;
+	line-height: 20px;
+	border-bottom: 1px dashed #dedede;
+	background-color: #ffffff;
+	margin-bottom: 20px;
+}
+
+.auswahl_bild {
+	padding: 0 15px 0 5px;
+	height: auto;
+	width: 130px;
+	height: auto;
+	min-height: 100px;
+	float: left;
+}
+
+.auswahl_text {
+	padding: 5px 5px;
+}
+
+.clearfix {
+	clear:both;
+}
+
+/*______________________________________________
+Container fuer Thumnails in Auswahlseiten
+________________________________________________*/
+.img_container_auswahl
+{
+	margin-left: 460px;
+	height:120px;
+	width: auto;
+}
+
+/*______________________________________________
+Container fuer Thumnails in Kuenstlerdetailseiten vertikal
+________________________________________________*/
+.img_container_vertical
+{
+	margin-top:40px;
+	height:auto;
+	width: auto;
+}
+
+
+
+/*______________________________________________
+Container fuer Thumnails
+________________________________________________*/
+.img_container_thumb
+{
+	height: auto;
+	width: auto;
+	margin: 0 20px 5px 0px;
+}
+
+/* thumnails small size*/
+.img_small
+{
+	margin: 1px;
+	margin-bottom: -2px;
+	padding-bottom: 10px;
+	padding-top: 5px;
+}
+
+/*______________________________________________
+ rahmen fuer thumbs small size
+________________________________________________*/
+.img_thumb_rahmen
+{
+	text-align: center;
+	border: 2px solid  #646464;
+	margin: 0px 20px 20px 0px;
+	float: left;
+	display: inline; /* IE Bug -> doppelter Margin */
+	height: 132px;
+	width: 132px;
+}
+
+/*______________________________________________
+ rahmen fuer thumbs small size kuenstler detail vertikal
+________________________________________________*/
+.img_thumb_rahmen_vertical
+{
+	text-align: center;
+	border: 0px solid  #646464;
+	margin: 0px 0px 20px 18px;
+	float: left;
+	display: inline; /* IE Bug -> doppelter Margin */
+	height: 120px;
+	width: 120px;
+}
+
+/*______________________________________________
+ Definition platzhalter fuer bilder thumbnail medium size
+ ________________________________________________*/
+.img_medium_right
+{
+	position: absolute;
+	text-align: left;
+    z-index: 1;
+    /*
+	height: 400px;
+	width: 400px;
+    */
+	/* display: inline; damit wird die H�he �bersteuert */
+}
+
+.img_medium_left
+{
+	position: absolute;
+	text-align: left;
+    z-index: 1;
+	/* 
+    height: 400px;
+	width: 400px;
+    */
+	/* display: inline;  damit wird die Hoehe uebersteuert */
+}
+
+.img_galerie
+{
+	text-align: left;
+	height: auto;
+	width: 300px;
+}
+
+.img_fix
+{
+	text-align: left;
+	min-height: 320px;
+	width: 300px;
+}
+
+.img_medium_480
+{
+	text-align: left;
+	height: auto;
+	width: 480px;
+}
+
+.img_medium_960
+{
+	text-align: left;
+	height: auto;
+	width: 960px;
+}
+
+.img_medium_320
+{
+	text-align: left;
+	height: auto;
+	width: 320px;
+	overflow: hidden;
+}
+/*-----------------------------------------------
+  CSS fuer Automatischen Bildwechsler xfade2.js --> 2 Container 
+ -----------------------------------------------*/
+#imageContainer1, #imageContainer2  {
+  height:400px;
+}
+
+#imageContainer1 img, #imageContainer2 img  {
+  display:none;
+  position:absolute;
+}
+/* Ende xfade2 */
+
+/*-----------------------------------------------
+	CSS fuer Bilder-Leiste und Galerie-Link
+ -----------------------------------------------*/
+.bildleiste_wrapper, .galerie_wrapper {
+  	padding-top: 10px;
+	padding-right: 0px;
+	padding-bottom: 10px;
+	float: right;
+	border: 0px solid purple;
+	width: 300px;
+	heigth: 200px;
+}
+
+.galerie_wrapper {
+  	float: left;
+  	height: auto;
+}
+
+.galerie_wrapper a:hover {
+  	background-color: transparent;  
+}
+
+.bildleiste_wrapper a:hover {
+  	background-color: #DE001F;
+}
+
+
+.bildleiste {
+	width: 9px;
+	height: 9px;
+	float: left;  
+	margin-top: 7px;
+	margin-right: 4px;
+	border: 0px solid black;
+}
+
+.bildleiste_space {
+	width: 10px;
+	height: 9px;
+	float: left; 
+	background-color: transparent;
+}
+
+
+.rect_aktiv {
+	background-color: #FF0000;
+}
+
+.rect_passiv {
+	background-color: #ff6600;
+}
+
+/* klassen fuer Link1 und Link2 auf den Unterseiten */
+.clslink1, .clslink2 {
+	padding: 5px 0;
+}
+
+.inhalt2_container {
+	padding: 0;
+}
+
+/*___________________________________________________________
+	CSS-Notationen fuer die Sitemap
+_____________________________________________________________*/
+
+.smap_ul1 {
+	list-style-type: none;
+}
+
+.smap_li1 {
+	/* text-decoration: underline; 
+	color: #ff0000;*/
+	border-bottom: 1px dotted;
+	line-height: 25px;
+	/*
+	background: transparent url(../../../shared/gifs/gt9.gif) no-repeat 0 7px;
+	padding-left: 13px;  */
+}
+
+.smap_li2 {
+	padding-left: 22px;
+	background: transparent url(../../../shared/gifs/arc.gif) no-repeat 0px 3px;
+/*
+	list-style-type: square;
+	list-style-position: inside;*/
+}
+
+.smap_li3 {
+	padding-left: 43px;
+	background: transparent url(../../../shared/gifs/arc.gif) no-repeat 22px 3px;
+}

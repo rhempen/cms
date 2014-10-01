@@ -4,7 +4,7 @@
 //<![CDATA[
 /**********************************************************************************
 *
-* Events und Functions für Zeichenzähler 
+* Events und Functions fï¿½r Zeichenzï¿½hler 
 *
 /*********************************************************************************/
 
@@ -68,7 +68,43 @@ function berechneZeichenZusatztext()
 }
 
 
+/* mit diesem Script werden sprachabhÃ¤ngige Texte im Edit-Formular nave_edit
+ * ausgetauscht sobald die Sprache gewechselt wird 
+ * dieses Script wird aus general_cmsadmin.js aufgerufen  */
+function update_navi_edit_formular(iEditId,iLangu) {
+  var lUrl = "../_controllers/navi_co_maintain.php"; 
+  var lTarget = "texteLangu";
+  var lParams = "action=replaceTexts&nav_id="+iEditId+"&langu_tra="+iLangu
+  var myAjax = new Ajax.Updater(lTarget, lUrl, { 
+    method: 'get',
+    evalScript: true,
+    parameters: lParams }
+);
+}
+
+  /* Beim Klick auf die Checkbox fÃ¼r das Memberlogin wird neben der Checkbox
+   * ein entsprechender Text angezeigt, damit der Benutzer weiss, ob das 
+   * Memberlogin erforderlich ist. X = erforderlich, '' = nicht erforderlich  
+   * ist das Login erforderlich wird es in fetter, grÃ¼ner Schrift angezeigt */
+function setMemberLoginText() {
+  var lCheckbox = this.id;
+  if (lCheckbox) {
+    if (this.checked) { 
+      $("memberLoginText").innerHTML = $("mlErforderlich").innerHTML; 
+      $("memberLoginText").addClassName("success");
+      this.value = 'X';
+    } else {
+      $("memberLoginText").innerHTML = $("mlNichtErforderlich").innerHTML;       
+      $("memberLoginText").removeClassName("success");
+      this.value = '';
+    }
+  }
+  
+}
+
 // Events deklarieren
+Event.observe($("memberLogin"), 'click', setMemberLoginText);
+
 Event.observe(window, 'load', kurztitel_zeichen_berechnen);
 
 Event.observe(window, 'load', zusatztext_zeichen_berechnen);

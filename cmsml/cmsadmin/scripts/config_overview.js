@@ -29,8 +29,12 @@ Event.observe(window, "load", function() {
 
 	$A($$(".spezial")).each( function(element) {
 		new Ajax.InPlaceEditor( element, "../_controllers/config_co_maintain.php?action=save_spez&id="+element.id, {});
-		// $("spezi").setStyle({ display:'none' });
 	});
+
+    $A($$(".aktivflag")).each(function(element) {
+		Event.observe(element, "click", function() { update_aktivflag_spezial(element.id); });
+	});
+    
 });
 
 
@@ -101,6 +105,31 @@ function update_radiobutton(id, value, alternative) {
 		};
 		XMLHttp.send(null);
 	} 
+}
+
+// Update des Aktiv-Flags im Spezial-Tab
+function update_aktivflag_spezial(id) {
+  var wert = $(id).innerHTML;
+  var led = wert.search(/blocked/);
+  if (led != -1) {wert = 'nein';} else {wert = 'ja';}
+  var lId = id;
+  var lUrl = "../_controllers/config_co_maintain.php?action=aktivSaveSpez&wert=" + wert + "&id=" + lId; 
+  new Ajax.Request(lUrl, {
+    method: 'get',
+    onSuccess: function(transport) {
+      var responseText = transport.responseText.split('/'); 
+      if (responseText[0] == 'j') {
+          $(id).innerHTML  = '<button type="button" class="freed" title="'+responseText[1]+'" />'; 
+          $(id).title = responseText[1]; 
+          $(id).setStyle({ color:'green' });
+      } else {
+          $(id).innerHTML  = '<button type="button" class="blocked" title="'+responseText[1]+'" />'; 
+          $(id).title = responseText[1]; 
+          $(id).setStyle({ color:'red' });
+      }      
+    }    
+  });
+  
 }
 
 //]]>

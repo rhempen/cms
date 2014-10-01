@@ -53,7 +53,7 @@
 	$mcImageManagerConfig['filesystem.include_file_pattern'] = '';
 	$mcImageManagerConfig['filesystem.exclude_file_pattern'] = '/([^a-zA-Z0-9_\-\.]|^mcic_)/i';
 	$mcImageManagerConfig['filesystem.invalid_file_name_msg'] = "";
-	$mcImageManagerConfig['filesystem.extensions'] = "gif,jpg,png,bmp,swf,dcr,mov,qt,ram,rm,avi,mpg,mpeg,asf,flv";
+	$mcImageManagerConfig['filesystem.extensions'] = "gif,jpg,png,bmp,pdf,swf,dcr,mov,qt,ram,rm,avi,mpg,mpeg,asf,flv";
 	$mcImageManagerConfig['filesystem.readable'] = true;
 	$mcImageManagerConfig['filesystem.writable'] = true;
 	$mcImageManagerConfig['filesystem.delete_recursive'] = false;
@@ -89,7 +89,7 @@
 	$mcImageManagerConfig['upload.include_file_pattern'] = '';
 	$mcImageManagerConfig['upload.exclude_file_pattern'] = '';
 	$mcImageManagerConfig['upload.invalid_file_name_msg'] = "";
-	$mcImageManagerConfig['upload.extensions'] = "gif,jpg,jpeg,png";
+	$mcImageManagerConfig['upload.extensions'] = "gif,jpg,jpeg,png,pdf";
 	$mcImageManagerConfig['upload.create_thumbnail'] = true; // true/false, create thumbnail on upload
 	$mcImageManagerConfig['upload.autoresize'] = false; // Force max width/height, IM will rescale uploaded images.
 	$mcImageManagerConfig['upload.autoresize_jpeg_quality'] = 75; // Force max width/height, IM will rescale uploaded images.

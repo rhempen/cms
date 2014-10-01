@@ -13,7 +13,7 @@ Event.observe(window, "load", function() {
 
 Event.observe(window, "load", function() {
 // Sortierbarkeit von LI-Elementen 
-		Sortable.create('frgmnts',{ tag:"LI",onUpdate:updateSortIndex,handle:"mnusort" });
+		Sortable.create('frgmnts',{ tag:"LI",onUpdate:updateSortIndex,handle:"fragment_move" });
 
 // Mouseover-Event deklarieren zum Anzeigen von Bearbeitungsoption je Row
 //  	$$("ul#frgmnts div.divwork").each( function(element) {

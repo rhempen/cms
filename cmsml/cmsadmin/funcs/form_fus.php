@@ -43,25 +43,25 @@ function html_encode($string){
 
 function convert_umlaute($text){
 	 //DIE UMLAUTE WERDEN KONVERTIERT  /////
-	 $pattern1="/ä/";
+	 $pattern1="/ï¿½/";
 	 $replace1="&#228;";
 	 $text=preg_replace($pattern1,$replace1, $text);
-	 $pattern2="/ö/";
+	 $pattern2="/ï¿½/";
 	 $replace2="&#246;";
 	 $text=preg_replace($pattern2,$replace2, $text);
-	 $pattern3="/ü/";
+	 $pattern3="/ï¿½/";
 	 $replace3="&#252;";
 	 $text=preg_replace($pattern3,$replace3, $text);
-	 $pattern1a="/Ä/";
+	 $pattern1a="/ï¿½/";
 	 $replace1a="&#196;";
 	 $text=preg_replace($pattern1a,$replace1a, $text);
-	 $pattern2a="/Ö/";
+	 $pattern2a="/ï¿½/";
 	 $replace2a="&#214;";
 	 $text=preg_replace($pattern2a,$replace2a, $text);
-	 $pattern3a="/Ü/";
+	 $pattern3a="/ï¿½/";
 	 $replace3a="&#220;";
 	 $text=preg_replace($pattern3a,$replace3a, $text);
-	 $pattern4="/ß/";
+	 $pattern4="/ï¿½/";
 	 $replace4="&#xDF;";
 	 $text=preg_replace($pattern4,$replace4, $text);
 	 $pattern5a="/\"/";
@@ -82,25 +82,26 @@ function convert_umlaute($text){
 
 
 function convert_umlaute2($text) {
-	// Alle ungültigen Zeichen ersetzen
-	$suchmuster[0] = '/ä/'; $ersetzung[0] = 'ae';
-	$suchmuster[1] = '/ö/'; $ersetzung[1] = 'oe';
-	$suchmuster[2] = '/ü/'; $ersetzung[2] = 'ue';
-	$suchmuster[3] = '/Ä/'; $ersetzung[3] = 'Ae';
-	$suchmuster[4] = '/Ö/'; $ersetzung[4] = 'Oe';
-	$suchmuster[5] = '/Ü/'; $ersetzung[5] = 'Ue';
-	$suchmuster[6] = '/à|á|â/'; $ersetzung[6] = 'a';
-	$suchmuster[7] = '/é|è|ê/'; $ersetzung[7] = 'e';
-	$suchmuster[8] = '/ò|ó|ô/'; $ersetzung[8] = 'o';
-	$suchmuster[9] = '/ù|ú|û/'; $ersetzung[9] = 'u';
-	$suchmuster[10] = '/À|Á|Â/'; $ersetzung[10] = 'A';
-	$suchmuster[11] = '/É|È|Ê/'; $ersetzung[11] = 'E';
-	$suchmuster[12] = '/Ó|Ò|Ô/'; $ersetzung[12] = 'O';
-	$suchmuster[13] = '/Ú|Ù|Û/'; $ersetzung[13] = 'U';
-	$suchmuster[14] = '/ç/'; $ersetzung[14] = 'c';
+	// Alle ungï¿½ltigen Zeichen ersetzen
+	$suchmuster[0] = '/ï¿½/'; $ersetzung[0] = 'ae';
+	$suchmuster[1] = '/ï¿½/'; $ersetzung[1] = 'oe';
+	$suchmuster[2] = '/ï¿½/'; $ersetzung[2] = 'ue';
+	$suchmuster[3] = '/ï¿½/'; $ersetzung[3] = 'Ae';
+	$suchmuster[4] = '/ï¿½/'; $ersetzung[4] = 'Oe';
+	$suchmuster[5] = '/ï¿½/'; $ersetzung[5] = 'Ue';
+	$suchmuster[6] = '/ï¿½|ï¿½|ï¿½/'; $ersetzung[6] = 'a';
+	$suchmuster[7] = '/ï¿½|ï¿½|ï¿½/'; $ersetzung[7] = 'e';
+	$suchmuster[8] = '/ï¿½|ï¿½|ï¿½/'; $ersetzung[8] = 'o';
+	$suchmuster[9] = '/ï¿½|ï¿½|ï¿½/'; $ersetzung[9] = 'u';
+	$suchmuster[10] = '/ï¿½|ï¿½|ï¿½/'; $ersetzung[10] = 'A';
+	$suchmuster[11] = '/ï¿½|ï¿½|ï¿½/'; $ersetzung[11] = 'E';
+	$suchmuster[12] = '/ï¿½|ï¿½|ï¿½/'; $ersetzung[12] = 'O';
+	$suchmuster[13] = '/ï¿½|ï¿½|ï¿½/'; $ersetzung[13] = 'U';
+	$suchmuster[14] = '/ï¿½/'; $ersetzung[14] = 'c';
 	$suchmuster[15] = '/\s/'; $ersetzung[15] = '_'; // Leerschlag durch _ ersetzen	
-	$suchmuster[16] = '/[^a-zA-Z0-9_]*/'; $ersetzung[16] = ''; // Alle Sonderzeichen durch space ersetzen
-	
+	$suchmuster[16] = '/[^a-zA-Z0-9_\.]*/'; $ersetzung[16] = ''; // Alle Sonderzeichen durch space ersetzen
+	$suchmuster[17] = '/-{1,}/'; $ersetzung[17] = '_'; // doppelte oder mehr Bindestriche durch einen ersetzen
+	$suchmuster[18] = '/_{2,}/'; $ersetzung[18] = '_'; // doppelte oder mehr Unterstriche durch einen ersetzen
 	$text=preg_replace($suchmuster,$ersetzung, $text);
 
 	return $text;

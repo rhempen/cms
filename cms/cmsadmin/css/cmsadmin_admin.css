@@ -169,9 +169,9 @@ form {
 }
 
 /* Definitionen f�r "Navigation verwalten" */
-.navi_overview {
-  width: 90%;
-  min-width: 770px;
+.navi_overview, .pages_overview {
+  width: 95%;
+  min-width: 800px;
   table-layout: fixed;
 }
 
@@ -181,6 +181,7 @@ form {
 	background-color: Teal;
 	color: white;
 }
+
 
 /* CSS-Definitonen f�r Formularfelder */
 form input, form select {

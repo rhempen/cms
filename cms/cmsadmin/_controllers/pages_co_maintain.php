@@ -106,8 +106,10 @@
 			break;
 		case 'nameSave':
 			if ($page_id > 0) {
+                // Bezeichnung in cms_redirect updaten
 				$feldwert	= isset($_POST['value']) && trim($_POST['value']) != '' ? trim(stripslashes($_POST['value'])) : 'value';
 				$feldname	= 'name'; // Feldname, dessen wert ge�ndert werden soll
+                $redir->navi_update($row['nav_id'], $feldwert, $page_id);
 				$message = $pages->page_update($page_id, $feldname, $feldwert);
 				echo $message;
 				$view = 'nothingToDo';

@@ -86,17 +86,19 @@ while ($eintrag = $navigation->fetchRow())
 		if ($navtype == $GLOBALS['NAVI']['HORIZONTAL']) 
 		{
 			$count_navigation++;
-            /* Pipezeichen | setzen, falls erwuenscht */ 
-			if ($count_navigation < $anz_navigation) { $tpl->setVariable('pipe', $pipe); }
             if (!$navi_h_richtung_done) {
               $tpl->setCurrentBlock('navi_h_richtung');
               $tpl->setVariable('richtung_navi', HMENU_RICHTUNG);
               $navi_h_richtung_done = true;
               $tpl->parseCurrentBlock();	
             }
+            
 			$tpl->setCurrentBlock('navi_horiz');
 
-			// Unterpositionen 
+            /* Pipezeichen | setzen, falls erwuenscht */ 
+			if ($count_navigation < $anz_navigation) { $tpl->setVariable('pipe', $pipe); }
+
+            // Unterpositionen 
 			$ukap_navid = $naviout->check_ukap($eintrag['kap'], $unav_array);
 
 			// Soll gleich auf die erste Unterposition positioniert werden?			
@@ -134,6 +136,7 @@ while ($eintrag = $navigation->fetchRow())
               $navi_s_richtung_done = true;
               $tpl->parseCurrentBlock();	
             }
+            
 			$tpl->setCurrentBlock('navi_service');
 			if ($count_service < $anz_service) { $tpl->setVariable('pipe', $pipe); }
 			if ($akt_navid == $tempid) { 
@@ -205,5 +208,5 @@ if (HMENU_SUBMENU == 'submenu')
 	Ausgabe	der Sprachenwahl, falls in cms_spezial Sprachen eingetragen wurden 
   ==============================================================================*/
   // Sprachauswahl ausgeben
-  $naviout->sprachauswahl();    
+  $naviout->sprachauswahl();
 ?>

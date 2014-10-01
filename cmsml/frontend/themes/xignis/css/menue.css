@@ -1,0 +1,97 @@
+/*************************************************
+* Navigation
+*************************************************/
+
+#navigation_liste
+{
+	margin-top: 7px;
+	text-align: center;
+	font-size: 24px;
+	font-weight: normal;
+	width: 264px;
+}
+
+* html #navigation_liste
+{
+	padding: 0px 10px 10px 20px;
+}
+
+#navigation_liste ul
+{
+	list-style: none;
+	margin-left: 0;
+	padding: 0;
+	border: none;
+}
+
+#navigation_liste ul li
+{
+	line-height: 45px;
+	padding: 0;
+	margin: 0;
+}
+
+* html #navigation_liste ul {  /* nur fuer Internet Explorer */
+	line-height: 35px;
+/* Version 5.x */
+}
+* html #navigation_liste li {  /* nur fuer Internet Explorer */
+	padding-top: 0px;
+/* Version 5.x */
+}
+
+#navigation_liste li a:link
+{
+	display: block;
+	padding: 0px;
+	border: 0px;
+	background-color: transparent;
+	text-decoration: none;
+	color: #ff6600;
+	font-weight: normal;
+	z-index: -100;
+}
+
+html>body #navigation_liste li a { width: auto; }
+
+
+/* CSS für Unternavigationspunkte vertikal */
+* html #navigation_liste ul ul
+{
+	padding-bottom: 15px;
+}
+
+#navigation_liste li li
+{
+	padding-left: 100px;
+	padding-top: 0px;
+	margin: 0;
+}
+
+* html #navigation_liste li li
+{
+	padding-bottom: 5px;
+}
+
+
+/* #navigation_liste li ul li a:link, #navigation_liste li ul li a:visited,*/
+#navigation_liste ul li ul li a
+{
+	color: #ff6600;
+	padding-top: 0px;
+	display: block;
+	width: 100%;
+	line-height: 22px;
+	font-size: 14px;
+	text-decoration: none;
+	text-align: left;
+}
+
+/* hover und aktiver link der 1. und 2. Ebene der Hauptnavigation */
+#navigation_liste ul li a.active, #navigation_liste ul li ul li a.subactive,
+#navigation_liste ul li a:hover, #navigation_liste ul li ul li a:hover
+{
+	color: #FF0000;
+	text-decoration: underline;
+}
+

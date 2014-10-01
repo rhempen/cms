@@ -10,7 +10,7 @@ function login_fields($action)
 	$html .= '<input type="hidden" name="pwcode" id="pwcode" value="'.$pwcode.'" />' . "\n";
 	switch ($action) {
 	case 'CHANGE':
-		// Passwort �ndern
+		// Passwort aendern
 		$html .= '<h2>'.$GLOBALS['TEXTE']['LBL_CHANGE_PASSWORD'].'</h2>' . "\n";
 		$html .= '<p class="odd">'.$GLOBALS['TEXTE']['USERNAME'].'<br/>' . "\n";
 		$html .= '<input style="width:160px;" type="text" id="username" name="username" tabindex="1" value="'.$user.'" />' . "\n";
@@ -87,7 +87,7 @@ function set_class($act, $pos) {
 /* Menu ausgeben */
 function menu()
 {
-	global $menu_arr;
+	global $menu_arr, $action;
 	// Debugging - Fenster �ffnen 
 	if ($_SESSION['debugging'] === true) {
 		debug_open_window();

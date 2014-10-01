@@ -5,10 +5,12 @@
  *           www.hempenweb.ch
  * ----------------------------------------------------------
  *
- * Klasse f�r die Verwaltung der Navigation und zugeh�riger Seiten
+ * Klasse fuer die Verwaltung der Navigation und zugeh�riger Seiten
  * @author      Roland Hempen
  * @copyright   Frei einsetz- und veraenderbar, wenn der Autor erw�hnt wird
  * @version     1.0 | 2007-07-14
+ * @package     CMSADMIN/Pages
+ * 
  */
  
 class pagesMaintain
@@ -48,14 +50,14 @@ class pagesMaintain
 	*	@param: $referrer - ist gesetzt, wenn der Aufruf vom Frontend erfolgt -> 
 	*                       dann muessen zusaetzliche Felder eingelesen werden
 	*/
-    public function read_pages_overview($area, $referrer='', $fach='', $start=0) 
+    public function read_pages_overview($area, $referrer='', $fach='', $start=0, $language) 
     { 
 		global $db;
 		$where  = ' domain="'.$area.'"';
-		$felder = 'page_id, kennzeichen, fach, name, datum_von, datum_bis, aktiv';
-//		$order  = 'fach, datum_von DESC, name';
-		$order  = 'fach, sort_id';
-		if ($referrer != '' && $fach != '') { $where .= ' AND fach="'.$fach.'"' ;}
+//		$felder = 'page_id, kennzeichen, fach_'.$language.', name_'.$language.', datum_von, datum_bis, aktiv';
+		$felder = '*';
+		$order  = 'fach_'.$language.', sort_id';
+		if ($referrer != '' && $fach != '') { $where .= ' AND fach_'.$language.'="'.$fach.'"' ;}
 		$query = 'SELECT '.$felder.' FROM '.$this->mPrefix.'pages WHERE '.$where.' ORDER BY '.$order;
 		$area_arr = $db->query($query);
 		return $area_arr;
@@ -131,10 +133,10 @@ class pagesMaintain
     */    
 	public function read_pages_per_domain($domain, $exp)  
 	{				
-		global $db;
-		$query = 'SELECT DISTINCT page_id, name FROM ' .$this->mPrefix.'pages'. ' 
+		global $db, $langu_tra;
+		$query = 'SELECT DISTINCT page_id, name_'.$langu_tra.' FROM ' .$this->mPrefix.'pages'. ' 
 				   WHERE aktiv="j"
-					 AND name LIKE "%' . utf8_decode($exp) . '%"';
+					 AND name_'.$langu_tra.' LIKE "%' . utf8_decode($exp) . '%"';
 		$result = $db->query($query);
 		return $result;
 	}
@@ -147,10 +149,10 @@ class pagesMaintain
 	public function read_page_per_kennzeichen($kennzeichen)  
 	{				
 		global $db;
-		$query = 'SELECT DISTINCT * FROM ' .$this->mPrefix.'pages'. ' 
-				   WHERE kennzeichen="'.$kennzeichen.'"' ;
-		$result = $db->query($query);
-		return $result;
+		$query  = 'SELECT DISTINCT * FROM ' .$this->mPrefix.'pages ';
+		$query .= 'WHERE kennzeichen="'.$kennzeichen.'"' ;
+		$page = $db->queryRow($query);
+		return $page;
 	}
 
 	/**
@@ -162,11 +164,11 @@ class pagesMaintain
     */    
 	public function move_up_page($page_id, $sort_id, $fach, $name)  
 	{
-		global $db;
+		global $db, $language;
 		if ($sort_id > 1) {
-			if ($db->query('UPDATE '.$this->mPrefix.'pages SET sort_id=222 WHERE page_id='.$page_id) && 
-			    $db->query('UPDATE '.$this->mPrefix.'pages SET sort_id='.$sort_id.' WHERE fach="'.$fach.'" AND sort_id=('.$sort_id.'-1)') && 
-				$db->query('UPDATE '.$this->mPrefix.'pages SET sort_id=('.$sort_id.'-1) WHERE page_id='.$page_id.' AND sort_id=222')) 
+			if ($db->query('UPDATE '.$this->mPrefix.'pages SET sort_id=2222 WHERE page_id='.$page_id) && 
+			    $db->query('UPDATE '.$this->mPrefix.'pages SET sort_id='.$sort_id.' WHERE fach_'.$language.'="'.$fach.'" AND sort_id=('.$sort_id.'-1)') && 
+				$db->query('UPDATE '.$this->mPrefix.'pages SET sort_id=('.$sort_id.'-1) WHERE page_id='.$page_id.' AND sort_id=2222')) 
 			{
 				$this->mMsg[] = 'success'; $this->mMsg[] = sprintf($GLOBALS['MESSAGES']['MSG_KAP_HOCHZIEHEN'], $name);
 				return $this->mMsg;					
@@ -201,7 +203,7 @@ class pagesMaintain
 	{				
 		global $db;
 		$query = 'SELECT * FROM '.$this->mPrefix.'pages WHERE page_id='.$page_id; 
-		$page  = $db->query($query);
+		$page  = $db->queryRow($query);
 		return $page;
 	}
 	
@@ -212,8 +214,8 @@ class pagesMaintain
     */    
 	public function read_link_name($link_id)  
 	{				
-		global $db;
-		$query = 'SELECT name FROM '.$this->mPrefix.'pages WHERE page_id='.$link_id.' AND aktiv="j"'; 
+		global $db, $langu_tra;
+		$query = 'SELECT name_'.$langu_tra.' FROM '.$this->mPrefix.'pages WHERE page_id='.$link_id.' AND aktiv="j"'; 
 		$name  = $db->queryOne($query);
 		return $name;
 	}
@@ -269,6 +271,29 @@ class pagesMaintain
 		return $seiten;
 	}
 
+	/**
+	 * 	zur aktuellen Page_id sollen die zugehörigen Thumbnails ermittelt werden
+	 *	@param: $page_id --> die ID der Unterseite
+	 * 	@return: $thumbnails 
+	*/
+    public function read_thumbnails($page_id) 
+    {
+      global $db, $browser, $naviga;
+      $query = 'SELECT domain, kennzeichen FROM '.$this->mPrefix.'pages WHERE page_id='.$page_id;
+      $pagerow = $db->queryRow($query);
+      $kennzeichen = $pagerow['kennzeichen'];
+      // wenn Kennzeichen nicht gesetzt ist, 
+      // kann es aus der domain und der Pageid zusammengesetzt werden....
+      if ($kennzeichen == '') {
+        $kennzeichen = $pagerow['domain'].sprintf("%04d",$page_id);
+        // ... und gleich in der cms_pages updaten
+        $knz = $this->page_update($page_id, 'kennzeichen',$kennzeichen);
+      }
+      $verzeichnis = MEDIA_ROOT .'/'. $kennzeichen .'/_thumbs';
+      $thumbnails  = $browser->get_images($verzeichnis);
+      return $thumbnails;
+    }
+    
 	/**
 	 * 	Alle Felder auf Richtigkeit �berpr�fen
 	 *	-> Diese Funktion wird nicht genutzt!! Statt dessen wird die Pruefung der Felder mit JavaScript gemacht
@@ -327,10 +352,9 @@ class pagesMaintain
 	*/
 	public function save_page($page_id, $action='', $dbaction='')	
 	{
-		global $general;
-		global $row; // Zustand der Daten VOR dem SAVE
-		global $db;
-
+		global $db, $general, $row; // Zustand der Daten VOR dem SAVE
+        $langu_tra = $_POST['langu_sav'] != '' ? strtolower($_POST['langu_sav']) : strtolower($_POST['sprache']);
+        
 		if ($action == '' || $dbaction == '') {
 			$this->mMsg[] = 'error'; $this->mMsg[] = 'Unerlaubter Zugriff auf die DB!!';
 			return $this->mMsg;		
@@ -351,7 +375,7 @@ class pagesMaintain
 		
 		// das Feld FACH = Kuerzel muss anhand der navid aus der Navigation eruiert werden
 		if (isset($_POST['navid']) && $_POST['navid'] > 0) {
-			$query = 'SELECT bezeichnung FROM '.$this->mPrefix.'navigation WHERE nav_id='.$_POST['navid']; //.' AND ukap > 0';
+			$query = 'SELECT bezeich_'.$langu_tra.' FROM '.$this->mPrefix.'navigation WHERE nav_id='.$_POST['navid']; //.' AND ukap > 0';
 			$bezeichnung = $db->queryOne($query);
 			$bezeichnung = str_replace(' ','_',$bezeichnung);
 		} else {
@@ -362,12 +386,13 @@ class pagesMaintain
 		
 		// Wenn die Zuordnung der Seite im Menu ge�ndert hat:
 		// - muss die letzte Sort_id des neuen Fachs in cms_pages ermittelt werden
-		if ($bezeichnung != $row['fach'] || $dbaction == 'insert') { 
-			$query = 'SELECT max(sort_id) FROM '.$this->mPrefix.'pages'.' WHERE nav_id='.$_POST['navid'].' AND fach="'.$bezeichnung.'"';
+		if ($bezeichnung != $row['fach_'.$langu_tra] || $dbaction == 'insert') { 
+			$query = 'SELECT max(sort_id) FROM '.$this->mPrefix.'pages'.' WHERE nav_id='.$_POST['navid'].' AND fach_'.$langu_tra.'="'.$bezeichnung.'"';
 			$row['sort_id'] = $db->queryOne($query)+1; 
 		}
 		
 	    // Seitennamen automatisch, falls nicht eingegeben wurde
+//		$pagename = convert_umlaute($_POST['name']);
 		$pagename = convert_umlaute($_POST['name']);
 		if ($pagename == '') { $pagename = $GLOBALS['TEXTE']['TEXT_UNTERSEITE'].$_POST['domain']; } 
 
@@ -377,24 +402,24 @@ class pagesMaintain
 		$aktiv	 = isset($_POST['aktiv']) && $_POST['aktiv'] != '' ? $_POST['aktiv'] : 'n';
 
 		// SQL-Statement vorbereiten
-		$sql .= 'name		="' .$pagename. '",';
-		$sql .= 'kennzeichen="' .$db->escape($_POST['kennzeichen']). '",';
-		$sql .= 'domain		="' .$db->escape($_POST['domain']). '",';
-		$sql .= 'nav_id		='	.intval($_POST['navid']).',';
-		$sql .= 'fach		="'	.$bezeichnung. '",';
-		$sql .= 'datum_von	="' .$datum_von_mysql. '",';
-		$sql .= 'datum_bis	="' .$datum_bis_mysql. '",';
-		$sql .= 'kurztext	="' .$db->escape($_POST['kurztext']). '",';
-		$sql .= 'langtext	="' .$db->escape($_POST['langtext']). '",';
-		$sql .= 'inhalt2	="' .$db->escape($_POST['inhalt2']). '",';
-		$sql .= 'template	='	.intval($_POST['templates']). ',';
-		$sql .= 'bild1		="'	.$bild1. '",';
-		$sql .= 'bild2		="'	.$bild2. '",';
-		$sql .= 'galerie	="' .$galerie. '",';
-		$sql .= 'linkid1	='	.$linkid1. ',';
-		$sql .= 'linkid2	='	.$linkid2. ',';
-		$sql .= 'aktiv		="'	.$aktiv. '",';
-		$sql .= 'sort_id	='	.intval($row['sort_id']);
+		$sql .= 'name_'.$langu_tra.'="'.$pagename.'",';
+		$sql .= 'kennzeichen="'.$db->escape($_POST['kennzeichen']).'",';
+		$sql .= 'domain="'.$db->escape($_POST['domain']).'",';
+		$sql .= 'nav_id='.intval($_POST['navid']).',';
+		$sql .= 'fach_'.$langu_tra.'="'	.$bezeichnung.'",';
+		$sql .= 'datum_von="'.$datum_von_mysql.'",';
+		$sql .= 'datum_bis="'.$datum_bis_mysql.'",';
+		$sql .= 'kurztext_'.$langu_tra.'="'.$db->escape($_POST['kurztext']).'",';
+		$sql .= 'inhalt1_'.$langu_tra.'="'.$db->escape($_POST['inhalt1']).'",';
+		$sql .= 'inhalt2_'.$langu_tra.'="'.$db->escape($_POST['inhalt2']).'",';
+		$sql .= 'template='.intval($_POST['templates']).',';
+		$sql .= 'bild1="'.$bild1.'",';
+		$sql .= 'bild2="'.$bild2.'",';
+		$sql .= 'galerie="'.$galerie.'",';
+		$sql .= 'linkid1='.$linkid1.',';
+		$sql .= 'linkid2='.$linkid2.',';
+		$sql .= 'aktiv="'.$aktiv.'",';
+		$sql .= 'sort_id='.intval($row['sort_id']);
 
 		switch (strtolower($dbaction)) {
 			case 'insert':
@@ -409,7 +434,8 @@ class pagesMaintain
 					$this->mMsg[] = 'success'; $this->mMsg[] = sprintf($GLOBALS['MESSAGES']['MSG_SEITE_GESPEICHERT'], $_POST['name']);
 					// für den anschliessenden Insert in cms_redirect ben�tigen wir die neue Page_id
 					$last_insert = 'SELECT LAST_INSERT_ID()';
-					$_POST['page_id'] = $db->queryOne($last_insert);
+                    $lastID = $db->queryOne($last_insert);
+					$_POST['page_id'] = $lastID;
 				}
 				break;
 			case 'update':
@@ -459,17 +485,17 @@ class pagesMaintain
 	 *	@param: $nav_id
 	*/
 	public function reorg_sort_ids( $nav_id ) {
-		if ($nav_id) { 
-			global $db;
-			$query = 'SELECT page_id, sort_id from '.$this->mPrefix.'pages WHERE nav_id='.$nav_id.' ORDER BY sort_id';
-			$result = $db->query($query);
-			$i = 0;
-			while ($row = $result->fetchRow(MDB2_FETCHMODE_ASSOC)) {
-				$i++;
-				$update = 'UPDATE '.$this->mPrefix.'pages SET sort_id='.$i.' WHERE page_id='.$row['page_id'];
-				$db->query($update);
-			}
-		}
+      if ($nav_id) { 
+        global $db;
+        $query = 'SELECT page_id, sort_id from '.$this->mPrefix.'pages WHERE nav_id='.$nav_id.' ORDER BY sort_id';
+        $result = $db->query($query);
+        $i = 0;
+        while ($row = $result->fetchRow(MDB2_FETCHMODE_ASSOC)) {
+          $i++;
+          $update = 'UPDATE '.$this->mPrefix.'pages SET sort_id='.$i.' WHERE page_id='.$row['page_id'];
+          $db->query($update);
+        }
+      }
 	}
 
 	/********************************************************************************/
@@ -550,11 +576,13 @@ class pagesMaintain
 	
 	/**
 	 * 	die naechste verfuegbare Page_id in der Tabelle $this->mPrefix.pages ermitteln 
+     * @return: $next_page_id - die nächste PageId für eine neue Unterseite
 	*/
 	private function get_next_page_id() {
 		global $db;
-		$query = 'SELECT MAX(page_id + 1) from '. $this->mPrefix.'pages';
-		$next_page_id = $db->queryOne($query);
+        $query = 'SHOW TABLE STATUS LIKE "'. $this->mPrefix.'pages"';
+		$tableStatus = $db->queryRow($query);
+        $next_page_id = $tableStatus['auto_increment'];
 		return $next_page_id;
 	}
 	

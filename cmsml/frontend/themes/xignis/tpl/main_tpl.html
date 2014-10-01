@@ -1,0 +1,181 @@
+<!-- BEGIN xml -->{xml_notation}<!-- END xml -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/2000/REC-xhtml1-20000126/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+  
+
+	<!-- main_tpl.html V.20130202 xignis.ch -->
+
+	<!-- BEGIN header -->
+	{header}
+	<!-- END header -->
+
+	<head>
+	<!-- BEGIN meta-tags -->
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<meta name="author" content="{author}" />
+	<meta name="Content-Language" content="de" />
+	<meta name="description" content="{description}" />
+	<meta name="keywords" content="{keywords}" />
+	<meta name="page-topic" content="{page_topic}" />
+	<meta name="publisher" content="{publisher}" />
+	<meta name="google-site-verification" content="{google_verify}" />
+	<meta name="rating" content="general" />
+	<meta name="revisit-after" content="10 days" />
+	<meta name="robots" content="index, follow" />
+	<!-- END meta-tags -->
+	
+	<title><!-- BEGIN title -->{titletag}<!-- END title --></title>
+
+	<!-- BEGIN themes -->
+	<link href="{host}{themes_dir}{theme}css/{theme_global}.css" rel="stylesheet" type="text/css"/>
+	<link rel="shortcut icon"  href="{host}{themes_dir}{theme}img/favicon.ico" type="image/x-icon" />
+	<script type="text/javascript" src="{host}lib/prototype.js"></script> 
+	<script type="text/javascript" src="{host}lib/scriptaculous.js"></script> 
+	<script type="text/javascript" src="{host}lib/path_finder.js"></script> 
+	<script type="text/javascript" src="{host}lib/lightbox.js"></script> 
+	<script type="text/javascript" src="{host}frontend/scripts/niftycorners.js"></script>
+	<script type="text/javascript" src="{host}frontend/scripts/global.js"></script>
+	{theme_js}
+	<!-- END themes -->
+
+	</head>
+
+	<body>
+		<div id="page_margins">
+			<div id="page">
+				<div id="header_balken_oben" class="header_balken"></div>
+				<div id="header" class="hide">
+                    <!-- BEGIN home -->
+                    <div class="header_background">{header_background}</div>
+                    <div id="header_home_wrapper"> 
+                      <div id="home_link" title="Startseite" onclick="location.href='{home_link}';"></div>
+                      <div id="home_bild">{header_bild}</div>
+                    </div>
+					<!-- END home -->
+                    <div id="meldung"></div>
+					<!-- BEGIN message -->
+					<div id="message">
+						{meldung}
+					</div>
+					<!-- END message -->
+				</div><!-- ende header -->
+                <div id="header_balken_unten" class="hide header_balken"></div>
+				
+				<div id="navibereich">
+                  <div id="filler"></div>
+  				  <div id="navi" class="<!-- BEGIN navi_h_richtung -->{richtung_navi}<!-- END navi_h_richtung -->">
+  					<ul class="ebene01">
+ 						<!-- BEGIN navi_horiz -->
+  						<li class="navi">{navi_h_link}{pipe}
+                          {ul_unavi_h_start}						  
+  							<!-- BEGIN unavi_horiz -->
+  						 	<li{unavi_h_aktiv}>{unavi_h_link}</li> 
+  							<!-- END unavi_horiz -->
+                          {ul_unavi_h_ende}						  
+  						</li>
+ 						<!-- END navi_horiz -->
+  					</ul>
+  				  </div> <!-- ende horizontale navigation -->
+                  <div id="klappe">
+                    <ul><li class="navi"><a href="#" id="aufzu" class="collapse" onclick="showHideHeader()" title="collapse Header"></a></li></ul>
+                  </div>
+                </div> <!-- ende navibereich -->
+
+				<div id="servicebereich">
+  				  <div id="service" class="<!-- BEGIN navi_s_richtung -->{richtung_navi}<!-- END navi_s_richtung -->">
+  					<ul class="ebene01">
+                        <!-- BEGIN navi_service -->
+  						<li class="navi{listyle}">{service_link}{pipe}
+  						{ul_uservice_start}						  
+  							<!-- BEGIN uservice -->
+  						 	<li{uservice_aktiv}>{uservice_link}</li> 
+  							<!-- END uservice -->
+  						{ul_uservice_ende}						  
+  						</li>
+                        <!-- END navi_service -->		
+  					</ul>
+  				  </div> <!-- ende servicenavigation -->
+ 				</div> <!-- ende servicebereich -->
+
+ 				<!-- BEGIN subnavi_horizontal -->
+				<div id="subnavibereich_horizontal">
+                <div id="filler_subnavi_horizontal" class="{shnav}"></div>
+	  				<div id="subnavi_horizontal" class="{richtung_subnavi}">
+  						{ul_subitem_start}						  
+  							<!-- BEGIN subitem_horizontal -->
+  						 	<li{subnavi_aktiv}>{subnavi_link}</li> 
+  							<!-- END subitem_horizontal -->
+  						{ul_subitem_ende}						  
+	  				</div>
+ 				</div> <!-- ende subnavibereich -->
+  			<!-- END subnavi_horizontal -->
+
+				<div id="main"> 	
+                    <!-- BEGIN hidden_fields -->
+                    <input type="hidden" id="webroot" value="{webroot}" />
+                    <input type="hidden" id="mediadir" value="{mediadir}" />
+                    <input type="hidden" id="classHeader" value="{classheader}" />
+                    <input type="hidden" id="startseite" value="{startseite}" />                    
+                    <!-- END hidden_fields -->
+                    
+					<div id="navigation">						
+		 				<!-- BEGIN subnavi_vertikal -->
+						<div id="subnavibereich_vertikal">
+			   				<div id="subnavi_vertikal">
+								{ul_subitem_start}						  
+									<!-- BEGIN subitem_vertikal -->
+								 	<li{subnavi_aktiv}>{subnavi_link}</li> 
+									<!-- END subitem_vertikal -->
+								{ul_subitem_ende}						  
+			  				</div>
+		  			</div>
+		  				
+		  			<div id="filler_subnavi_vertikal">&nbsp;</div>
+	  				<!-- END subnavi_vertikal -->
+
+						<div id="navigation_liste">
+							{nav}
+						</div> <!-- ende navigation_liste -->
+					</div> <!-- ende navigation -->
+	  				
+					<div id="spalte3"<!-- BEGIN dyn_margin -->{dyn_margin}<!-- END dyn_margin -->>
+						<div id="spalte3_inhalt">							
+							<!--beginn subtemplate-->
+							<!-- BEGIN content -->
+							{content}
+							<!--ende subtemplate-->							
+							<!-- END content -->
+						</div> <!-- ende spalte3_inhalt -->
+					</div> <!-- ende spalte3 -->	          
+
+				</div> <!-- ende main -->
+				
+				<div id="footer">
+				<!-- BEGIN copyright -->
+                  <div id="copyright">
+					 &copy; {copyright} 
+                  </div>     
+				<!-- END copyright -->
+                <!-- BEGIN sprachen -->
+                  <div id="sprachen">
+                     {sprachwahl}                
+                  </div>     
+                <!-- END sprachen -->
+                <!-- BEGIN member_data -->
+                  <div id="memberData">
+                     {member_login}                
+                  </div>     
+                <!-- END member_data -->                
+				</div> <!-- ende footer -->
+			</div> <!-- ende page -->
+		</div> <!-- ende page_margins --> 
+
+		<!-- BEGIN googleAnalytics -->
+        {google_analytics}
+		<!-- END googleAnalytics -->
+		<p>&nbsp;</p>
+	</body>
+
+</html>

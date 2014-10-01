@@ -30,7 +30,7 @@
 
         <li>CMS-Manual als PDF</li>
         <li class="nobullet">&#160;</li>
-        <li class="nobullet"><a href="/cmsadmin/doku/cms_manual_fns.pdf">Download Pdf (FNS)</a></li>		
+        <li class="nobullet"><a href="./doku/cms_manual_fns.pdf">Download Pdf</a></li>		
         <li class="nobullet">&#160;</li>
     </ul>
     

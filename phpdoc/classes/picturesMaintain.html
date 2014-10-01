@@ -1,0 +1,567 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>phpDocumentor » \picturesMaintain</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">phpDocumentor</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/CMSADMIN.html"><i class="icon-folder-open"></i> CMSADMIN</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">364</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods</li>
+<li class="method public "><a href="#__construct" title="__construct :: "><span class="description">__construct()
+        </span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#create_directory" title="create_directory :: "><span class="description">create_directory()
+        </span><pre>create_directory()</pre></a></li>
+<li class="method public "><a href="#delete_file" title="delete_file :: "><span class="description">delete_file()
+        </span><pre>delete_file()</pre></a></li>
+<li class="method public "><a href="#deltree" title="deltree :: "><span class="description">deltree()
+        </span><pre>deltree()</pre></a></li>
+<li class="method public "><a href="#dirlst" title="dirlst :: "><span class="description">dirlst()
+        </span><pre>dirlst()</pre></a></li>
+<li class="method public "><a href="#get_images" title="get_images :: "><span class="description">get_images()
+        </span><pre>get_images()</pre></a></li>
+<li class="method public "><a href="#rename_file" title="rename_file :: "><span class="description">rename_file()
+        </span><pre>rename_file()</pre></a></li>
+<li class="method public "><a href="#resize_picture" title="resize_picture :: "><span class="description">resize_picture()
+        </span><pre>resize_picture()</pre></a></li>
+<li class="method public "><a href="#scan_directories" title="scan_directories :: "><span class="description">scan_directories()
+        </span><pre>scan_directories()</pre></a></li>
+<li class="method public "><a href="#upload_files" title="upload_files :: "><span class="description">upload_files()
+        </span><pre>upload_files()</pre></a></li>
+<li class="nav-header private">» Private</li>
+<li class="method private "><a href="#check_filesize" title="check_filesize :: "><span class="description">check_filesize()
+        </span><pre>check_filesize()</pre></a></li>
+<li class="method private "><a href="#check_filetype" title="check_filetype :: "><span class="description">check_filetype()
+        </span><pre>check_filetype()</pre></a></li>
+<li class="method private "><a href="#check_gd_lib" title="check_gd_lib :: "><span class="description">check_gd_lib()
+        </span><pre>check_gd_lib()</pre></a></li>
+<li class="method private "><a href="#check_subdirectories" title="check_subdirectories :: "><span class="description">check_subdirectories()
+        </span><pre>check_subdirectories()</pre></a></li>
+<li class="method private "><a href="#create_thumbnail" title="create_thumbnail :: "><span class="description">create_thumbnail()
+        </span><pre>create_thumbnail()</pre></a></li>
+<li class="method private "><a href="#datei_loeschen" title="datei_loeschen :: "><span class="description">datei_loeschen()
+        </span><pre>datei_loeschen()</pre></a></li>
+<li class="method private "><a href="#file_owner" title="file_owner :: "><span class="description">file_owner()
+        </span><pre>file_owner()</pre></a></li>
+<li class="method private "><a href="#file_perms" title="file_perms :: "><span class="description">file_perms()
+        </span><pre>file_perms()</pre></a></li>
+<li class="method private "><a href="#get_next_directory" title="get_next_directory :: "><span class="description">get_next_directory()
+        </span><pre>get_next_directory()</pre></a></li>
+<li class="method private "><a href="#get_next_file" title="get_next_file :: "><span class="description">get_next_file()
+        </span><pre>get_next_file()</pre></a></li>
+<li class="method private "><a href="#set_bildpfad" title="set_bildpfad :: "><span class="description">set_bildpfad()
+        </span><pre>set_bildpfad()</pre></a></li>
+<li class="method private "><a href="#set_dateipfad" title="set_dateipfad :: "><span class="description">set_dateipfad()
+        </span><pre>set_dateipfad()</pre></a></li>
+<li class="method private "><a href="#verzeichnis_loeschen" title="verzeichnis_loeschen :: "><span class="description">verzeichnis_loeschen()
+        </span><pre>verzeichnis_loeschen()</pre></a></li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties</li>
+<li class="nav-header private">» Private</li>
+<li class="property private "><a href="#%24mBildDb" title="$mBildDb :: "><span class="description">$mBildDb</span><pre>$mBildDb</pre></a></li>
+<li class="property private "><a href="#%24mDir" title="$mDir :: "><span class="description">$mDir</span><pre>$mDir</pre></a></li>
+<li class="property private "><a href="#%24mMeldung" title="$mMeldung :: "><span class="description">$mMeldung</span><pre>$mMeldung</pre></a></li>
+</ul>
+</div>
+<div class="span8">
+<a name="%5CpicturesMaintain" id="\picturesMaintain"></a><div href="../classes/picturesMaintain.html" class="element class">
+<p class="short_description">----------------------------------------------------------
+(c) 2007  Roland Hempen
+          www.hempenweb.ch
+----------------------------------------------------------</p>
+<div class="details">
+<p class="long_description">Klasse f�r die Verwaltung der Navigation</p>
+<table class="table table-bordered">
+<tr>
+<th>author</th>
+<td><a href="">Roland Hempen</a></td>
+</tr>
+<tr>
+<th>copyright</th>
+<td>Frei einsetz- und veraenderbar, wenn der Autor erw�hnt wird</td>
+</tr>
+<tr>
+<th>version</th>
+<td>1.0 | 2007-07-14</td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a name="__construct" id="__construct"></a><div class="element clickable method public __construct" data-toggle="collapse" data-target=".__construct .collapse">
+<h2>__construct()
+        </h2>
+<pre>__construct($dir, $bilddb) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$dir</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$bilddb</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<a name="create_directory" id="create_directory"></a><div class="element clickable method public create_directory" data-toggle="collapse" data-target=".create_directory .collapse">
+<h2>create_directory()
+        </h2>
+<pre>create_directory($dir_to_create) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$dir_to_create</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<a name="delete_file" id="delete_file"></a><div class="element clickable method public delete_file" data-toggle="collapse" data-target=".delete_file .collapse">
+<h2>delete_file()
+        </h2>
+<pre>delete_file($dir, $file) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$dir</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$file</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<a name="deltree" id="deltree"></a><div class="element clickable method public deltree" data-toggle="collapse" data-target=".deltree .collapse">
+<h2>deltree()
+        </h2>
+<pre>deltree($path) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$path</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<a name="dirlst" id="dirlst"></a><div class="element clickable method public dirlst" data-toggle="collapse" data-target=".dirlst .collapse">
+<h2>dirlst()
+        </h2>
+<pre>dirlst($srcdir, $p, $getfmt, $getfsz, $getdrs, $verbose) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$srcdir</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$p</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$getfmt</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$getfsz</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$getdrs</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$verbose</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<a name="get_images" id="get_images"></a><div class="element clickable method public get_images" data-toggle="collapse" data-target=".get_images .collapse">
+<h2>get_images()
+        </h2>
+<pre>get_images($verzeichnis) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$verzeichnis</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<a name="rename_file" id="rename_file"></a><div class="element clickable method public rename_file" data-toggle="collapse" data-target=".rename_file .collapse">
+<h2>rename_file()
+        </h2>
+<pre>rename_file($dir, $file, $fileold) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$dir</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$file</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$fileold</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<a name="resize_picture" id="resize_picture"></a><div class="element clickable method public resize_picture" data-toggle="collapse" data-target=".resize_picture .collapse">
+<h2>resize_picture()
+        </h2>
+<pre>resize_picture($image_file_path, $new_image_file_path, $max_width, $max_height) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$image_file_path</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$new_image_file_path</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$max_width</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$max_height</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<a name="scan_directories" id="scan_directories"></a><div class="element clickable method public scan_directories" data-toggle="collapse" data-target=".scan_directories .collapse">
+<h2>scan_directories()
+        </h2>
+<pre>scan_directories($srcdir, $verzeichnisse) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$srcdir</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$verzeichnisse</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<a name="upload_files" id="upload_files"></a><div class="element clickable method public upload_files" data-toggle="collapse" data-target=".upload_files .collapse">
+<h2>upload_files()
+        </h2>
+<pre>upload_files($aktdir) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$aktdir</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<a name="check_filesize" id="check_filesize"></a><div class="element clickable method private check_filesize" data-toggle="collapse" data-target=".check_filesize .collapse">
+<h2>check_filesize()
+        </h2>
+<pre>check_filesize($size) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$size</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<a name="check_filetype" id="check_filetype"></a><div class="element clickable method private check_filetype" data-toggle="collapse" data-target=".check_filetype .collapse">
+<h2>check_filetype()
+        </h2>
+<pre>check_filetype($type) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$type</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<a name="check_gd_lib" id="check_gd_lib"></a><div class="element clickable method private check_gd_lib" data-toggle="collapse" data-target=".check_gd_lib .collapse">
+<h2>check_gd_lib()
+        </h2>
+<pre>check_gd_lib() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<a name="check_subdirectories" id="check_subdirectories"></a><div class="element clickable method private check_subdirectories" data-toggle="collapse" data-target=".check_subdirectories .collapse">
+<h2>check_subdirectories()
+        </h2>
+<pre>check_subdirectories($pfad) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$pfad</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<a name="create_thumbnail" id="create_thumbnail"></a><div class="element clickable method private create_thumbnail" data-toggle="collapse" data-target=".create_thumbnail .collapse">
+<h2>create_thumbnail()
+        </h2>
+<pre>create_thumbnail($image_file, $thumb_path, $breite, $hoehe) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$image_file</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$thumb_path</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$breite</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$hoehe</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<a name="datei_loeschen" id="datei_loeschen"></a><div class="element clickable method private datei_loeschen" data-toggle="collapse" data-target=".datei_loeschen .collapse">
+<h2>datei_loeschen()
+        </h2>
+<pre>datei_loeschen($datei) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$datei</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<a name="file_owner" id="file_owner"></a><div class="element clickable method private file_owner" data-toggle="collapse" data-target=".file_owner .collapse">
+<h2>file_owner()
+        </h2>
+<pre>file_owner($file, $type) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$file</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$type</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<a name="file_perms" id="file_perms"></a><div class="element clickable method private file_perms" data-toggle="collapse" data-target=".file_perms .collapse">
+<h2>file_perms()
+        </h2>
+<pre>file_perms($file, $octal) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$file</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$octal</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<a name="get_next_directory" id="get_next_directory"></a><div class="element clickable method private get_next_directory" data-toggle="collapse" data-target=".get_next_directory .collapse">
+<h2>get_next_directory()
+        </h2>
+<pre>get_next_directory($dir) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$dir</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<a name="get_next_file" id="get_next_file"></a><div class="element clickable method private get_next_file" data-toggle="collapse" data-target=".get_next_file .collapse">
+<h2>get_next_file()
+        </h2>
+<pre>get_next_file($nextdir, $file) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$nextdir</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$file</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<a name="set_bildpfad" id="set_bildpfad"></a><div class="element clickable method private set_bildpfad" data-toggle="collapse" data-target=".set_bildpfad .collapse">
+<h2>set_bildpfad()
+        </h2>
+<pre>set_bildpfad($filetype, $aktdir, $filename) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$filetype</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$aktdir</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$filename</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<a name="set_dateipfad" id="set_dateipfad"></a><div class="element clickable method private set_dateipfad" data-toggle="collapse" data-target=".set_dateipfad .collapse">
+<h2>set_dateipfad()
+        </h2>
+<pre>set_dateipfad($aktdir) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$aktdir</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<a name="verzeichnis_loeschen" id="verzeichnis_loeschen"></a><div class="element clickable method private verzeichnis_loeschen" data-toggle="collapse" data-target=".verzeichnis_loeschen .collapse">
+<h2>verzeichnis_loeschen()
+        </h2>
+<pre>verzeichnis_loeschen($verzeichnis) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$verzeichnis</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a name="%24mBildDb" id="$mBildDb"> </a><div class="element clickable property private $mBildDb" data-toggle="collapse" data-target=".$mBildDb .collapse">
+<h2>$mBildDb</h2>
+<pre>$mBildDb </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<a name="%24mDir" id="$mDir"> </a><div class="element clickable property private $mDir" data-toggle="collapse" data-target=".$mDir .collapse">
+<h2>$mDir</h2>
+<pre>$mDir </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<a name="%24mMeldung" id="$mMeldung"> </a><div class="element clickable property private $mMeldung" data-toggle="collapse" data-target=".$mMeldung .collapse">
+<h2>$mMeldung</h2>
+<pre>$mMeldung </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a3</a> and<br>
+            generated on </footer></div>
+</div>
+</body>
+</html>

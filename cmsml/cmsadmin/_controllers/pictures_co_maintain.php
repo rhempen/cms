@@ -1,4 +1,18 @@
 <?php 
+/**
+ * ----------------------------------------------------------
+ * (c) 2007  Roland Hempen
+ *           www.hempenweb.ch
+ * ----------------------------------------------------------
+ *
+ * Klasse fuer die Praesentation der Navigation am Bildschirm 
+ *
+ * @author      Roland Hempen
+ * @copyright   Frei einsetz- und veraenderbar, wenn der Autor erw�hnt wird
+ * @version     1.0 | 2007-07-14
+ * @package     CMSADMIN/Pictures
+ * 
+ */
 // Klassen includieren und instanziieren 
 	require_once('cmsadmin.inc.php');
 
@@ -21,6 +35,8 @@
 	$kommentar 	= isset($_GET['kommentar']) ? stripslashes($_GET['kommentar']) : '';
 	$zeige_bilder = isset($_GET['bilder']) ? $_GET['bilder'] : $_SESSION['zeige_bilder'];
 	$view		= ''; // steuert die Anzeige der Daten
+    $langu_tra  = $cfg->set_language_tra();    
+    $language   = $_SESSION['language'] ? $_SESSION['language'] : strtolower(LANGUAGE);
 	global $msg;
 	
 // Session-Cookies setzen
@@ -28,33 +44,32 @@
 	$_SESSION['action'] = $action;
 	$_SESSION['ref_id'] = $ref_id; // ref_id = id der Aktuellen Seite der Navigation oder Pages
 	$_SESSION['type'] 	= $type;   // Type N = Navigation / P = Pages
+    $_SESSION['language'] = strtolower($language);
 	
 // die Seiteninformationen brauchen wir praktisch auf jeder Seite -> also gleich am Anfang lesen
 	if ($ref_id > 0) {
-		if ($type == 'N') {
-			$page = $navi->read_navi_page($ref_id);
-		} else {
-			$page = $pages->read_page($ref_id);
-		}
-		// Row mit Seiteninformationen
-		$row = $page->fetchRow(MDB2_FETCHMODE_ASSOC); 		
+      if ($type == 'N') {
+          $row = $navi->read_navi_page($ref_id);            
+      } else {
+          $row = $pages->read_page($ref_id);
+      }
 	} else {
-// es wurde der Medienbrowser aufgerufen, der ohne ref_id daherkommt.
-// stattdessen versuchen wir hier, anhand des Verzeichnisses die richtige ref_id zu finden
-		if ($aktdir != MEDIA_ROOT && $aktdir != '') {
-			$pfad = array_pop(explode('/',$aktdir));
-			if (preg_match('/navi/',$bilder_dir)) {
-				$page = $navi->read_navigation_by_bildpfad($pfad);
-			} else {				
-				$page = $pages->read_page_per_kennzeichen($pfad);
-			}
-		}
+      // es wurde der Medienbrowser aufgerufen, der ohne ref_id daherkommt.
+      // stattdessen versuchen wir hier, anhand des Verzeichnisses die richtige ref_id zu finden
+      if ($aktdir != MEDIA_ROOT && $aktdir != '') {
+          $pfad = array_pop(explode('/',$aktdir));
+          if ($type == 'N') {
+              $row = $navi->read_navigation_by_bildpfad($pfad);
+          } else {				
+              $row = $pages->read_page_per_kennzeichen($pfad);
+          }
+      }
 	}
 	
 /***********************************************************************************************
  * Verschiedene Funktionen auf der �bersicht ausf�hren
  ***********************************************************************************************/
-// Reihenfolge �ndern
+// Reihenfolge aendern
 	if ($action == 'bildup') {
 		if ($ref_id > 0 && $sortkey > 0) {
 			$msg = $bilddb->bild_hochziehen($ref_id, $sortkey);
@@ -122,7 +137,7 @@
 		$view = '';
 	}
 	
-// Ein Bild in der ganzen Gr�sse anzeigen
+// Ein Bild in der ganzen Groesse anzeigen
 	if ($action == 'imageShow')
 	{
 		$bild = $aktdir .'/'. $filename;
@@ -172,12 +187,12 @@
 	$_SESSION['action'] = $action;
 
 // Die Anzeige wird durch die Variable $view gesteuert. $view == 'single' zeigt einen Datensatz
-// Ansonsten wird die �bersicht angezeigt.	
+// Ansonsten wird die Uebersicht angezeigt.	
 	switch($view) 
 	{
 /***********************************************************************************************
  * Eine einzelne Menuposition anzeigen (Aktion nach dem Bearbeiten mittels Ajax.InPlaceEditor
- * Das Nachladen der �bersicht erfolgt via Javascript Reload
+ * Das Nachladen der Uebersicht erfolgt via Javascript Reload
  ***********************************************************************************************/
 		case 'nothingToDo':
 			break;
@@ -193,11 +208,9 @@
  * Dateien hochladen
  ***********************************************************************************************/
 		case 'upload_files':
-			if ($page != '') {
-				if ($type == 'P') { $naviseite = $navi->read_navi_page($row['nav_id']);  }
-				if ($naviseite) {$row = $naviseite->fetchRow(MDB2_FETCHMODE_ASSOC);}
+			if ($row != '') {
+				if ($type == 'P') { $seite = $navi->read_navi_page($row['nav_id']); }                
 				$thumbsize = $frontget->read_thumbsize_by_tplid($row['template']);
-//				var_dump($row['template']);
 			}
 			$show->dateien_hochladen($verzeichnisse, $msg, $aktdir, $thumbsize);
 			break;

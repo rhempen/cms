@@ -211,18 +211,6 @@ class generalPresent
 			}
 		}
 		
-//		$option = $code == 'n' ? $option = $option .= '<option selected ' : $option .= '<option ';
-//		$option .= 'value="n">'.$GLOBALS['LINKS']['GALERIE_INAKTIV'].'</option>' . "\n"; 
-//		
-//		$option = $code == 'a' ? $option = $option .= '<option selected ' : $option .= '<option ';
-//		$option .= 'value="a">'.$GLOBALS['LINKS']['GALERIE_AKTIV'].'</option>' . "\n"; 
-//
-//		$option = $code == 'b' ? $option = $option .= '<option selected ' : $option .= '<option ';
-//		$option .= 'value="b">'.$GLOBALS['LINKS']['BILDLEISTE'].'</option>' . "\n"; 
-//
-//		$option = $code == 'c' ? $option = $option .= '<option selected ' : $option .= '<option ';
-//		$option .= 'value="c">'.$GLOBALS['LINKS']['AUTOBILDWECHSEL'].'</option>' . "\n"; 
-
 		$selectbox_ende  = '</select>';
 		$selectbox = $selectbox_start . $option . $selectbox_ende;
 		return $selectbox;	
@@ -339,12 +327,15 @@ class generalPresent
 	 */
 	public function analyse_template($tplname='',$tplnr=0,$pattern='') 
 	{
+      global $frontget;
       // Templatename- oder Nummer muss übergeben werden
       if ($tplname == '' && $tplnr > 0) {
-        $tplname = $frontget->read_single_template($tplnr); 
+        $template = $frontget->read_single_template($tplnr); 
+        $tplname = $template['template_name']; 
       }
       // Template mit absolutem Pfad ergänzen
       $intpl = $tplname !='' ? DOCUROOT.'/'.TEMPLATE_DIR.'/'.$tplname : '';  
+      $intpl = str_replace('//','/',$intpl);
       // Pattern, nach dem gesucht werden soll
       if ($pattern == '') { $pattern = '/{inhalt2}/'; }
       // ab PHP5.0 koennen folgende optionale Parameter mitgegeben werden

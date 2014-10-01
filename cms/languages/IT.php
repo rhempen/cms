@@ -51,7 +51,7 @@ $GLOBALS['TEXTE']['ALLE_FELDER_FUELLEN']				= 'Prego compilare tutti i campi';
 $GLOBALS['TEXTE']['USER_NOT_EXIST']						= 'Utente %s sconosciuto!';
 $GLOBALS['TEXTE']['NEW_PASSWORD_IS']					= 'La nuova password è: ';
 $GLOBALS['TEXTE']['WRONG_EMAIL']						= 'L\'indirizzo e-mail non è valido ';
-$GLOBALS['TEXTE']['EMAIL_SENT']							= 'La nuova password è stata inviata al seguente indirizzo: ';
+$GLOBALS['TEXTE']['EMAIL_SENT']							= 'La nuova password è stata inviata al seguente indirizzo: %s';
 $GLOBALS['TEXTE']['EMAIL_SEND_FAILED']					= 'Impossibile inviare e-mail - Prego riprovare più tardi ';
 $GLOBALS['TEXTE']['EMAIL_BETREFF']						= 'Dati d\'accesso personali al CMS';
 $GLOBALS['TEXTE']['EMAIL_TEXT']							= 'Buongiorno,'."\n".'la nuova password è %s'."\n".'E\' necessario modificare la password subito dopo averla ricevuta.'."\n".'Cordiali saluti'."\n".'info@hempenweb.ch';
@@ -124,7 +124,7 @@ $GLOBALS['TEXTE']['THUMB_NAVI_MAX_HEIGHT']				= 'Altezza max. delle thumbnail ne
 $GLOBALS['TEXTE']['IMAGE_MAX_WIDTH']					= 'Larghezza max. dell\'immagine visualizzata';
 $GLOBALS['TEXTE']['IMAGE_MAX_HEIGHT']					= 'Altezza max. dell\'immagine visualizzata';
 $GLOBALS['TEXTE']['DISK_DB_ADJUSTMENT']					= 'Allineamento tra le immagini del disco e quelle della banca dati';
-$GLOBALS['TEXTE']['MEDIA_ROOT_ADJUSTMENT']		= 'Allineamento di MEDIA-Directory';
+$GLOBALS['TEXTE']['MEDIA_ROOT_ADJUSTMENT']              = 'Allineamento di MEDIA-Directory';
 $GLOBALS['TEXTE']['HMENU_RICHTUNG']						= 'Orizzontale: impaginazione';
 $GLOBALS['TEXTE']['HMENU_SUBMENU']						= 'Orizzontale: forma del sottomenu';
 $GLOBALS['TEXTE']['SUBMENU_DIR']						= 'Posizione del sottomenu';
@@ -149,9 +149,9 @@ $GLOBALS['TEXTE']['NAVI_VERWALTUNG']	 				= 'Gestione della navigazione';
 $GLOBALS['TEXTE']['TEXT_BILDER_HOCHLADEN'] 				= 'Carica immagini';
 $GLOBALS['TEXTE']['TEXT_EDIT_HAUPTNAVI'] 				= 'Modifica un elemento della navigazione principale';
 $GLOBALS['TEXTE']['TEXT_NEUE_UNTERNAVI'] 				= 'Aggiungi un elemento alla sottonavigazione';
-$GLOBALS['TEXTE']['TEXT_DELE_HAUPTNAVI'] 				= 'Eliminare l\'elemento della navigazione principale';
-$GLOBALS['TEXTE']['TEXT_DELE_UNTERNAVI'] 				= 'Eliminare l\'elemento della sottonavigazione';
-$GLOBALS['TEXTE']['TEXT_COPY_HAUPTNAVI'] 				= 'Copiare l\'elemento della navigazione principale';
+$GLOBALS['TEXTE']['TEXT_DELE_HAUPTNAVI'] 				= 'Eliminare l\\\'elemento della navigazione principale';
+$GLOBALS['TEXTE']['TEXT_DELE_UNTERNAVI'] 				= 'Eliminare l\\\'elemento della sottonavigazione';
+$GLOBALS['TEXTE']['TEXT_COPY_HAUPTNAVI'] 				= 'Copiare l\\\'elemento della navigazione principale';
 $GLOBALS['TEXTE']['TEXT_REIHENFOLGE'] 	 				= 'Modifica l\'ordine spostando l\'immagine verso l\'alto';
 $GLOBALS['TEXTE']['TEXT_EDIT_UNTERNAVI'] 				= 'Modifica l\'elemento della sottonavigazione';
 $GLOBALS['TEXTE']['TEXT_NEUE_HAUPTNAVI'] 				= 'Nuovo elemento della navigazione principale';
@@ -170,7 +170,7 @@ $GLOBALS['TEXTE']['JA']									= 'Sì';
 $GLOBALS['TEXTE']['NEIN']								= 'No';
 $GLOBALS['TEXTE']['FREIGEGEBEN']						= 'rilasciato';
 $GLOBALS['TEXTE']['BLOCKIERT']							= 'bloccato';
-$GLOBALS['NAVI']['HORIZONTAL']							= 'O';
+$GLOBALS['NAVI']['HORIZONTAL']							= 'H';
 $GLOBALS['NAVI']['VERTIKAL']							= 'V';
 $GLOBALS['NAVI']['SERVICE']								= 'S';
 
@@ -199,6 +199,7 @@ $GLOBALS['MESSAGES']['MSG_NICHT_NEU_SORTIERT']   		= 'Die Datens&auml;tze konnte
 $GLOBALS['LABELS']['SIE_BEARBEITEN_SEITE']				= 'Pagina in elaborazione:';
 $GLOBALS['LABELS']['SEITEN_INFO']						= 'Info pagina';
 $GLOBALS['LABELS']['SEITEN_INFO_VALUES']				= 'ID pagina: %s / Id nav: %s / Directory: %s';
+$GLOBALS['LABELS']['MESSAGE']							= 'Messagio';
 $GLOBALS['LABELS']['TEMPLATE']							= 'Modello';
 $GLOBALS['LABELS']['INTEGRATION']						= 'Integrazione';
 $GLOBALS['LABELS']['MODUL']								= 'Modulo';
@@ -219,6 +220,9 @@ $GLOBALS['LABELS']['ESCAPE']							= 'interrompi';
 $GLOBALS['LABELS']['RESET']								= 'ripristina';
 $GLOBALS['LABELS']['SAVE']								= 'salva';
 $GLOBALS['LABELS']['ZEICHEN']							= 'Caratteri restanti: ';
+$GLOBALS['LABELS']['MEMBERLOGIN']						= 'Accesso membri';
+$GLOBALS['LABELS']['ERFORDERLICH']						= 'richiesto';
+$GLOBALS['LABELS']['NICHT_ERFORDERLICH']				= 'non è necessario';
 
 /*********************************************************************************************************************
  * Texte zur Klasse redirectMaintain
@@ -243,7 +247,8 @@ $GLOBALS['TEXTE']['TEXT_UNTERSEITE']					= 'Sottopagina di ';
 
 // Texte zu SEITEN-Verwaltung
 $GLOBALS['TEXTE']['TEXT_PLUS_MINUS'] 					= 'visualizza o nascondi';
-$GLOBALS['TEXTE']['TEXT_UPLOAD'] 						= "Gestione immagini:\ninformazioni sulle immagini\ncarica immagini\nelimina immagini";
+//$GLOBALS['TEXTE']['TEXT_UPLOAD'] 						= "Gestione immagini:\ninformazioni sulle immagini\ncarica immagini\nelimina immagini";
+$GLOBALS['TEXTE']['TEXT_UPLOAD'] 						= "Gestione immagini";
 $GLOBALS['TEXTE']['TEXT_EDIT'] 							= 'Modifica';
 $GLOBALS['TEXTE']['TEXT_DELETE'] 						= 'Elimina';
 $GLOBALS['TEXTE']['TEXT_PAGE_EDIT'] 					= 'Modifica il contenuto della pagina';
@@ -263,6 +268,7 @@ $GLOBALS['TEXTE']['TEXT_BILDER_EDIT'] 					= "Modifica commento delle immagini\n
 $GLOBALS['TEXTE']['TEXT_BILD_DELETE'] 					= 'Elimina questa immagine';
 $GLOBALS['TEXTE']['TEXT_DIR_DELETE'] 					= 'Elimina questa directory';
 $GLOBALS['TEXTE']['TEXT_FILETYPE'] 						= 'Apri la directory';
+$GLOBALS['TEXTE']['TEXT_TRANSLATE']						= 'Tradurre';
 
 // Texte zu Medienbrowser
 $GLOBALS['TEXTE']['TEXT_SEITE'] 						= 'Pagina: ';
@@ -381,8 +387,50 @@ $GLOBALS['LINKS']['BILDLEISTE'] 						= 'con barra d\'immagini e link verso l\'i
 $GLOBALS['LINKS']['AUTOBILDWECHSEL'] 					= 'con immagini che scorrono automaticamente';
 
 $GLOBALS['LINKS']['SIEHE_AUCH'] 						= '&gt; ';
+$GLOBALS['WEBMAIL']['TITEL'] 							= 'Login Webmail';
+
+/*********************************************************************************************************************
+ * Kontaktformular
+ *********************************************************************************************************************/
 $GLOBALS['KONTAKTFORM']['TITEL'] 						= 'Formulario di contatto';
 $GLOBALS['KONTAKTFORM']['SENT'] 						= 'Grazie per avermi contattato!'."<br />\n";
-$GLOBALS['WEBMAIL']['TITEL'] 							= 'Login Webmail';
+$GLOBALS['KONTAKTFORM']['NOT_SENT']						= 'La posta non ha potuto essere inviato!'."<br />\n";
+$GLOBALS['KONTAKTFORM']['DATA_SENT']					= 'Le seguenti informazioni sono state presentate: '."<br />\n";
+$GLOBALS['KONTAKTFORM']['OBLIGATORY']                   = '* Si prega di compilare tutti i campi!';
+$GLOBALS['KONTAKTFORM']['NAME']                         = 'Nome *';
+$GLOBALS['KONTAKTFORM']['ADRESSE']                      = 'Indirizzo *';
+$GLOBALS['KONTAKTFORM']['PLZ_ORT']                      = 'CAP / Città *';
+$GLOBALS['KONTAKTFORM']['TELEFON']                      = 'Telefono *';
+$GLOBALS['KONTAKTFORM']['EMAIL']                        = 'Email *';
+$GLOBALS['KONTAKTFORM']['MITTEILUNG']                   = 'Messaggio';
+$GLOBALS['KONTAKTFORM']['BILDCODE']                     = 'Codice immagine *';
+$GLOBALS['KONTAKTFORM']['SENDEN']                       = 'inviare';
+$GLOBALS['KONTAKTFORM']['RESET']                        = 'indietro';
+$GLOBALS['KONTAKTFORM']['CODE_FALSCH']                  = 'Il codice di sicurezza non è corretto!';
+$GLOBALS['KONTAKTERROR']['MARKEDFIELDS']                = 'Compila i campi evidenziati';
+$GLOBALS['KONTAKTERROR']['WRONGEMAIL']                  = 'L\'indirizzo email non è valido!';
+
+/*********************************************************************************************************************
+ * Texte zum Member-Login
+ *********************************************************************************************************************/
+$GLOBALS['MEMBER']['TITLE_LOGIN']                       = 'Accedere';
+$GLOBALS['MEMBER']['TITLE_FORGOTTEN']                   = 'Richiedi una nuova password';
+$GLOBALS['MEMBER']['TITLE_CHANGE']                      = 'Modifica della password';
+$GLOBALS['MEMBER']['TITLE_REGISTER']                    = 'nuova registrazione';
+$GLOBALS['MEMBER']['LBL_EXECUTE']                       = 'eseguire';
+$GLOBALS['MEMBER']['EMAIL']                             = 'Email';
+$GLOBALS['MEMBER']['CHANGE_PW']                         = 'Vuoi cambiare la tua password?';
+$GLOBALS['MEMBER']['CHANGE_PW_MELDUNG']                 = 'La password è stata cambiata!';
+$GLOBALS['MEMBER']['FORGOTTEN']                         = 'Hai dimenticato la password?';
+$GLOBALS['MEMBER']['REGISTER']                          = 'Vuoi registrarti?';
+$GLOBALS['MEMBER']['REGISTER_MELDUNG']    				= 'La registrazione è stata completata con successo - si prega iscriviti adesso.';
+$GLOBALS['MEMBER']['EXEC_LOGIN']                        = 'Accedi eseguire';
+$GLOBALS['MEMBER']['EXEC_FORGOTTEN']                    = 'Richiedi una nuova password';
+$GLOBALS['MEMBER']['EXEC_REGISTER']                     = 'Registrazione per l\'esecuzione';
+$GLOBALS['MEMBER']['LOGIN_AND_PASSWORD']                = 'Inserisci credenziali valide!';
+$GLOBALS['MEMBER']['EMAIL_SEND_FAILED']					= 'La tua nuova password non può essere inviato via e-mail - si prega di riprovare più tardi, grazie!';
+$GLOBALS['MEMBER']['USER_NOT_EXISTS']   				= 'L\'utente %s NON è memorizzato nel sistema!';
+$GLOBALS['MEMBER']['USER_ALREADY_EXISTS']				= 'L\'utente %s è già memorizzato nel sistema!';
+$GLOBALS['MEMBER']['SAVE_FAILED']        				= 'Si è verificato un errore!';
 
 ?>

@@ -55,6 +55,40 @@ function getCookie(iName) {
   return lMatch ? unescape( lMatch[1] ) : "";
 }
 
+/* Feldinhalt im Kontaktformular löschen bei onfocus */
+function setFokus(iId) {
+  var value = document.getElementById(iId).value;
+  var feldwert = document.getElementById(iId).value.toLowerCase();
+  switch(iId) {
+    case "name":
+      feldwert = feldwert.match(/n(o|a)m/) ? '' : value;
+      break;
+    case "adresse":
+      feldwert = feldwert.match(/ad{1,2}res/) ? '' : value;
+      break;
+    case "plz_ort":
+      feldwert = isNaN(feldwert.match(/\^d{4}/)) ? value : '';      
+      break;
+    case "telefon":
+      feldwert = feldwert.replace(/\s/g, "");
+      feldwert = isNaN(feldwert) ? '' : value;
+      break;
+    case "email":
+      feldwert = isEmail(feldwert) ? value : '';
+      break;
+    case "kommentar":     
+      feldwert = value;
+      break;
+    case "code":
+      feldwert = feldwert.match(/code/) ? '' : value;
+      break;
+    default:
+      feldwert = "";      
+  }
+  document.getElementById(iId).value = feldwert;  
+}
+
+/* Formulareingaben prüfen */
 function check_form() {
   // Felder im Kontaktformular �berpr�fen
 	var f = document.forms["formmail"];
@@ -64,7 +98,7 @@ function check_form() {
 	var fehler_telefon = "";
 	// *** �berpr�fung auf vollst�ndige Ausf�llung
 	  // Bild-code
-   	if (f.code.value=="") {
+   	if (f.code.value=="" || f.code.value.match(/Code/)) {
    	 	fehler += "bitte den Bild-Code eingeben"+"<br />\n";
    		$("code").setStyle({ border:'1px solid red' });
 		$("code").focus();
@@ -85,7 +119,8 @@ function check_form() {
   		$("email").setStyle({ border:'' });   		
    	}
    	// Telefon
-   	if (f.telefon.value=="") {
+    var telefon = f.telefon.value.replace(/\s/g, "");
+   	if (telefon=="") {
       	fehler += "bitte Telefonnummer eingeben"+"<br />\n";
    		$("telefon").setStyle({ border:'1px solid red' });
 		$("telefon").focus();
@@ -121,8 +156,8 @@ function check_form() {
     	var fehlertext = "Bitte f&uuml;llen Sie die markierten Felder aus ";
 		if (fehler_telefon != '') { fehlertext += fehler_telefon; }
 		if (fehler_email != '') { fehlertext += "<br />\n"+fehler_email; }
-		$("meldung").innerHTML = fehlertext;
-      	$("meldung").setStyle({ color:'red' });
+		$("kontaktmeldung").innerHTML = fehlertext;
+      	$("kontaktmeldung").setStyle({ color:'red' });
       	return false;
    	}
    	return true;
@@ -163,6 +198,19 @@ function isEmail(string) {
 		return false;
 	}
 }
+
+/* Start des Formulars im Member-Login-Bereich */
+function start_memberform(action) {
+	var act = action.toUpperCase();
+    if (act == 'LOGOUT') {
+      document.getElementById('logout').value=act;
+      document.memberlogout.submit();	
+    } else {      
+      document.getElementById('action').value=act;
+      document.memberlogin.submit();	
+    }
+}
+
 
 /* Bilderwechsel indem mit der Maus �ber die entsprechenden B�xchen unterhalb des Bildes gefahren wird. 
    das Erscheinungsbild kann g�nzlich in der CSS-Datei gesteuert werden - Keine CSS-Notation hier drin! */

@@ -77,7 +77,7 @@ return $html;
 /* class setzen */ 
 function set_class($act, $pos) {
 	/* wenn $act == $pos --> diese Menuposition wurde angeklickt */
-	if ($act == $pos) { 
+	if ($act === $pos) { 
 		return 'odd'; 
 	} else { 
 		return 'even'; 
@@ -85,10 +85,10 @@ function set_class($act, $pos) {
 }
 
 /* Menu ausgeben */
-function menu()
+function menu($action)
 {
 	global $menu_arr;
-	// Debugging - Fenster �ffnen 
+    // Debugging - Fenster �ffnen 
 	if ($_SESSION['debugging'] === true) {
 		debug_open_window();
 		debug_var('Seite: ', $_SERVER['PHP_SELF']);

@@ -1,4 +1,4 @@
-<!?xml version="1.0" encoding="utf-8">
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/2000/REC-xhtml1-20000126/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -45,13 +45,22 @@
 				{meldung}
       <!-- END message_block -->
 		</div>
+      
 		<ul id="frgmnts">
 			<!-- BEGIN frgmntzeile -->
 			<li id="liste_{nr}" class="lielem">
 			<div class="sortid">{sortid}</div>
 			<div class="divelem"><span class="frgnamedit" id="{nr}">{frgname}</span></div>
-			<div id="frgid{nr}" class="divwork">{bearbeiten}</div>
-			<div id="divmenu{nr}" class="mnusort">{sorticon}</div>
+			<div id="frgid{nr}" class="divwork">  <!--{bearbeiten} -->
+              <table>
+                <tr>
+                  <td>{button_edit}</td>
+                  <td>{button_dele}</td>
+                  <td>{button_copy}</td>
+                  <td>{button_move}</td>
+                </tr>
+              </table>            
+            </div>
 			</li>
 			<!-- END frgmntzeile -->
 		</ul>

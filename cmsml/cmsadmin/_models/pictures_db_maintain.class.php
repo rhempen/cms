@@ -5,11 +5,13 @@
  *           www.hempenweb.ch
  * ----------------------------------------------------------
  *
- * Klasse f�r die Verwaltung der hochgeladenen Bilder in der DB
+ * Klasse fuer die Verwaltung der hochgeladenen Bilder in der DB
  *
  * @author      Roland Hempen
  * @copyright   Frei einsetz- und veraenderbar, wenn der Autor erw�hnt wird
  * @version     1.0 | 2007-09-01
+ * @package     CMSADMIN/Pictures
+ * 
  */
  
 class picturesDbMaintain
@@ -26,12 +28,16 @@ class picturesDbMaintain
 
     /* Neue Methode implementieren */
     
-    /* Informationen einer Bilddatei in der Datenbank speichern 
-    	@params: $ref_id - id der Seite zu der das Bild geh�rt
-    	@params: $pfad_bild - Bilddateiname inkl. Pfad
-    	@params: $dbaction - Insert oder Update
-    	@return: $message - Erfolgsmeldung
-    */
+    /**
+     * Informationen einer Bilddatei in der Datenbank speichern 
+     * @global type $db
+     * @param type $ref_id - id der Seite zu der das Bild gehoert
+     * @param type $pfad_bild - Bilddateiname inkl. Pfad
+     * @param type $kommentar
+     * @param type $dbaction - Insert oder Update
+     * @param type $msg
+     * @return type $message - Erfolgsmeldung 
+     */
     public function bild_in_db_speichern($ref_id, $pfad_bild, $kommentar='', $dbaction, $msg='') 
     {
 		global $db;
@@ -39,11 +45,14 @@ class picturesDbMaintain
     	$bild_id = $this->bild_in_db_checken($ref_id, $pfad_bild);
     	
     	// SQL vorbereiten
-    	$sql =	'ref_id		='	. $ref_id . ',';
-    	$sql .= 'type		="'	. $_SESSION['type'] . '",';
-		$sql .= 'bildpfad	="' . $pfad_bild . '",';
-		$sql .= 'kommentar	="'	. $kommentar . '",';
-		$sql .= 'sortkey	='	. $this->get_next_sortkey($ref_id, $_SESSION['type']);
+    	$sql =	'ref_id         ='	. $ref_id . ',';
+    	$sql .= 'type           ="'	. $_SESSION['type'] . '",';
+		$sql .= 'bildpfad       ="' . $pfad_bild . '",';
+		$sql .= 'kommentar_de	="'	. $kommentar . '",';
+		$sql .= 'kommentar_en	="'	. $kommentar . '",';
+		$sql .= 'kommentar_fr	="'	. $kommentar . '",';
+		$sql .= 'kommentar_it	="'	. $kommentar . '",';
+		$sql .= 'sortkey        ='	. $this->get_next_sortkey($ref_id, $_SESSION['type']);
 
 		// Bildname extrahieren
 		$bild_arr = explode('/', $pfad_bild);
@@ -87,10 +96,13 @@ class picturesDbMaintain
 		return $msg;
 	}
 
-	/* den höchsten Sortierschlüssel festlegen
-		@param: $ref_id - ID der betroffenen Page
-		@return: $sortkey - um 1 erh�hten Sortierschl�ssel
-	*/
+    /**
+     * den höchsten Sortierschlüssel festlegen
+     * @global type $db
+     * @param type $ref_id - ID der betroffenen Page
+     * @param type $type - um 1 erhoehten Sortierschluessel
+     * @return type 
+     */
 	private function get_next_sortkey($ref_id, $type) {
 		global $db;
 		$query = 'SELECT MAX(sortkey) AS sortkey FROM '.$this->mPrefix.'galerien WHERE ref_id='.$ref_id.' AND type="'.$type.'"';
@@ -98,11 +110,14 @@ class picturesDbMaintain
 		return $sortkey;		
 	}
 	
-    /* Informationen einer Bilddatei in der Datenbank l�schen 
-    	@params: $ref_id - id der Seite zu der das Bild geh�rt
-    	@params: $pfad_bild - Bilddateiname inkl. Pfad
-    	@return: $message - Erfolgsmeldung
-    */
+    /**
+     * Informationen einer Bilddatei in der Datenbank loeschen 
+     * @global type $db
+     * @param type $ref_id - id der Seite zu der das Bild gehoert
+     * @param type $pfad_bild - Bilddateiname inkl. Pfad
+     * @param type $msg
+     * @return type $message - Erfolgsmeldung
+     */
     public function bild_in_db_loeschen($ref_id, $pfad_bild, $msg) 
     {		
     	// vor dem L�schen wird erst mal überprüft, ob ein Datensatz vorhanden ist -> id, sortkey
@@ -131,10 +146,14 @@ class picturesDbMaintain
 		return $msg;
     }
 
-    /* Alle Bilder einer Ref_id l�schen -> erfolgt beim L�schen einer Seite oder eines Navigationspunktes
-    	@param: $ref_id - id, f�r die alle Bilder gel�scht werden sollen
-    	@return: $msg - Erfolgs-oder Misserfolgsmeldung
-    */
+    /**
+     * Alle Bilder einer Ref_id l�schen -> erfolgt beim L�schen einer Seite oder eines Navigationspunktes
+     * @global type $db
+     * @param type $ref_id
+     * @param type $type
+     * @param type $msg
+     * @return type $msg
+     */
     public function bilder_loeschen_pro_ref_id($ref_id, $type, $msg='') {
     	if ($ref_id > 0 && ($type == 'N' || $type == 'P')) {
     		global $db;
@@ -156,10 +175,16 @@ class picturesDbMaintain
     	return $msg;
     }
     	
-	/* Bilder aus der DB auslesen anhand eines Array, der gef�llt wurde durch das Auslesen eines Verzeichnisses
-	   	@params: $files - Array mit Dateinamen
-	   	@return: $files_db - Array mit DB-Eintr�gen 
-	*/
+    /**
+     * Bilder aus der DB auslesen anhand eines Array, der gefuellt wurde durch 
+     * das Auslesen eines Verzeichnisses
+     * @global type $db
+     * @global type $general
+     * @param type $ref_id
+     * @param type $files_disk
+     * @param type $type - P = Pages oder N = Navigation
+     * @return type $files_in_db - Datenbank - Objekt
+     */
 	public function bilder_aus_db_lesen($ref_id, $files_disk, $type) 
 	{
 		global $db, $general;
@@ -184,6 +209,10 @@ class picturesDbMaintain
 				// Array-Felder vorbelegen
 				$fdb['bild'] = $bild['bildpfad'];
 				$fdb['kommentar'] = $bild['kommentar'];
+				$fdb['kommentar_de'] = $bild['kommentar_de'];
+				$fdb['kommentar_en'] = $bild['kommentar_en'];
+				$fdb['kommentar_fr'] = $bild['kommentar_fr'];
+				$fdb['kommentar_it'] = $bild['kommentar_it'];
 				$fdb['bildid'] = $bild['id'];
 				$fdb['ref_id'] = $bild['ref_id'];
 				$fdb['type'] = $bild['type'];
@@ -197,7 +226,13 @@ class picturesDbMaintain
 		return 	$files_in_db;
 	}
 
-	/* Bildreihenfolge in der DB �ndern */
+	/**
+     * Bildreihenfolge in der DB aendern 
+     * @global type $db
+     * @param type $ref_id
+     * @param type $sortkey
+     * @return type $msg - Erfolgsmeldung
+     */
 	public function bild_hochziehen($ref_id, $sortkey) {
 		global $db;
 		if ($db->query('UPDATE '.$this->mPrefix.'galerien SET sortkey=222 WHERE ref_id='.$ref_id.' AND sortkey='.$sortkey) && 
@@ -209,13 +244,27 @@ class picturesDbMaintain
 		}
 	}
 	
-	
-    public function bild_kommentar_speichern($bild_id, $kommentar='') 
+	/**
+     * Die Funktion updated die sprachabhaengigen Kommentarfelder via Ajax
+     * @global type $db
+     * @param type $bild_id
+     * @param type $kommentar --> kommt als JSON-String daher
+     * @return string 
+     */
+    public function bild_kommentar_speichern($bild_id, $kommentar) 
     {
 		global $db;
-		$kommentar = mb_detect_encoding($kommentar,"UTF-8") == "UTF-8" ? $kommentar : utf8_encode($kommentar);
-//		var_dump(mb_detect_encoding($kommentar, "UTF-8"));
-		$update = 'UPDATE '.$this->mPrefix.'galerien SET kommentar="'.$db->escape($kommentar).'" WHERE id='.$bild_id;
+        // den Json-String in einen assoziativen Array umwandeln
+        $komm_array = json_decode($kommentar,true); 
+        // Beginn des UPDATE-Statements für alle gelieferten sprachabhangigen Kommentare
+        $update = 'UPDATE '.$this->mPrefix.'galerien SET ';
+        foreach($komm_array as $langu => $comment) {
+          $i++;
+          $kommentar = mb_detect_encoding($comment,"UTF-8") == "UTF-8" ? $comment : utf8_encode($comment);
+          if ($i > 1) { $update .= ','; }
+          $update .= 'kommentar_'.$langu.'="'.$db->escape($kommentar).'"';
+        }
+        $update .= ' WHERE id='.$bild_id;
 		$affected =& $db->exec($update);
 		if (PEAR::isError($affected))
 		{
@@ -229,11 +278,13 @@ class picturesDbMaintain
 	}
 
 	
-	/* Die ID eines Bildes aus der DB auslesen
-	   	@params: $ref_id - Referenz-Id einer Seite
-	   	@params: $pfad_bild - Bildname
-	   	@return: $id - BildID
-	*/
+    /**
+     * Die ID eines Bildes aus der DB auslesen
+     * @global type $db
+     * @param type $ref_id - Referenz-Id einer Seite
+     * @param type $pfad_bild - Bildname
+     * @return type $id - BildID
+     */
 	public function bild_in_db_checken($ref_id, $pfad_bild) {
 		global $db;
 		$query = 'SELECT id, sortkey FROM ' . $this->mPrefix.'galerien' . ' WHERE ref_id='. $ref_id . ' AND bildpfad="' . $pfad_bild . '"';
@@ -241,10 +292,13 @@ class picturesDbMaintain
 		return $id_sortkey;		
 	}
 	
-	/* Die Anzahl Bilder zu einer Page_id aus der DB auslesen (Frontend)
-	   	@params: $ref_id - Referenz-Id einer Seite
-	   	@return: $total - Anzahl Bilder
-	*/
+    /**
+     * Die Anzahl Bilder zu einer Page_id aus der DB auslesen (Frontend)
+     * @global type $db
+     * @global type $type
+     * @param type $ref_id
+     * @return type $total - Anzahl Bilder
+     */
 	public function count_bilder_pro_pageid($ref_id) {
 		global $db, $type;
 		$total = 0;
@@ -253,29 +307,38 @@ class picturesDbMaintain
 		return $total;		
 	}
 
-	/* Die Bilder zu einer Page_id aus der DB auslesen (Frontend)
-	   	@params: $ref_id - Referenz-Id einer Seite
-	   	@return: $bilder - Bilder-Array
-	*/
+    /**
+     * Die Bilder zu einer Page_id aus der DB auslesen (Frontend)
+     * @global type $db
+     * @global type $type - N = Navigation , P = Page
+     * @param type $ref_id - Referenz-Id einer Seite
+     * @param type $start
+     * @return type $bilder - Bilder-Array
+     */
 	public function bilder_pro_pageid_lesen($ref_id, $start=0) {
-		global $db, $type;
+		global $db, $type, $language;
 		
 		// festlegen der Limite mit setLimit(Anzahl, Start)
 		$db->setLimit(MAX_THUMBS, $start);
-		$query = 'SELECT bildpfad, kommentar FROM ' . $this->mPrefix.'galerien' . ' WHERE ref_id='.$ref_id.' AND type="'.$type.'" ORDER BY sortkey';
+		$query = 'SELECT bildpfad, kommentar_'.$language.' FROM '.$this->mPrefix.'galerien';
+        $query .= ' WHERE ref_id='.$ref_id.' AND type="'.$type.'" ORDER BY sortkey';
 		$bilder = $db->query($query);
 		return $bilder;		
 	}
 
-	/* Den Kommentar f�r ein einzelnes Bild aus der DB auslesen
-	   	@params: $ref_id - Referenz-Id einer Seite
-	   	@params: $pfad_bild - Bildname
-	   	@return: $kommentar - Kommentar
-	*/
+    /**
+     * Den Kommentar f�r ein einzelnes Bild aus der DB auslesen
+     * @global type $db
+     * @global type $general
+     * @param type $ref_id
+     * @param type $type
+     * @param type $pfad_bild
+     * @return type 
+     */
 	public function bild_kommentar_in_db_lesen($ref_id, $type, $pfad_bild) {
-		global $db, $general;
+		global $db, $general, $language;
 		$kommentar = '';
-		$query = 'SELECT kommentar FROM '.$this->mPrefix.'galerien'.' WHERE ref_id='.$ref_id.' 
+		$query = 'SELECT kommentar_'.$language.' FROM '.$this->mPrefix.'galerien'.' WHERE ref_id='.$ref_id.' 
 		             AND type="'.$type.'" AND bildpfad="' . $pfad_bild . '"';
 		$kommentar = $db->queryOne($query);
 		return $kommentar;		

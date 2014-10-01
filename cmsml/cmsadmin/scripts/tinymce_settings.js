@@ -17,9 +17,9 @@ tinyMCE.init ({
   /*mode : "textareas",*/
   languages : "de",
   mode : "exact",
-  elements: "longtxt, longtxt2, frgcontent",
+  elements: "longtxt1, longtxt2, inhalt1, inhalt2, frgcontent",
   theme : "advanced",
-  height : "250",
+  height : "180",
   dialog_type : "window",
   inline_styles : true,
   remove_linebreaks : false,

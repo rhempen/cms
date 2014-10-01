@@ -28,7 +28,7 @@ $tpl->setVariable('galink', HIDDEN);
 
 if ($items != 0) {
   // Seitentitel zusammensetzen und anzeigen
-  $frontend->create_titel($seiten_infos['kurztitel'],$seiten_infos['template_name']);
+  $frontend->create_titel($seiten_infos['kurztitel_'.$language],$seiten_infos['template_name']);
 
   while ($row = $overview->fetchRow(MDB2_FETCHMODE_ASSOC)) 
   {

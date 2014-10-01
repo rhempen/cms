@@ -1,4 +1,4 @@
-<!?xml version="1.0" encoding="utf-8">
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/2000/REC-xhtml1-20000126/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -23,7 +23,7 @@
 	<div id="content">
 		<table width="730" cellpadding="1" cellspacing="1">
 		  <tr> 
-		    <td colspan="4"> 
+		    <td colspan="5"> 
 				<ul id="tabnav">
 					<!-- BEGIN tabnav -->
 					<li{id}>
@@ -35,7 +35,7 @@
 		  </tr>
 	      <!-- BEGIN message_block -->
 		  <tr>
-			<td colspan="3">
+			<td colspan="5">
 				{meldung}
 			</td>
 			<td>&nbsp;</td>
@@ -63,17 +63,19 @@
           <!-- cms_spezial -->
 		  <tr class="{class}">
 			<td width="20%" align="center">{label_name}</td>
-			<td width="20%" align="center">{label_wert1}</td>
-			<td width="20%" align="center">{label_wert2}</td>
-			<td width="20%" align="center">{label_wert3}</td>
+			<td width="15%" align="center">{label_wert1}</td>
+			<td width="15%" align="center">{label_wert2}</td>
+			<td width="15%" align="center">{label_wert3}</td>
+			<td width="10%" align="center">{label_aktiv}</td>
 		  </tr>
           <!-- END titel_spez -->
           <!-- BEGIN zeile_spez -->
 		  <tr class="{class}">
 			<td width="20%">{name}</td>
-			<td width="20%"{style1}><span class="{classedit}" id="{configid1}">{wert1}</span></td>
-			<td width="20%"{style2}><span class="{classedit}" id="{configid2}">{wert2}</span></td>
-			<td width="20%"{style3}><span class="{classedit}" id="{configid3}">{wert3}</span></td>
+			<td width="15%"{style1}><span class="{classedit}" id="{configid1}">{wert1}</span></td>
+			<td width="15%"{style2}><span class="{classedit}" id="{configid2}">{wert2}</span></td>
+			<td width="15%"{style3}><span class="{classedit}" id="{configid3}">{wert3}</span></td>
+			<td width="10%" align="center"><span class="aktivflag" id="{configid4}">{aktiv}</span></td>
 		  </tr>
           <!-- END zeile_spez -->
 		</table>

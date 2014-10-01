@@ -52,7 +52,9 @@
 // CSS-Klasse per Ajax in der PHP-Session speichern  
   function saveClassHeader( iClassHeader ) {
     var lWebroot = $("webroot").value;
-    var lUrl = lWebroot+"/frontend/_models/frontend_setdata.php?action=saveHeaderClass&class="+iClassHeader 
+    var lLast = lWebroot.substr(lWebroot.length-1,lWebroot.length); // Letztes Zeichen!
+    if (lLast != '/') { lWebroot = lWebroot+'/'; } 
+    var lUrl = lWebroot+"frontend/_models/frontend_setdata.php?action=saveHeaderClass&class="+iClassHeader 
     var myAjax = new Ajax.Request( lUrl,
         {   
             method:'get',

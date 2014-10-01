@@ -1,0 +1,362 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>phpDocumentor » \configPresent</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">phpDocumentor</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/CMSADMIN.html"><i class="icon-folder-open"></i> CMSADMIN</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">364</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods</li>
+<li class="method public "><a href="#__construct" title="__construct :: "><span class="description">__construct()
+        </span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#config_anzeigen" title="config_anzeigen :: "><span class="description">config_anzeigen()
+        </span><pre>config_anzeigen()</pre></a></li>
+<li class="method public "><a href="#show_messages" title="show_messages :: "><span class="description">show_messages()
+        </span><pre>show_messages()</pre></a></li>
+<li class="method public "><a href="#show_pushbutton" title="show_pushbutton :: "><span class="description">show_pushbutton()
+        </span><pre>show_pushbutton()</pre></a></li>
+<li class="nav-header private">» Private</li>
+<li class="method private "><a href="#create_pushbutton" title="create_pushbutton :: "><span class="description">create_pushbutton()
+        </span><pre>create_pushbutton()</pre></a></li>
+<li class="method private "><a href="#create_radiobuttons" title="create_radiobuttons :: "><span class="description">create_radiobuttons()
+        </span><pre>create_radiobuttons()</pre></a></li>
+<li class="method private "><a href="#create_selectbox" title="create_selectbox :: "><span class="description">create_selectbox()
+        </span><pre>create_selectbox()</pre></a></li>
+<li class="method private "><a href="#create_selectbox_tpldir" title="create_selectbox_tpldir :: "><span class="description">create_selectbox_tpldir()
+        </span><pre>create_selectbox_tpldir()</pre></a></li>
+<li class="method private "><a href="#present_config" title="present_config :: "><span class="description">present_config()
+        </span><pre>present_config()</pre></a></li>
+<li class="method private "><a href="#present_spezial" title="present_spezial :: "><span class="description">present_spezial()
+        </span><pre>present_spezial()</pre></a></li>
+<li class="method private "><a href="#read_languages" title="read_languages :: "><span class="description">read_languages()
+        </span><pre>read_languages()</pre></a></li>
+<li class="method private "><a href="#read_themes" title="read_themes :: "><span class="description">read_themes()
+        </span><pre>read_themes()</pre></a></li>
+<li class="method private "><a href="#show_menu" title="show_menu :: "><span class="description">show_menu()
+        </span><pre>show_menu()</pre></a></li>
+<li class="method private "><a href="#show_radiobuttons" title="show_radiobuttons :: "><span class="description">show_radiobuttons()
+        </span><pre>show_radiobuttons()</pre></a></li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties</li>
+<li class="nav-header private">» Private</li>
+<li class="property private "><a href="#%24mTpl" title="$mTpl :: "><span class="description">$mTpl</span><pre>$mTpl</pre></a></li>
+</ul>
+</div>
+<div class="span8">
+<a name="%5CconfigPresent" id="\configPresent"></a><div href="../classes/configPresent.html" class="element class">
+<p class="short_description">----------------------------------------------------------
+(c) 2007  Roland Hempen
+          www.hempenweb.ch
+----------------------------------------------------------</p>
+<div class="details">
+<p class="long_description">Klasse f�r die Pr�sentation der Navigation am Bildschirm</p>
+<table class="table table-bordered">
+<tr>
+<th>author</th>
+<td><a href="">Roland Hempen</a></td>
+</tr>
+<tr>
+<th>copyright</th>
+<td>Frei einsetz- und veraenderbar, wenn der Autor erw�hnt wird</td>
+</tr>
+<tr>
+<th>version</th>
+<td>1.0 | 2007-07-14</td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a name="__construct" id="__construct"></a><div class="element clickable method public __construct" data-toggle="collapse" data-target=".__construct .collapse">
+<h2>__construct()
+        </h2>
+<pre>__construct($tpl) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$tpl</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<a name="config_anzeigen" id="config_anzeigen"></a><div class="element clickable method public config_anzeigen" data-toggle="collapse" data-target=".config_anzeigen .collapse">
+<h2>config_anzeigen()
+        </h2>
+<pre>config_anzeigen($config, $categories, $cat, $message, $spezial, $spez) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$config</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$categories</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$cat</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$message</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$spezial</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$spez</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<a name="show_messages" id="show_messages"></a><div class="element clickable method public show_messages" data-toggle="collapse" data-target=".show_messages .collapse">
+<h2>show_messages()
+        </h2>
+<pre>show_messages($categories, $cat, $message) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$categories</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$cat</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$message</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<a name="show_pushbutton" id="show_pushbutton"></a><div class="element clickable method public show_pushbutton" data-toggle="collapse" data-target=".show_pushbutton .collapse">
+<h2>show_pushbutton()
+        </h2>
+<pre>show_pushbutton($row) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$row</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<a name="create_pushbutton" id="create_pushbutton"></a><div class="element clickable method private create_pushbutton" data-toggle="collapse" data-target=".create_pushbutton .collapse">
+<h2>create_pushbutton()
+        </h2>
+<pre>create_pushbutton($row) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$row</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<a name="create_radiobuttons" id="create_radiobuttons"></a><div class="element clickable method private create_radiobuttons" data-toggle="collapse" data-target=".create_radiobuttons .collapse">
+<h2>create_radiobuttons()
+        </h2>
+<pre>create_radiobuttons($row) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$row</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<a name="create_selectbox" id="create_selectbox"></a><div class="element clickable method private create_selectbox" data-toggle="collapse" data-target=".create_selectbox .collapse">
+<h2>create_selectbox()
+        </h2>
+<pre>create_selectbox($werte, $row) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$werte</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$row</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<a name="create_selectbox_tpldir" id="create_selectbox_tpldir"></a><div class="element clickable method private create_selectbox_tpldir" data-toggle="collapse" data-target=".create_selectbox_tpldir .collapse">
+<h2>create_selectbox_tpldir()
+        </h2>
+<pre>create_selectbox_tpldir($werte, $row) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$werte</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$row</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<a name="present_config" id="present_config"></a><div class="element clickable method private present_config" data-toggle="collapse" data-target=".present_config .collapse">
+<h2>present_config()
+        </h2>
+<pre>present_config($config) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$config</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<a name="present_spezial" id="present_spezial"></a><div class="element clickable method private present_spezial" data-toggle="collapse" data-target=".present_spezial .collapse">
+<h2>present_spezial()
+        </h2>
+<pre>present_spezial($spezial) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$spezial</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<a name="read_languages" id="read_languages"></a><div class="element clickable method private read_languages" data-toggle="collapse" data-target=".read_languages .collapse">
+<h2>read_languages()
+        </h2>
+<pre>read_languages() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<a name="read_themes" id="read_themes"></a><div class="element clickable method private read_themes" data-toggle="collapse" data-target=".read_themes .collapse">
+<h2>read_themes()
+        </h2>
+<pre>read_themes() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<a name="show_menu" id="show_menu"></a><div class="element clickable method private show_menu" data-toggle="collapse" data-target=".show_menu .collapse">
+<h2>show_menu()
+        </h2>
+<pre>show_menu($categories, $cat, $spez) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$categories</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$cat</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$spez</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<a name="show_radiobuttons" id="show_radiobuttons"></a><div class="element clickable method private show_radiobuttons" data-toggle="collapse" data-target=".show_radiobuttons .collapse">
+<h2>show_radiobuttons()
+        </h2>
+<pre>show_radiobuttons($row) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$row</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a name="%24mTpl" id="$mTpl"> </a><div class="element clickable property private $mTpl" data-toggle="collapse" data-target=".$mTpl .collapse">
+<h2>$mTpl</h2>
+<pre>$mTpl </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a3</a> and<br>
+            generated on </footer></div>
+</div>
+</body>
+</html>

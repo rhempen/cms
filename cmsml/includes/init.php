@@ -1,5 +1,5 @@
 <?php
-/* hier werden alle benötigten Variablen initialisiert */
+/* hier werden alle benï¿½tigten Variablen initialisiert */
 
 // Deklaration von Objekt-Variablen
 $naviga 	= '';
@@ -18,8 +18,9 @@ $slider		= '';
 $tpl		= '';
 $aktdir		= '';
 $bilddb		= '';
+$member		= '';
 
-/* Objektvariablen für cmsadmin */
+/* Objektvariablen fuer cmsadmin */
 $genmain 	= '';
 $confmain 	= '';
 $confpres	= '';

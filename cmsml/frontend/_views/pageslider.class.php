@@ -1,9 +1,9 @@
 <?php
 /**
-* Die Klasse erzeugt eine Navigationsleiste zum Blättern innerhalb einer Liste 
+* Die Klasse erzeugt eine Navigationsleiste zum Blï¿½ttern innerhalb einer Liste 
 *
 * @param   integer  $rowsperpage  Zeilen pro Seite
-* @param   integer  $totalrows    Total Zeilen (entspr. Datensätzen)
+* @param   integer  $totalrows    Total Zeilen (entspr. Datensï¿½tzen)
 * @param   integer  $startrow     Startrow der aktuellen Seite
 * @return  string   $slider       Blaettern-Links / Navigation
 * @author      Roland Hempen
@@ -43,7 +43,7 @@ class pageSlider
 
     /** Berechnung der Anzahl Seiten
      * 1. ergibt sich aus Anzahl Rows / Rows pro Seite
-     * 2. Ist der Quotient nicht 0 muss noch eine Seite mehr dazugezählt werden,
+     * 2. Ist der Quotient nicht 0 muss noch eine Seite mehr dazugezï¿½hlt werden,
      *    da die letzten Rows keine ganze Seite fuellen
     */	
     private function anzPages() 
@@ -63,7 +63,7 @@ class pageSlider
 	 * 2. ist das Ergebnis <= 1 muss die Seitenzahl um 1 erhoeht werden
 	 *    da ja der Rowzaehler bei 0 beginnt.
 	 * 3. wenn der Quotient nicht 0 ergibt muss der Seitenzaehler ebenfalls um 1 erhoeht werden,
-	 *    da dann noch Rows kommen, die nicht eine ganze Seite füllen
+	 *    da dann noch Rows kommen, die nicht eine ganze Seite fï¿½llen
 	*/    
     private function actPage() 
     {
@@ -94,11 +94,11 @@ class pageSlider
 
 	/** Die Navigation berechnen und in HTML verpacken
 	 * 1. Wenn der Startrow > 0 ist, sind wir mindestens auf Seite 2. (Seite 1 hat ja den Startrow = 0)
-	 *    Eine Seite zurückzublättern: (Actpage -2) * Rows pro Seite = $prev_page
+	 *    Eine Seite zurï¿½ckzublï¿½ttern: (Actpage -2) * Rows pro Seite = $prev_page
 	 *    Wenn der Startrow <= 0 --> Navigation First und Prev ausblenden
-	 * 2. Startrow für Page_next ergibt sich aus ActPage * RowsPerPage
-	 *    wenn der Startrow < Totalrows ist: Navigation für Next und Last einblenden
-	 *    wenn der Startrow > Totalrows wird: Navigation für next und last ausblenden
+	 * 2. Startrow fï¿½r Page_next ergibt sich aus ActPage * RowsPerPage
+	 *    wenn der Startrow < Totalrows ist: Navigation fï¿½r Next und Last einblenden
+	 *    wenn der Startrow > Totalrows wird: Navigation fï¿½r next und last ausblenden
 	*/
     public function toHtml() 
     {
@@ -113,6 +113,7 @@ class pageSlider
 		if ($this->mStartRow > 0) {
 		$start = ($this->mActPage - 2) * $this->mRowsPerPage;
         if ($start < 1) { $start = 0; }
+            $href = $params.$redirect->set_start(0);
 			$first_page = '<a title="'.$GLOBALS['GALERIE']['FIRST_PAGE'].'" href="'.$params.$redirect->set_start(0).'">'.$this->mFirstActive.'</a>';
 			$prev_page  = '<a title="'.$GLOBALS['GALERIE']['PREV_PAGE'].'" href="'.$params.$redirect->set_start($start).'">'.$this->mPrevActive.'</a>';
 		} else {
@@ -131,7 +132,7 @@ class pageSlider
 		}
  				
 		$slider = '';
-		// der pageSlider wird nur angezeigt, wenn mehr als eine Seite angezeigt werden können		
+		// der pageSlider wird nur angezeigt, wenn mehr als eine Seite angezeigt werden kï¿½nnen		
 		if ($this->mTotalPages > 1) {
 		// first-page und last-page werden nur angezeigt, wenn mehr als 2 Seiten berechnet wurden
 		if ($this->mTotalPages > 2)	{ $slider  = $first_page . "\n"; }

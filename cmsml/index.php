@@ -30,32 +30,22 @@ $session_name = session_name();
 $session_id   = session_id();
 
 // wichtige Includes und Debuggingfunktion einbinden
+// Sprachschlüssel neu setzen anhand $_GET['langu'] bzw. $_SESSION['language'] in includes.php
 require('./includes/includes.php');
-
-// Sprachschlüssel neu setzen
-if (isset($_GET['langu']) && $_GET['langu'] != $_SESSION['language']) {
-  $language = $_SESSION['language'];
-  unset($_SESSION['language']);
-  $language = $_SESSION['language'];
-  $_SESSION['language'] = $_GET['langu'];
-}
+$language = $_GET['langu'] != '' ? $_GET['langu'] : $_SESSION['language'];
 
 // die CSS-Klasse des Header-Bereiches aus der Session beschaffen
 $classHeader = preg_match('/(hide|show)/',$_SESSION['classHeader']) ? $_SESSION['classHeader'] : 'show';
 
-// Sprache festlegen anhand $_GET['langu'] bzw. $_SESSION['language']
-$cfg->sprache_festlegen(); 
-
-$uri = $_SERVER['REQUEST_URI'];
 // ev. ist eine Umleitung auf die Startseite nötig!
-$redirect->redirect_to_first_navi();
+$startSeite = $redirect->redirect_to_startseite();
 
 // SMURL
 if (SMURL == 'ja') { $redirect->get_navid(); }
 
-
 // Fuer den Zugriff auf die Bilder-DB muss der Seiten-Type (Page oder Navi) bekannt sein
 $type = $_GET['pagid'] > 0 ? 'P' : 'N';
+
 // Startzahl zum Lesen der Bilder bzw. der Listitems
 $start = isset($_GET['start']) && $_GET['start'] > 0 ? $_GET['start'] : 0;
 
@@ -97,17 +87,28 @@ $html_for_scripts = $frontget->read_theme_scripts();
 $html_for_scripts != '' ? $tpl->setVariable('theme_js',$html_for_scripts) : '';
 $tpl->parseCurrentBlock();
 
+// skalierbares Hintergrundbild, falls erwuenscht
+if ($general->analyse_template('main_tpl.html',0,'/{backgroundImage}/') ) {
+  $tpl->setCurrentBlock('background');
+  $bgImage = $frontget->get_random_bgimage();
+  $bgImage != '' ? $tpl->setVariable('backgroundImage',$bgImage) : '';
+  $tpl->parseCurrentBlock();
+}
+
 // home_link
 $tpl->setCurrentBlock('home');
 $tpl->setVariable('home_link', $naviget->get_startseite());
-//$tpl->setVariable('home_link', ROOTDIR.'index.php');
-$header_bild = $frontget->get_random_bild();
-$header_bild != '' ? $tpl->setVariable('header_bild',$header_bild) : '';
-$header_bgimage = $frontget->get_header_bgimage();
-$header_bgimage != '' ? $tpl->setVariable('header_background',$header_bgimage) : '';
-$tpl->setVariable('webroot', ROOTDIR); // ist nötig für Lightbox
-$tpl->setVariable('mediadir', str_replace('../../','',MEDIA_ROOT)); // ist nötig für footer
-$tpl->setVariable('classheader',$classHeader); // ist nötig für Headerbereich 
+
+// Bild im Headerbereich
+if ($general->analyse_template('main_tpl.html',0,'/{header_bild}/') ) {
+  $header_bild = $frontget->get_random_bild();
+  $header_bild != '' ? $tpl->setVariable('header_bild',$header_bild) : '';
+}
+// Hintergrundbild im Header
+if ($general->analyse_template('main_tpl.html',0,'/{header_background}/') ) {
+  $header_bgimage = $frontget->get_header_bgimage();
+  $header_bgimage != '' ? $tpl->setVariable('header_background',$header_bgimage) : '';
+}
 $tpl->parseCurrentBlock();
 
 // Copyright
@@ -121,7 +122,19 @@ $tpl->setCurrentBlock('nav_block');
 
 // Navigation
 require_once './includes/nav.php';
-$s_id = isset($_GET['subid']) ?  $_GET['subid'] : $n_id;
+$s_id = isset($_GET['subid']) ? $_GET['subid'] : $_GET['navid'];
+
+// Hidden Fields ins HTML rendern
+$tpl->setCurrentBlock('hidden_fields');
+  // Versteckte Informationen für die Lightbox
+  $tpl->setVariable('webroot', ROOTDIR); // ist nötig für Lightbox
+  $tpl->setVariable('mediadir', str_replace('../../','',MEDIA_ROOT)); // ist nötig für footer
+  $tpl->setVariable('classheader',$classHeader); // ist nötig für Headerbereich 
+  // feststellen, ob die Startseite angezeigt werden soll
+  $startseite = $frontget->read_single_field_from_navi('start', $s_id);
+  $tpl->setVariable('startseite',$startseite); // Flag wird per Javascript ausgwertet 
+$tpl->parseCurrentBlock();
+
 
 // Name Content-Template aus DB holen, Template einbinden und verarbeiten
 $tpl->setCurrentBlock('content');
@@ -131,20 +144,21 @@ $seiten_infos = $frontget->read_seiten_infos($s_id);
 $useragent = $general->detect_user_agent();
 //if ($useragent != 'msie') {
 // "iso-8859-1"
-	$xml_notation = '<?xml version="1.0" encoding="utf-8" ?>' . "\n";
-	$tpl->setCurrentBlock('xml');
-	$tpl->setVariable('xml_notation', $xml_notation);
-	$tpl->parseCurrentBlock();
-//}
+// Mit HTML5 ist das nicht mehr noetig!!
+if ($general->analyse_template('main_tpl.html',$tplnr,'/{xml_notation}/')) {
+  $xml_notation = '<?xml version="1.0" encoding="utf-8"?>'."\n";
+  $tpl->setCurrentBlock('xml');
+  $tpl->setVariable('xml_notation', $xml_notation);
+  $tpl->parseCurrentBlock();
+}
 
-// Title-Tag setzen
-$titletag = COPYRIGHT != ''  ? COPYRIGHT.' &#8211; '.$seiten_infos['kurztitel'] : $seiten_infos['kurztitel'];
+// Title-Tag setzen 
+$titletag = COPYRIGHT != ''  ? COPYRIGHT.' &#8211; '.$seiten_infos['kurztitel_'.$language] : $seiten_infos['kurztitel_'.$language];
 $tpl->setCurrentBlock('title');
 $tpl->setVariable('titletag', $titletag);
 $tpl->parseCurrentBlock();
 
 /* Anfuegen Inhalt-Template-Datei */
-//$template = $seiten_infos['template_name'] == '' ? 'zweispaltig_340_420_tpl.html' : $seiten_infos['template_name'];
 $template = $seiten_infos['template_name'];
 
 // page_id > 0, dann ist eine Detailseite mit einem separaten Template gefragt
@@ -163,82 +177,26 @@ if ($seiten_infos['modul'] != 0) {
 $tpl->addBlockfile('content','content_block', $template);
 $tpl->setCurrentBlock('content_block');
 
-// feststellen, ob die Startseite angezeigt werden soll
-$query = 'SELECT start FROM '.$tab_prefix.'navigation WHERE nav_id='.$s_id;
-$startseite = $db->queryOne($query);
-if ($startseite == 'j') { 
-  $tpl->setCurrentBlock('dyn_margin');
-  $tpl->setVariable('dyn_margin',' style="margin-left:0;"'); 
-  $tpl->parseCurrentBlock();
+// Ab hier wird die gewählte Seite gerendert
+if ($seiten_infos['memberlogin'] == 'X') {
+  include_once(MEMBER_LOGIN);
+  if ($_SESSION['memberlogin'] != '' && $_SESSION['memberpassw'] != '') {
+    include_once(RENDER_WEBSITE);
+  }
+} else {
+    include_once(RENDER_WEBSITE);
 }
 
-// Ist der Seite ein Modul zugewiesen?
-if ($seiten_infos['modul'] == 0)
-{
-	// Seiteninhalt anzeigen entweder mit einem Thumbnail-Template oder mit normalgrossen Bilder
-	if (preg_match('/760h/', $template) || preg_match('/760v/', $template) || preg_match('/260/', $template) )	{
-		include_once(NAVI_DETAIL_THUMBS);
-		$controller = NAVI_DETAIL_THUMBS;
-	} else {
-		require_once(INDEX_DETAIL);
-		$controller = INDEX_DETAIL;
-	}
-}	
-else {
-	/* Module einbinden */
-	switch ($module) 
-	{
-	  case 'LIST_EXPOS_EVENTS':
-            if (isset($_GET['pagid']) && $_GET['pagid'] > 0) {
-                include_once(PAGE_DETAIL);
-                $controller = PAGE_DETAIL;
-            } else {
-                include_once(PAGES_OVERVIEW);
-                $controller = PAGES_OVERVIEW;
-            }
-  			break;
-	  case 'READ_TOP_EXPO_EVENT':
-			include_once(HOME_ART4ART);
-			$controller = HOME_ART4ART;
-			break;
-	  case 'READ_TOP_NEWS':
-			include_once(HOME);
-			$controller = HOME;
-			break;
-	  case 'KONTAKTFORMULAR':
-  			include_once(KONTAKTFORMULAR);
-			$controller = KONTAKTFORMULAR;
-  			break;
-	  case 'WEBMAIL':
-  			include_once(WEBMAIL);
-			$controller = WEBMAIL;
-  			break;
-	  case 'SITEMAP':
-  			include_once(SITEMAP);
-			$controller = SITEMAP;
-  			break;
-      case 'GOOGLEMAPS';
-            include_once(GOOGLEMAPS);
-            $controller = GOOGLEMAPS;
-            break;
-//	  case 'PAGES_OVERVIEW':
-      default:
-		  	if ($akt_pagid > 0) {
-		  		// Template mit Thumbnails (98x98) f�r Detailanzeige (horizontal oder vertikal)
-			  	if (preg_match('/760h/', $template) || preg_match('/760v/', $template)) {
-	  				include_once(PAGE_DETAIL_THUMBS);
-					$controller = PAGE_DETAIL_THUMBS;
-			  	} else {
-			  	// Template mit Thumbnails 300x300 links oder rechts
-	  				include_once(PAGE_DETAIL);
-					$controller = PAGE_DETAIL;
-			  	}
-			 } else { 
-			 	include_once(PAGES_OVERVIEW);
-			 	$controller = PAGES_OVERVIEW;
-			 }
-			break;
-	}
+if (isset($_POST['logout']) && $_POST['logout'] == 'LOGOUT') {
+  $member->logout();
+}
+
+// Anzeige der Member-Login-Daten
+if ($_SESSION['memberlogin'] != '') {
+  $tpl->setCurrentBlock('member_data');
+  $logout = $member->setLogoutForm();
+  $tpl->setVariable('member_login',$logout);
+  $tpl->parseCurrentBlock();
 }
 
 // Header-Informationen ausgeben
@@ -248,7 +206,11 @@ $tpl->parseCurrentBlock();
 
 
 /* Google-analytics Script einbinden */
-if ($ga_script != '') { $tpl->setVariable('google_analytics', $ga_script); }
+if ($ga_script != '') {   
+  $tpl->setCurrentBlock('googleAnalytics');
+  $tpl->setVariable('google_analytics', $ga_script);
+  $tpl->parseCurrentBlock();
+}
 
 // Ausgabe anzeigen
 $tpl->show();

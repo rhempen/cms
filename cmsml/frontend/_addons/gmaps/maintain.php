@@ -1,4 +1,6 @@
 <?php 
+  include_once './languages/Language.php';
+  $langu = $_GET['langu'];
   $query = $_GET['query'];
   $dista = $_GET['dista'];
   $param = $query != '' ? '?query='.$query : '';
@@ -34,9 +36,12 @@
       <div id="gmapsInputsMaint">
   		<form action="maintain.php" method="get">
           <ul>
-            <li><span>Suchen nach PLZ/Ort</span></li>&nbsp;
-			<li><input type="text" name="query" value="<?php echo $query;?>" size="20"/></li>&nbsp;
-            <li><span>Umkreis: </span>&nbsp;
+            <li><span><?php echo $GLOBALS['TEXTE']['LBL_SUCHEN'];?></span></li>&nbsp;
+			<li>
+              <input type="hidden" name="langu" value="<?php echo $langu;?>" size="2"/>
+              <input type="text" name="query" value="<?php echo $query;?>" size="20"/>
+            </li>&nbsp;
+            <li><span><?php echo $GLOBALS['TEXTE']['LBL_UMKREIS'];?></span>&nbsp;
                 <select id="umkreis" name="dista" size="1">
                   <option value="05" <?php if ($dista == 05) echo 'selected';?>>5 Km</option>
                   <option value="10" <?php if ($dista == 10) echo 'selected';?>>10 Km</option>
@@ -46,8 +51,8 @@
                   <option value="50" <?php if ($dista == 50) echo 'selected';?>>50 Km</option>
                 </select>
             </li>&nbsp;
-						<li><button class="submit" type="submit"><b>Suchen</b></button></li>&nbsp;
-						<li><span id="ergebnis"></span></li>&nbsp;
+            <li><button class="submit" type="submit"><b><?php echo $GLOBALS['TEXTE']['BTN_SUCHEN'];?></b></button></li>&nbsp;
+            <li><span id="ergebnis"></span></li>&nbsp;
           </ul>
 		</form>
       </div>
@@ -78,8 +83,8 @@
           <div class="clear"></div>
           <div class="label"><label for="typ">Type</label></div>
           <div class="input"><select name="typ" id="typ" rel="5">
-                                  <option value="vollsortiment">vollsortiment</option>
-                                  <option value="teilsortiment">teilsortiment</option>
+                                  <option value="lager">lager</option>
+                                  <option value="onlineshop">onlineshop</option>
                           </select></div>
           <div class="clear"></div>
           <div class="label"><label for="act">Aktiv</label></div>

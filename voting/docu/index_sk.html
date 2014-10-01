@@ -1,0 +1,600 @@
+<?xml version="1.0"?>
+<!doctype html public "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Documentation Voting Script</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=windows-1250" />
+  <meta name="robots" content="noindex">
+
+</head>
+
+<style type="text/css">
+<!--
+  h4 {
+      font-family:Tahoma,Helvetica,Geneva,Sans-serif,sans-serif;
+      margin-top:5px;
+      text-align:center;
+      }
+
+  h5 {
+      font-family:Tahoma,Helvetica,Geneva,Sans-serif,sans-serif;
+      margin-top:50px;
+      margin-bottom:5px;
+      text-align:center;
+      font-size:11pt;
+      }
+
+  p, td, br, form, ol, a {
+      font-family:Verdana,Helvetica,Geneva,Sans-serif,sans-serif;
+      font-size:10.5pt;
+      }
+
+  .chapter {
+      width:650px;
+      border-width:1px;
+      border-style:solid;
+      border-color:#000000;
+      margin-left:50px;
+      padding:10px;
+      margin-bottom:20px;
+      background-color:#E6F2CC;
+      line-height:14pt;
+      }
+
+  .code {
+      font-family:Courier New;
+      }
+
+  .codebold {
+      font-family:Courier New;
+      font-weight:bold;
+      }
+
+  .links {
+      width:650px;
+      margin-left:50px;
+      margin-bottom:10px;
+      text-align:center;
+      line-height:25px;
+      }
+-->
+</style>
+
+<body>
+  <a name="top"></a>
+  <form>
+  
+  
+  <div class="chapter"><a name="ad"></a>
+<h4>Voting Script uvádza: Online evidencia stretnutí</h4>
+<p> Our PHP skript <a href="http://www.schedule-organizer.de/en/">Plánovací organizér</a> umožňuje plánovať stretnutia zákazníkov, 
+pacientov alebo klientov prostredníctvom firemnej, lekárovej alebo kozultantovej webstránky.
+PHP skript zjednodušuje a automatizuje spravovanie stretnutí - zodpovedný pracovník ušetrí čas, 
+pretože bude odpovedať na menej telefonátov faxov a listov.
+</p>
+<p>  <a href="http://www.schedule-organizer.de/en/">Stránka plánovacieho organizéru</a>
+ 
+</p>
+<p align="right"><a href="#top"> Naspäť na začiatok
+</a></p></div> 
+  
+  <div class="chapter">
+    <h4>Documentácia k hlasobvaciemu skriptu</h4>
+    <p>
+      Ďakujeme za Váš záujem o náš HLASOVACÍ SCRIPT. Doporučujeme prečítať si túto dokumentáciu pozorne.
+    </p>
+  </div>
+
+  <div class="links">
+    <a href="#function">Funcie</a>&nbsp;&nbsp;
+    <a href="#configuration">Konfigurácia</a>&nbsp;&nbsp;
+    <a href="#upload">Upload</a>&nbsp;&nbsp;
+    <a href="#logfiles">Súbor Log</a>&nbsp;&nbsp;
+    <a href="#include">Vloženie skritpu</a>&nbsp;&nbsp;
+    <a href="#html">HTML šablóny</a>&nbsp;&nbsp;
+    <a href="#support">Podpora</a>&nbsp;&nbsp;
+    <a href="#license">Licenčné informácie</a>
+  </div>
+
+
+
+
+  <div class="chapter">
+    <h4>Úvod</h4>
+
+    <p>Skript bol konfigurovaný tak, aby bol pripravený na použitie.
+	Potrebujete iba uploadovať všetky skripty na Váš server.
+	Ak sa royhodnete skript editovať, postupujte krok za krokom.
+	Po každej zmene monitorujte jej efekt.
+	Tak zistíte, ktorá zmena spôsobila prípadnú chybu.</p>
+
+    <p>uistite sa, že do adresára "logfiles" sa dá zapisovať (chmod 777).</p>
+
+    <p>HTML šablóny skriptu boli generované podľa špecifikácií  tagov XHTML 1.0. HTML (ako &lt;br&gt; or &lt;input&gt; a obsahujú ukončovacie lomítko (&lt;br /&gt; alebo &lt;input type=&quot;text&quot; name=&quot;field&quot; /&gt;).</p>
+
+  </div>
+
+
+
+
+  <div class="chapter">
+    <a name="function"></a>
+    <h4>Funkcie a vlastnosti</h4>
+
+      <p>Pomocou tohoto skriptu môžete viesť hlasovania a ankety na Vašej webstránke.
+	  Vaši návštevníci si vyberú jednu z možností a hlasujú kliknutím na tlačidlo.
+	  Výsledky sa zobrazujú ako grafické stĺpce. Možnosti môžu byť zobrazené ako označovacie políčka s textom alebo obrázkom vedľa
+	  alebo ako rozbaľovacie menu.</p>
+
+      <p>Pre zabránenie manipuláciám, používa skript IP adresy návštevníkov a/alebo Cookies. 
+	  Je to kôli zaisteniu, že každý návštevník hlasuje iba raz. 
+	  Uvedomte si však, že tieto dve vlastnosti môžu zabrániť iba pokusom o falošné hlasovanie.</p>
+
+
+      <h4>Prehľad vlastností</h4>
+
+      <ul>
+        <li>Grafické výsledky v stĺpcoch</li>
+        <li>Grafické (obrázkové) stĺpce s roôznou veľkosťou a farbou</li>
+        <li>Vzhľad možno ľahko upravovať pomocou HTML šablón</li>
+        <li>Prevencia proti falošnému hlasovaniu používaním IP adries a/alebo Cookies</li>
+        <li>Text alebo obrázok k označovacím políčkam </li>
+      </ul>
+
+
+    <p align="right"><a href="#top">Hore</a></p>
+
+  </div>
+
+
+  <div class="chapter">
+    <a name="configuration"></a>
+    <h4>Nastavenie a konfigurácia</h4>
+
+    <p>Súbor "index.php" možno považovať za kofiguračný súbor skriptu.
+	Možno ho duplikovať a nastaviť per rôzne použitie.
+	To umožňuje použiť viacero skriptov s tým istým jadrom.
+	Vďaka tomu potrebujete skript insštalovať, resp. získať k nemu licenciu, iba raz.</p>
+
+    <p>Okrem "index.php" je pripravený ešte súbor "voting_image_options.php".
+	Možnosťou zobrazenia sú namiesto textu obráozky. Návštevníci si môžu vybrať zobrazenie pomocou obroázkov
+	namiesto textu. Preto boli definované dva jedinečné názvy: ($intern_vote_name) a "radio_image" a tiež typy polí ($form_field_type).</p>
+
+    <p>Editovať možno tieto premenné:</p>
+
+    <table border="0" cellpadding="0" cellspacing="0">
+
+
+      <tr valign="top">
+        <td class="codebold">$vote_title</td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+            Pre každé hlasovanie môžete zvoliť jedinečný názov. Názov sa zobrazí v rámci tagu &lt;title&gt; ako hlavička stránky. Príklad:
+          <br /><br />
+          <span class="code">$vote_title = 'Obľúbená farba';</span>
+          <br /><br />
+        </td>
+      </tr>
+
+
+      <tr valign="top">
+        <td class="codebold">$vote_text</td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+          Rovnako ako názov, môžete definovať aj ďalší text, ktorý sa zobrazí na stránka(napr. otázka alebop vysvetlivka). Príklad:
+          <br /><br />
+          <span class="code">$vote_text = 'Ktorá je Vaša obľúbená farba?';</span>
+          <br /><br />
+        </td>
+      </tr>
+
+
+      <tr valign="top">
+        <td class="codebold">$vote_option[]</td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+          V tejto premennej môžete definovať možnosti, z ktorých si návštevním má vybrať. 
+		  Každá možnosť je pritom samostatnou premennou. Príklad:
+          <br /><br />
+          <span class="code">
+            $vote_option[] = 'Červená';<br />
+            $vote_option[] = 'Zelená';<br />
+            $vote_option[] = 'Modrá';
+          </span>
+          <br /><br />
+
+            Namiesto textu môžete možnosti zobraziť aj ako obrázok. Príklad:
+          <br /><br />
+          <span class="code">
+            $vote_option[] = './templates/smilies/1.gif';
+            $vote_option[] = './templates/smilies/2.gif';
+            $vote_option[] = './templates/smilies/3.gif';
+          </span>
+          <br /><br />
+            Okrem cesty k obázku musíte definovať aj "radio_image" ako typ poľa ($form_field_type).
+          <br /><br />
+
+
+
+        </td>
+      </tr>
+
+
+      <tr valign="top">
+        <td class="codebold">$intern_vote_name</td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+          Sem vložte interný názov hlasovania, ktorý bude používaný v skripte. Vyhnite sa v názve medzerám a špeciálnym znakom.
+		  Interný názov musí byť definovaný, lebo skript používa jediný súbor pre všetky hlasovania. Na oddelenie všetkých hlasovaní
+		  musia byť ich interné názvy jedinečné. Príklad:
+          <br /><br />
+          <span class="code">$intern_vote_name = 'oblubena_farba';</span>
+          <br /><br />
+        </td>
+      </tr>
+
+
+      <tr valign="top">
+        <td class="codebold">$form_field_type</td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+          Naraz možno zobraziť dva typy zoznamov. Pre zoznam s označovacími políčkami zadajte "radio". Príklad:
+          <br /><br />
+          <span class="code">$form_field_type = 'radio';</span>
+          <br /><br />
+          Výsledok: <input type="Radio" name="ddd" value="v">&nbsp;Text
+          <br /><br />
+          V tomto prípade ešte môžete zameniť text pri políčku obrázkom. Zadajte "radio_image" ako typ poľa.
+          <br /><br />
+          <span class="code">$form_field_type = 'radio_image';</span>
+          <br /><br />
+          Výsledok: <input type="Radio" name="ddd" value="v">&nbsp;<img src="./images/3.gif" border="0" alt="" align="middle" />
+          <br /><br />
+
+          Pre rozbaľovací zoznam (drop down/pull down menu) zadajte "select". Príklad:
+          <br /><br />
+          <span class="code">$form_field_type = 'select';</span>
+          <br /><br />
+          Výsledok:<select name="name" size="1">
+                     <option value="Red">Červená</option>
+                     <option value="Green">Zelená</option>
+                     <option value="Green">Modrá</option>
+                  </select>
+
+          <br /><br />
+
+        </td>
+      </tr>
+
+
+      <tr valign="top">
+        <td class="codebold">$bar_image_name</td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+          Výsledky sa zobrazia v grafických stĺpcoch. Táto premenná obsahuje mená obrázkov, ktoré môžete použiť. 
+		  Vštky dostupné obrázky nájdete v adresári "templates/images_voting". Príklad:
+          <br /><br />
+          <span class="code">$bar_image_name = 'black.gif';</span>
+          <br /><br />
+          Môžete si vytvoriť aj vlastné grafické prvky a uložiť ich do spomínaného adresára.
+          <br /><br />
+        </td>
+      </tr>
+
+
+      <tr valign="top">
+        <td class="codebold">$max_bar_width</td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+          Hodnota uložená v tejto premennej sa použije ako maximálna dĺžka stĺpca (v pixeloch).
+          <br /><br />
+        </td>
+      </tr>
+
+
+      <tr valign="top">
+        <td class="codebold">$check_ip_address</td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+          Pomocou tejto voľby môžete definovať, či návštevní môže hlasovať iba raz alebo viackrát.
+		  Ak nastavíte premennú na "yes", skript sleduje IP adresu návštevníka a kontroluje jej výskyt v "log! súbore.
+		  V prípade, že sa už v súbore vyskytuje, návštevník nebude môcť hlasovať.
+          <br /><br />
+        </td>
+      </tr>
+
+
+      <tr valign="top">
+        <td class="codebold">$check_cookie</td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+          
+		  Pomocou tejto voľby môžete definovať, či návštevní môže hlasovať iba raz alebo viackrát.
+		  Ak nastavíte premennú na "yes", skript vytvorí "cookie" potom, čo návštevník zahlasuje.
+		  Skript potom kontroluje "cookies" a znemožňuje návštevníkom opakovane hlasovať.
+          <br /><br />
+        </td>
+      </tr>
+
+
+
+      <tr valign="top">
+        <td class="codebold">$language</td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+          Tu možno nastaviť jazyk. Použite skratku, ktorá je použitá v označení jazyka v adresári "languages" 
+		  (en pre languages.en.inc.php, de pre languages.de.inc.php a sk pre languages.sk.inc.php ).
+          <br /><br />
+        </td>
+      </tr>
+
+
+      <tr valign="top">
+        <td class="codebold">$path['templates']</td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+          Táto prememnná obsahuje cestu k adresáru s HTML šabónami.
+          <br /><br />
+        </td>
+      </tr>
+
+
+      <tr valign="top">
+        <td class="codebold">$path['logfiles']</td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+          Sem napíšte cestu k adresáru, ktorý obsahuje "log" súbory. Uistite sa, že sa do adresára dá zapisovať (chmod 777).
+          <br /><br />
+        </td>
+      </tr>
+
+
+      <tr valign="top">
+        <td class="codebold">$tmpl['layout']</td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+          Táto prememnná obsahuje cestu k adresáru s HTML šablónami vzhľadu.
+          <br /><br />
+        </td>
+      </tr>
+
+
+      <tr valign="top">
+        <td class="codebold">$log['logfile']</td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+          Táto prememnná obsahuje názov "log" súboru. Uistite sa, že sa do súboru dá zapisovať (chmod 777).
+          <br /><br />
+        </td>
+      </tr>
+
+
+      <tr valign="top">
+        <td class="codebold">$show_error_messages</td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+          Nastavená hosdnota pre túto premennú je "yes", preto počas konfigurácie budete vidieť chybové hlásenia a rady, ktoré Vám pomôžu nainštalovať skript.
+		  Ak ste dkončili konfiguráciu, môžete túto službu vypnúť, lebo nie je potrebné dávať návštevníkom možnosť vidieť do systému.
+          <br /><br />
+        </td>
+      </tr>
+
+
+      <tr valign="top">
+        <td class="codebold">$add_text</td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+          Múžete pridávať ďalšie prvky, text, premenné alebo ďalší obsah týmto premenným.
+		  Tento obsah môže byt zobrazený v HTML šablónach pomocou značiek/pozícií v zložených zátvorkách { a }.
+          <br /><br />
+		  Ak chcete pridať vlastný prvok do premennej $add_text, použite vzor:
+          <br /><br />
+
+          <pre>
+$add_text = array(
+
+                    'txt_additional' => 'Ďalšie',
+                    'txt_more'       => 'Viac'
+
+                  );
+          </pre>
+
+          <p>Prvá čas
+		  Prvá ačsť každého údaja je názov značky/pozície. Ak chcete pridať textový údaj vo Vašej šablóne, 
+		  vložte názov údaja do zložených zátvoriek  - {txt_addition}. Názov nesmie obsahovať medzery
+		  alebo špeciálne znaky. Dovolený je iba spojovník _.</p>
+
+
+        </td>
+      </tr>
+
+
+      <tr valign="top">
+        <td class="codebold"></td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+
+          <br /><br />
+        </td>
+      </tr>
+
+
+
+    </table>
+
+    <p align="right"><a href="#top">Hore</a></p>
+  </div>
+
+
+
+
+  <div class="chapter">
+    <a name="upload"></a>
+    <h4>Upload súborov skriptu</h4>
+
+    <p>Vytvorte na serveri nasledovný adresár
+	S väčšionou FTP klientov môžete jednoducho naraz skopírovať celý skript so všetkými adresármi:</p>
+
+    <p class="code">
+      /voting_skript/<br />
+      /voting_skript/inc/<br />
+      /voting_skript/languages/<br />
+      /voting_skript/logfiles/<br />
+      /voting_skript/templates/
+    </p>
+
+    <p>Skopírujte všetky súbory do zodpovedajúcich adresárov. Obrazové súbory (.gif, .jpg, .png) treba uploadovať v binárnom móde. 
+	Všetky ostatné súbory treba ploadovať v ASCII óde (textový mód).</p>
+
+    <p>Pamätajte: Adresár "templates" obsahuje podadresár s obrázkami.</p>
+
+    <p align="right"><a href="#top">Hore</a></p>
+
+  </div>
+
+
+
+  <div class="chapter">
+    <a name="logfiles"></a>
+    <h4>Súbor log - logfiles/log.txt</h4>
+
+    <p>Adresár "logfiles" a súbor "log.txt" musia mať povolený zápis (chmod 777).</p>
+
+    <p align="right"><a href="#top">Hore</a></p>
+  </div>
+
+
+
+  <div class="chapter">
+    <a name="include"></a>
+    <h4>Vloženie skriptu Hlasovanie</h4>
+
+    <p>Skript možno včleniť rôznymi spôsobmi.</p>
+
+    <h4>Priamym linkovaním</h4>
+
+    <p>Môžete definovať priamy link k skriptu a použiť ho na samostatnej stránke.
+	Môžete upraviť HTML šablónu, aby vyhovovala vzhľadu Vašej webstránky.</p>
+
+
+    <h4>I-Frame (HTML)</h4>
+
+    <p>Pomocou HTML tagu  &lt;iframe&gt; môžete vložiť skript do už existujúcej stránky.
+	Umiestnite &lt;iframe&gt; tag na miesto, kde sa má zobraziť skript. Príklad:</p>
+
+    <p class="code">&lt;iframe name=&quot;voting&quot; src=&quot;./voting.php&quot; width=&quot;400&quot; height=&quot;300&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;</p>
+
+
+    <h4>SSI Include</h4>
+
+    <p>Ak Váš server podporuje SSI (Server Side Includes) môžete vložiť skript nasledovným príkazom:</p>
+
+    <p class="code">&lt;!--#include virtual=&quot;./voting.php?$QUERY_STRING&quot; --&gt;</p>
+
+    <p>Nahraďte "./voting.php" správnou cestou k Vášmu skriptu. Je dôležité zachovať parameter "?QUERY_STRING".</p>
+
+    <p>Ak by to nefungovalo, premenujte Váš HTML súbor na "subor.shtml". Opýtajte sa tiež Vášho providera, či Váš server podporuje SSI SSI.</p>
+
+    <p>Dôležité: Aby bol možný po hlasovaní návrat na stránku, na ktorej je vložený skript,
+	potrebujete vložiť do HTML šablóny skrytý formulár:</p>
+
+    <p class="code">&lt;input type=&quot;hidden&quot; name=&quot;vote_redirect&quot; value=&quot;http://www.vas-server.com/subor.shtml&quot; /&gt;</p>
+
+    <p>Tento riadok musí byť bezprostredne za tagom formulára:</p>
+
+    <p class="code">&lt;form name=&quot;vote&quot; action=&quot;{skript_self}&quot; method=&quot;post&quot;&gt;<br />
+    &nbsp;&nbsp;&lt;input type=&quot;hidden&quot; name=&quot;vote_redirect&quot; value=&quot;http://www.vas-server.com/subor.shtml&quot; /&gt;</p>
+
+    <p>Nahraďte "http://www.vas-server.com/subor.shtml" s úlnou URL adresou Vašej stránky.</p>
+
+    <h4>PHP Include</h4>
+
+    <p>Pomocou inštrukcie include()môžete vložiť skript do existujúcej PHP stránky:</p>
+
+    <p class="code">&lt;?php<br /><br />include('./voting.php');<br /><br />?&gt;</p>
+
+    <p>Nahraďte "./voting.php" správnou cestou ku skriptu. </p>    
+
+
+
+    <p align="right"><a href="#top">Hore</a></p>
+  </div>
+
+
+
+  <div class="chapter">
+    <a name="html"></a>
+    <h4>Úprava HTML šablóny</h4>
+
+    <p>Adresár "templates" obsahuje súbory vzhľadu. Môžete využiť HTML a CSS na úpravu vzhľadu podľa vlastných predstáv.</p>
+
+    <p>Ak používate WISIWIG editor ako  Dreamweaver, Frontpage alebo NetObjects, uistite sa, 
+	že softvŕ sám od seba nevykonáva žiadne zmany.</p>
+
+    <p>Šablóny obsahujú značky s { a } napr.: {txt_skript_name}. Tieto značky sa nahradia konkrétnym obsahom z jazykového súboru
+	 "languages/language.sk.inc.php". Slová i frázy použité v tomto súbore môžete ľubovoľne upraviť alebo zmeniť.
+	  Môžete tiež tieto značky v šablóne nahradiť priamo potrebnými výtazmi alebo značky premiastniť na iné miesto v šablóne.
+	  Jazykový súbor tiež môžete pri dodržaní pravidiel doplniť o ďalšie značky.</p>
+
+    <p>Medzi týmito značkami existujú takzvané "Loops". Podobne ako v HTML tagoch,  dve časti (&lt;LOOP …&gt;…&lt;/LOOP&gt;) nemožno oddeliť. Ak chcete zmeniť ich pozíciu v rámci šablóny, musíte premiestniť celý blok.</p>
+
+    <p>Šablńa "voting_image_options.tpl.html" bola vytvorená, aby unožnila použitie obrázkov.
+	 Obsahuje obrázkové tagy s pozicionérmi {label} ako názov súboru a cesta v rámci bloku LOOP.</p>
+
+    <p align="right"><a href="#top">Hore</a></p>
+  </div>
+
+
+  <div class="chapter">
+    <a name="support"></a>
+    <h4>Podpora</h4>
+
+    <p>Odpovede na Vaše otázky a riešenia Vašich problémov so skriptom nájdete v našom <a href="http://www.stadtaus.com/forum/" target="_blank">fóre</a>.</p>
+
+    <p align="right"><a href="#top">Hore</a></p>
+  </div>
+
+
+
+
+
+  <div class="chapter">
+    <a name="license"></a>
+    <h4>Licenčné informácie</h4>
+
+
+    <p>Môžete si stiahnuť a bezplatne používať tento skript. Ak ho chcete používať bez odkazu na STADTAUS.com, môžete si licenciu kúpiť online.</p>
+
+
+    <ol start="1" type="1">
+      <li>Licenciu k skriptu môžete previesť aj na iného užívateľa.</li>
+      <li>Môžete ho poskytnúť za Vami navrhnutú cenu.</li>
+      <li>Licencia sa vzťahuje na jednu doménu.</li>
+    </ol>
+
+
+    <p>Ďalšie skripty na STADTAUS.com:</p>
+
+    <ol>
+      <li>Online Appointment Planner</li>
+      <li>Image Gallery Script</li>
+      <li>Formmail Script</li>
+      <li>Tell A Friend Script</li>
+      <li>Google Dance Tool</li>
+      <li>Download Center Lite</li>
+      <li>Kniha návštev Script</li>
+    </ol>
+
+
+    <p>Navštívte tiež náš projekt MetaCollection, návod pre tvorcov stránok a vývojárov, ktorí hľadajú CGI, Perl alebo PHP archívy so skriptami.</p>
+
+
+    <p><a href="http://www.metacollection.com/">http://www.metacollection.com/</a></p>
+
+    <p align="right"><a href="#top">Hore</a></p>
+  </div>
+
+</form>
+</body>
+</html>

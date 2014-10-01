@@ -3,16 +3,18 @@
 
 function change_image(index, id)
 {
-	var bild;
+	var bild, bild1, bild2;
 	switch (id) {
 		case 'thumbnails1':
-			bild = document.page_edit.thumbnails1.options[index].value;
+            bild = $F("thumbnails1");
+//			bild = document.page_edit.thumbnails1.options[index].value;
 			bild1 = new Image();
 			bild1.src = bild;
 			window.document.bild1.src = bild1.src;
 			break;
 		case 'thumbnails2':
-			bild = document.page_edit.thumbnails2.options[index].value;
+            bild = $F("thumbnails2");
+//			bild = document.page_edit.thumbnails2.options[index].value;
 			bild2 = new Image();
 			bild2.src = bild;
 			window.document.bild2.src = bild2.src;
@@ -27,8 +29,8 @@ function check_felder_pages()
 {
 	var f = document.forms["page_edit"];
    	var fehler = ""; //enth�lt die Bezeichnungen
-                   //der nichtausgef�llten Felder
-   	// *** �berpr�fung auf vollst�ndige Ausf�llung
+                   //der nichtausgefuellten Felder
+   	// *** Ueberpruefung auf vollstaendige Ausfuellung
    	if (f.name.value=="") {
    	 	fehler += "bitte einen Seitentitel eingeben"+"<br />\n";
    		$("name").setStyle({ border:'1px solid red' });
@@ -81,7 +83,9 @@ function check_felder_pages()
    	if (fehler != ""){
     	var fehlertext = "Die folgenden Felder wurden nicht vollst&auml;ndig oder fehlerhaft ausgef&uuml;llt:"+"<br />\n";
       	fehlertext += fehler;
-      	$("meldung").update(fehlertext).setStyle({ color:'#B70000' });
+      	//$("meldung").update(fehlertext).setStyle({ color:'#B70000' });
+      	$("message").update(fehlertext).setStyle({ color:'#FF0000', fontWeight:'bold' });
+        $("trMessage").removeClassName('hide');
       	return false;
    	}
    	return true;
@@ -123,3 +127,189 @@ function gueltigesDatum(key, datum)
 	     return true; else return false;
 }
 
+/*--------------------------------------------------------------------------------------------
+  Funktion: toggle_navi_trans -> Auf- und Zuklappen Navigationstexte zum Uebersetzen
+  Dabei wird auf die gerade eingestellte Backend-Sprache geachtet. Ein Satz mit dieser Sprache
+  muss immer angezeigt werden.
+----------------------------------------------------------------------------------------------*/ 
+function toggle_navi_trans(iLangId,iLang) { 
+    var lElements = new Array();
+    var lLang, elSave;
+    // Alle TR-Elemente unter halb Table Tbody sammeln
+    lElements = $(iLangId).children[0].rows;
+    gAnzShow = 0; // Zähler zurücksetzen
+    // dann für jedes Element die Richtige Klasse setzen
+    $A(lElements).each(function(el,index) {
+      // Die Sprache des Elements aus der ID in TR-Tag lesen
+      lLang = el.id.split("_")[1]; 
+      if (lLang.toUpperCase() != iLang.toUpperCase())  {
+        if (el.className.match(/show/)) {
+          el.removeClassName('show');
+          el.removeClassName('underline');
+          el.addClassName('hide');
+        } else {
+          // Element nur zeigen, wenn es einen Wert in der 1. TD-Zelle gibt
+          if (el.cells[0].innerHTML != '') {
+            el.removeClassName('hide');
+            el.addClassName('show');
+            el.addClassName('underline');
+            gAnzShow++;
+          }
+        }
+      } else {
+        elSave = el;
+      }      
+    });
+    // Wenn nur 1 Sprache angezeigt wird, soll kein Understrich gezeigt werden
+    if (gAnzShow == 0) {
+      elSave.removeClassName('underline');
+    } else {
+      elSave.addClassName('underline');      
+    }
+}
+
+/* Sprachwechsel in der Editier-Ansicht einer Navi-Seite */
+function setLanguForSave(iLangu) 
+{
+  if ($("languForSave")) { $("languForSave").value = iLangu; }
+}
+
+function setLanguForTranslation(iLangu,iEditId,iTemplate) 
+{
+  var lFormId, lUrl, lId, lRc;
+  if (iTemplate == 'navi') {
+    lFormId = 'naviSeitenEdit';
+    lUrl    = "../_controllers/navi_co_maintain.php";
+    lId     = 'nav_id='+iEditId;
+  } else {
+    lFormId = 'pageSeitenEdit';
+    lUrl    = "../_controllers/pages_co_maintain.php";  
+    lId     = 'page_id='+iEditId;
+    lRc     = check_felder_pages();
+    if (lRc === false) return;
+  }
+  // erst mal Prüfen, ob das Formular da ist
+  if (!$(lFormId)) { alert('ID '+lFormId+' existiert nicht!'); return false; }
+  
+  var lLanguForSave = $("languForSave").value != '' ? $("languForSave").value : iLangu;
+  // GET-Parameter an die URL anhängen
+  lUrl = lUrl+"?action=edit&langu_tra="+iLangu+"&"+lId;
+
+  // der Inhalt der Textareas muss mit einer Funktion von tinyMCE ermittelt und codiert werden,
+  // damit er richtig an den Server übertragen wird. langu_sav muss ebenfalls mitgegeben werden.
+  // die übrigen Felder des Formulars können wie üblich im PHP aus $_POST ermittelt werden
+  // bei onComplete wird ein normaler Request an die URL abgesetzt und wieder in den Edit-Modus 
+  // zu gelangen
+  var innerHTML1 = encodeURIComponent(tinyMCE.get("inhalt1").getContent());
+  var innerHTML2 = encodeURIComponent(tinyMCE.get("inhalt2").getContent());
+  var lParam = "inhalt1="+innerHTML1+"&inhalt2="+innerHTML2+"&langu_sav="+lLanguForSave;
+  $(lFormId).request({
+    method: "post",
+    parameters: lParam,
+    asynchronous: false,
+    onSuccess: zeige_resultat,
+    onFailure: zeige_fehler,
+    onComplete: function() { 
+      lUrl = lUrl+"&msg_save="+$("msgFromSave").innerHTML+"&led_save="+$("ledFromSave").value;
+      lUrl = lUrl+"&class_save="+$("classFromSave").value;
+      location.href = lUrl;   
+    }
+  }); 
+  return true;
+}
+
+
+  
+var zeige_resultat = function(r)
+{    
+    $("ledLangu").src = '../gifs/ledgreen.gif';
+    $("ledLangu").alt = r.responseText;
+    $("ledLangu").title = r.responseText;
+    $("msgFromSave").innerHTML = r.responseText;
+    $("ledFromSave").value = '../gifs/ledgreen.gif';
+    $("classFromSave").value = 'success';
+//    $("message").addClassName('success');
+//    $("message").innerHTML = r.responseText;
+//    $("trMessage").removeClassName('hide');    
+}
+
+var zeige_fehler = function(r)
+{
+    $("ledLangu").src = '../gifs/ledred.gif';
+    $("ledLangu").alt = r.statusText;
+    $("ledLangu").title = r.statusText;
+    $("msgFromSave").innerHTML = r.responseText;
+    $("ledFromSave").value = '../gifs/ledred.gif';
+    $("classFromSave").value = 'error';
+//    $("message").addClassName('error');
+//    $("meldung").innerHTML = "Fehler: " + r.status + " / " + r.statusText;
+//    $("trMessage").removeClassName('hide');
+}
+
+
+document.onkeydown = function(event) {
+  if (getKeyCode(event) == '13') {
+    // auf Enter soll keine Reaktion erfolgen (zB. kein Submit des Formulars)
+    return false;
+  }
+  return true;
+}
+
+// KeyCode abfragen
+function getKeyCode(event) {
+   event = event || window.event;
+   return event.keyCode;
+}
+
+// Allgemeine Funktion für den Submit eines Formulars an eine URL
+function genericSubmit(iUrl,iConfirm) {
+  if (iConfirm != '') {
+    var conf = confirm(iConfirm);
+    if (conf == false) return;
+  }
+  var submitter = document.createElement("form"); 
+  submitter.setAttribute("action",iUrl);
+  submitter.setAttribute("method","post");
+  document.body.appendChild(submitter); 
+  submitter.submit();
+}
+
+
+Event.observe(window, 'load', function(){
+// 1. Eine Instantz pro Element mit der Klasse "abbrechen" erstellen --> Button-Registrierung
+    // navi_edit
+    $A($$(".navi_abbrechen")).each( function(element) {
+		Event.observe(element, "click", function() {
+          var lUrl = '../_controllers/navi_co_maintain.php?action=esc';          
+			location.href=lUrl;
+		});
+	});
+    // page_edit
+	$A($$(".page_abbrechen")).each( function(element) {
+		Event.observe(element, "click", function() {
+          var lUrl = '../_controllers/pages_co_maintain.php?action=esc';          
+			location.href=lUrl;
+		});
+	});
+
+    // 2. Eine Instantz pro Element mit der Klasse "speichern" erstellen --> Button-Registrierung
+    // navi_edit
+	$A($$(".navi_sichern")).each( function(element) {
+		Event.observe(element, "click", function() {
+          var lLanguTra = $("sprachen").value; // Wert des selektierten Eintrages in der Selectbox
+          var lSeitenId = $("seitenId").innerHTML;
+          var lTemplate = 'navi';
+          setLanguForTranslation(lLanguTra,lSeitenId,lTemplate);
+		});
+	});
+    // page_edit
+    $A($$(".page_sichern")).each( function(element) {
+		Event.observe(element, "click", function() {
+          var lLanguTra = $("sprachen").value; // Wert des selektierten Eintrages in der Selectbox
+          var lPageId   = $("pageId").innerHTML;
+          var lDomain   = $("bildPfad").innerHTML;
+          var lTemplate = 'page';
+          setLanguForTranslation(lLanguTra,lPageId,lTemplate);
+		});
+	});
+});

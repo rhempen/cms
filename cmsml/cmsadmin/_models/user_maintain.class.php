@@ -5,10 +5,12 @@
  *           www.hempenweb.ch
  * ----------------------------------------------------------
  *
- * Klasse f�r die Verwaltung der Benutzer und Logindaten
+ * Klasse fuer die Verwaltung der Benutzer und Logindaten
  * @author      Roland Hempen
- * @copyright   Frei einsetz- und veraenderbar, wenn der Autor erw�hnt wird
+ * @copyright   Frei einsetz- und veraenderbar, wenn der Autor erwaehnt wird
  * @version     1.0 | 2009-05-22
+ * @package     CMSADMIN/Usermaintenance
+ * 
  */
 
 class userMaintain
@@ -216,7 +218,7 @@ class userMaintain
     			} elseif ($user == '' || $email == '') {
     				$rc = 8; // Fehlermeldung
     			}
-    			// Email pr�fen
+    			// Email pruefen
     			if ($email != '' && !preg_match('/^[\w.+-]{2,}\@[\w.-]{2,}\.[a-z]{2,6}$/', $email)) {
     				$rc = 9;
     			}
@@ -225,7 +227,7 @@ class userMaintain
 		return $rc;      
     }	
 
-    /* Pr�fen, ob der eingegebene Username existiert auf der DB 
+    /* Pruefen, ob der eingegebene Username existiert auf der DB 
     	@params: $user	- Username
     	@return: $rc	- Return-Code (0=User existiert, 12=User existiert nicht)
     */

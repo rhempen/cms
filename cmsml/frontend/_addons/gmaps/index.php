@@ -1,4 +1,6 @@
 <?php 
+  include_once './languages/Language.php';
+  $langu = $_GET['langu'];
   $query = $_GET['query'];
   $dista = $_GET['dista'];
   $param = $query != '' ? '?query='.$query : '';
@@ -20,7 +22,7 @@
     <script type="text/javascript" src="scripts/jquery.js"></script>
     <script type="text/javascript" src="scripts/jquery.dataTables.js"></script>
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?region=CH&sensor=false"></script>
-    <script type="text/javascript" src="scripts/gmaps.js"></script>
+    <script type="text/javascript" src="scripts/gmaps.js" charset="utf-8"></script>
   </head>
 
   <body onload="initialize()">
@@ -28,9 +30,12 @@
   		<div id="gmapsInputs">
   			<form action="index.php" method="get">
               <ul>
-                <li><span>Suchen nach PLZ/Ort</span></li>&nbsp;
-				<li><input type="text" name="query" value="<?php echo $query;?>" size="20"/></li>&nbsp;
-                <li><span>Umkreis: </span>&nbsp;
+                <li><span><?php echo $GLOBALS['TEXTE']['LBL_SUCHEN']; ?></span></li>&nbsp;
+				<li>
+                  <input type="hidden" size="2" name="langu" value="<?php echo $langu;?>"/>
+                  <input type="text" name="query" value="<?php echo $query;?>" size="20"/>
+                </li>&nbsp;
+                <li><span><?php echo $GLOBALS['TEXTE']['LBL_UMKREIS'];?></span>&nbsp;
                     <select id="umkreis" name="dista" size="1">
                       <option value="05" <?php if ($dista == 05) echo 'selected';?>>5 Km</option>
                       <option value="10" <?php if ($dista == 10) echo 'selected';?>>10 Km</option>
@@ -40,9 +45,9 @@
                       <option value="50" <?php if ($dista == 50) echo 'selected';?>>50 Km</option>
                     </select>
                 </li>&nbsp;
-				<li><button class="submit" type="submit"><b>Suchen</b></button></li>&nbsp;
+				<li><button class="submit" type="submit"><b><?php echo $GLOBALS['TEXTE']['BTN_SUCHEN'];?></b></button></li>&nbsp;
 				<li><span id="ergebnis"></span></li>&nbsp;
-                <li><button id="liste" class="switch hide" type="button" onclick="switchView();"><b>Liste</b></button></li>
+                <li><button id="liste" class="switch hide" type="button" onclick="switchView('<?php echo $GLOBALS['TEXTE']['BTN_LISTE'];?>','<?php echo $GLOBALS['TEXTE']['BTN_KARTE'];?>');"><b><?php echo $GLOBALS['TEXTE']['BTN_LISTE'];?></b></button></li>
               </ul>
 			</form>
   		</div>

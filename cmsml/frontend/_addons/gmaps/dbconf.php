@@ -22,13 +22,12 @@ elseif ($_SERVER['HTTP_HOST'] == 'www.publicdev.ch' || $_SERVER['HTTP_HOST'] == 
 	$password   = 'ayk61mz';      // Passwort
 	$db         = 'cms_e-njoy';			 // db-Name
 } 
-elseif ($_SERVER['HTTP_HOST'] == 'www.e-njoy.ch' || $_SERVER['HTTP_HOST'] == 'e-njoy.ch' || 
-				$_SERVER['HTTP_HOST'] == 'e-njoy.ch.emerson.ch-meta.net' ) {
-	$dbtype     = 'mysqli';        // Datenbank-Server Typ
-	$host       = 'localhost'; 	   // Server
-	$user       = 'enjoy_u1';  		 // BenutzerIn 
-	$password   = 'Wopowe26';      // Passwort 
-	$db         = 'enjoy_db1'; 		 // db-Name
+elseif ($_SERVER['HTTP_HOST'] == 'www.xignis.ch' || $_SERVER['HTTP_HOST'] == 'xignis.ch') {
+	$dbtype     = 'mysqli';         // Datenbank-Server Typ
+	$host       = 'localhost';      // Server
+	$user       = 'xignisml_u1';    // BenutzerIn
+	$password   = 'Wopowe26';       // Passwort
+	$db         = 'xignisdbml_db1';		// db-Name
 } 
 
 define('MARKER_TABLE','cms_markers2');
