@@ -1,0 +1,266 @@
+/* zurücksetzen der Innen und Aussenabstände für alle Html Elemente */
+* {
+ margin:0; padding: 0
+ }
+ 
+/* (de) Erzwingen vertikaler Scrollbalken in Netscape, Firefox und Safari Browsern */
+html{
+  height: 100%
+  font-size: 90%;
+}
+
+body {
+	min-height: 100%;
+	/* (de) Vorgabe der Standardfarben und Textausrichtung */
+	color: #333333;
+	background-color: #D1D1CB; 	/* #999967;	*/
+	text-align: left;
+	line-height: 24px;
+}
+
+body, td, input, textarea {
+	font-family:  Arial, Helvetica, Verdana, sans-serif;	
+}
+
+a:link, a:visited {
+	color: #333333
+}
+
+a:hover, a:active {
+	background-color: #ECECEC;
+	color: #DE001F;
+}
+
+p, li, label {
+	font-size: 0.9em;
+	line-height: 24px;	
+}
+
+div {
+  border: 0px solid red;
+}
+
+#spalte3_inhalt ul {
+  list-style-type: none; /* disc;*/
+  list-style-position: outside;
+  padding-left: 0px; /* 14px;*/
+}
+
+#spalte3_inhalt ol {
+  list-style-type: decimal;
+  list-style-position: outside;
+  padding-left: 18px;
+}
+
+#spalte3_inhalt ul li, #spalte3_inhalt ol li {
+  line-height: 20px;
+}
+
+
+
+
+/* das folgende Statemant verhindert, dass ein Link umrahmt wird, wenn man draufklickt */
+*:focus, *:active  {
+	outline: none; 
+}
+
+
+/* (de) Layout: Breite, Hintergrund, Rahmen */
+#page_margins
+{
+	width: 960px;
+	margin: 20px auto;
+}
+
+#page
+{
+	min-height: 600px;
+}
+
+/* (de) Zentrierung des Layouts in alten IE-versionen */
+body
+{
+	text-align: center;
+}
+#page_margins
+{
+	text-align:left;
+}
+  
+#header
+{
+	height: 64px;
+	background-color: #FFFFFF;
+	background-image: url(../img/logo.png); 
+	background-position: 445px 0;
+	background-repeat: no-repeat; 
+	padding: 0;
+}
+
+#home_link
+{
+	height: 64px;
+	width: 500px;
+	background-color: transparent;
+	float: right;
+	cursor: pointer;
+}
+
+#main
+{
+	clear: both;
+	min-height: 500px;
+	background-color: #ECECEC;
+	padding: 0;
+}
+
+.subcontainer 
+{
+  width: 100.01%;
+}
+
+.kurztxt_container {
+  padding-right: 24px;
+}
+
+/* CSS-Notationen für Template einspaltig_760v_tpl */
+.kurztxt_container_auswahl p {
+  line-height: 18px;
+}
+
+.img_thumb_rahmen {
+  border: none;
+  text-align: right;
+}
+/* Ende einspaltig_760v_tpl */
+
+
+/* (de) Definition 2 Kolonnen (navigation und spalte 1 */
+#navigation
+{
+	float: left;
+	width: 240px;
+}
+
+#spalte3
+{
+	margin-left: 240px;
+	border: 0;
+/*	border-left: 1px solid #232323; */
+}
+
+#spalte3_inhalt
+{
+  margin: 0;
+	padding: 0;
+	min-height: 500px;
+	background-color: #ECECEC;
+	border-left: 0px solid #232323;
+}
+
+* html #spalte3_inhalt {
+  height: 500px;
+}
+
+.spalte_480_l 
+{
+  margin-left: 0px;
+}
+
+.subspalte_auswahl 
+{
+	padding: 0 50px 0 0;
+}
+
+.subspalte_detail_l
+{
+  padding: 0;
+}
+
+.subspalte_detail_r
+{
+  padding: 0;
+  width: 360px;
+}
+
+/* titel und counter mit automatischer Höhe */
+.titel_seite {
+  height: auto;
+}
+
+.counter {
+  height: auto;
+  background-color: transparent;
+}
+
+
+
+#spalte2
+{
+  display: none;
+  width: 250px;
+  background-color: red;
+  float: right;
+  border: 0;
+  min-height: 500px;
+}
+
+* html #spalte2 {
+  height: 500px;
+}
+
+.clearfix
+{
+  display: block;
+}
+
+/* pageslider */
+.slider {
+	color: #938356;
+	font-weight: bold;
+}
+
+#footer
+{
+	height: 20px;
+	background-color: #ECECEC;
+	padding-left: 10px;
+	border: 0px;
+	clear: both;
+	display: block;
+	color: #ECECEC; /*Text unsichtbar */
+}
+
+.img_container_thumb
+{
+	height: auto;
+}
+
+.img_medium_left, .img_medium_right 
+{
+  width: auto;
+	height: 348px;
+	background-color: transparent;
+	padding-bottom: 5px;
+}
+
+.img_small {
+  margin: 0;
+}
+
+/* CSS für automatischen Bildwechsler */ 
+#imageContainer1 img {
+  display:none;
+  position: absolute;
+}
+
+
+/* Kontaktformular */
+.error 
+{
+  color: #DE001F 
+} 
+
+input, textarea {
+  width: 240px;
+}

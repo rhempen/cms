@@ -1,0 +1,489 @@
+/**********************************************
+Styles fuer templates
+************************************************ */
+
+.subcontainer
+{
+min-height: 340px;
+width: 99%;
+overflow: hidden;
+}
+
+/*___________________________________________________________
+spalten fuer drei-spaltiges Template mit Gesamtbreite 960px
+Breite der Spalten soll individuell einstellbar sein,
+Vorlage: links 400px, mitte 400px, rechts 160px 
+_____________________________________________________________*/
+#spalten_wrapper 
+{
+width: 960px;
+height: auto;
+background-color: red;
+/* IE6 Bug -> http://www.positioniseverything.net/explorer/expandingboxbug.html */
+overflow: hidden; 
+}
+
+.spalte_links
+{
+width: 400px;
+float: left;
+/* IE6 Bug -> http://www.positioniseverything.net/explorer/expandingboxbug.html */
+overflow: hidden; 
+}
+
+.spalte_mitte
+{
+width: 400px;
+/* IE6 Bug -> http://www.positioniseverything.net/explorer/expandingboxbug.html */
+overflow: hidden; 
+float: left;
+}
+
+.spalte_rechts
+{
+width: 80px;
+float: right;
+/* IE6 Bug -> http://www.positioniseverything.net/explorer/expandingboxbug.html */
+overflow: hidden; 
+}
+
+/*_____________________________________________
+spalten fuer home
+_______________________________________________*/
+.spalte_340_l
+{
+width: auto;
+/* IE6 Bug -> http://www.positioniseverything.net/explorer/expandingboxbug.html */
+overflow: hidden; 
+}
+
+.spalte_420_r
+{
+float: right;
+width: 408px;
+}
+
+* html div.spalte_420_r {
+w\idth:400px;    /* IE Version 6 */
+}
+
+/*______________________________________________
+spalten fuer tpl zweispaltig_420_340
+________________________________________________*/
+.spalte_420_l
+{
+width: 420px;
+float: left;
+/* IE6 Bug -> http://www.positioniseverything.net/explorer/expandingboxbug.html */
+overflow: hidden; 
+}
+
+.spalte_340_r
+{
+width: auto;
+margin-left: 420px;
+}
+
+/*______________________________________________
+spalten fuer tpl zweispaltig_360_360
+________________________________________________*/
+.spalte_360_l
+{
+width: 360px;
+float: left;
+/* IE6 Bug -> http://www.positioniseverything.net/explorer/expandingboxbug.html */
+overflow: hidden; 
+}
+
+.spalte_360_r
+{
+width: auto;
+margin-left: 360px;
+}
+
+/*__________________________________________________________
+spalten fuer tpl zweispaltig_480_240 (birchler-architektur)
+____________________________________________________________*/
+.spalte_480_l
+{
+float: left;
+width: 480px;
+overflow: hidden; 
+}
+
+.spalte_240_r
+{
+float: right;
+min-width: 200px;
+width: auto;
+min-height: 40px;
+}
+
+/*_____________________________________________
+spalten fuer kuenstler detail / auswahlseiten
+_______________________________________________ */
+.spalte_760
+{
+width: 752px;
+}
+
+
+
+/*______________________________________________
+spalten fuer medien
+________________________________________________*/
+.spalte_500_l
+{
+width: 500px;
+float: left;
+/* IE6 Bug -> http://www.positioniseverything.net/explorer/expandingboxbug.html */
+overflow: hidden; 
+}
+
+.spalte_260_r
+{
+width: auto;
+margin-left: 500px;
+}
+
+
+/*______________________________________________
+inhaltscontainer fuer home
+________________________________________________*/
+.subspalte_home_l
+{
+width: auto;
+padding: 0px 0px 0px 40px;
+}
+
+/*______________________________________________
+inhaltscontainer fuer home
+________________________________________________*/
+.subspalte_home_r
+{
+width: auto;
+padding: 40px 15px 0px 20px;
+}
+
+/*______________________________________________
+inhaltscontainer 
+________________________________________________*/
+.subspalte_detail_l
+{
+width: auto;
+padding: 0px 0px 0px 40px;
+}
+
+/*______________________________________________
+inhaltscontainer 
+________________________________________________*/
+.subspalte_detail_r
+{
+width: auto;
+padding: 40px 0px 0px 20px;
+}
+
+
+/*______________________________________________
+inhaltscontainer fuer auswahlseiten
+________________________________________________*/
+.subspalte_auswahl
+{
+width: auto;
+padding: 0px 0px 0px 40px;
+}
+
+/*______________________________________________
+inhaltscontainer fuer kuenstler detailseiten
+________________________________________________*/
+.subspalte_kuenstlerdetail
+{
+width: auto;
+padding: 0px 40px;
+}
+
+/*______________________________________________
+Container fuer kurztext und thumbnail in auswahlseiten
+________________________________________________*/
+.kurztxt_container
+{
+width: auto;
+line-height: 20px;
+margin-bottom: 20px;
+}
+
+/*______________________________________________
+Container fuer langtext detailseiten kuenstler
+________________________________________________*/
+.txt_kuenstlerdetail
+{
+clear: both;
+width: 100%;
+margin: 0px 20px 20px 0px;
+}
+
+
+/*______________________________________________
+Container fuer kontaktform
+________________________________________________*/
+.kontaktform
+{
+width: auto;
+margin-bottom: 20px;
+}
+
+/*______________________________________________
+Container fuer Seitentitel h1
+________________________________________________*/
+.titel_seite
+{
+width: 100%;
+height: 20px;
+}
+
+/*______________________________________________
+Container fuer Counter / Uebersicht
+________________________________________________*/
+.counter
+{
+height: 20px;
+margin-bottom: 0px;
+text-align: right;
+}
+
+/*______________________________________________
+Container fuer Counter / Kuenstlerdetailseite 
+________________________________________________*/
+.counter_kuenstlerdetail
+{
+height: auto;
+margin-bottom: 0px;
+text-align: right;
+clear: both;
+}
+
+/*______________________________________________
+Counter / Kuenstlerdetailseite (500_260v)
+________________________________________________*/
+.counter_kuenstlerdetail_vertikal
+{
+height: auto;
+width: 250px;
+margin-bottom: 0px;
+text-align: right;
+}
+
+/*______________________________________________
+Container fuer Counter / Uebersicht - Auwahlseiten
+________________________________________________*/
+.counter_auswahl
+{
+width: 460px;
+height: 20px;
+margin-bottom: 0px;
+text-align: right;
+}
+/*______________________________________________
+Container fuer Auswahl
+________________________________________________*/
+.container_auswahl
+{
+float: none;
+width: auto;
+min-height: 100px;
+margin-bottom: 20px;
+}
+
+/*______________________________________________
+Container fuer Kurztexte in Auswahlseiten
+________________________________________________*/
+.kurztxt_container_auswahl
+{
+width: 460px;
+height: 120px;
+line-height: 20px;
+float: left;
+}
+
+/*______________________________________________
+Container fuer Thumnails in Auswahlseiten
+________________________________________________*/
+.img_container_auswahl
+{
+margin-left: 460px;
+height:120px;
+width: auto;
+}
+
+/*______________________________________________
+Container fuer Thumnails in Kuenstlerdetailseiten vertikal
+________________________________________________*/
+.img_container_vertical
+{
+margin-top:40px;
+height:auto;
+width: auto;
+}
+
+
+
+/*______________________________________________
+Container fuer Thumnails kuenstler detailseiten
+________________________________________________*/
+.img_container_thumb
+{
+height:100px;
+width: auto;
+margin-top: 20px;
+margin-bottom: 20px;
+}
+
+/* thumnails small size*/
+.img_small
+{
+margin: 1px;
+margin-bottom: -2px;
+}
+
+/*______________________________________________
+ rahmen fuer thumbs small size
+________________________________________________*/
+.img_thumb_rahmen
+{
+text-align: center;
+border: 1px solid  #646464;
+margin: 0px 0px 0px 18px;
+float: left;
+display: inline; /* IE Bug -> doppelter Margin */
+height: 100px;
+width: 101px;
+}
+
+/*______________________________________________
+ rahmen fuer thumbs small size kuenstler detail vertikal
+________________________________________________*/
+.img_thumb_rahmen_vertical
+{
+text-align: center;
+border: 1px solid  #646464;
+margin: 0px 0px 20px 18px;
+float: left;
+display: inline; /* IE Bug -> doppelter Margin */
+height: 100px;
+width: 100px;
+}
+
+/*______________________________________________
+ Definition platzhalter fuer bilder thumbnail medium size
+ ________________________________________________*/
+.img_medium_right
+{
+text-align: right;
+height: auto;
+width: 300px;
+}
+
+.img_medium_left
+{
+text-align: left;
+height: auto;
+width: 300px;
+padding-bottom: 20px; 
+}
+
+.img_medium_480
+{
+text-align: left;
+height: auto;
+width: 480px;
+}
+
+.img_medium_960
+{
+text-align: left;
+height: auto;
+width: 960px;
+}
+
+.img_medium_320
+{
+text-align: left;
+height: auto;
+width: 320px;
+overflow: hidden;
+}
+
+/*-----------------------------------------------
+	CSS für Bilder-Leiste und Galerie-Link 
+ -----------------------------------------------*/
+.bildleiste_wrapper, .galerie_wrapper {
+  padding-top: 10px;
+	padding-right: 0px;
+	padding-bottom: 10px;
+	float: right;
+	border: 0px solid purple;
+}
+
+.galerie_wrapper a:hover {
+  background-color: transparent;  
+}
+
+.bildleiste_wrapper a:hover {
+  background-color: #DE001F;
+}
+
+
+.bildleiste {
+	width: 6px; 
+	height: 6px; 
+	float: left;  
+	margin-top: 5px;
+	border: 0px solid black;
+}
+
+.bildleiste_space {
+	width: 18px; 
+	height: 6px; 
+	float: left; 
+	background-color: transparent;
+}
+
+
+.rect_aktiv {
+	background-color: #DE001F; 	
+}
+
+.rect_passiv {
+	background-color: #333333;
+}
+
+/* klassen für Link1 und Link2 auf den Unterseiten */
+.clslink1, .clslink2 {
+	padding-top: 5px;
+}
+
+/*___________________________________________________________
+	CSS-Notationen für die Sitemap
+_____________________________________________________________*/
+
+.smap_ul1 {
+	line-height: 23px;
+	list-style-type: none;
+}
+
+.smap_li1 {
+	border-bottom: 1px dotted;
+/*	background: transparent url(../gifs/gt9.gif) no-repeat 0 7px;
+	padding-left: 13px; */
+}
+
+.smap_li2 {
+	padding-left: 10px;
+	list-style-type: square;
+	list-style-position: inside;
+}
+
+.smap_li3 {
+	padding-left: 43px;
+	background: transparent url(../gifs/arc.gif) no-repeat 22px 3px;
+}

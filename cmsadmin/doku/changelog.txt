@@ -1,0 +1,98 @@
+Changelog hempenweb CMS Version 3.
+18.09.2011
+Die folgenden Änderungen sind im Zusammenhang mit der Entwicklung für Nexttext in
+einer neuen Version des CMS entstanden
+1.	in der Datei server.php wird das Web-Root-Verzeichnis neu ermittelt, so dass 
+		es nicht mehr nur cms oder cms1 etc. heissen muss. Neu kann das CMS auch in einem 
+		Unterverzeichnis liegen zB. /beta/nexttext --> das hat den Vorteil, dass mehrere
+		CMS in einer Hierarchie untereinander liegen können. zB. Die Haupt-Website liegt
+		im Root-Verzeichnis "/" und ein weiteres CMS liegt im Verzeichnis /beta. Die beiden
+		CMS werden in verschiedenen DB's gespeichert
+
+2.	Im Include-Verzeichnis liegt neu eine Datei website.php. In dieser Datei wird 
+		lediglich die Globale Variable WEBSITE definiert. Der Wert dieser Variable wird 
+		beim Ändern des Thema's in der Konfiguration neu gesetzt.
+
+3.	Des Weiteren werden auch die Zugriffe auf das Media-Verzeichnis geändert und zwar
+		nach dem gleichen Prinzip, wie der DB-Zugriff. 
+
+In der Konfiguration wird neu beim Wechsel des Thema/Design's auch der Zugriff auf 
+die entsprechende Datenbank gewechselt. Um dies zu realisieren, waren die oben 
+beschriebenen Änderungen Voraussetzung.
+-		Beschreiung der Anpassungen:
+a)	in der Datei /includes/includes.php wird als erste die Datei server.php includiert.
+		In dieser Datei wird das Root-Verzeichnis (wie oben beschrieben) ermittelt
+
+b)  Neu wird beim Wechsel des Themas nicht mehr ein AJAX-Request durchgeführt, sondern
+		ein ganz normaler Server-Request. Als GET-Parameter wird der Wert des Theme's 
+		mitgegeben und in der Datei server.php abgefragt. Ist die Abfrage positiv, wird der
+		Wert in der Datei website.php aktualisiert. -> Funktion update_website() 
+		in config_maintain.class.php Das ist nötig, damit beim anschliessenden Auslesen 
+		der website.php der Pfad auf die richtige DB gelenkt wird.
+
+c)	Der Zugriff auf das Media-Verzeichnis erfolgt neu auch anhand des gewählten Theme's
+		dh. Das Medien-Verzeichnis heisst nicht mehr nur "media", sondern zB. "media_hempenweb"
+		--> Diese Änderung hat auch Auswirkung auf die JS-libraries des TinyMCE-Editors. 
+		Insbesondere muss die Datei tinymce_settings.js angepasst werden, sowie die Config-Dateien
+		für die Plug-Ins imagemanager (und ev. ibrowser) im plugin-Verzeichnis
+		--> Achtung: zur Zeit verweist der Pfad auf das Hauptverzeichnis des CMS und nicht auf media...
+
+
+wird die Konfiguration eingelesen. 
+		Wenn der Wert für den Parameter THEME gelesen und definiert wurde, wird 
+		die Datei website.php mit dem Parameter THEME neu geschrieben, falls sie 
+		nicht vorhanden ist 
+
+
+23.04.2010
+Meta-Tag: Google-Verify heisst neu "google-site-verification" (nicht mehr verfy-v1)
+a) Text-Konserve GOOGLE_VERIFY in den Language-Files angepasst
+b) main_tpl.html angepasst
+c) 
+
+07/08.01.2010
+--> frontend --> M�glichkeit, Fragmente in einzelnen Seiten anzuzeigen
+01) Neue Tabelle in der DB erstellt: cms_fragmente
+02) im Frontend Controller index.inc.php erster Versuch, %fragment% zu ersetzen 
+		--> hat geklappt! --> jetzt muss dieser Code noch gekappselt werden!
+    --> alternativ k�nnten die Texte aus der Tabelle cms_fragmente auch via AJAX 
+        gelesen und in der Seite ersetzt werden --> Script fragments.js in frontend/scripts erstellt
+03) Neue Funktion in der Klasse frontend_present.class.php --> replenish_text_with_fragments($text)
+    Die Funktion ermittelt aus dem Langtext einer Seite, ob es Platzhalter f�r Fragmente gibt. 
+    Wenn ja, wird die ID des Fragments aus dem Text extrahiert und damit das Fragment aus der DB
+    gelesen und der Platzhalter wird durch den Content des Fragmentes ersetzt
+04) Neue Funktion in der Klasse frontent_getdata.class.php -->  read_longtext_fragment($name) 
+    Die Funktion liefert das Feld content aus der Tabelle cms_fragmente zur�ck 
+
+04.01.2010
+--> cmsadmin - server.php
+01) verallgemeinerung des Pfades: cms, cms1,.... um DOCUROOT global zu definieren
+02) Menu in pictures_present.class.php mit neuen Links versehen --> $this->show_menue
+    --> Verzeichnis anlegen, etc.
+
+
+01.01.2010
+->cmsadmin - Konfiguration: 
+01) Themes sortiert anzeigen 
+    --> _views/config_present.class.php --> read_themes()
+02) Neuer Punkt im Tab "general": 
+    TEMPLATE_DIR -> Damit kann gesteuert werden, woher die Templates geladen werden sollen. 
+    So k�nnen die Templates pro Website in ein themeneigenes Verzeichnis tpl versorgt werden. 
+    Defaultm�ssig werden die Templates neu im Verzeichnis frontend/themes/default/tpl 
+    abgespeichert. 
+    --> DB: cms_config -> general
+    --> PHP: _views/config_present.class.php -> present_config(..)
+
+31.12.2009
+- cms nach cms2 kopiert und cms in cms1 umbenannt
+- SQL: herocms nach /desktop/sql/herocms.sql exportiert und nach herocms2.sql kopiert
+       DB herocms2 angelegt und herocms2.sql importiert  
+- DB-Zugriffe im Verzeichnis /db auf die Datenbank herocms2 angepasst.
+  --> nur die Dateien im Verzeichnis /db, nicht in den Unterverzeichnissen
+- SMURL: falls SMURL aktiv ist, muss in der Datei .htaccess der Pfad f�r ModRewrite auf "RewriteBase /cms2" gesetzt werden
+- Im Frontend-Model navigation_redirect.class.php muss in der Funktion get_navid() die Abfrage 
+  if ($t != '' && $t != 'cms' && $t != 'index.php') --> nach dem Teil-String cms suchen, nicht nach exakt 'cms' 
+  if ($t != '' && !preg_match('/cms/',$t) && $t != 'index.php') ge�ndert werden
+- in lib/lightbox muss am Anfang der Pfad zu den Gif-Dateien loading.gif und close.gif angepasst werden 
+- in cmsadmin/scripts muss am Anfang der Pfad in tinymce_settings.js angepasst werden
+  --> in den beiden JS wird mittels Regular Expression ermittelt, ob es im URL-Pfad einen String �hnlich /cms.../ gibt
