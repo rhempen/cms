@@ -414,12 +414,12 @@ overflow: hidden;
 }
 
 /*-----------------------------------------------
-	CSS für Bilder-Leiste und Galerie-Link 
+	CSS fï¿½r Bilder-Leiste und Galerie-Link 
  -----------------------------------------------*/
 .bildleiste_wrapper, .galerie_wrapper {
   padding-top: 10px;
 	padding-right: 0px;
-	padding-bottom: 10px;
+	padding-bottom: 25px;
 	float: right;
 	border: 0px solid purple;
 }
@@ -434,8 +434,8 @@ overflow: hidden;
 
 
 .bildleiste {
-	width: 6px; 
-	height: 6px; 
+	width: 10px; 
+	height: 10px; 
 	float: left;  
 	margin-top: 5px;
 	border: 0px solid black;
@@ -457,13 +457,13 @@ overflow: hidden;
 	background-color: #333333;
 }
 
-/* klassen für Link1 und Link2 auf den Unterseiten */
+/* klassen fï¿½r Link1 und Link2 auf den Unterseiten */
 .clslink1, .clslink2 {
 	padding-top: 5px;
 }
 
 /*___________________________________________________________
-	CSS-Notationen für die Sitemap
+	CSS-Notationen fï¿½r die Sitemap
 _____________________________________________________________*/
 
 .smap_ul1 {

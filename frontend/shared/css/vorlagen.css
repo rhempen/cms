@@ -91,3 +91,8 @@ a:link, a:visited, a:active
   overflow: auto;
   border: 1px solid #dedede;
 }
+
+/* linkliste in Unterseiten */
+.linkliste {
+  margin: 15px 0;
+}

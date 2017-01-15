@@ -618,7 +618,7 @@ class picturesMaintain
 	private function check_gd_lib()
 	{
 		$gd_info = gd_info();
-		if ($gd_info && preg_match('/2.0/', $gd_info['GD Version'])) {
+		if ($gd_info && preg_match('/2.\d{1,}/', $gd_info['GD Version'])) {
 			return "gd2";
 		} else {
 			return "gd";

@@ -64,7 +64,6 @@ if ($rc===false) {
 
 // Einlesen der Haupttemplate-Datei
 $tpl->loadTemplatefile('main_tpl.html', true, true);
-
 // Meta-Tags ausgeben
 $tpl->setCurrentBlock('meta-tags');
 $tpl->setVariable('author', AUTHOR);

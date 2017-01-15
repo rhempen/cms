@@ -24,7 +24,7 @@ elseif ($_SERVER['HTTP_HOST'] == 'www.birchler-architektur.ch' || $_SERVER['HTTP
 	$db         = 'birchler-architektur';		// db-Name
 } 
 
-// tab_prefix wird im Backup-Programm ben�tigt
-$tab_prefix = TABLE_PREFIX;		// cms_
+// tab_prefix wird im Backup-Programm benoetigt
+$tab_prefix = defined('TABLE_PREFIX') ? TABLE_PREFIX : 'cms_';		// cms_
 
 ?>

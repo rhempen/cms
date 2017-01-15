@@ -1,4 +1,4 @@
-/* zurücksetzen der Innen und Aussenabstände für alle Html Elemente */
+/* zurï¿½cksetzen der Innen und Aussenabstï¿½nde fï¿½r alle Html Elemente */
 * {
  margin:0; padding: 0
  }
@@ -116,14 +116,14 @@ body
 
 .subcontainer 
 {
-  width: 100.01%;
+  width: 100%;
 }
 
 .kurztxt_container {
   padding-right: 24px;
 }
 
-/* CSS-Notationen für Template einspaltig_760v_tpl */
+/* CSS-Notationen fï¿½r Template einspaltig_760v_tpl */
 .kurztxt_container_auswahl p {
   line-height: 18px;
 }
@@ -183,7 +183,7 @@ body
   width: 360px;
 }
 
-/* titel und counter mit automatischer Höhe */
+/* titel und counter mit automatischer Hï¿½he */
 .titel_seite {
   height: auto;
 }
@@ -248,7 +248,7 @@ body
   margin: 0;
 }
 
-/* CSS für automatischen Bildwechsler */ 
+/* CSS fï¿½r automatischen Bildwechsler */ 
 #imageContainer1 img {
   display:none;
   position: absolute;

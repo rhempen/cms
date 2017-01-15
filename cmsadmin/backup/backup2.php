@@ -1,7 +1,6 @@
 <?php
 
-require_once 'db_connect2.php';
-//*require_once '../../includes/includes.php';  --> DEPRECATED  Function mysql_list_tables()
+require_once('db_connect2.php');
 
 $path = './backups/';
 $filetype = 'txt';
@@ -23,8 +22,8 @@ function get_def($db, $table) {
      $def = ereg_replace(",\n$",'', $def);
      $result = mysql_db_query($db, 'SHOW KEYS FROM '.$table,$verbindung);
      while($row = mysql_fetch_array($result)) {
-          $kname=$row[Key_name];
-          if(($kname != 'PRIMARY') && ($row[Non_unique] == 0)) $kname='UNIQUE|'.$kname;
+          $kname=$row['Key_name'];
+          if(($kname != 'PRIMARY') && ($row['Non_unique'] == 0)) $kname='UNIQUE|'.$kname;
           if(!isset($index[$kname])) $index[$kname] = array();
           $index[$kname][] = $row['Column_name'];
      }
@@ -92,32 +91,30 @@ $newfile.="#----------------------------------------------\n\n\n";
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 
 <html>
-
-	<head>
+<head>
 <!-------------------------------------------------------------------->
 <!--  (c) KLIK! Klein Informatik  www.klik-info.ch  rklein@mus.ch   -->
 <!-------------------------------------------------------------------->
-		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
-		<title>Backup</title>
-		<link rel="SHORTCUT ICON" href="favicon.ico" title="external:favicon.ico">
+    <meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+    <title>Backup</title>
+    <link rel="SHORTCUT ICON" href="favicon.ico" title="external:favicon.ico">
 </head>
 <body  bgcolor="#cccccc" text="black" link="#006699" alink="#ff9900" vlink="#006699" marginwidth="30" marginheight="20" topmargin="20" leftmargin="30">
-		<table width="443" border="0" cellpadding="3" cellspacing="2" bgcolor="white">
-			<tr>
-				<td bgcolor="white" class="titel">
-		<?php
-		if	(file_exists($datei_neu))
-		{
-		echo '<font color="green">Der Backup hat geklappt!</font>';
-		}
-		else 
-		{
-			echo '<font color="red">Der Backup hat nicht geklappt!</font><br>&Uuml;berpr&uuml;fen Sie die Zugriffsrechte des Ordners "backup".';
-		}
-?>
-				</td>
-			</tr>	
-			</table>
-			
-			</body>
-			</html>	
+    <table width="443" border="0" cellpadding="3" cellspacing="2" bgcolor="white">
+        <tr>
+            <td bgcolor="white" class="titel">
+            <?php
+                if	(file_exists($datei_neu))
+                {
+                    echo '<font color="green">Der Backup hat geklappt!</font>';
+                }
+                else 
+                {
+                    echo '<font color="red">Der Backup hat nicht geklappt!</font><br>&Uuml;berpr&uuml;fen Sie die Zugriffsrechte des Ordners "backup".';
+                }
+            ?>
+            </td>
+        </tr>	
+    </table>
+</body>
+</html>	

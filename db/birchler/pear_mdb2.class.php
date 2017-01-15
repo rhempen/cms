@@ -3,7 +3,7 @@
 if (preg_match('/^hero/',$_SERVER['HTTP_HOST']) || $_SERVER['HTTP_HOST'] == 'localhost') 
 { 
 	ini_set('include_path', ini_get('include_path') . ';c:\xampp56\php\PEAR;c:\xampp56\htdocs\\'.ROOTDIR);
-	$login_file = '\\xampp56\\htdocs\\birchler\\db\\db_login_pear.php';
+	$login_file = '\\xampp56\\htdocs\\'.ROOTDIR.'\\db\\db_login_pear.php';
 } 
 // publicdev
 elseif ($_SERVER['HTTP_HOST'] == 'www.publicdev.ch' || $_SERVER['HTTP_HOST'] == 'publicdev.ch')

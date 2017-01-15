@@ -37,9 +37,9 @@ require_once('init.php');
 // Klassenobjekte deklarieren --> Klassen des CMS
 if (!$naviga)	{ $naviga	= new naviMaintain($db, 0); }
 if (!$pages)	{ $pages	= new pagesMaintain($db); }
-if (!$picture)	{ $picture  = new picturesMaintain($aktdir, $bilddb); }
-if (!$pictdb)	{ $pictdb   = new picturesDbMaintain($db); }
-if (!$cfg)		{ $cfg		= new configMaintain($db); }
+if (!$picture)	{ $picture      = new picturesMaintain($aktdir, $bilddb); }
+if (!$pictdb)	{ $pictdb       = new picturesDbMaintain($db); }
+if (!$cfg)	{ $cfg		= new configMaintain($db); }
 if (!$redir)	{ $redir	= new redirectMaintain($db); }
 if (!$general)	{ $general 	= new generalPresent($tpl); }
 
