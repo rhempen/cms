@@ -215,27 +215,27 @@ function toggle_ukaps(img,id,anz) {
 
     var src = $(img).src;
 	var bild = src.search(/minus/g);	
-	var i, plus_minus;
+	var plus_minus;
 	var uid;
 	// aktuelles Bild ist minus_16.png
 	if (bild !== -1) {
-		plus_minus = 'minus'
-		bildneu = src.replace(/minus/g, "plus"); 
+            plus_minus = 'minus'
+            bildneu = src.replace(/minus/g, "plus"); 
 	} else { 
-		plus_minus = 'plus';
-		bildneu = src.replace(/plus/g, "minus"); 
+            plus_minus = 'plus';
+            bildneu = src.replace(/plus/g, "minus"); 
 	}
 	// Bildwechsel
 	$(img).src = bildneu;
 	
 	// Ukaps verbergen oder zeigen
-	for (i=1; i<=anz; i++) {
-		uid = id+'_'+(i*10);
-		if (plus_minus == 'minus') {
-			$(uid).hide();
-		} else { 
-			$(uid).show(); 
-		}
+	for (var i = 1; i <= anz; i++) {
+            uid = id+'_'+(i*10);
+            if (plus_minus == 'minus') {
+                $(uid).hide();
+            } else { 
+                $(uid).show(); 
+            }
 	}
 	
 	// Cookie setzen, welches bei der Anzeige der Seite aus $_COOKIE navi_present.class.php abgefragt wird

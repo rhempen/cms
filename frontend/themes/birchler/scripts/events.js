@@ -20,4 +20,4 @@
 /*-------------------------------------------------------------------------------
   Events bei onLoad registrieren
   -------------------------------------------------------------------------------*/
-    Event.observe(window, 'load', sfHover, false);
+   // Event.observe(window, 'load', sfHover, false);

@@ -96,3 +96,8 @@ a:link, a:visited, a:active
 .linkliste {
   margin: 15px 0;
 }
+
+/* > Zeichen vor dem Link */
+.linkliste > ul > li > a:before {
+    content: "> ";
+}

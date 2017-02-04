@@ -3,6 +3,9 @@
 $page 	= $pages->read_page($_GET['pagid']);
 // $bilder	= $pictdb->bilder_pro_pageid_lesen($_GET['pagid']);
 
+// Es gibt max. 1 Satz
+$page_infos = $page->fetchRow(MDB2_FETCHMODE_ASSOC);
+
 $tpl->setCurrentBlock('inhalt');
 
 // Seitentitel zusammensetzen und anzeigen
@@ -10,9 +13,6 @@ $frontend->create_titel($seiten_infos['kurztitel'],$seiten_infos['template_name'
 	
 // Link Uebersicht/zurueck erstellen
 $frontend->create_uebersicht_link($tpl);
-
-// Es gibt max. 1 Satz
-$page_infos = $page->fetchRow(MDB2_FETCHMODE_ASSOC);
 
 // Textelemente einer Seite anzeigen
 $frontend->display_texte($page_infos, 'detail');

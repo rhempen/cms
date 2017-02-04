@@ -1,0 +1,25 @@
+[Changelog 2017]
+
+Januar 2017:
+- Überarbeiten der Unterseiten-Funktionen
+- Erneuerung der Javascript-Library Ligthbox für die Anzeige der Bilder
+- Aktualisierung der Php-Resize-Funktion für Bilder wührend des Hochladens
+- Anpassung der Controller-Datei pictures_co_maintain.php: 
+	Zeile 200 ff: case 'upload_files': 
+	Lesen des richtigen Templates für die Anzeige der richtigen Bildermasse im Screen Bild-Upload
+- Überarbeiten der Dokumentation
+- Anpassen der DB Tabelle navi_overview --> Typ des Feldes ukap von Tinyint (0-255) nach Smallint (0-65535)
+
+Februar 2017:
+- Einbau der 2. Inhaltsspalte in die drei Templates:
+    - rb_zweispaltig_360_360_tpl.html
+    - rb_zweispaltig_480_240_180_tpl.html
+    - rb_zweispaltig_480_240_348_tpl.html
+  und ergänzen des CSS für CSS-Klasse  .inhalt2_container 
+
+- Anpassung der Bildmasse für das rb_zweispaltig_480_240_348_tpl.html 
+    - in der DB cms_templates von 348x348 zu 460x348
+    - dazu muss ich in der Tabelle cms_spezial einen neuen Eintrag für das Template 360x360 machen 
+- Überarbeiten der Dokumentation
+
+Aufwand: 9 Stunden 

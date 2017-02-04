@@ -264,3 +264,24 @@ body
 input, textarea {
   width: 240px;
 }
+
+/*___________________________________________________________
+Spalte für Zusatztexte abhängig vom verwendeten Template
+___________________________________________________________*/
+/* Template rb_zweispaltig_360_360_tpl.html */
+.spalte_360_r > .subspalte_detail_r > .inhalt2_container {
+    width: 342px;
+    float: right;
+    padding-right: 5px;
+}
+
+/* Template rb_zweispaltig_480_240_180_tpl.html */
+.spalte_480_l > .subspalte_detail_l > .inhalt2_container {}
+
+/* Template rb_zweispaltig_480_240_348_tpl.html */
+.spalte_240_r > .subspalte_detail_r > .inhalt2_container {
+    width: 220px;
+    padding: 0 5px;
+}
+
+

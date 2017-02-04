@@ -85,7 +85,7 @@ function set_class($act, $pos) {
 }
 
 /* Menu ausgeben */
-function menu()
+function menu($action)
 {
 	global $menu_arr;
 	// Debugging - Fenster �ffnen 
@@ -109,7 +109,7 @@ function menu()
 		if (in_array($GLOBALS['CMS']['MENU10'],$menu_arr)) { $html .= '<li class="'.set_class($action, 'CONFIG').'"><a href="#" onclick="javascript:start_form(\'config\');">'.$GLOBALS['CMS']['MENU10'].'</a></li>' . "\n"; }
 		if (in_array($GLOBALS['CMS']['MENU06'],$menu_arr)) { $html .= '<li class="'.set_class($action, 'XLINKS').'"><a href="#" onclick="javascript:start_form(\'xlinks\');">'.$GLOBALS['CMS']['MENU06'].'</a></li>' . "\n"; }
 		if (in_array($GLOBALS['CMS']['MENU07'],$menu_arr)) { $html .= '<li class="'.set_class($action, 'BACKUP').'"><a href="#" onclick="javascript:start_form(\'backup\');">'.$GLOBALS['CMS']['MENU07'].'</a></li>' . "\n"; }
-		if (in_array($GLOBALS['CMS']['MENU08'],$menu_arr)) { $html .= '<li class="'.set_class($action, 'DOKU').'"><a href="#" onclick="javascript:start_form(\'docu\');">'.$GLOBALS['CMS']['MENU08'].'</a></li>' . "\n"; }	
+		if (in_array($GLOBALS['CMS']['MENU08'],$menu_arr)) { $html .= '<li class="'.set_class($action, 'DOCU').'"><a href="#" onclick="javascript:start_form(\'docu\');">'.$GLOBALS['CMS']['MENU08'].'</a></li>' . "\n"; }	
 	$html .= '<li class="even">' . "\n";
 	$html .= '<p><font color="#00CC00">'.$GLOBALS['TEXTE']['ANGEMELDET'].' '.$_SESSION['username'].'</font><br />' . "\n";
 	    if ($message != '') { $html .= $message; } 

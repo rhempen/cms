@@ -157,7 +157,7 @@ switch($action)
 		break;
 	default:
 		// Menu ausgeben
-		echo menu();
+		echo menu($action);
 		break;
 }
 echo message($message);

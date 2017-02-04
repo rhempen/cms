@@ -10,6 +10,15 @@ overflow: hidden;
 }
 
 /*___________________________________________________________
+Spalte für Zusatztexte
+___________________________________________________________*/
+.inhalt2_container {
+    width: 100%;
+    display: block;
+    padding: 0;
+}
+
+/*___________________________________________________________
 spalten fuer drei-spaltiges Template mit Gesamtbreite 960px
 Breite der Spalten soll individuell einstellbar sein,
 Vorlage: links 400px, mitte 400px, rechts 160px 
@@ -115,7 +124,7 @@ overflow: hidden;
 {
 float: right;
 min-width: 200px;
-width: auto;
+width: 240px;
 min-height: 40px;
 }
 
@@ -416,16 +425,21 @@ overflow: hidden;
 /*-----------------------------------------------
 	CSS f�r Bilder-Leiste und Galerie-Link 
  -----------------------------------------------*/
+.img_galerie_wrapper {
+    height: 40px;
+    width: 100%;
+}
+
 .bildleiste_wrapper, .galerie_wrapper {
-  padding-top: 10px;
-	padding-right: 0px;
-	padding-bottom: 25px;
-	float: right;
-	border: 0px solid purple;
+    padding-top: 10px;
+    padding-right: 0px;
+    padding-bottom: 25px;
+    float: right;
+    border: 0px solid purple;
 }
 
 .galerie_wrapper a:hover {
-  background-color: transparent;  
+    background-color: transparent;  
 }
 
 .bildleiste_wrapper a:hover {

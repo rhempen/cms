@@ -81,47 +81,47 @@ class frontendPresent
 	*/
 	public function create_titel($kurztitel,$tplname='',$tplnr=0)
 	{
-		global $tpl, $general, $frontget;
-		global $nav_array, $unav_array;
-		$kap_text  = $_GET['navid'];
-		$ukap_text = $_GET['subid'];
+            global $tpl, $general, $frontget;
+            global $nav_array, $unav_array;
+            $kap_text  = $_GET['navid'];
+            $ukap_text = $_GET['subid'];
 
-		// die Bezeichnung des Kap kann aus dem Array nav_array aus nav.php geholt werden
-		if ($kap_text!='' && is_array($nav_array)) {
-			foreach ($nav_array as $menu => $value) {
-				list($kap, $label) = explode('|',$value);
-				if ($kap_text == $menu) {
-					$kap_text = $label;
-					break;
-				}
-			}
-		}
-		// titel = Bezeichnung Kap
-		$titel = $kap_text;
-		
-		// die Bezeichnung des Ukap kann aus dem Array unav_array aus nav.php geholt werden
-		if ($ukap_text!='' && is_array($unav_array)) {
-			foreach ($unav_array as $submenu => $value) {
-				list($kap, $ukap, $label) = explode('|',$value);
-				if ($ukap_text == $submenu) {
-					$ukap_text = $label;
-                    break;
-				}
-			}
-		}
-		// Titel = Bezeichnungen von Kap und Ukap
-		$titel .= $ukap_text !='' ? ' &#150; '.$ukap_text : '';
-        // Falls der Titel ausserhalb des Inhalt-Blockes angezeigt wird
-        // wird hier ein separater Seitentitel-Block angzeigt und gleich nach
-        // der Anzeige des Titel geparst.
-        $rc = $general->analyse_template($tplname,$tplnr,'/seitentitel/');
-        if ($rc) { $tpl->setCurrentBlock('seitentitel'); }
-		// hier müsste ein Flag abgefragt werden können, ob der Titel angezeigt werden soll
-        $tpl->setVariable('kap_ukap', '<h1 class="h1mod">'.$titel.'</h1>');
-        if ($rc) { 
-          $tpl->parseCurrentBlock(); 
-          $tpl->setCurrentBlock('inhalt');          
-        }
+            // die Bezeichnung des Kap kann aus dem Array nav_array aus nav.php geholt werden
+            if ($kap_text!='' && is_array($nav_array)) {
+                foreach ($nav_array as $menu => $value) {
+                    list($kap, $label) = explode('|',$value);
+                    if ($kap_text == $menu) {
+                        $kap_text = $label;
+                        break;
+                    }
+                }
+            }
+            // titel = Bezeichnung Kap
+            $titel = $kap_text;
+
+            // die Bezeichnung des Ukap kann aus dem Array unav_array aus nav.php geholt werden
+            if ($ukap_text!='' && is_array($unav_array)) {
+                foreach ($unav_array as $submenu => $value) {
+                    list($kap, $ukap, $label) = explode('|',$value);
+                    if ($ukap_text == $submenu) {
+                        $ukap_text = $label;
+                        break;
+                    }
+                }
+            }
+            // Titel = Bezeichnungen von Kap und Ukap
+            $titel .= $ukap_text !='' ? ' &#150; '.$ukap_text : '';
+            // Falls der Titel ausserhalb des Inhalt-Blockes angezeigt wird
+            // wird hier ein separater Seitentitel-Block angzeigt und gleich nach
+            // der Anzeige des Titel geparst.
+            $rc = $general->analyse_template($tplname,$tplnr,'/seitentitel/');
+            if ($rc) { $tpl->setCurrentBlock('seitentitel'); }
+                    // hier müsste ein Flag abgefragt werden können, ob der Titel angezeigt werden soll
+            $tpl->setVariable('kap_ukap', '<h1 class="h1mod">'.$titel.'</h1>');
+            if ($rc) { 
+              $tpl->parseCurrentBlock(); 
+              $tpl->setCurrentBlock('inhalt');          
+            }
 	}
 	
 	/**
@@ -244,7 +244,8 @@ class frontendPresent
         $newtext = $this->replenish_text_with_fragments($row['inhalt2']);
         // Linkliste erstellen und VOR den Inhaltstext2 stellen
         $linkliste = $frontget->create_unterseiten_link_liste($row);
-        $row['inhalt2'] = $newtext.$linkliste;
+//        $row['inhalt2'] = $newtext.$linkliste;
+        $row['inhalt2'] = $newtext;
         $tpl->setVariable('inhalt2', $row['inhalt2']);        
         $tpl->parseCurrentBlock();
       }
@@ -255,14 +256,14 @@ class frontendPresent
 	 * 	@param: $datum - zu pr�fenden Datum 
 	*/
 	private function check_datum($datum) {
-		if ($datum == null || $datum == '') {
-			$datum = null;
-		} else {
-			list($year,$month,$day) = explode('-',$datum);
-			$tag = substr($day,0,2);
-			if (!checkdate($month,$tag,$year)) { $datum = null; }
-		}			
-		return $datum;		
+            if ($datum == null || $datum == '') {
+                $datum = null;
+            } else {
+                list($year,$month,$day) = explode('-',$datum);
+                $tag = substr($day,0,2);
+                if (!checkdate($month,$tag,$year)) { $datum = null; }
+            }			
+            return $datum;		
 	}
 	
 	/**
@@ -270,8 +271,8 @@ class frontendPresent
 	 *	@param: $nav_id - NavigationsId  
 	*/
 	public function read_navi($nav_id) {
-		global $naviga;
-		return $naviga->read_navi_page($nav_id);
+            global $naviga;
+            return $naviga->read_navi_page($nav_id);
 	}
 	
 	/**	
@@ -281,19 +282,19 @@ class frontendPresent
 	*/
 	public function display_bilder($row,$type) 
 	{		
-		global $tpl, $pictdb, $frontget; 
-		$thumbsize = $frontget->read_thumbsize_by_tplid($row['template']);
-		$id = $type == 'P' ? $row['page_id'] : $row['nav_id'];
-		if ($row['bild1'] != '' && !preg_match('/blank/',$row['bild1']))  {
-			$tpl->setCurrentBlock('bilder'); 
-			// das zugeordnete Bild anzeigen
-			if ($row['galerie'] == 'n' || $row['galerie'] == 'a') { // n=Kein Link, a=GalerieLink
-				$this->display_bild($id, $row['bild1'], $thumbsize, $type);
-			}
-			// Bildergalerie vorbereiten
-			$this->create_bilderanzeige($id, $row['galerie'], $row['bild1'], $type, $thumbsize);
-			$tpl->parseCurrentBlock(); // Block parsen
-		}
+            global $tpl, $pictdb, $frontget; 
+            $thumbsize = $frontget->read_thumbsize_by_tplid($row['template']);
+            $id = $type == 'P' ? $row['page_id'] : $row['nav_id'];
+            if ($row['bild1'] != '' && !preg_match('/blank/',$row['bild1']))  {
+                $tpl->setCurrentBlock('bilder'); 
+                // das zugeordnete Bild anzeigen
+                if ($row['galerie'] == 'n' || $row['galerie'] == 'a') { // n=Kein Link, a=GalerieLink
+                        $this->display_bild($id, $row['bild1'], $thumbsize, $type);
+                }
+                // Bildergalerie vorbereiten
+                $this->create_bilderanzeige($id, $row['galerie'], $row['bild1'], $type, $thumbsize);
+                $tpl->parseCurrentBlock(); // Block parsen
+            }
 	}
 	
 	
@@ -305,103 +306,103 @@ class frontendPresent
 	*/
 	public function display_bild($id, $bild, $thumbsize, $type) 
 	{
-		global $tpl, $pictdb;
-		$thumb		= $bild;
-		$thumb		= $this->resize_thumbnail($bild, $thumbsize, $type);
-		$image  	= str_replace('_thumbs/th_','_images/',$bild);	
+            global $tpl, $pictdb;
+            $thumb  = $bild;
+            $thumb  = $this->resize_thumbnail($bild, $thumbsize, $type);
+            $image  = str_replace('_thumbs/th_','_images/',$bild);	
 
-		// zuerst muss geschaut werden, ob fuer das Bild auch ein Kommentar erfasst wurde
-		$kommentar 	= $pictdb->bild_kommentar_in_db_lesen($id, $type, $image);
-		
-		// Html fuer die Bildausgabe 
-		if (!preg_match('/blank.gif/',$bild) && $bild != null) {
-			$bild 	= $this->convert_rel2abs_path($thumb);
-			$image 	= str_replace('_thumbs/th_', '_images/', $bild);
-			$html	= '<img src="'.$bild.'"  border="0" title="'.$kommentar.'" alt="'.$kommentar.'" />';
-			$tpl->setVariable('bild1', $html);
-		} else {
-			$tpl->setVariable('bild1', HIDDEN);			
-		}
+            // zuerst muss geschaut werden, ob fuer das Bild auch ein Kommentar erfasst wurde
+            $kommentar 	= $pictdb->bild_kommentar_in_db_lesen($id, $type, $image);
+
+            // Html fuer die Bildausgabe 
+            if (!preg_match('/blank.gif/',$bild) && $bild != null) {
+                $bild 	= $this->convert_rel2abs_path($thumb);
+                $image 	= str_replace('_thumbs/th_', '_images/', $bild);
+                $html	= '<img src="'.$bild.'"  border="0" title="'.$kommentar.'" alt="'.$kommentar.'" />';
+                $tpl->setVariable('bild1', $html);
+            } else {
+                $tpl->setVariable('bild1', HIDDEN);			
+            }
 	}
 
 	/**
-	 * 	Resizen der Thumbnail-Datei abhaengig vom Template
-	 * 	@param:	$bild - aktuelles Bild
+	 *  Resizen der Thumbnail-Datei abhaengig vom Template
+	 *  @param:	$bild - aktuelles Bild
 	 *  @param:	$thumbsize - Gr�sse des Thumbnails
 	 *  @param:	$type  
 	*/ 
 	private function resize_thumbnail($bild, $thumbsize=0, $type) 
 	{	
-		// wenn $thumbsize leer, nix wie raus!
-		if ($thumbsize == 0) return $bild;
+            // wenn $thumbsize leer, nix wie raus!
+            if ($thumbsize == 0) return $bild;
 
-		global $picture;
+            global $picture;
 //		$max_breite = $type == 'N' ? THUMB_NAVI_MAX_WIDTH : THUMB_PAGE_MAX_WIDTH;
 //		$max_hoehe	= $type == 'N' ? THUMB_NAVI_MAX_HEIGHT : THUMB_PAGE_MAX_HEIGHT;
-		
-		// Bilddimensionen ermitteln
-		$image		= str_replace('../../', './', $bild);
-		if (is_file($image)) {
-			$imagesize	= getimagesize($image);
-			$img_breite = $imagesize[0];
-			$img_hoehe	= $imagesize[1];
-			if ($imagesize == false || $imagesize == null) return $this->convert_rel2abs_path($bild);
-		} else { return false; }
-		
-		// Breite und Hoehe aus der Template-Tabelle
-		list($th_breite, $th_hoehe) = explode('x', $thumbsize);
 
-		// Masse des Bildes < Masse Template-Masse?
-		if ($img_breite <= $th_breite && $img_hoehe <= $th_hoehe) return $this->convert_rel2abs_path($bild);
-		
-		// Dateiendung
-		$arr = explode('/', $bild);
-		$bilddatei = array_pop($arr);		
-		list($datei, $endung) = explode('.', $bilddatei);
-		
-		// neu zu schaffende Bilddatei
-		$bildneu  = str_replace('.'.$endung,'', $image) . '_'.$th_breite.'_'.$th_hoehe.'.'.$endung;
-		// Resize nur durchfuehren, wenn die Datei nicht schon existiert!!
-		if (!file_exists($bildneu)) {
-			$picture->resize_picture($image, $bildneu, $th_breite, $th_hoehe);		
-		}
-		
-		// absoluter Pfad 
-		$bild = $this->convert_rel2abs_path($bildneu);
-		return $bild;
-	}
+            // Bilddimensionen ermitteln
+            $image		= str_replace('../../', './', $bild);
+            if (is_file($image)) {
+                    $imagesize	= getimagesize($image);
+                    $img_breite = $imagesize[0];
+                    $img_hoehe	= $imagesize[1];
+                    if ($imagesize == false || $imagesize == null) return $this->convert_rel2abs_path($bild);
+            } else { return false; }
 
-	
+            // Breite und Hoehe aus der Template-Tabelle
+            list($th_breite, $th_hoehe) = explode('x', $thumbsize);
 
-	/**
-	 *  falls das Flag "aktiv" gesetzt ist, werden weitere Bilder versteckt als Galerie (Lightbox) zur Verfuegung gestellt
-	 *	@param: $Seiten_infos - Array mit Seiteninformationen der Navigation
-	 *	@param: $id
-	 *	@param: $galerie - SQL-Array mit den auszugebenden Bildern
-	 *	@param:	$bild - das sichtbare Bild
-	 *	@param: $type - Art des Links f�r die Galerie
-	 *	@param:	$thumbsize - Gr�sse der Thumbnails
-	 * 	n = es wird kein Link angeboten
-	 *	a = Es wird der Link ">Galerie" angeboten
-	 * 	b = Es wird eine Bilderleiste mit Links angeboten
-	 *  c = automatischer Bildwechsel
-	*/
-	public function create_bilderanzeige($id, $galerie, $bild, $type, $thumbsize) 
-	{
-		global $tpl;
-		if ($galerie == 'a' && $id > 0) {
-			// erzeuge Bildergalerie
-			$this->erzeuge_bildergalerie($id, $type, $bild, $thumbsize);
-		} elseif ($galerie == 'b' && !preg_match('/blank.gif/', $bild)) {
-			// erzeuge Bildleiste
-			$this->erzeuge_bilderleiste($id, $type, $bild, $thumbsize);
-		} elseif ($galerie == 'c') {
-			$this->erzeuge_auto_bildwechsel($id, $type, $bild, $thumbsize);
-		} else {
-		}
-	}
-	
-	
+            // Masse des Bildes < Masse Template-Masse?
+            if ($img_breite <= $th_breite && $img_hoehe <= $th_hoehe) return $this->convert_rel2abs_path($bild);
+
+            // Dateiendung
+            $arr = explode('/', $bild);
+            $bilddatei = array_pop($arr);		
+            list($datei, $endung) = explode('.', $bilddatei);
+
+            // neu zu schaffende Bilddatei
+            $bildneu  = str_replace('.'.$endung,'', $image) . '_'.$th_breite.'_'.$th_hoehe.'.'.$endung;
+            // Resize nur durchfuehren, wenn die Datei nicht schon existiert!!
+            if (!file_exists($bildneu)) {
+                    $picture->resize_picture($image, $bildneu, $th_breite, $th_hoehe);		
+            }
+
+            // absoluter Pfad 
+            $bild = $this->convert_rel2abs_path($bildneu);
+            return $bild;
+    }
+
+
+
+    /**
+     *  falls das Flag "aktiv" gesetzt ist, werden weitere Bilder versteckt als Galerie (Lightbox) zur Verfuegung gestellt
+     *	@param: $Seiten_infos - Array mit Seiteninformationen der Navigation
+     *	@param: $id
+     *	@param: $galerie - SQL-Array mit den auszugebenden Bildern
+     *	@param:	$bild - das sichtbare Bild
+     *	@param: $type - Art des Links f�r die Galerie
+     *	@param:	$thumbsize - Gr�sse der Thumbnails
+     * 	n = es wird kein Link angeboten
+     *	a = Es wird der Link ">Galerie" angeboten
+     * 	b = Es wird eine Bilderleiste mit Links angeboten
+     *  c = automatischer Bildwechsel
+    */
+    public function create_bilderanzeige($id, $galerie, $bild, $type, $thumbsize) 
+    {
+            global $tpl;
+            if ($galerie == 'a' && $id > 0) {
+                    // erzeuge Bildergalerie
+                    $this->erzeuge_bildergalerie($id, $type, $bild, $thumbsize);
+            } elseif ($galerie == 'b' && !preg_match('/blank.gif/', $bild)) {
+                    // erzeuge Bildleiste
+                    $this->erzeuge_bilderleiste($id, $type, $bild, $thumbsize);
+            } elseif ($galerie == 'c') {
+                    $this->erzeuge_auto_bildwechsel($id, $type, $bild, $thumbsize);
+            } else {
+            }
+    }
+
+
     /**
      *  Bildergalerie zu einer nav_id erzeugen
      *	@param: $nav_id - id der Seite zu der die Galerie gehoert
@@ -411,46 +412,46 @@ class frontendPresent
     */
     public function erzeuge_bildergalerie($id, $type, $bild, $thumbsize) 
     {	
-		global $frontget, $tpl, $db;
-		$tpl->setVariable('leiste',HIDDEN);
-		
-		// Erst mal in der Tabelle cms_galerien sehen, ob es Bilder hat.
-		$bilder = $frontget->read_galerie_pro_nav_id($id, $type);
-		//var_dump($db->queryOne('SELECT FOUND_ROWS()'));
-		// wenn Bilder da sind, das HTML fuer Galerie zusammenstellen
-		$galerie = '';
-		$i = 0;
-		while ($row = $bilder->fetchRow(MDB2_FETCHMODE_ASSOC)) {
-			$i++;
-			$bild = $this->convert_rel2abs_path($row['bildpfad']);
-			if ($i == 1) { 
-				$bild1_link = $bild; 
-				$bild1_kommentar = ($row['kommentar'] != '' || $row['kommentar'] != null) ? $row['kommentar'] : ' '; 
-			}
-			
-			// Resize the thumbnail
-			//$bild = $this->resize_thumbnail($bild, $thumbsize, $type);			
-			if ($bild != '') { 
-				//var_dump($bild);
-				// wenn kein Kommentar gepflegt wurde, muss ein space ' ' uebergeben werden, sonst wird beim Blaettern
-				// in Ligthbox der Kommentar des Folgebildes angezeigt
-				$kommentar = ($row['kommentar'] != '' || $row['kommentar'] != null) ? $row['kommentar'] : ''; 
-				// $bild = $this->convert_rel2abs_path($bild);
-				$galerie .= '<a href="' .$bild. '" rel="lightbox[roundtrip]" title="' .$kommentar. '">';
-				$galerie .= '<img src="' .$bild. '" border="0" alt="' .$bild. '" /></a>'."\n";		
-			}
-		}
-		// den Link fuer die Galerie zusammenstellen und ausgeben
-		if ($i > 0) {
+        global $frontget, $tpl, $db;
+        $tpl->setVariable('leiste',HIDDEN);
+
+        // Erst mal in der Tabelle cms_galerien sehen, ob es Bilder hat.
+        $bilder = $frontget->read_galerie_pro_nav_id($id, $type);
+        //var_dump($db->queryOne('SELECT FOUND_ROWS()'));
+        // wenn Bilder da sind, das HTML fuer Galerie zusammenstellen
+        $galerie = '';
+        $i = 0;
+        while ($row = $bilder->fetchRow(MDB2_FETCHMODE_ASSOC)) {
+            $i++;
+            $bild = $this->convert_rel2abs_path($row['bildpfad']);
+            if ($i == 1) { 
+                $bild1_link = $bild; 
+                $bild1_kommentar = ($row['kommentar'] != '' || $row['kommentar'] != null) ? $row['kommentar'] : ' '; 
+            }
+
+            // Resize the thumbnail
+            //$bild = $this->resize_thumbnail($bild, $thumbsize, $type);			
+            if ($bild != '') { 
+                //var_dump($bild);
+                // wenn kein Kommentar gepflegt wurde, muss ein space ' ' uebergeben werden, sonst wird beim Blaettern
+                // in Ligthbox der Kommentar des Folgebildes angezeigt
+                $kommentar = ($row['kommentar'] != '' || $row['kommentar'] != null) ? $row['kommentar'] : ''; 
+                // $bild = $this->convert_rel2abs_path($bild);
+                $galerie .= '<a href="' .$bild. '" rel="lightbox[roundtrip]" title="' .$kommentar. '">';
+                $galerie .= '<img src="' .$bild. '" border="0" alt="' .$bild. '" /></a>'."\n";		
+            }
+        }
+        // den Link fuer die Galerie zusammenstellen und ausgeben
+        if ($i > 0) {
 //			$tpl->setCurrentBlock('bildergalerie');
-			$link = '<p><a href="'.$bild1_link.'" title="'.$bild1_kommentar.' " rel="lightbox[roundtrip]">'.$GLOBALS['LINKS']['GALERIE'].'</a></p>'."\n";
-			$tpl->setVariable('galerie', $galerie);	
-			$tpl->setVariable('link_galerie', $link);   // Galerielink inkl. umschliessendes Div
+            $link = '<p><a href="'.$bild1_link.'" title="'.$bild1_kommentar.' " rel="lightbox[roundtrip]">'.$GLOBALS['LINKS']['GALERIE'].'</a></p>'."\n";
+            $tpl->setVariable('galerie', $galerie);	
+            $tpl->setVariable('link_galerie', $link);   // Galerielink inkl. umschliessendes Div
 //			$tpl->parseCurrentBlock();
-		}		
-		// Speicher wieder freigeben
-		$bilder->free();
-	} 
+        }		
+        // Speicher wieder freigeben
+        $bilder->free();
+    } 
 
 	
     /**
@@ -462,46 +463,46 @@ class frontendPresent
     */
     public function erzeuge_bilderleiste($id, $type, $bild, $thumbsize) 
     {	
-		global $frontget, $tpl, $db;
-		$tpl->setVariable('galink',HIDDEN);
-		$tpl->setVariable('img_fix','img_fix');
-		
-		// Erst mal in der Tabelle art_galerien sehen, ob es Bilder hat.
-		$bilder = $frontget->read_galerie_pro_nav_id($id, $type);
-		//echo $db->queryOne('SELECT FOUND_ROWS()');	
-		$i = 0;
-		while ($row = $bilder->fetchRow(MDB2_FETCHMODE_ASSOC)) {
-			$hide = 'display:none;';
-			$aktiv_passiv = 'rect_passiv';
-			
-			// HTML fuer Bilder erstellen
-			$image = $this->convert_rel2abs_path($row['bildpfad']);
-			$thumb = str_replace('_images/', '_thumbs/th_', $row['bildpfad']);
-			// das ausgewuehlte Bild soll als Erstes aktiv angezeigt werden
-			if ($bild == $thumb) {
-				$hide = 'display:inline;';
-				$aktiv_passiv = 'rect_aktiv';			
-			}
-			$thumb = $this->resize_thumbnail($thumb, $thumbsize, $type);
-			if ($thumb) {
-				$kommentar = ($row['kommentar'] != '' || $row['kommentar'] != null) ? $row['kommentar'] : ''; 
-				$bild_html .= '<img id="pict_'.$i.'" class="img_small" style="'.$hide.'" src="'.$thumb.'" border="0" title="'.$kommentar.'" />'."\n";
-	
-				// HTML fuer Bildleiste aufbauen	
-				$bildleiste .= '<a id="rect_'.$i.'" class="bildleiste '.$aktiv_passiv.'" onmouseover="picSwitch('.$i.');" rel="lightbox[roundtrip]" href="'.$image.'" title="'.$kommentar.'" />';
-				$bildleiste .= '<img src="'.SPACER.'"  width="9" height="9" border="0"></a>'."\n";
-				$bildleiste .= '<div class="bildleiste_space"><img src="'.SPACER.'" width="9" height="9" border="0" alt=""></div>'."\n";
-				$i++;		
-			}
-		}
-		if ($bild_html != '') {
+        global $frontget, $tpl, $db;
+        $tpl->setVariable('galink',HIDDEN);
+        $tpl->setVariable('img_fix','img_fix');
+
+        // Erst mal in der Tabelle art_galerien sehen, ob es Bilder hat.
+        $bilder = $frontget->read_galerie_pro_nav_id($id, $type);
+        //echo $db->queryOne('SELECT FOUND_ROWS()');	
+        $i = 0;
+        while ($row = $bilder->fetchRow(MDB2_FETCHMODE_ASSOC)) {
+            $hide = 'display:none;';
+            $aktiv_passiv = 'rect_passiv';
+
+            // HTML fuer Bilder erstellen
+            $image = $this->convert_rel2abs_path($row['bildpfad']);
+            $thumb = str_replace('_images/', '_thumbs/th_', $row['bildpfad']);
+            // das ausgewuehlte Bild soll als Erstes aktiv angezeigt werden
+            if ($bild == $thumb) {
+                $hide = 'display:inline;';
+                $aktiv_passiv = 'rect_aktiv';			
+            }
+            $thumb = $this->resize_thumbnail($thumb, $thumbsize, $type);
+            if ($thumb) {
+                $kommentar = ($row['kommentar'] != '' || $row['kommentar'] != null) ? $row['kommentar'] : ''; 
+                $bild_html .= '<img id="pict_'.$i.'" class="img_small" style="'.$hide.'" src="'.$thumb.'" border="0" title="'.$kommentar.'" />'."\n";
+
+                // HTML fuer Bildleiste aufbauen	
+                $bildleiste .= '<a id="rect_'.$i.'" class="bildleiste '.$aktiv_passiv.'" onmouseover="picSwitch('.$i.');" rel="lightbox[roundtrip]" href="'.$image.'" title="'.$kommentar.'" />';
+                $bildleiste .= '<img src="'.SPACER.'"  width="9" height="9" border="0"></a>'."\n";
+                $bildleiste .= '<div class="bildleiste_space"><img src="'.SPACER.'" width="9" height="9" border="0" alt=""></div>'."\n";
+                $i++;		
+            }
+        }
+        if ($bild_html != '') {
 //			$tpl->setCurrentBlock('bilderleiste');
-			$tpl->setVariable('bild1', $bild_html); 
-			$tpl->setVariable('bilder_leiste', $bildleiste);
+            $tpl->setVariable('bild1', $bild_html); 
+            $tpl->setVariable('bilder_leiste', $bildleiste);
 //			$tpl->parseCurrentBlock();			
-		} 
-		// Speicher wieder freigeben
-		$bilder->free();
+        } 
+        // Speicher wieder freigeben
+        $bilder->free();
     }
 	
     /**
@@ -513,47 +514,47 @@ class frontendPresent
     */
     public function erzeuge_auto_bildwechsel($id, $type, $bild, $thumbsize) 
     {	
-		global $frontget, $tpl, $db;
-		$bild1 = ''; 
-		$bild2 = '';
+        global $frontget, $tpl, $db;
+        $bild1 = ''; 
+        $bild2 = '';
 
-		// Erst mal in der Tabelle cms_galerien sehen, ob es Bilder hat.
-		$bilder = $frontget->read_galerie_pro_nav_id($id, $type);
-		$found  = $db->queryOne('SELECT FOUND_ROWS()');	
-		// ev. Spezialfall aus cms_spezial lesen --> soll der Bildwechsel fuer 1 oder 2 Bilder erfolgen
-		$spez	= $frontget->read_single_spez(THEME,'BW');  // BW = Bildwechsel
+        // Erst mal in der Tabelle cms_galerien sehen, ob es Bilder hat.
+        $bilder = $frontget->read_galerie_pro_nav_id($id, $type);
+        $found  = $db->queryOne('SELECT FOUND_ROWS()');	
+        // ev. Spezialfall aus cms_spezial lesen --> soll der Bildwechsel fuer 1 oder 2 Bilder erfolgen
+        $spez	= $frontget->read_single_spez(THEME,'BW');  // BW = Bildwechsel
 
-		$i = 0; $j=0;
-		while ($row = $bilder->fetchRow(MDB2_FETCHMODE_ASSOC)) 
-		{
-			$i++; $j++;
-			// muessen 2 BildContainer gefuellt werden, oder nur 1?
-			$bilder_pro_container = $spez['wert1']=='imageContainer1' && $spez['wert2']=='imageContainer2' ? $found / 2 : $found;
-			// $j und $bild_html initialisieren, sobald der 1. Container voll ist.
-			if ($i > $bilder_pro_container && $i == $j) { $j = 1; $bild_html = ''; }
-			$thumb = $this->resize_thumbnail($row['bildpfad'], $thumbsize, $type);
-			$kommentar = ($row['kommentar'] != '' || $row['kommentar'] != null) ? $row['kommentar'] : ''; 
-			$bild_html = '<img id="pict_'.$i.'" class="img_small" src="'.$thumb.'" border="0" title="'.$kommentar.'" />';
-			if ($j < $i) { // jetzt ist der 2. Container dran
-				$bild2 .= $bild_html;
-			} else {
-				$bild1 .= $bild_html;
-			}
-		}
-		if ($bild1 != '') {
+        $i = 0; $j=0;
+        while ($row = $bilder->fetchRow(MDB2_FETCHMODE_ASSOC)) 
+        {
+            $i++; $j++;
+            // muessen 2 BildContainer gefuellt werden, oder nur 1?
+            $bilder_pro_container = $spez['wert1']=='imageContainer1' && $spez['wert2']=='imageContainer2' ? $found / 2 : $found;
+            // $j und $bild_html initialisieren, sobald der 1. Container voll ist.
+            if ($i > $bilder_pro_container && $i == $j) { $j = 1; $bild_html = ''; }
+            $thumb = $this->resize_thumbnail($row['bildpfad'], $thumbsize, $type);
+            $kommentar = ($row['kommentar'] != '' || $row['kommentar'] != null) ? $row['kommentar'] : ''; 
+            $bild_html = '<img id="pict_'.$i.'" class="img_small" src="'.$thumb.'" border="0" title="'.$kommentar.'" />';
+            if ($j < $i) { // jetzt ist der 2. Container dran
+                $bild2 .= $bild_html;
+            } else {
+                $bild1 .= $bild_html;
+            }
+        }
+        if ($bild1 != '') {
 //			$tpl->setCurrentBlock('bilderwechsler');
-			// das Script fuer den Bildwechsler wird erst hier eingefuegt, weil es sonst Probleme mit lightbox macht
-			$xfade = '<script type="text/javascript" src="'.HOST.'frontend/scripts/xfade2.js"></script>';
-			$imagecontainer = 'id="imageContainer1" ';
-			$tpl->setVariable('xfade', $xfade);
-			$tpl->setVariable('setright', ' setright'); // fuer Templates mit Bild rechts
-	 		$tpl->setVariable('imagecontainer', $imagecontainer);				
-			$tpl->setVariable('bild1', $bild1);
-			$tpl->setVariable('bild2', $bild2);
+            // das Script fuer den Bildwechsler wird erst hier eingefuegt, weil es sonst Probleme mit lightbox macht
+            $xfade = '<script type="text/javascript" src="'.HOST.'frontend/scripts/xfade2.js"></script>';
+            $imagecontainer = 'id="imageContainer1" ';
+            $tpl->setVariable('xfade', $xfade);
+            $tpl->setVariable('setright', ' setright'); // fuer Templates mit Bild rechts
+            $tpl->setVariable('imagecontainer', $imagecontainer);				
+            $tpl->setVariable('bild1', $bild1);
+            $tpl->setVariable('bild2', $bild2);
 //			$tpl->parseCurrentBlock();
-		}
-		// Speicher wieder freigeben
-		$bilder->free();
+        }
+        // Speicher wieder freigeben
+        $bilder->free();
     }
 		
 	/**
@@ -565,57 +566,57 @@ class frontendPresent
 	*/
 	public function set_css_class($type, $navid, $css_classes)
 	{
-		global $tpl;
-		$farbe = '';
+            global $tpl;
+            $farbe = '';
 //		if ($type == 'nav')	{ $style = ' class="active"'; }
 //		if ($type == 'subnav')	{ $style = ' class="subactive"'; }
 //		if ($type == 'service') { $astyle = ' class="active"'; $listyle = ' active'; }
-		if (count($css_classes) > 0 && $navid > 0) {
-          foreach($css_classes as $index => $css){
-            if ($css['wert1'] == $navid)  {
-              switch($type) {
-                case 'nav':
-                    $style = $css['wert2'];
-                    $farbe = $css['wert2'];
-                    break;
-                case 'subnav':
-//                    $style = ' class="subactive '.$css['wert2'].'"';
-                    $style = $css['wert2'];
-                    $farbe = $css['wert2'];
-                    break;
-                case 'service':
-                    $farbe = ' '.$css['wert2'];
-                    break;
-                case 'seite':
-                    $style = ' '.$css['wert2'];
-                    break;
-              }
-            }
-          }			
+            if (count($css_classes) > 0 && $navid > 0) {
+                foreach($css_classes as $index => $css){
+                    if ($css['wert1'] == $navid)  {
+                        switch($type) {
+                            case 'nav':
+                                $style = $css['wert2'];
+                                $farbe = $css['wert2'];
+                                break;
+                            case 'subnav':
+            //                    $style = ' class="subactive '.$css['wert2'].'"';
+                                $style = $css['wert2'];
+                                $farbe = $css['wert2'];
+                                break;
+                            case 'service':
+                                $farbe = ' '.$css['wert2'];
+                                break;
+                            case 'seite':
+                                $style = ' '.$css['wert2'];
+                                break;
+                        }
+                    }
+                }			
 
-          //Platzhalter-Variable setzen
-          if ($type == 'nav') {
-              return $style;
-//              $tpl->setVariable('style', $style);
-//              $tpl->setVariable('farbe', $farbe);
-          } elseif ($type == 'subnav') {
-              $tpl->setVariable('shnav', $farbe);
-              return $style;
-          } elseif ($type == 'service') {
-              $tpl->setVariable('listyle', $listyle);
-              $tpl->setVariable('astyle', $astyle);
-              $tpl->setVariable('farbe', $farbe); // Farbe setzen in nav_tpl.html
-          } elseif ($type == 'seite') {
-              $tpl->setCurrentBlock('subnavi_horizontal');
-              $tpl->setVariable('shnav', $style); // Hintergrundfarbe Subnavi Horizontal
-              $tpl->parseCurrentBlock();
-              $tpl->setCurrentBlock('subcontainer');
-              $tpl->setVariable('farbe', $style); // Hintergrundfarbe Contentseite
-              $tpl->parseCurrentBlock();
-          }
-          $style = '';
-          $farbe = '';
-        }
+                //Platzhalter-Variable setzen
+                if ($type == 'nav') {
+                    return $style;
+      //              $tpl->setVariable('style', $style);
+      //              $tpl->setVariable('farbe', $farbe);
+                } elseif ($type == 'subnav') {
+                    $tpl->setVariable('shnav', $farbe);
+                    return $style;
+                } elseif ($type == 'service') {
+                    $tpl->setVariable('listyle', $listyle);
+                    $tpl->setVariable('astyle', $astyle);
+                    $tpl->setVariable('farbe', $farbe); // Farbe setzen in nav_tpl.html
+                } elseif ($type == 'seite') {
+                    $tpl->setCurrentBlock('subnavi_horizontal');
+                    $tpl->setVariable('shnav', $style); // Hintergrundfarbe Subnavi Horizontal
+                    $tpl->parseCurrentBlock();
+                    $tpl->setCurrentBlock('subcontainer');
+                    $tpl->setVariable('farbe', $style); // Hintergrundfarbe Contentseite
+                    $tpl->parseCurrentBlock();
+                }
+                $style = '';
+                $farbe = '';
+             }
 	}
 	
 	/**
@@ -632,33 +633,33 @@ class frontendPresent
 	*/
 	public function replenish_text_with_fragments($text)
 	{
-		global $frontget;
-		// zuerst feststellen, ob es ueberhaupt einen Platzhalter im Text gibt.
-		// die Regex sucht alle Vorkommnisse des Pattern mit folgender Form %<zahl><wortinklsonderzeichen><zahl>% 
-		// hilfreiches Regex-Test-Tool http://regex.larsolavtorvik.com/
-		$pattern = '/%\d*\w.*\d*%/'; 
-		// gibt es einen Platzhalter in der Form %<Zahl>irgendeinwort<Zahl>%? 
-		$anz = preg_match_all($pattern, $text, $result);
-		if ($anz > 0) {
-			$fragments = $result[0];  // ist ein Array mit den Namen der Platzhalter
-			// wenn mind. 1 Fragment gefunden wurde..
-			foreach($fragments as $index => $fragment) {
-				// muss das fuehrende und abschliessende %-Zeichen geloescht werden,
-				$frgnam = str_replace("%","", $fragment);
-				// um den Content des Fragments aus cms_fragmente zu lesen
-				// das Fragment wird automatisch in einem Div-Tag ausgegeben
-				$erstxt  = '<div class="teaserwrapper">';
- 				$erstxt .= '<div id="'.$frgnam.'" class="teaser">';
-				$erstxt .= $frontget->read_longtext_fragment($frgnam);
-				$erstxt .= '</div>';
-				$erstxt .= '</div>';
-				// und dann den Platzhalter $fragment (ein Regex-Ausdruck) in $text zu ersetzen
-				$fragment = '/'.$fragment.'/';
-				$text = preg_replace($fragment, $erstxt, $text);								
-			}
-		}
-		// den ganzen erneuerten Text zurueckgeben
-		return $text;
+            global $frontget;
+            // zuerst feststellen, ob es ueberhaupt einen Platzhalter im Text gibt.
+            // die Regex sucht alle Vorkommnisse des Pattern mit folgender Form %<zahl><wortinklsonderzeichen><zahl>% 
+            // hilfreiches Regex-Test-Tool http://regex.larsolavtorvik.com/
+            $pattern = '/%\d*\w.*\d*%/'; 
+            // gibt es einen Platzhalter in der Form %<Zahl>irgendeinwort<Zahl>%? 
+            $anz = preg_match_all($pattern, $text, $result);
+            if ($anz > 0) {
+                $fragments = $result[0];  // ist ein Array mit den Namen der Platzhalter
+                // wenn mind. 1 Fragment gefunden wurde..
+                foreach($fragments as $index => $fragment) {
+                    // muss das fuehrende und abschliessende %-Zeichen geloescht werden,
+                    $frgnam = str_replace("%","", $fragment);
+                    // um den Content des Fragments aus cms_fragmente zu lesen
+                    // das Fragment wird automatisch in einem Div-Tag ausgegeben
+                    $erstxt  = '<div class="teaserwrapper">';
+                    $erstxt .= '<div id="'.$frgnam.'" class="teaser">';
+                    $erstxt .= $frontget->read_longtext_fragment($frgnam);
+                    $erstxt .= '</div>';
+                    $erstxt .= '</div>';
+                    // und dann den Platzhalter $fragment (ein Regex-Ausdruck) in $text zu ersetzen
+                    $fragment = '/'.$fragment.'/';
+                    $text = preg_replace($fragment, $erstxt, $text);								
+                }
+            }
+            // den ganzen erneuerten Text zurueckgeben
+            return $text;
 	}
 }
 ?>
