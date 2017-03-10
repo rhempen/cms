@@ -1,0 +1,91 @@
+/*************************************************
+* Navigation vertikal
+*************************************************/
+
+#navigation_liste
+{
+	padding: 0; 
+	margin: 0;
+	background-color:  #960500;
+	width: auto;
+}
+
+#navigation_liste li
+{
+ 	margin: 0;
+  	list-style: none;
+	text-transform: uppercase;
+	line-height: 1.5em;
+  	letter-spacing: 0.1em;	
+}
+ 
+#navigation_liste a,
+#navigation_liste strong
+{
+	display: block;
+	padding: 0.2em 0.25em 0.2em 0.75em;
+	height: auto;
+}
+
+/* IE hasLayout korrigiert den white-space Error im IE 5.* und 6 */
+* html #navigation_liste ul,
+* html #navigation_liste a,
+* html #navigation_liste strong 
+{
+  height: 1%;
+}
+
+
+#navigation_liste li a:link
+{
+	color: #e4bebd;
+}
+
+#navigation_liste li a:visited
+{
+	color: #e4bebd;
+}
+
+#navigation_liste li a:hover
+{
+	background-color: #047391;
+	color: #e4bebd;
+}
+
+#navigation_liste li ul
+{
+  margin: 0;
+}
+
+#navigation_liste li li
+{
+  padding: 0;
+  margin: 0;
+}
+
+/* Unterpositionen */
+#navigation_liste li li a:link, 
+#navigation_liste li li a:visited
+{
+	color: #e4bebd;
+	background-color:  #960500;
+	padding: 0.3em 0.8em;
+	border-left: 1em solid #047391;
+	text-decoration: none;
+	font-size: 0.9em;
+}
+
+#navigation_liste li li a:hover
+{
+	background-color: #047391;
+	color: #e4bebd;
+}
+
+
+/* hover und aktiver link der 1. und 2. Ebene der Hauptnavigation */
+#navigation_liste ul li.aktiv, #navigation_liste ul li a.aktiv  {
+	background-color: #047391;
+	color: #ffffff;
+	font-weight: bold;
+}
+

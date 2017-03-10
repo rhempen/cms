@@ -1,0 +1,64 @@
+/* Erst einmal muss PEAR mysqli angepasst werden, damit überhautp ein Zugriff auf die DB möglich wird */
+
+
+a) Fehlermeldungen aus C:\xampp\php\pear\MDB2\Driver\mysqli.php
+
+Parse error: syntax error, unexpected 'new' (T_NEW) in C:\xampp\php\pear\MDB2\Driver\mysqli.php on line 940
+Parse error: syntax error, unexpected 'new' (T_NEW) in C:\xampp\php\pear\MDB2\Driver\mysqli.php on line 1206
+
+Lösung: Gemäss http://codecaveme.de/blog/php-7-wordpress-unexpected-new-t_new-beheben/
+Dieser Fehler wird angezeigt, da in PHP 7 Klassen nicht mehr mit dem & Operator zugeordnet werden dürfen. 
+
+alt: 940: $obj =& new $class_name($this, $statement, $positions, $query, $types, $result_types, $is_manip, $limit, $offset); 
+neu: 940: $obj = new $class_name($this, $statement, $positions, $query, $types, $result_types, $is_manip, $limit, $offset); 
+
+Warning: Declaration of MDB2_Driver_mysqli::setTransactionIsolation($isolation) should be compatible with MDB2_Driver_Common::setTransactionIsolation($isolation, $options = Array) in C:\xampp\php\pear\MDB2\Driver\mysqli.php on line 1138
+--> diese Warnung lasse ich einfach stehen...
+
+b) Fehlermeldungen aus Files im CMS:
+
+1) Notice: Only variables should be assigned by reference in C:\xampp\htdocs\birchler\db\birchler\pear_mdb2.class.php on line 49
+
+Lösung:
+$db =& MDB2::connect($dsn, $options); --> $db = MDB2::connect($dsn, $options);
+
+2) Fatal error: Uncaught Error: Call to undefined function set_magic_quotes_runtime() in C:\xampp\htdocs\birchler\cmsadmin\config.php:8 
+die Funktion set_magic_quotes_runtime() wird nicht mehr unterstützt --> also auskommentieren!
+
+
+[6.10.2016]
+Ein Command-Fenster auf den Pfad C:\xampp\php> stellen
+
+mit php go-pear.phar kann erst mal die PEAR Library installiert werden
+
+Um die mysqli-Fehler zu beseitigen, habe ich erst mal das Package MDB2_Driver_mysqli deinstalliert mit folgendem Befehl: 
+pear uninstall MDB2_Driver_mysqli
+pear uninstall MDB2
+
+
+Installieren des MDB2-Treibers und mysqli-Treibers von PEAR:
+pear install MDB2 (https://pear.php.net/package/MDB2/download/)
+pear install MDB2_Driver_mysqli-1.5.0b4  (https://pear.php.net/package/MDB2_Driver_mysqli/download/)
+
+Das Package HTML_Template_IT deinstallieren und neu installieren
+pear uninstall HTML_Template_IT
+pear install HTML_Template_IT
+
+
+[28.02.2017]
+Übernahme der Version aus xampp56 lokal in xampp (php7) und auf publicdev.ch. 
+Damit sind alle Anpassungen aus Version php5.6 auch in php7 enthalten.
+
+- Unter PHP7 wird das Laden eines Templates nicht erfolgreich durchgeführt. 
+Habe daher auf stackoverflow einen Post abgesetzt und eine Antwort erhalten:
+--> http://stackoverflow.com/questions/39944630/pear-html-template-it-does-not-load-templatefile-in-php7
+Änderung im File IT.php im PEAR-Verzeichnis /HTML/Template/IT.php auf Zeile 1091 
+
+Da ich nun schon die zweite Anpassung innerhalb der PEAR-Library gemacht habe, muss ich die benötigten Files 
+in Zukunft innerhalb der Web-Domain speichern und mich darauf beziehen, anstatt auf die globale Installation von PEAR
+dh. ich muss den include_path anpassen (falls möglich) --> /home/httpd/vhosts/publicdev.ch/httpdocs/pear statt /usr/share/pear
+
+- im Verzeichnis lib muss ich das File prototype.php anpassen (ereg ersetzen mit preg_match) 
+
+- Backup: die DB-Connection und die Zugriffe auf die DB sind mit mysql programmiert 
+--> muss ich komplett umschreiben, da mysql nicht mehr unterstützt wird 
