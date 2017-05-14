@@ -20,14 +20,8 @@
 <body>
 <div id="content">
     <h2>Links zur Dokumentation</h2>
-   
-
     <ul id="navlist">
-    	  <!-- <li>CMS-Dokumentation im Wiki</li>
-        <li class="nobullet"><a href="http://www.publicdev.ch/wikis/pdwiki/index.php/Art4art">Wiki - Art4art-Dokumentation</a></li> -->
-
         <li class="nobullet">&#160;</li>
-
         <li>CMS-Manual als PDF</li>
         <li class="nobullet">&#160;</li>
         <li class="nobullet"><a href="./doku/cms_manual_02_2017.pdf">Download Doku 2017 Pdf</a></li>		

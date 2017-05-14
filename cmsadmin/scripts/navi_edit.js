@@ -3,66 +3,64 @@
 
 //<![CDATA[
 /**********************************************************************************
-*
-* Events und Functions für Zeichenzähler 
-*
-/*********************************************************************************/
+ *
+ * Events und Functions fï¿½r Zeichenzï¿½hler 
+ *
+ /*********************************************************************************/
 
 var maxLaenge = 60;
 // Berechne die Anzahl Zeichen, die der User eingibt
 
 /*------------------------------------------------------------------------------
-  Funktion: kurztitel_zeichen_berechnen
-------------------------------------------------------------------------------*/ 
+ Funktion: kurztitel_zeichen_berechnen
+ ------------------------------------------------------------------------------*/
 function kurztitel_zeichen_berechnen()
 {
-	$("maxzeichen_kurztitel").innerHTML = maxLaenge;
-	berechneZeichenKurztitel();
-	Event.observe($("kurztitel"), "change", berechneZeichenKurztitel);
-	Event.observe($("kurztitel"), "focus", berechneZeichenKurztitel);
-	Event.observe($("kurztitel"), "keydown", berechneZeichenKurztitel);
-	Event.observe($("kurztitel"), "keyup", berechneZeichenKurztitel);
+    $("maxzeichen_kurztitel").innerHTML = maxLaenge;
+    berechneZeichenKurztitel();
+    Event.observe($("kurztitel"), "change", berechneZeichenKurztitel);
+    Event.observe($("kurztitel"), "focus", berechneZeichenKurztitel);
+    Event.observe($("kurztitel"), "keydown", berechneZeichenKurztitel);
+    Event.observe($("kurztitel"), "keyup", berechneZeichenKurztitel);
     Field.focus("kurztitel");
 }
 
-function berechneZeichenKurztitel() 
-{  
-    if ($F("kurztitel").length > maxLaenge) 
+function berechneZeichenKurztitel()
+{
+    if ($F("kurztitel").length > maxLaenge)
     {
-      $("kurztitel").value = $F("kurztitel").substring(0, maxLaenge);
-      restlicheZeichen = 0;
-    }
-    else 
+        $("kurztitel").value = $F("kurztitel").substring(0, maxLaenge);
+        restlicheZeichen = 0;
+    } else
     {
-      restlicheZeichen = maxLaenge - $F("kurztitel").length;
+        restlicheZeichen = maxLaenge - $F("kurztitel").length;
     }
     $("anzeige_kurztitel").innerHTML = restlicheZeichen;
 }
 
 /*------------------------------------------------------------------------------
-  Funktion: zusatz_zeichen_berechnen
-------------------------------------------------------------------------------*/ 
+ Funktion: zusatz_zeichen_berechnen
+ ------------------------------------------------------------------------------*/
 function zusatztext_zeichen_berechnen()
 {
-	$("maxzeichen_zusatztext").innerHTML = maxLaenge;
-	berechneZeichenZusatztext("zusatztext");
-	Event.observe($("zusatztext"), "change", berechneZeichenZusatztext);
-	Event.observe($("zusatztext"), "focus", berechneZeichenZusatztext);
-	Event.observe($("zusatztext"), "keydown", berechneZeichenZusatztext);
-	Event.observe($("zusatztext"), "keyup", berechneZeichenZusatztext);
+    $("maxzeichen_zusatztext").innerHTML = maxLaenge;
+    berechneZeichenZusatztext("zusatztext");
+    Event.observe($("zusatztext"), "change", berechneZeichenZusatztext);
+    Event.observe($("zusatztext"), "focus", berechneZeichenZusatztext);
+    Event.observe($("zusatztext"), "keydown", berechneZeichenZusatztext);
+    Event.observe($("zusatztext"), "keyup", berechneZeichenZusatztext);
     Field.focus("zusatztext");
 }
 
-function berechneZeichenZusatztext() 
-{  
-    if ($F("zusatztext").length > maxLaenge) 
+function berechneZeichenZusatztext()
+{
+    if ($F("zusatztext").length > maxLaenge)
     {
-      $("zusatztext").value = $F("zusatztext").substring(0, maxLaenge);
-      restlicheZeichen = 0;
-    }
-    else 
+        $("zusatztext").value = $F("zusatztext").substring(0, maxLaenge);
+        restlicheZeichen = 0;
+    } else
     {
-      restlicheZeichen = maxLaenge - $F("zusatztext").length;
+        restlicheZeichen = maxLaenge - $F("zusatztext").length;
     }
     $("anzeige_zusatztext").innerHTML = restlicheZeichen;
 }

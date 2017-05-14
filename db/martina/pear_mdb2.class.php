@@ -2,8 +2,8 @@
 // zu Hause
 if (preg_match('/^hero/',$_SERVER['HTTP_HOST']) || $_SERVER['HTTP_HOST'] == 'localhost')
 { 
-	ini_set('include_path', ini_get('include_path') . ';c:\xampp\php\PEAR;e:\xampp\htdocs\\'.ROOTDIR);
-	$login_file = '\\xampp\\htdocs\\'.ROOTDIR.'\\db\\db_login_pear.php';
+	ini_set('include_path', ini_get('include_path') . ';c:\xampp711\php\PEAR;e:\xampp\htdocs711\\'.ROOTDIR);
+	$login_file = '\\xampp711\\htdocs\\'.ROOTDIR.'\\db\\db_login_pear.php';
 } 
 // publicdev
 elseif ($_SERVER['HTTP_HOST'] == 'www.publicdev.ch' || $_SERVER['HTTP_HOST'] == 'publicdev.ch')
@@ -43,6 +43,6 @@ $options = array(
     'result_buffering' => true
 );
 
-$db =& MDB2::connect($dsn, $options);
+$db = MDB2::connect($dsn, $options);
 
 ?>

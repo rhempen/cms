@@ -1,0 +1,13 @@
+          <div id="search_mask">
+            <form name="suchen" action="index.php" method="GET">
+					  <div style="width:400px; height:58px;"></div>
+						<input type="text" size="25" id="search" name="search" autocomplete="off" value="{search_text}" 
+                onfocus="if (this.value=='{search_text}') {this.value='';}" 
+                onblur="if (this.value=='') {this.value='{search_text}';}" />
+						<a id="link" href="" onblur="if (this.blur) {this.blur;}">Enter!</a>
+						<input type="hidden" id="navid" value="" style="width:25px;" />
+						<input type="hidden" id="subid" value="" style="width:25px;" />
+						<input type="hidden" id="pagid" value="" style="width:25px;" />
+            <div id="resultlist" class="auto_complete"></div>
+            </form>
+					</div>

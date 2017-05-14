@@ -1,0 +1,146 @@
+/*******************************************************************************
+ CSS-Notationen für Untermenupositionen unterhalb der horizontalen Navigation
+********************************************************************************/
+/*_________Definition des subnavi-containers */
+
+#subnavibereich_horizontal {
+	width: 100%;
+	height: auto;
+	min-height: 1.6em;
+	background-color: #9E987E;	
+}
+
+#filler_subnavi_horizontal {
+	clear: both;
+	background-color: inherit;	
+	padding-left: 200px;
+}
+
+#subnavi_horizontal {
+	float: right; /* default: rechts -> kann im spezifischen CSS überschrieben werden */
+	overflow: hidden;
+	width: auto;
+	margin: 0;
+	padding: 0;
+	padding-left: 192px;
+	display: table; /* mit display table erscheinen die SubMenues ÜBER den anderen DIV's */
+	background-color: inherit;	
+}
+
+#subnavi_horizontal.left {
+	float: left;
+}
+
+#subnavi_horizontal.right {
+	float: right;
+}
+
+/*_________Format fuer Linksverhalten innerhalb des subnavis */
+#subnavi_horizontal li, 
+#subnavi_horizontal a {
+	color:   #1C5069;
+	background-color: inherit;
+	display: block;
+	float: left;
+	padding: 0;
+}
+
+#subnavi_horizontal li  {
+	background-color: inherit;
+	padding: 0;
+}
+
+#subnavi_horizontal a {
+	padding: 0.2em 1em;
+}
+
+/*_________Pseudoklassen fuer links im subnavi_h-container */
+
+#subnavi_horizontal a:visited {
+	background-color: inherit;
+	color:  #1C5069;
+}
+
+#subnavi_horizontal li:hover, #subnavi_horizontal li a:hover {
+	color: #1C5069;
+	background-color: #C1AD79;
+}
+
+/* hover und aktiver link */
+#subnavi_horizontal a.subactive, #subnavi_horizontal li.active  {
+	color: #1C5069;
+	background-color: #F0FFFF;
+}
+
+/*******************************************************************************
+ CSS-Notationen für Untermenupositionen unterhalb der vertikalen Hauptnavigation
+********************************************************************************/
+/*_________Definition des subnavi-containers */
+
+#subnavibereich_vertikal {
+	width: 200px;
+	height: auto;
+	background-color: transparent;	
+}
+
+#filler_subnavi_vertikal {
+	clear: both;
+	background-color: inherit;	
+	border-bottom: 1px solid #232323;	
+}
+
+#subnavi_vertikal {
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+	display: table; /* mit display table erscheinen die SubMenues ÜBER den anderen DIV's */
+	background-color: inherit;	
+	/*background-color:  #C1AD79; */
+	width: 192px;
+}
+
+
+/*_________Format fuer Linksverhalten innerhalb des subnavis */
+#subnavi_vertikal li, 
+#subnavi_vertikal a {
+	color: #1C5069;
+	background-color: #9E987E;	
+	background-color:  #C1AD79; 
+	display: block;
+	font-weight: bold;
+}
+
+/* Link innerhalb LI gestalten */
+#subnavi_vertikal a {
+	background-color:  #C1AD79;
+	padding: 0.3em 0em 0.3em 0.8em; 
+	font-size: 1em;
+	border-bottom: 1px solid  #504539;
+}
+
+/*_________Pseudoklassen fuer links im subnavi-container */
+
+#subnavi_vertikal a:visited {
+	background-color: inherit;
+	color: #1C5069;
+}
+
+/* hovern und aktiver link */
+#subnavi_vertikal li:hover, #subnavi_vertikal li a:hover {
+	color: #FFFFFF;
+	font-weight: bold;
+	width: auto; /* vermeidet einen weissen Strich im IE */
+	background-color: #9E987E;	
+}
+
+/* aktiver link */
+#subnavi_vertikal a.subactive, #subnavi_vertikal li.active  {
+	color: #1C5069;	
+	font-weight: bold;
+	background-color: #FFFFFF;
+	width: auto; /* vermeidet einen weissen Strich im IE */
+}
+
+
+
+

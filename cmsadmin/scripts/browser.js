@@ -5,26 +5,28 @@
 // Update des Bildkommentars per AJAX
 var nr = 0;
 function update_kommentar(id, value) {
-	nr = id;
+    nr = id;
     var myAjax = new Ajax.Request(
-        "../_controllers/pictures_co_maintain.php?action=kommentarSave&bild_id="+nr+"&kommentar="+value,
-        {   
-            method:'get',
-            onLoading:function(r) { $("meldung"+nr).innerHTML="Saving..."; },
-            onSuccess:zeige_resultat,
-            onFailure:zeige_fehler
-        }
-    ); 
+            "../_controllers/pictures_co_maintain.php?action=kommentarSave&bild_id=" + nr + "&kommentar=" + value,
+            {
+                method: 'get',
+                onLoading: function (r) {
+                    $("meldung" + nr).innerHTML = "Saving...";
+                },
+                onSuccess: zeige_resultat,
+                onFailure: zeige_fehler
+            }
+    );
 }
 
-var zeige_resultat = function(r)
+var zeige_resultat = function (r)
 {
-    $("meldung"+nr).innerHTML = r.responseText;
+    $("meldung" + nr).innerHTML = r.responseText;
 }
 
-var zeige_fehler = function(r)
+var zeige_fehler = function (r)
 {
-   $("meldung"+nr).innerHTML = "Fehler: " + r.status + " / " + r.statusText;
+    $("meldung" + nr).innerHTML = "Fehler: " + r.status + " / " + r.statusText;
 }
 //]]>
 

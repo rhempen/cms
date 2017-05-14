@@ -23,7 +23,12 @@
    
 
     <ul id="navlist">
-    	<li>PEAR-Packages</li>
+        <li>Prüf-Scripts</li>
+        <li class="nobullet"><a href="./funcs/phpinfo.php" target="_self">PHP-Info</a></li>
+        <li class="nobullet"><a href="./funcs/pearinfo.php" target="_self">PEAR-Info</a></li>
+        <li class="nobullet">&#160;</li>
+
+        <li>PEAR-Packages</li>
         <li class="nobullet"><a href="http://pear.php.net/manual/en/package.database.mdb2.php">PEAR (PHP Extension and Application Repository) f&uuml; Datenbank-Operationen</a></li>
         <li class="nobullet"><a href="http://pear.php.net/manual/en/package.html.html-template-it.php">ITX (Integrated Template Extension) f&uuml;r die Templates</a> </li>
 

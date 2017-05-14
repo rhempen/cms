@@ -1,1 +1,1 @@
-<?php define('WEBSITE','birchler'); ?>
+<?php define('WEBSITE','art4art'); ?>

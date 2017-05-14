@@ -4,7 +4,7 @@
  *
  * @package Moxiecode.utils
  * @author Moxiecode
- * @copyright Copyright © 2007, Moxiecode Systems AB, All rights reserved.
+ * @copyright Copyright ï¿½ 2007, Moxiecode Systems AB, All rights reserved.
  */
 
 /**

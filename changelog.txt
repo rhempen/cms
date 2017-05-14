@@ -1,5 +1,21 @@
 [Changelog 2017]
 
+Mai 2017:
+- Fehler beim Scandir in der Funktion neuer_ukap im Model navi_maintain.class.php
+	der 2. Parameter $verzeichnisse muss als array() definiert werden, sonst wird das Verzeichnis zum 
+	Ukap immer angelegt, was zum Verlust von bestehenden Dateien führt
+
+- Erstellen einer neuen Funktion get_next_directory_for_ukap in der Klasse pictures_maintain.class.php 
+	in dieser Funktion wird geprüft, ob das Verzeichnis gemäss bildpfad auf der Disk existiert oder nicht.
+        Wenn NEIN, kann das entsprechende Verzeichnis angelegt werden, 
+        wenn JA, wird das Verzeichnis mit der höchsten Nummer der entsprechenden Domain (zb. navi_11) gesucht und um 10 erhöht.
+	Danach wird das neue Verzeichnis angelegt.
+
+- Neuer Eintrag in der Datenbank / Tabelle cms_config: VERSION value = Aktuelle Version und ev. Datum
+        Ausgabe dieser Information im cmsadmin unterhalb der Menuliste (Copyright)
+        Anpassung der Funktion copyright() in /funcs/cmslogin.php
+
+
 Januar 2017:
 - Überarbeiten der Unterseiten-Funktionen
 - Erneuerung der Javascript-Library Ligthbox für die Anzeige der Bilder

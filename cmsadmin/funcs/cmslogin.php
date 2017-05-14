@@ -136,7 +136,8 @@ function message($message)
 /* Copyright ausgeben */
 function copyright()
 {
-	$html  = '<p> Copyright by &copy; R. Hempen<br>' . "\n";
+        $html = '<p>'.$GLOBALS['TEXTE']['VERSION']. VERSION .'<br>' . "\n";
+	$html .= 'Copyright by &copy; R. Hempen<br>' . "\n";
 	$html .= 'See also <a class="ohne_rand" href="http://www.hempenweb.ch" target="_blank">hempen<em>Web</em></a>' . "\n"; 
     $html .= '</p>' . "\n";
     return $html;

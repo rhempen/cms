@@ -1,0 +1,28 @@
+<!--beginn member_login_tpl.html -->
+<form name="memberlogin" action="{form_action}" method="post">
+<!-- BEGIN login_form -->
+  <div id="memberLogin">
+    <fieldset>
+      <h2>{lbl_memberlogin}</h2> 
+      <div id="message" class="{msg_class}">{message}</div>
+      <label>{lbl_username}</label>
+      <input type="text" tabindex="1" name="memberlogin" value="{txt_username}">
+      <label class="{class_oldpw_hidden}">{lbl_old_passwort}</label>
+      <input class="{class_oldpw_hidden}" type="password" tabindex="2" name="memberoldpw">
+      <label class="{class_pw_hidden}">{lbl_passwort}</label>
+      <input class="{class_pw_hidden}" type="password" tabindex="3" name="memberpassw">
+      <label>{lbl_submit}</label>
+      <input id="login" type="submit" name="login" tabindex="4" value="{exec_login}" onclick="this.submit();" />
+      <input type="hidden" name="pwcode" value="{session_code}"><br/>
+      <input type="hidden" id="action" name="action" value="{action}"><br/>
+      <div id="memberLinks">
+        <span class="memberLink" onclick="{action_change}">{link_change}</span></br>
+        <span class="memberLink" onclick="{action_forgotten}">{link_forgotten}</span></br>
+        <span class="memberLink" onclick="{action_register}">{link_register}</span></br>
+      </div>
+    </fieldset>
+  </div>
+<!-- END login_form -->
+</form>
+<!--ende member_login_tpl.html -->
+

@@ -4,7 +4,7 @@
 if (preg_match('/^hero/',$_SERVER['HTTP_HOST']) || $_SERVER['HTTP_HOST'] == 'localhost')  { 
 	$dbtype     = 'mysqli'; 		// Datenbank-Server Typ
 	$host       = 'localhost'; 	// Server
-	$user       = 'cmsuser';	// BenutzerIn 
+	$user       = 'root';	// BenutzerIn 
 	$password   = 'ayk61mz';	// Passwort 
 	$db         = 'cms_hempen';		// db-Name
 }

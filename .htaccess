@@ -14,7 +14,7 @@
 RewriteEngine On
 
 #Wo gilt das mod_rewrite
-RewriteBase /birchler/
+RewriteBase /cms/
 
 #URL ohne index.php
 RewriteCond %{REQUEST_FILENAME} !-f

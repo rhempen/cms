@@ -1,0 +1,50 @@
+/* kundeneigene CSS - Diese CSS kann zu einem sp�teren Zeitpunkt direkt im 
+	CMS bearbeitet und erg�nzt werden */
+
+/* Notationen f�r die Homeseite */
+div#intro {
+  background-color: #dcdcdc;
+}
+
+div#introcontent {
+  background-color: transparent;
+  padding: 1.5em;
+  min-height: 380px;
+}
+
+/* Grosse Schrift für den Titel auf der Homeseite */
+.verybig {
+  font-size: 30px;
+  line-height: 60px;
+  margin-top: -30px; /* �bersteuert .titel_seite und .counter */
+}
+
+/* teaser - auf jeder beliebigen Seite */
+.teaserwrapper {
+	padding: 10px;
+}
+
+.teaser {
+  width: 100%; /* 286px; */
+}
+
+.teasertitle {
+  font-size: 20px;
+  line-height: 21px;
+}
+
+.teasertext {
+	padding: 5px;
+  background-color: #f3f3f3;
+}
+
+#teaser2 {
+	width: auto;
+	max-width: 560px;
+	background-color: #FF0000; /* #F2B578; */
+}
+
+div#introcontent .teaser ul,
+div#introcontent .teaserwrapper ul {
+	padding: 0 10px 0 20px;
+}
