@@ -1,6 +1,0 @@
-Changelog: 
-31.12.2009
-- css-Dateien in den Ordner /frontend/themes/martina/css verschoben
-- main_tpl.html: Pfad für den Include der themenspezifischen CSS-Datein angepasst
-- Vorbereitung für das Einbinden von themenspezifischen Javascripts --> {themes_js} im main_tpl.html
-  zu diesem Zweck eine neue Funktion read_theme_scritps() in models/frontend_getdata.class.php eingebaut 

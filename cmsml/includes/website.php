@@ -1,1 +1,0 @@
-<?php define('WEBSITE','xignis'); ?>
