@@ -43,10 +43,10 @@ Stand Januar 2017:
 
 
 Stand 12.03.2012:
-- auf Seite Frontend vorbereitet f�r Mehrsprachigkeit (anzuzeigende Sprachen werden website-spezifisch in cms_spezial gespeichert
-- Fehleingaben in der URL werden durch �berpr�fung der gespeicherten URL verhindert
+- auf Seite Frontend vorbereitet für Mehrsprachigkeit (anzuzeigende Sprachen werden website-spezifisch in cms_spezial gespeichert
+- Fehleingaben in der URL werden durch Überprüfung der gespeicherten URL verhindert
 - Klick auf das Logo führt bei Bedarf auf die 1. eingetragene Seite (gemäss Index in der Navigation)
-- Unn�tige HTTP-Requests, ausgel�st durch jQuery und Niftycorners werden unterbunden. Perfomance-Verbesserung
+- Unnötige HTTP-Requests, ausgelöst durch jQuery und Niftycorners werden unterbunden. Perfomance-Verbesserung
 
 
 Stand 30.12.2011:
@@ -55,18 +55,18 @@ Stand 30.12.2011:
 
 
 Stand 16.12.2011:
-Optimierung der Navigation ist vorl�ufig soweit gedeiht, dass alle bisherigen Websites
+Optimierung der Navigation ist vorläufig soweit gedeiht, dass alle bisherigen Websites
 mit dieser Version einwandfrei laufen.
 Es gibt in den HTML-Templates noch Optimierungspotential!!
 
-nächste Entwicklung: Kopierfunktion f�r Menu-Eintr�ge und Seiten
+nächste Entwicklung: Kopierfunktion für Menu-Einträge und Seiten
 
 Stand 15.11.2011:
 
 Diese Version beinhaltet im Admin-Bereich die Funktion, von einer Website zur anderen zu wechseln.
 Das betrifft alle Websites, welche mit dem vorliegenden CMS entwickelt wurden.
 Mit dieser Funktion kann sicher gestellt werden, dass alle individuellen Websites innerhalb des CMS 
-voll funktionsf�hg sind.
+voll funktionsfähg sind.
 
 Nächste geplante Entwicklung: Mehrsprachigkeit --> Kopierfunktion geht vor!
 
