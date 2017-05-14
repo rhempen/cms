@@ -1,0 +1,140 @@
+{xml_notation}<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+{header}	
+
+	<head>
+	<!-- BEGIN meta-tags -->
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<meta name="author" content="{author}" />
+	<meta name="Content-Language" content="de" />
+	<meta name="description" content="{description}" />
+	<meta name="keywords" content="{keywords}" />
+	<meta name="page-topic" content="{page_topic}" />
+	<meta name="publisher" content="{publisher}" />
+	<meta name="google-site-verification" content="{google-site-verification}" />
+	<meta name="rating" content="general" />
+	<meta name="revisit-after" content="10 days" />
+	<meta name="robots" content="index, follow" />
+	<!-- END meta-tags -->
+	
+	<title>{titletag}</title>
+	<!-- BEGIN themes -->
+	<link href="{host}frontend/shared/css/shared_global.css" rel="stylesheet" type="text/css" media="screen" />
+	<link href="{host}{themes_dir}{theme}css/{theme_global}.css" rel="stylesheet" type="text/css"/>
+	<link rel="shortcut icon"  href="{host}{themes_dir}{theme}img/favicon.ico" type="image/x-icon" />
+	<script type="text/javascript" src="{host}lib/prototype.js"></script> 
+	<script type="text/javascript" src="{host}lib/scriptaculous.js"></script> 
+	<script type="text/javascript" src="{host}lib/effects.js"></script> 
+	<script type="text/javascript" src="{host}lib/lightbox.js"></script> 
+	<script type="text/javascript" src="{host}frontend/scripts/global.js"></script>
+	{theme_js}
+	<!-- END themes -->
+	</head>
+
+	<body>
+
+		<div id="page_margins">
+			<div id="page">
+				<div id="header">
+				  <!-- BEGIN home -->
+					<div id="home_link" title="" onclick="location.href='{home_link}'";> 
+				  <!-- END home -->
+					<!-- BEGIN message -->
+						{meldung}
+					<!-- END message -->
+					&nbsp;
+					</div>
+				</div> <!-- ende header -->
+				
+				<div id="navibereich">
+          		  <div id="filler"></div>
+  				  <div id="navi" class="{richtung_navi}">
+  					<ul class="ebene01">
+  						<!-- BEGIN navi_horiz -->
+  						<li class="navi"><a href="{link}"{style}>{text}</a>{pipe}
+  						{ul_unavi_h_start}						  
+  							<!-- BEGIN unavi_horiz -->
+  						 	<li{unavi_h_aktiv}>{unavi_h_link}</li> 
+  							<!-- END unavi_horiz -->
+  						{ul_unavi_h_ende}						  
+  						</li>
+  						<!-- END navi_horiz -->
+  					</ul>
+  				  </div> <!-- ende horizontale navigation -->
+ 				</div> <!-- ende navibereich -->
+
+				<div id="servicebereich">
+  				  <div id="service" class="{richtung_navi}">
+  					<ul class="ebene01">
+  						<!-- BEGIN navi_service -->
+  						<li class="navi{listyle}"><a href="{link}"{astyle}>{text}</a>{pipe}
+  						{ul_uservice_start}						  
+  							<!-- BEGIN uservice -->
+  						 	<li{uservice_aktiv}>{uservice_link}</li> 
+  							<!-- END uservice -->
+  						{ul_uservice_ende}						  
+  						</li>
+  						<!-- END navi_service -->
+  					</ul>
+  				  </div> <!-- ende servicenavigation -->
+ 				</div> <!-- ende servicebereich -->
+
+ 				<!-- BEGIN subnavi_horizontal -->
+				<div id="subnavibereich_horizontal">
+	          		<div id="filler_subnavi_horizontal" class="{shnav}"></div>
+	  				<div id="subnavi_horizontal" class="{richtung_subnavi}">
+  						{ul_subitem_start}						  
+  							<!-- BEGIN subitem_horizontal -->
+  						 	<li{subnavi_aktiv}>{subnavi_link}</li> 
+  							<!-- END subitem_horizontal -->
+  						{ul_subitem_ende}						  
+	  				</div>
+ 				</div> <!-- ende subnavibereich -->
+  				<!-- END subnavi_horizontal -->
+
+				<div id="main"> 				 				
+					<div id="navigation">						
+		 				<!-- BEGIN subnavi_vertikal -->
+						<div id="subnavibereich_vertikal">
+			   				<div id="subnavi_vertikal">
+								{ul_subitem_start}						  
+									<!-- BEGIN subitem_vertikal -->
+								 	<li{subnavi_aktiv}>{subnavi_link}</li> 
+									<!-- END subitem_vertikal -->
+								{ul_subitem_ende}						  
+			  				</div>
+		  				</div>
+		  				
+		  				<div id="filler_subnavi_vertikal">&nbsp;</div>
+	  				<!-- END subnavi_vertikal -->
+
+						<div id="navigation_liste">
+							{nav}
+						</div> <!-- ende navigation_liste -->
+					</div> <!-- ende navigation -->
+	  				
+					<div id="spalte3"{dyn_margin}>
+						<div id="spalte3_inhalt">							
+							<!--beginn subtemplate-->
+							<!-- BEGIN content -->
+							{content}
+							<!--ende subtemplate-->							
+							<!-- END content -->
+						</div> <!-- ende spalte3_inhalt -->
+					</div> <!-- ende spalte3 -->	          
+
+				</div> <!-- ende main -->
+				
+				<div id="footer">
+				<!-- BEGIN copyright -->
+					 &copy; {copyright}	
+				<!-- END copyright -->
+				</div>
+			</div> <!-- ende page -->
+		</div> <!-- ende page_margins --> 
+{google_analytics}		
+	</body>
+
+</html>

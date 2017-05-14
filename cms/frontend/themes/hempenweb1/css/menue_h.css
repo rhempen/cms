@@ -1,0 +1,154 @@
+
+/*======================================================
+  01 Das umgebende DIV gestalten
+  ====================================================== */
+#navibereich {
+  width: 100%;
+  /* background:  #9E987E; */
+  background:  #1C5069 url(img/menubg1.jpg) repeat-x;
+  height: 26px;
+  border-top: 0px solid #1C5069;
+  border-bottom: 0px solid #1C5069;
+}
+
+#filler {
+  float: left;
+  width: 100px;
+  height: 26px;
+}
+
+#navi {
+  float: left;
+  width: auto;
+  border-top: 0px solid transparent;	/* default: ein Oberstrich */
+  border-bottom: 0px solid transparent;	/* default: ein Unterstrich */
+  display: table; 
+}
+
+.ebene01 {
+  background: #9E987E;
+}
+
+#navi.right {
+  float: right;
+}
+
+#navi.left {
+  float: left;
+}
+
+/*======================================================
+  02 die ungeordnete Liste in Ebene 1 gestalten
+  ======================================================*/
+#navi ul {
+  margin: 0;
+  padding: 0;	
+  text-align: center;
+  background: #9E987E; 
+}
+
+#navi li  {
+  margin: 0;
+  padding: 0;	
+  float: left; 
+  list-style-type: none;
+  width: 11em;
+}
+
+a {
+  text-decoration: none;
+  font-size: 1em;
+}
+
+a:hover {
+  font-weight: normal;	
+  color: #F0FFFF;
+  background: #9B8C14 url(img/menubg2.jpg) repeat-x;
+}
+
+.navi {
+  /* background: #9E987E; */
+  background: #1C5069 url(img/menubg1.jpg) repeat-x;
+  height: 26px;	
+}
+
+/*======================================================
+  03 Hyperlinks der Ebene 1 gestalten
+  ======================================================*/
+
+#navi li a {
+  display: block;
+  font-weight: normal;
+  padding: 0.25em 1em 0.1em 1em;
+  color: #F0FFFF;
+}
+
+#navi a:hover {
+  background: #9B8C14 url(img/menubg2.jpg) repeat-x;
+  color: #F0FFFF; 
+  height: 21px;
+}
+
+
+/* ==========================================================================================
+	Spezifit�t erh�hen -> n�tzt aber leider nur, solange der Cursor mit gedr�cketer Maustaste �ber dem Link ist.
+	Damit der Link Weiss mit schwarzer Schrift bleibt, muss in nav.php die CSS-Klasse .active gesetzt werden. 
+	========================================================================================= */
+#navi li a:active
+{
+  color: #F0FFFF !important;
+  background: #9B8C14 url(img/menubg2.jpg) repeat-x;
+  height: 21px;
+}
+
+.active
+{
+  color: #F0FFFF !important;
+  background: #9B8C14 url(img/menubg2.jpg) repeat-x;
+  height: 21px;
+}
+
+/*======================================================
+  04 Ebene 2 verstecken
+  ====================================================== */
+#navi li ul
+{
+  position: absolute;
+  left: -9999px;	
+  top: -9999px;
+  display: inline;
+  width: 0;
+  height: 0;
+}  
+
+/*======================================================
+  05 Ebene 2 sichtbar machen
+  li.sfhover ist ein Workaround f�r IE < Version 7 --> suckerfish.js
+  ====================================================== */
+#navi li:hover ul,
+#navi li.sfhover ul
+{
+  left: auto;
+  top: auto;
+  display: block;
+  height: auto;
+  width: 11em;	
+}
+
+/* Korrektur fuer den IE 5 und 6 */
+* html #navi li:hover ul, #navi li.sfhover ul {
+  margin-left: 0px;    
+  ma\rgin-left: -5.5em;    
+} 
+
+/* ==============================================
+   06 Die Rausklappliste korrekt einf�rben
+   ==============================================*/
+#navi ul.ebene02 li a { 
+  border-top: 1px solid #504539;
+  border-left: 1em solid #1C5069; /*#504539;*/
+  font-size: 0.8em;
+  font-weight: bold;
+  padding: 0.5em 1em 0.5em 1em;
+ }
+

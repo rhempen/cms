@@ -1,0 +1,167 @@
+/* html5 + CSS 3 Template created by miss monorom  
+http://intensivstation.ch 2013 */
+
+
+/* render html5 elements as block 
+   rendert html5 elemente als block  */
+
+header, footer, section, aside, nav, article { display: block;}
+
+
+*{
+  box-sizing: padding-box;
+  -moz-box-sizing: padding-box;
+  -webkit-box-sizing: padding-box;
+  box-sizing:border-box;
+  -moz-box-sizing:border-box; /* Firefox */
+  -webkit-box-sizing:border-box; /* Safari */
+  padding: 0;
+  margin: 0;	
+  }
+  
+body {
+background-color: #fff;
+font-size: 1em;
+font-family: Arial, SunSans-Regular, Sans-Serif;
+color:#564b47;
+}
+pre, code {
+font-size: 1.3em;
+}
+a {color: #ff6677;}
+a:visited {color:#ff6677;}
+a:hover {color: #564b47;}
+a:active { color:#000000;}
+
+h1, h2 {
+font-size:1.8em;
+font-weight: normal;
+margin: 0 0 20px;
+}
+header{
+	padding:20px;
+	float:left;
+	width:50%;
+	}
+header p{
+	font-size:0.8434em;
+	padding:5px 0 0;
+	}	
+.mini, .menubutton{
+	display:none;
+	}
+
+nav{
+	padding:0 20px 0 0;
+	float:right;
+	width:50%;
+}	
+
+section:before {
+    height: 0;
+    content: ".";
+    display: block;
+    clear: both;
+	visibility:hidden;
+	}
+nav ul:after {
+    height: 0;
+    content: ".";
+    display: block;
+    clear: both;
+	visibility:hidden;
+	}	
+nav ul {
+	list-style-type: none;
+	float:right;
+}		
+nav li {
+  float: left;
+  margin: 0 3px 0 0;
+  }
+nav a,  nav a:visited {
+  display:block; 
+  text-decoration: none;
+  color:#fff;
+  background-color: #999; 
+  padding: 5px 20px;
+  box-shadow:0 1px 3px #666;
+	-moz-transition:all 0.5s linear;		
+	-webkit-transition:all 0.5s linear;		
+	transition:all 0.5s linear;	
+    border-radius:0 0 10px 10px;
+}
+
+nav a:hover {
+  color:#564b47;
+  background-color: #ccc; 
+  }
+nav a:active { color:#000000;}
+nav a.selected {
+  color:#fff;
+  background-color: #f67; 
+}
+ 
+section{
+	padding:20px;
+	}
+  
+
+/* -------------------- Media Queries -------------------- */
+
+@media only screen and (max-width: 860px) { 
+	header, nav {
+	float:none;
+	width:100%;
+	}
+	nav {
+	padding:0;
+	}	
+	nav ul {
+	float:none;
+	}
+	nav li {
+  	float: left;
+  	margin: 0;
+  	width:25%;
+	}	
+	nav a {
+    border-radius:0 0 0 0;
+	}
+}
+
+@media only screen and (max-width: 768px) { 
+
+}
+
+@media only screen and (max-width: 480px) { 
+	nav li {
+  	float: none;
+  	margin: 0;
+  	width:100%;
+	display:block;
+	}	
+	nav a {
+    font-size:1.2em;
+	position:relative;
+	}
+		
+	nav a:not(.selected):after {
+   	content:'»';
+	position:absolute;
+	right:10px;
+	}
+	.mini{
+	display:block;
+
+	}
+	.menubutton{
+	display:block;
+	position:absolute;
+	right:20px;
+	top:20px;
+	}
+	.maxi{
+	display:none;
+	}
+}

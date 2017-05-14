@@ -1,0 +1,188 @@
+
+/*======================================================
+  01 Das umgebende DIV gestalten
+  ====================================================== */
+#navibereich {
+  position: fixed;
+  top: 65px;
+  left: 285px;
+  right: 70px;
+  width: auto;
+  height: 55px;
+  line-height: 40px;
+  background-color: #ffffff;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)"; /* IE8 */
+  filter:Alpha(Opacity=70); /* IE7 */
+  opacity: 0.7;
+}
+
+#filler {
+  float: left;
+  width: 0px;
+  height: 25px;
+  cursor: pointer;
+}
+
+#navi {
+  float: left;
+  width: auto;
+  display: table; 
+  
+}
+
+.ebene01 {
+  background-color: transparent;
+  padding-right: 15px;
+}
+
+#navi.right {
+  float: right;
+}
+
+#navi.left {
+  float: left;
+}
+
+/*======================================================
+  02 die ungeordnete Liste in Ebene 1 gestalten
+  ======================================================*/
+#navi ul {
+  margin: 0;
+  padding: 0;	
+  text-align: center;
+  padding-right: 15px;
+}
+
+#navi li  {
+  margin: 0;
+  float: left; 
+  list-style-type: none;
+  width: auto;
+}
+
+#navi li li {
+  clear: both;
+}
+
+/* Bereich auf #navi zum Auf/zuklappen des Headerbereiches */
+#klappe {
+  position: fixed;
+  left: 273px;
+  top: 90px;
+  z-index: 3;
+}
+
+#klappe .collapse {
+  position: absolute;
+  background: url("../../../shared/gifs/icon-collapse.gif") no-repeat 0 5px transparent;
+  width: 16px;
+  height: 15px;
+  }
+
+#klappe .expand {
+  position: absolute;
+  background: url("../../../shared/gifs/icon-expand.gif") no-repeat 0 5px transparent;
+  width: 16px;
+  height: 15px;
+  }
+
+#navi ul li.navi, #klappe ul li.navi, #sprachen ul li.navi {
+  display: inline;
+  color: #FFFFFF;
+}
+
+#navi ul li a {
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+  display: inline;
+  line-height: 55px;
+}
+
+#navi ul li a:hover {
+  font-weight: bold;
+  font-style: normal;
+  color: #0099cc; /* blaue Farbe aus dem Logo */
+  text-decoration: none;
+}
+
+/*======================================================
+  03 Hyperlinks der Ebene 1 gestalten
+  ======================================================*/
+#navi a, #klappe a, #sprachen a {
+  color: #434343;
+  background-color: transparent; /*#2E5068;*/
+  padding: 0.3em 0.5em;
+  font-weight: bold;
+}
+
+#navi a:hover, #klappe a:hover, #sprachen a:hover {
+  color: #0099cc; /* blaue Farbe aus dem Logo */
+  background-color: transparent;
+  text-decoration: none;
+}
+
+#sprachen a:hover {
+  color: #0099cc; /* blaue Farbe aus dem Logo */ 
+}
+
+/* ==========================================================================================
+  Spezifitaet erhoehen -> nuetzt aber leider nur, solange der Cursor mit gedruecketer Maustaste �ber dem Link ist.
+  Damit der Link Weiss mit schwarzer Schrift bleibt, muss in nav.php die CSS-Klasse .active gesetzt werden. 
+  ========================================================================================= */
+#navi li a.active, #klappe li a.active, #sprachen li a.active 
+{
+  font-weight: bold !important;
+  font-style: italic !important;
+  color: #0099cc !important;
+  text-decoration: none;
+}
+
+#sprachen li a.active 
+{
+  color: #ffff66 !important; 
+}
+/*======================================================
+  04 Ebene 2 verstecken
+  ====================================================== */
+#navi li ul
+{
+  position: absolute;
+  left: -9999px;	
+  top: -9999px;
+  display: inline;
+  width: 0;
+  height: 0;
+}  
+
+/*======================================================
+  05 Ebene 2 sichtbar machen
+  li.sfhover ist ein Workaround fuer IE < Version 7 --> suckerfish.js
+  ====================================================== */
+#navi li:hover ul,
+#navi li.sfhover ul
+{
+  left: auto;
+  top: auto;  
+  display: block;
+  height: auto;
+  width: auto;
+  padding: 0.4em 0em; 
+  background-color: #2E5068;
+  border-bottom: 5px solid yellow;
+}
+
+/* ==============================================
+ 06 Die Rausklappliste korrekt einfaerben
+ ==============================================*/
+/* Spezifitaet erhoehen */
+#navi ul#ebene01 ul.ebene02 li a {
+  color: #ffffff !important;
+  background-color: #2E5068 !important;
+}
+
+#navi ul#ebene01 ul.ebene02 li a:hover {
+  color: #d90000 !important;
+  background-color: #FFFF66 !important;
+}
+

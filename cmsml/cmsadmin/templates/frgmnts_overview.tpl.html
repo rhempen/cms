@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/2000/REC-xhtml1-20000126/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!-- Template: frgmnts_overview.tpl.html -->
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>{titel}</title>
+
+<script src="../../lib/prototype.php" type="text/javascript" charset="utf-8"></script>
+<script src="../../lib/scriptaculous.js" type="text/javascript"></script>
+<script src="../../lib/effects.js" type="text/javascript"></script>
+<script src="../../lib/controls.js" type="text/javascript"></script>
+<!-- Einbinden der TinyMCE-scripts und Customizing des Editors für diese Seite -->
+<script type="text/javascript" src="../../tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript" src="../../lib/path_finder.js"></script>
+<script type="text/javascript" src="../scripts/tinymce_settings.js"></script>
+<script type="text/javascript" src="../scripts/general_cmsadmin.js"></script>
+<script src="../scripts/frgmnts_overview.js" type="text/javascript" charset="utf-8"></script>
+
+<link rel="stylesheet" type="text/css" href="../css/cmsadmin_admin.css" media="screen"/>
+<link rel="stylesheet" type="text/css" href="../css/cmsadmin_tabnav.css" media="screen"/>
+</head>
+
+<body id="top">
+
+	<div id="content">
+		<table width="730" cellpadding="1" cellspacing="1">
+		  <tr> 
+		    <td colspan="4"> 
+				<ul id="tabnav">
+					<!-- BEGIN tabnav -->
+					<li{id}>
+					    {link}
+					</li>
+					<!-- END tabnav -->
+				</ul>
+		    </td>
+		  </tr>
+		</table>
+	</div>
+    <div id="wrapper">
+		<div id="msg">
+	    <!-- BEGIN message_block -->
+				{meldung}
+      <!-- END message_block -->
+		</div>
+      
+		<ul id="frgmnts">
+			<!-- BEGIN frgmntzeile -->
+			<li id="liste_{nr}" class="lielem">
+			<div class="sortid">{sortid}</div>
+			<div class="divelem"><span class="frgnamedit" id="{nr}">{frgname}</span></div>
+			<div id="frgid{nr}" class="divwork">  <!--{bearbeiten} -->
+              <table>
+                <tr>
+                  <td>{button_edit}</td>
+                  <td>{button_dele}</td>
+                  <td>{button_copy}</td>
+                  <td>{button_move}</td>
+                </tr>
+              </table>            
+            </div>
+			</li>
+			<!-- END frgmntzeile -->
+		</ul>
+		<!-- BEGIN edit_mode -->
+		<div id="edit">
+			<form name="frgedit" action="{action_url}" method="post">
+			<input type="hidden" name="frgname" value="{frgname}" />
+			<textarea id="frgcontent" cols="50" rows="60" name="content">{frgcontent}</textarea>
+			<input type="submit" value="speichern" />
+			<input type="button" value="abbrechen" onclick="javascript:leaveEditMode();" />
+			</form>
+		</div>
+  	<!-- END edit_mode -->
+		<!-- BEGIN css_edit -->
+		<div id="css">
+			<form name="cssedit" action="{action_url}" method="post">
+			<textarea id="csscontent" cols="80" rows="20" name="content">{csscontent}</textarea><br />
+			<input type="submit" value="speichern" />
+			<input type="button" value="abbrechen" onclick="javascript:leaveEditMode();" />
+			</form>
+		</div>
+  	<!-- END css_edit -->
+		<div id="editAjax"></div>
+    <div id="debug"></div>
+	 </div>
+</body>
+<!-- Ende: frgmnt_overview.tpl.html -->
+
+</html>

@@ -1,0 +1,27 @@
+    <!-- BEGIN texte -->
+    <table id="texteLangu" width="800" cellpadding="1" cellspacing="1">
+      <tr class="col_even">
+        <td width="20%" align="right">{lbl_kurztitel}</td>
+        <td width="80%"><input type="text" id="kurztitel" name="kurztitel" size="60" maxlength="60" value="{kurztitel}" style="width:420px;" />
+            {lbl_zeichen} <b><span id="anzeige_kurztitel"></span>&nbsp;/&nbsp;<span id="maxzeichen_kurztitel"></span></b>
+        </td>
+      </tr>
+      <tr class="col_odd">
+        <td width="20%" align="right">{lbl_zusatztext}</td>
+        <td width="80%"><input type="text" id="zusatztext" name="zusatztext" size="60" maxlength="60" value="{zusatztext}" style="width:420px;" />
+            {lbl_zeichen} <b><span id="anzeige_zusatztext"></span>&nbsp;/&nbsp;<span id="maxzeichen_zusatztext"></span></b>
+        </td>
+      </tr>
+      <tr class="col_even">
+        <td width="20%" align="right">{lbl_inhaltstext}</td>
+        <td width="80%"><textarea id="longtxt" cols="70" rows="50" name="inhalt1">{inhalt1}</textarea></td>
+      </tr>
+      <tr class="{evenodd1}" style="{hide_inhalt2}">
+        <td width="20%" align="right">{lbl_inhaltstext2}</td>
+        <td width="80%"><textarea id="longtxt2" cols="70" rows="10" name="inhalt2">{inhalt2}</textarea></td>
+      </tr>
+    </table>
+    
+    
+    <!-- END texte -->
+  

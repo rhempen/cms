@@ -1,0 +1,410 @@
+/* CSS Document */
+html { 
+    padding:0px;
+    margin:0px;
+}
+
+body {
+	background-color: #999999;
+	font-size: 12px;
+	font-family: Verdana, Arial, SunSans-Regular, Sans-Serif;
+	color:#564b47;
+	padding:0px 20px;
+	margin:0px;
+	margin-top: 5px;
+}
+
+/* Links */
+*:focus, *:active { /* verhindert die Umrandung eines Links */
+ 	outline: none;
+}
+
+a {
+	color: #dedede;
+	font-size: 11px;
+	font-weight: bold;
+	background-color:transparent;
+	text-decoration: none;
+}
+
+a:hover  {
+	color: Purple;
+}
+
+p, pre, h2, td {
+	padding:3px;
+	margin:0px;
+	font-size: 12px;
+}
+
+h1 {
+	font-size: 11px;
+	text-transform:uppercase;
+	text-align: right;
+	color: #FFFFFF;
+	background-color: #6699cc;
+	padding:5px 15px;
+	margin:0px
+}
+
+h2 {
+	font-size:14px;
+	text-transform:uppercase;
+	color: #564b47;
+	background-color: transparent;
+	border-bottom : 1px dotted Green;
+}	
+
+pre { 
+	color: #564b47;
+	font-size: 11px;
+	background-color: transparent;
+	font-family: Courier, Monaco, Monospace;
+}
+
+img{
+	border : none;
+	margin: 0px 0px;
+}
+
+.even {
+	background-color: #D0D0D0;
+	border-bottom : 1px dotted Green;
+	border-collapse: collapse;
+}
+.odd {
+	background-color: #F0FFFF;
+	border-bottom : 1px dotted Green;
+	border-collapse: collapse;
+}
+
+.col_even {
+	background-color: #DEDEDE;
+	border-bottom : 1px dotted Green;
+}
+.col_odd{
+	background-color: #EEEEEE;
+	border-bottom : 1px dotted Green;
+}
+
+.display_none, .hide {
+	display: none;
+}
+
+.display_block, .show {
+	display: block;
+}
+
+.display_inline .inline {
+	display: inline;  
+}
+
+.underline {
+    border-bottom: 1px dashed #626262;
+}
+
+/* Bildkommentar pflegen */
+.kommentar {
+  height: 17px;
+  white-space: pre;
+}
+
+.message {
+	background-color: #FF8C00;
+	color: #F0F8FF;
+	font-weight : bold;
+	border-bottom : 1px dotted Green;
+}
+
+.title {
+	background-color:transparent;
+	color: purple;
+	font-weight : bold;
+}
+
+.success {
+	background-color:transparent;
+	color: #008000; /*green*/
+	font-weight : bold;
+}
+
+.error {
+	background-color:transparent;
+	color: #ff0800; /*red*/
+	font-weight : bold;
+}
+
+.warning {
+	background-color:transparent;
+	color: #FFFF00; /*yellow*/
+	font-weight : bold;
+}
+
+.neutral {
+	background-color: transparent;
+	color: ButtonFace;
+	font-weight : bold;
+}
+
+.gruppenbruch {
+	background-color: #eeeeee;
+	color: #626262;
+	font-weight : bold;
+    line-height: 20px;
+}
+
+.gruppenbruchabstand {
+	background-color: transparent;
+    line-height: 10px;
+}
+
+.menu_horizontal {
+	background-color: transparent;
+	font-weight : bold;
+	border-top : 1px dotted grey;
+	border-bottom : 1px dotted grey;
+}
+
+.aktivflag, .typeflag, .bezeichnung, .pointer, .startflag {
+	cursor: pointer;
+}
+
+.aktivflag, .typeflag {
+	font-weight: bold; 
+}
+
+/*  positioning-layers statisch und absolut */
+#menu {
+	position: absolute;
+	width: 200px;
+	left: 20px;
+	background-color: #DCDCDC;
+	padding:0px;
+	margin:0px;
+	overflow: visible;
+}
+
+#menu p {
+  padding: 7px;
+}
+
+#inhalt {
+  margin-left: 200px;
+  background-color:#fff;
+  overflow: visible;
+}
+
+#inhaltTitel {
+  float: left;
+  width: 70%;
+  background-color:#fff;
+}
+
+#inhaltZeit {
+  background-color:#fff;
+  width: 30%;
+  float: right;
+  text-align: right;
+}
+
+form {
+	margin: 0px 0px 0px 0px;
+}
+
+/* Definitionen fuer "Navigation verwalten" */
+.navi_overview, .pages_overview {
+  width: 95%;
+  min-width: 800px;
+  table-layout: fixed;
+}
+
+.navi_overview_titel {
+	font-size: 1.2em;
+	font-weight: bold;
+	background-color: Teal;
+	color: white;
+}
+
+tr.navi_overview_titel td {
+  padding: 10px;
+}
+
+/* CSS-Definitonen f�r Formularfelder */
+form input, form select {
+	font-family: verdana, arial; 
+	font-size: 1.0em; 
+	color: #600; 
+	/*
+	background-color: #eee; 
+	border-top: 0px solid #00f;
+	border-right: 1px solid navy; 
+	border-bottom: 1px solid navy; 
+	border-left: 0px solid #00f;
+	cursor: default;
+	*/
+}
+
+input#exp1, input#exp2 {
+  width: 594px;
+}
+
+/* CSS-Definitionen f�r den InPlaceEditor */
+form.inplaceeditor-form input[type="text"] { /* Input box Default */
+	width: 200px;
+}
+
+.editor_field { /* IE8 versteht obige Anweisung nicht!! */
+  width: 200px;
+}
+
+#pages form.inplaceeditor-form input[type="text"] { /* Input box auf der Pages-Overview */
+	width: 300px;
+}
+
+#pages .editor_field { /* IE8 versteht obige Anweisung nicht!! */
+  width: 300px;
+}
+
+form.inplaceeditor-form input[type="submit"] { /* The submit button */
+  margin-left:5px;
+}
+
+form.inplaceeditor-form a { /* The cancel link */
+  margin-left:5px;
+  color:purple;
+}
+
+/* Ende InPlaceEditor */
+
+.roter_rand {
+	border: 1px solid red;
+}
+
+.klein {
+	font-size: smaller;
+}
+
+/* CSS für Checkbox-Text MemberLogin in navi_edit.tpl.html */
+#memberLoginText {
+  margin-left: 10px;
+  vertical-align: top;
+}
+
+#mlErforderlich, #mlNichtErforderlich {
+  display: none;
+}
+
+/* Selectboxen in der Konfiguration */
+.selbox {
+  width: 200px;
+}
+
+/* CSS - Notationen f�r AutoComplete */
+.selected { background-color: #888; }
+div.auto_complete {
+background: #EEEEEE;
+}
+
+div.auto_complete ul {
+border:1px solid #888;
+margin:0;
+padding:0;
+width: 600px;
+list-style-type:none;
+font-size: 12px;
+}
+
+div.auto_complete ul li {
+margin:0;
+padding:3px;
+}
+
+div.auto_complete ul li.selected { 
+background-color: #ffb; 
+}
+
+div.auto_complete ul strong.highlight { 
+color: #800; 
+margin:0;
+padding:0;
+}
+
+
+button {
+  height: 25px;
+  width: 25px;  
+  cursor: pointer;
+  border: 1px solid #323232;
+}
+
+button.navi_abbrechen, button.page_abbrechen {
+  background: url(../gifs/restore_16.png) no-repeat center center #EEEEEE;  
+  height: 35px;
+  width: 35px;  
+}
+
+button.navi_sichern, button.page_sichern {
+  background: url(../gifs/save.gif) no-repeat center center #EEEEEE; 
+  height: 35px;
+  width: 35px;  
+}
+
+button.reset {
+  background: url(../gifs/undo.gif) no-repeat center center #EEEEEE; 
+  height: 35px;
+  width: 35px;  
+}
+
+button.translate {
+  background: url(../gifs/translate.gif) no-repeat center center #EEEEEE; 
+}
+
+button.freed { /* Seite ist aktiv */
+  background: url(../gifs/freed.gif) no-repeat center center #EEEEEE; 
+}
+
+button.blocked { /* Seite ist inaktiv */
+  background: url(../gifs/blocked.gif) no-repeat center center #EEEEEE; 
+}
+
+button.page_upload, button.navi_upload {
+  background: url(../gifs/jpeg.gif) no-repeat center center #EEEEEE;   
+}
+
+button.page_bilder_edit, button.navi_bilder_edit {
+  background: url(../gifs/modify_16.png) no-repeat center center #EEEEEE;   
+}
+
+button.page_edit, button.navi_edit, button.fragment_edit {
+  background: url(../gifs/edit.gif) no-repeat center center #EEEEEE;   
+}
+
+button.navi_copy, button.fragment_copy {
+  background: url(../gifs/copy_object.gif) no-repeat center center #EEEEEE;   
+}
+
+button.navi_create {
+  background: url(../gifs/new.gif) no-repeat center center #EEEEEE;   
+}
+
+button.page_delete, button.navi_delete, button.fragment_dele {
+  background: url(../gifs/delete.gif) no-repeat center center #EEEEEE;   
+}
+
+
+div.fragment_move {
+  background: url(../gifs/move_neu.png) no-repeat center center #EEEEEE;   
+  cursor: move;
+  width: 25px;
+  height: 25px;
+  border: 1px solid #323232;  
+}
+
+button.page_move_up  {
+  background: url(../gifs/up.gif) no-repeat center center #EEEEEE;   
+}
+
+/* spezial CSS-Klasse für das Verschieben eines Rows in er Navi-Übersicht */
+button.navi_move_up { 
+  background: url(../gifs/up_16.png) no-repeat center center #EEEEEE;  
+}

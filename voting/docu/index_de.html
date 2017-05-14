@@ -1,0 +1,559 @@
+<?xml version="1.0"?>
+<!doctype html public "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Dokumentation Voting-Script</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta name="robots" content="noindex">
+
+</head>
+
+<style type="text/css">
+<!--
+  h4 {
+      font-family:Tahoma,Helvetica,Geneva,Sans-serif,sans-serif;
+      margin-top:5px;
+      text-align:center;
+      }
+
+  h5 {
+      font-family:Tahoma,Helvetica,Geneva,Sans-serif,sans-serif;
+      margin-top:50px;
+      margin-bottom:5px;
+      text-align:center;
+      font-size:11pt;
+      }
+
+  p, td, br, form, ol, a {
+      font-family:Verdana,Helvetica,Geneva,Sans-serif,sans-serif;
+      font-size:10.5pt;
+      }
+
+  .chapter {
+      width:650px;
+      border-width:1px;
+      border-style:solid;
+      border-color:#000000;
+      margin-left:50px;
+      padding:10px;
+      margin-bottom:20px;
+      background-color:#E6F2CC;
+      line-height:14pt;
+      }
+
+  .code {
+      font-family:Courier New;
+      }
+
+  .codebold {
+      font-family:Courier New;
+      font-weight:bold;
+      }
+
+  .links {
+      width:650px;
+      margin-left:50px;
+      margin-bottom:10px;
+      text-align:center;
+      line-height:25px;
+      }
+-->
+</style>
+
+<body>
+  <a name="top"></a>
+  <form>
+  
+  
+  <div class="chapter"><a name="ad"></a>
+<h4>Voting Script präsentiert: Online Terminreservierung</h4>
+<p> Unser Programm <a href="http://www.schedule-organizer.de/">Schedule Organizer</a> ermöglicht den Kunden, Patienten oder Mandanten die Terminreservierung über die Homepage der Firma, ihres Arztes oder ihres Beraters. Das PHP-Script erleichtert und automatisiert die Terminverwaltung - die zuständigen Mitarbeiter werden entlastet, denn es müssen weniger Telefonanrufe entgegen genommen oder weniger Faxe und Briefe beantwortet werden.
+</p>
+<p> <a href="http://www.schedule-organizer.de/">Schedule Organizer Website</a>
+ 
+ 
+ 
+</p>
+<p align="right"><a href="#top"> Nach oben
+</a></p></div> 
+ 
+  
+  
+  <div class="chapter">
+    <h4>Dokumentation Voting-Script</h4>
+    <p>
+      Vielen Dank f&uuml;r Ihr Interesse an unserem Voting Script. Wir empfehlen Ihnen, sich Zeit f&uuml;r die Lekt&uuml;re dieser Anleitung zu nehmen.
+    </p>
+  </div>
+
+  <div class="links">
+    <a href="#function">Funktionsweise</a>&nbsp;&nbsp;
+    <a href="#configuration">Konfiguration</a>&nbsp;&nbsp;
+    <a href="#upload">Upload</a>&nbsp;&nbsp;
+    <a href="#logfiles">Die Logdatei</a>&nbsp;&nbsp;
+    <a href="#include">Einbinden des Scripts</a>&nbsp;&nbsp;
+    <a href="#html">HTML-Templates</a>&nbsp;&nbsp;
+    <a href="#support">Support</a>&nbsp;&nbsp;
+    <a href="#license">Lizenzierung</a>
+  </div>
+
+
+
+
+  <div class="chapter">
+    <h4>Einleitung</h4>
+
+      <p>Das Script ist f&uuml;r den sofortigen Einsatz konfiguriert und eingerichtet. Nachdem Sie das Script auf den Server kopiert haben, k&ouml;nnen Sie es sofort verwenden. Wenn Sie &Auml;nderungen vornehmen m&ouml;chten, sollten Sie diese schrittweise durchf&uuml;hren und nach jeder &Auml;nderung die Auswirkung auf das Script zu testen. Sie behalten dadurch den &Uuml;berblick, welche &Auml;nderung einen eventuell auftretenden Fehler verursacht hat.</p>
+      <p>Beachten Sie bitte auch, dass  das Verzeichnis "logfiles" Schreibrechte besitzen muss (chmod 777). Dasselbe gilt f&uuml;r alle darin befindlichen Dateien.</p>
+      <p>Das HTML-Template wurde nach den Spezifikationen f&uuml;r XHTML 1.0 erstellt. Deshalb enthalten alle einfachen Tags (&lt;br&gt; oder &lt;input&gt;) einen abschlie&szlig;enden Slash (&lt;br /&gt; oder &lt;input type=&quot;text&quot; name=&quot;feld&quot; /&gt;).</p>
+  </div>
+
+
+
+
+  <div class="chapter">
+    <a name="function"></a>
+    <h4>Funktionsweise des Scripts</h4>
+
+      <p>Mit diesem Script k&ouml;nnen Sie Umfragen und Abstimmungen auf Ihrer Website einrichten. Die Besucher k&ouml;nnen eine der Optionen ausw&auml;hlen und durch einen Klick auf den Submit-Button abstimmen. Die Umfrageergebnisse werden in einem Balkendiagramm angezeigt. Sie k&ouml;nnen die Optionen als Radio-Button mit Text oder Bildern und als Select-Men&uuml; anzeigen lassen.</p>
+
+      <p>Zum Einschr&auml;nken und Vermeiden von Manipulationen arbeitet das Script mit der IP-Adresse des Besuchers und/ oder mit Cookies. Damit soll sicher gestellt werden, dass der Besucher nur einmal abstimmen kann. Beachten Sie aber, dass dies keine 100%-igen L&ouml;sungen sind. Mit entsprechendem Aufwand lassen sich diese Sicherheitsvorkehrungen umgehen.</p>
+
+      <h4>Funktionen auf einen Blick</h4>
+
+      <ul>
+        <li>Anzeige der Abstimmungsergebnisse mit Hilfe von Balkengrafiken</li>
+        <li>Verschiedene Grafiken mit verschiedenen Farben und Gr&ouml;&szlig;en f&uuml;r die Balken m&ouml;glich</li>
+        <li>Anpassung des Layouts durch HTML-Templates</li>
+        <li>Vermeidung von Manipulationen durch Pr&uuml;fung der IP-Adresse und/oder Setzen eines Cookies</li>
+        <li>Text- oder Grafik-Option f&uuml;r Radio-Buttons</li>
+      </ul>
+
+
+    <p align="right"><a href="#top">Nach oben</a></p>
+
+  </div>
+
+
+  <div class="chapter">
+    <a name="configuration"></a>
+    <h4>Konfiguration des Scripts</h4>
+
+    <p>Die Datei "index.php" stellt die Konfigurationsdatei f&uuml;r das Script dar. Sie haben dadurch die M&ouml;glichkeit, die Datei zu duplizieren und mit anderen Konfigurationen aufzurufen und zu betreiben, trotzdem aber den selben Script-Kern zu nutzen. Dadurch brauchen Sie das Script nur einmal zu installieren und bei Bedarf nur einmal zu lizenzieren.</p>
+
+    <p>Zus&auml;tzlich zu der Datei "index.php" wurde zu Demonstrationszwecken die Datei "voting_image_options.php" eingerichtet. Bei dieser Abstimmung wurden anstatt von Text-Optionen Bild-Pfade angegeben. Anstatt zwischen verschiedenen Text-Optionen k&ouml;nnen die Besucher zwischen verschiedenen Bildern ausw&auml;hlen. Au&szlig;erdem wurde ein anderer eindeutiger Name ($intern_vote_name) f&uuml;r die Abstimmung angegeben und als Feld-Typ ($form_field_type) wurde "radio_image".</p>
+     <p>Folgende Variablen k&ouml;nnen editiert werden:</p>
+
+    <table border="0" cellpadding="0" cellspacing="0">
+
+
+      <tr valign="top">
+        <td class="codebold">$vote_title</td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+            Sie k&ouml;nnen f&uuml;r jede Abstimmung einen eigenen Titel angeben. Der wird im &lt;title&gt; Tag und als &Uuml;berschrift angezeigt. Beispiel:
+          <br /><br />
+          <span class="code">$vote_title = 'Lieblingsfarbe';</span>
+          <br /><br />
+        </td>
+      </tr>
+
+
+      <tr valign="top">
+        <td class="codebold">$vote_text</td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+          Analog zum Titel einer Abstimmung k&ouml;nnen Sie einen Text (z.B. eine Frage oder Beschreibung) eintragen. Beispiel:
+          <br /><br />
+          <span class="code">$vote_text = 'Was ist Ihre Lieblingsfarbe?';</span>
+          <br /><br />
+        </td>
+      </tr>
+
+
+      <tr valign="top">
+        <td class="codebold">$vote_option[]</td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+          In dieser Variable k&ouml;nnen Sie die Auswahlpunkte (Optionen) eintragen, zwischen denen der Benutzer ausw&auml;hlen k&ouml;nnen soll. Dabei wird f&uuml;r jede Auswahlm&ouml;glichkeit eine eigene Variable festgelegt. Beispiel:
+          <br /><br />
+          <span class="code">
+            $vote_option[] = 'Rot';<br />
+            $vote_option[] = 'Gr&uuml;n';<br />
+            $vote_option[] = 'Blau';
+          </span>
+          <br /><br />
+
+          Anstatt von Text k&ouml;nnen Sie Grafiken als Optionen einrichten. Beispiel:
+          <br /><br />
+          <span class="code">
+            $vote_option[] = './templates/smilies/1.gif';
+            $vote_option[] = './templates/smilies/2.gif';
+            $vote_option[] = './templates/smilies/3.gif';
+          </span>
+          <br /><br />
+
+            Zus&auml;tzlich zu den Pfaden m&uuml;ssen Sie als Feld-Typ ($form_field_type) "radio_image" angeben.
+          <br /><br />
+
+
+        </td>
+      </tr>
+
+
+      <tr valign="top">
+        <td class="codebold">$intern_vote_name</td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+          Hier muss ein Name f&uuml;r die Abstimmung eingetragen werden, der intern durch das Script verwendet wird. Vermeiden Sie bitte Leer- und Sonderzeichen. Der interne Name f&uuml;r die Abstimmung muss angegeben werden, weil das Script f&uuml;r alle Abstimmungen mit einer einzigen Log-Datei arbeitet. Um die einzelnen Abstimmungen von einander unterscheiden zu k&ouml;nnen, muss der interne Abstimmungsname einzigartig sein. Beispiel:
+          <br /><br />
+          <span class="code">$intern_vote_name = 'lieblings_farbe';</span>
+          <br /><br />
+        </td>
+      </tr>
+
+
+      <tr valign="top">
+        <td class="codebold">$form_field_type</td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+          Sie haben die M&ouml;glichkeit, zwei verschiedene Arten von Auswahlmen&uuml;s anzeigen zu lassen. Um eine Liste von Radio-Buttons zu erhalten, geben Sie bitte "radio" in die Variable ein. Beispiel:
+          <br /><br />
+          <span class="code">$form_field_type = 'radio';</span>
+          <br /><br />
+          Ergebnis: <input type="Radio" name="ddd" value="v">&nbsp;Text
+          <br /><br />
+          Anstatt von Text neben den Radio-Buttons k&ouml;nnen Sie auch Grafiken anzeigen lassen. Tragen Sie dazu "radio_image" als Feld-Typ ein. Beispiel:
+          <br /><br />
+          <span class="code">$form_field_type = 'radio_image';</span>
+          <br /><br />
+          Ergebnis: <input type="Radio" name="ddd" value="v">&nbsp;<img src="./images/3.gif" border="0" alt="" align="middle" />
+
+          <br /><br />
+          Sie k&ouml;nnen auch ein Select-Men&uuml; anzeigen lassen. Geben Sie dazu bitte "select" an. Beispiel:
+          <br /><br />
+          <span class="code">$form_field_type = 'select';</span>
+          <br /><br />
+          Ergebnis: <select name="name" size="1">
+                       <option value="Rot">Rot</option>
+                       <option value="Gr&uuml;n">Gr&uuml;n</option>
+                    </select>
+          <br /><br />
+
+        </td>
+      </tr>
+
+
+      <tr valign="top">
+        <td class="codebold">$bar_image_name</td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+          Bei Anzeige der Umfrageergebnisse wird zur Veranschaulichung der Verteilung neben jeder Option ein grafischer Balken angezeigt. Tragen Sie in diese Variable den Namen der Grafik ein, die verwendet werden soll. Alle verf&uuml;gbaren Balkengrafiken sind im Verzeichnis "templates/images_voting" enthalten. Beispiel:
+          <br /><br />
+          <span class="code">$bar_image_name = 'black.gif';</span>
+          <br /><br />
+          Sie k&ouml;nnen auch eigene Balkengrafiken erstellen und in dem oben genannten Verzeichnis ablegen.
+          <br /><br />
+        </td>
+      </tr>
+
+
+      <tr valign="top">
+        <td class="codebold">$max_bar_width</td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+          Der Wert dieser Variable wird als maximale Breite (in Pixel) des h&ouml;chsten Wertes bei der Abstimmung verwendet. Abh&auml;ngig von dieser Breite berechnet sich automatisch die Breite der anderen Ergebnisse. Sie k&ouml;nnen die Balkenbreite frei festlegen und von Ihrem Layout und dem verf&uuml;gbaren Platz abh&auml;ngig machen.
+          <br /><br />
+        </td>
+      </tr>
+
+
+      <tr valign="top">
+        <td class="codebold">$check_ip_address</td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+          Mit dieser Option k&ouml;nnen Sie festlegen, ob ein Besucher mehrmals oder nur einmal abstimmen kann. Wenn Sie die Variable auf "yes" stellen, wird die IP-Adresse des Besuchers automatisch ausgelesen. Das Script pr&uuml;ft dann, ob ein Besucher mit der gleichen IP-Adresse bereits an der Umfrage teilgenommen hat. Sollte das der Fall sein, kann der Besucher nicht mehr abstimmen.
+          <br /><br />
+        </td>
+      </tr>
+
+
+      <tr valign="top">
+        <td class="codebold">$check_cookie</td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+          Mit dieser Option k&ouml;nnen Sie ebenfalls bestimmen, ob ein Besucher mehrmals oder nur einmal abstimmen darf. Wenn Sie die Variable auf "yes" stellen, wird nach dem Abstimmen ein Cookie auf dem Rechner des Besuchers geschrieben und beim Aufruf der Umfrage automatisch ausgelesen. Das Script pr&uuml;ft dann anhand des Cookies, ob der Benutzer bereits an der Abstimmung teilgenommen hat. Sollte das der Fall sein, kann der Besucher nicht mehr abstimmen.
+          <br /><br />
+        </td>
+      </tr>
+
+
+
+      <tr valign="top">
+        <td class="codebold">$language</td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+          Hier k&ouml;nnen Sie die Sprache festlegen. Eingetragen werden muss hier das K&uuml;rzel, dass auch im Namen der Sprachdatei im Verzeichnis 'languages' verwendet wurde ("de" bei languages.de.inc.php und "en" bei languages.en.inc.php).
+          <br /><br />
+        </td>
+      </tr>
+
+
+      <tr valign="top">
+        <td class="codebold">$path['templates']</td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+          Diese Variable enth&auml;lt den Pfad zum Verzeichnis mit den HTML-Templates.
+          <br /><br />
+        </td>
+      </tr>
+
+
+      <tr valign="top">
+        <td class="codebold">$path['logfiles']</td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+          Diese Variable enth&auml;lt den Pfad zum Verzeichnis, in dem sich die Log-Dateien befinden. Stellen Sie sicher, dass das Verzeichnis Schreibrechte besitzt (chmod 777).
+          <br /><br />
+        </td>
+      </tr>
+
+
+      <tr valign="top">
+        <td class="codebold">$tmpl['layout']</td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+          Diese Variable enth&auml;lt den Datei-Namen des HTML-Templates, das zust&auml;ndig f&uuml;r das Layout der Seiten ist.
+          <br /><br />
+        </td>
+      </tr>
+
+
+      <tr valign="top">
+        <td class="codebold">$log['logfile']</td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+          Diese Variable enth&auml;lt den Namen der Log-Datei. Stellen Sie sicher, dass die Datei Schreibrechte besitzt (chmod 777).
+          <br /><br />
+        </td>
+      </tr>
+
+
+      <tr valign="top">
+        <td class="codebold">$show_error_messages</td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+          Bei Auslieferung des Scripts ist diese Variable standardm&auml;&szlig;ig auf "yes" gesetzt. Das hat zur Folge, dass Sie bei der Konfiguration des Scripts Fehlermeldungen und Hinweise zur Einrichtung des Scripts erhalten. Sobald aber das System funktioniert, k&ouml;nnen Sie die Ausgabe der Meldungen abschalten. So verwehren Sie allzu neugierigen Besuchern den Einblick in das System.
+          <br /><br />
+        </td>
+      </tr>
+
+
+      <tr valign="top">
+        <td class="codebold">$add_text</td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+          Sie k&ouml;nnen weitere Werte, Text, Variablen oder andere Inhalte an dieser Stelle festlegen. Diese Inhalte k&ouml;nnen Sie dann mit Hilfe von entsprechenden Markierungen in geschweiften Klammern in die Templates &uuml;bertragen.
+          <br /><br />
+
+          Wenn Sie eigene Werte in der Variable $add_text hinzuf&uuml;gen folgen Sie bitte dem Muster, dass durch die beiden Beispieleintr&auml;ge deutlich gemacht wurde.
+          <br /><br />
+
+          <pre>
+$add_text = array(
+
+                    'txt_additional' => 'Additional',
+                    'txt_more'       => 'More'
+
+                  );
+          </pre>
+
+          <p>Der erste Teil eines Eintrags (z.B.: 'txt_additional') stellt den Namen der Platzhalter im Template dar. Wenn Sie den Wert von 'txt_additional' im Template anzeigen m&ouml;chten, tragen Sie dort den Namen umschlossen von geschweiften Klammern ein - {txt_additional}. Der Name darf keine Leer- oder Sonderzeichen enthalten. Erlaubt ist nur der Unterstrich (_).</p>
+
+        </td>
+      </tr>
+
+
+      <tr valign="top">
+        <td class="codebold"></td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+
+          <br /><br />
+        </td>
+      </tr>
+
+
+
+    </table>
+
+    <p align="right"><a href="#top">Nach oben</a></p>
+  </div>
+
+
+
+
+  <div class="chapter">
+    <a name="upload"></a>
+    <h4>Dateien auf den Webserver kopieren - Upload</h4>
+
+    <p>Erstellen Sie auf dem Server folgende Verzeichnisse (bei den meisten FTP-Programmen ist es auch m&ouml;glich, alle Dateien und Verzeichnisse zu markieren und zusammen auf den Server hoch zu laden):</p>
+
+    <p class="code">
+      /voting_script/<br />
+      /voting_script/inc/<br />
+      /voting_script/languages/<br />
+      /voting_script/logfiles/<br />
+      /voting_script/templates/
+    </p>
+
+    <p>Kopieren Sie alle Dateien in ihre entsprechenden Verzeichnisse auf den Server. Alle Bilddateien (.gif, .jpg, .png) m&uuml;ssen im Bin&auml;r-Modus (Binary) auf den Server &uuml;bertragen werden. Alle restlichen Dateien m&uuml;ssen im ASCII-Modus (Text-Modus) hochgeladen werden. </p>
+
+    <p>Achten Sie bitte darauf, dass sich im Verzeichnis "templates" ein Verzeichnis mit Bilddateien darin befindet.</p>
+
+    <p align="right"><a href="#top">Nach oben</a></p>
+
+  </div>
+
+
+
+  <div class="chapter">
+    <a name="logfiles"></a>
+    <h4>Die Log-Datei - logfiles/log.txt</h4>
+
+    <p>Das Verzeichnis "logfiles" und die Datei "log.txt" m&uuml;ssen das Dateiattribut 777 besitzen (chmod 777) - also schreibbar sein.</p>
+
+
+    <p align="right"><a href="#top">Nach oben</a></p>
+  </div>
+
+
+
+  <div class="chapter">
+    <a name="include"></a>
+    <h4>Einbinden des Voting Scripts</h4>
+
+    <p>Sie haben mehrere M&ouml;glichkeiten das Script in Ihre bestehende Website einzubinden. </p>
+
+    <h4>Direkt verlinken</h4>
+
+    <p>Sie k&ouml;nnen das Voting Script direkt verlinken und wie eine eigene Seite innerhalb Ihrer Website behandeln. Dazu k&ouml;nnen Sie auch das HTML-Template komplett an das Layout Ihrer Website anpassen.</p>
+
+    <h4>I-Frame (HTML)</h4>
+
+    <p>Mit Hilfe des HTML &lt;iframe&gt; Tags k&ouml;nnen Sie das Script in eine bestehende Seite einbinden. F&uuml;gen Sie dazu an der entsprechenden Stelle den &lt;iframe&gt; Tag ein. Beispiel:</p>
+
+    <p class="code">&lt;iframe name=&quot;voting&quot; src=&quot;./voting.php&quot; width=&quot;400&quot; height=&quot;300&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;</p>
+
+
+    <h4>SSI Include</h4>
+
+    <p>Wenn Ihr Server SSI (Server Side Includes) unterst&uuml;tzt, k&ouml;nnen Sie das Script mit folgender Zeile SSI-Code einbinden:</p>
+
+    <p class="code">&lt;!--#include virtual=&quot;./voting.php?$QUERY_STRING&quot; --&gt;</p>
+
+    <p>Ersetzen Sie "./voting.php" durch den korrekten Pfad zu Ihrem Script. Wichtig ist, dass als Parameter "?$QUERY_STRING" an das Script &uuml;bergeben wird.</p>
+
+    <p>Sollte das Einbinden auf diese Weise nicht funktionieren, benennen Sie bitte die HTML-Seite in .shtml um. Fragen Sie bitte auch bei Ihrem Webspace-Provider nach, ob SSI unterst&uuml;tzt wird.</p>
+
+    <p>Wichtig: Damit nach dem Abstimmen wieder die Ausgangsseite angezeigt wird - also die Seite, in die das Script eingebunden wurde - muss ein Hidden-Formularfeld in das HTML-Template "templates/voting.tpl.html" eingef&uuml;gt werden:</p>
+
+    <p class="code">&lt;input type=&quot;hidden&quot; name=&quot;vote_redirect&quot; value=&quot;http://www.your-server.com/seite.shtml&quot; /&gt;</p>
+
+    <p>Die Zeile muss direkt unterhalb des Form-Tags stehen:</p>
+
+    <p class="code">&lt;form name=&quot;vote&quot; action=&quot;{script_self}&quot; method=&quot;post&quot;&gt;<br />
+      &nbsp;&nbsp;&lt;input type=&quot;hidden&quot; name=&quot;vote_redirect&quot; value=&quot;http://www.your-server.com/seite.shtml&quot; /&gt;</p>
+
+    <p>Ersetzen Sie bitte "http://www.your-server.com/seite.shtml" durch den URL zu Ihrer Seite.</p>
+
+    <h4>PHP Include</h4>
+
+    <p>Sie k&ouml;nnen das Script auch in eine bestehende PHP-Datei einbinden. Nutzen Sie dazu die include() Anweisung von PHP:</p>
+
+    <p class="code">&lt;?php<br /><br />include('./voting.php');<br /><br />?&gt;</p>
+
+    <p>Ersetzen Sie "./voting.php" durch den korrekten Pfad zu Ihrem Script.</p>
+
+
+
+
+    <p align="right"><a href="#top">Nach oben</a></p>
+  </div>
+
+
+
+  <div class="chapter">
+    <a name="html"></a>
+    <h4>Anpassung der HTML-Templates</h4>
+
+    <p>Mit Hilfe von HTML und CSS k&ouml;nnen Sie die Templates, die sich im Verzeichnis "/templates/" befinden, komplett Ihren W&uuml;nschen anpassen.</p>
+
+    <p>Sollten Sie f&uuml;r die Anpassung WYSIWYG-Editoren wie Dreamweaver, Frontpage oder NetObjects verwenden, achten Sie bitte darauf, dass die Software keine eigenm&auml;chtigen Ver&auml;nderungen vornimmt. Die Funktionsweise des Scripts k&ouml;nnte dadurch beeintr&auml;chtigt werden.</p>
+
+    <p>In den Templates befinden sich Markierungen/Platzhalter in geschweiften Klammern, wie zum Beispiel {txt_script_name}. Die werden beim Aufruf des Scripts durch die entsprechenden W&ouml;rter ersetzt. Diese W&ouml;rter finden Sie in der Datei "languages/language.de.inc.php". Nat&uuml;rlich k&ouml;nnen Sie diese W&ouml;rter auch &auml;ndern oder an eine andere Position innerhalb des Templates verschieben. Es spricht auch nichts dagegen, wenn Sie die Markierungen durch richtige W&ouml;rter ersetzen. Ebenso k&ouml;nnen Sie die Sprachdatei nach dem vorgegebenen Muster erweitern.</p>
+
+    <p>Neben den Platzhaltern f&uuml;r die W&ouml;rter existieren die so genannten Loops. &Auml;hnlich wie HTML-Tags geh&ouml;rt immer ein Paar zusammen und darf auch nicht getrennt werden (&lt;LOOP ...&gt;...&lt;/LOOP&gt;). Sie haben aber die M&ouml;glichkeit, die Position des gesamten Blocks zu ver&auml;ndern.</p>
+
+    <p>Im Template, das f&uuml;r die Anzeige Bildern als Abstimmungsoptionen eingerichtet wurde (voting_image_options.tpl.html), enth&auml;lt der LOOP-Block einen Image-Tag mit dem Platzhalter {label} als Dateipfad und -name.</p>
+
+
+    <p align="right"><a href="#top">Nach oben</a></p>
+  </div>
+
+
+  <div class="chapter">
+    <a name="support"></a>
+    <h4>Support</h4>
+
+    <p>Antworten auf Ihre Fragen und L&ouml;sungen f&uuml;r Probleme mit dem Script finden Sie in unserem
+     <a href="http://www.stadtaus.com/forum/" target="_blank">Support-Forum</a>.</p>
+
+    <p align="right"><a href="#top">Nach oben</a></p>
+  </div>
+
+
+
+
+
+  <div class="chapter">
+    <a name="license"></a>
+    <h4>Nutzung und Lizenzierung</h4>
+
+
+    <p>Sie k&ouml;nnen das Script kostenlos nutzen. Wenn Sie das Script ohne Hinweis auf STADTAUS.com im Download-Link betreiben m&ouml;chten, k&ouml;nnen Sie die Vollversion online erwerben.</p>
+
+
+
+    <ol start="1" type="1">
+      <li>Sie k&ouml;nnen die Script-Lizenz an Dritte verkaufen, auch als professioneller Reseller.</li>
+      <li>Den Preis k&ouml;nnen Sie dabei selbst bestimmen.</li>
+      <li>Die Script-Lizenz gilt f&uuml;r eine Installation des Scripts.</li>
+    </ol>
+
+
+    <p>Weitere Scripts auf STADTAUS.com:</p>
+
+    <ol>
+      <li>Apotheken-Notdienstkalender</li>
+      <li>Bildergalerie-Script</li>
+      <li>Formmail-Script</li>
+      <li>Tell-A-Friend-Script</li>
+      <li>Online-Terminplaner</li>
+      <li>Google-Tool</li>
+      <li>Download Center Lite</li>
+      <li>G&auml;stebuch Script</li>
+    </ol>
+
+
+    <p>Besuchen Sie unser Projekt MetaCollection. Die Seite ist ein Verzeichnis deutscher und internationaler Script-Archive.</p>
+
+    <p><a href="http://www.metacollection.com/">http://www.metacollection.com/</a></p>
+
+    <p align="right"><a href="#top">Nach oben</a></p>
+  </div>
+
+</form>
+</body>
+</html>

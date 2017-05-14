@@ -1,0 +1,395 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>phpDocumentor » \configMaintain</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">phpDocumentor</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/CMSADMIN.html"><i class="icon-folder-open"></i> CMSADMIN</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">364</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods</li>
+<li class="method public "><a href="#__construct" title="__construct :: "><span class="description">__construct()
+        </span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#bildgroessen_lesen" title="bildgroessen_lesen :: "><span class="description">bildgroessen_lesen()
+        </span><pre>bildgroessen_lesen()</pre></a></li>
+<li class="method public "><a href="#check_sprachcode" title="check_sprachcode :: "><span class="description">check_sprachcode()
+        </span><pre>check_sprachcode()</pre></a></li>
+<li class="method public "><a href="#config_category_lesen" title="config_category_lesen :: "><span class="description">config_category_lesen()
+        </span><pre>config_category_lesen()</pre></a></li>
+<li class="method public "><a href="#config_laden" title="config_laden :: "><span class="description">config_laden()
+        </span><pre>config_laden()</pre></a></li>
+<li class="method public "><a href="#config_lesen" title="config_lesen :: "><span class="description">config_lesen()
+        </span><pre>config_lesen()</pre></a></li>
+<li class="method public "><a href="#config_update" title="config_update :: "><span class="description">config_update()
+        </span><pre>config_update()</pre></a></li>
+<li class="method public "><a href="#config_update_rb" title="config_update_rb :: "><span class="description">config_update_rb()
+        </span><pre>config_update_rb()</pre></a></li>
+<li class="method public "><a href="#getBrowserLanguage" title="getBrowserLanguage :: "><span class="description">getBrowserLanguage()
+        </span><pre>getBrowserLanguage()</pre></a></li>
+<li class="method public "><a href="#get_disp_language_code" title="get_disp_language_code :: "><span class="description">get_disp_language_code()
+        </span><pre>get_disp_language_code()</pre></a></li>
+<li class="method public "><a href="#get_language_tra" title="get_language_tra :: "><span class="description">get_language_tra()
+        </span><pre>get_language_tra()</pre></a></li>
+<li class="method public "><a href="#get_sprache_from_url" title="get_sprache_from_url :: "><span class="description">get_sprache_from_url()
+        </span><pre>get_sprache_from_url()</pre></a></li>
+<li class="method public "><a href="#google_analytics" title="google_analytics :: script fuer Google-Analytics erstellen"><span class="description">script fuer Google-Analytics erstellen</span><pre>google_analytics()</pre></a></li>
+<li class="method public "><a href="#set_language_tra" title="set_language_tra :: "><span class="description">set_language_tra()
+        </span><pre>set_language_tra()</pre></a></li>
+<li class="method public "><a href="#spezial_lesen" title="spezial_lesen :: "><span class="description">spezial_lesen()
+        </span><pre>spezial_lesen()</pre></a></li>
+<li class="method public "><a href="#spezial_update" title="spezial_update :: "><span class="description">spezial_update()
+        </span><pre>spezial_update()</pre></a></li>
+<li class="method public "><a href="#sprache_festlegen" title="sprache_festlegen :: "><span class="description">sprache_festlegen()
+        </span><pre>sprache_festlegen()</pre></a></li>
+<li class="method public "><a href="#sprachen_lesen" title="sprachen_lesen :: "><span class="description">sprachen_lesen()
+        </span><pre>sprachen_lesen()</pre></a></li>
+<li class="method public "><a href="#update_website" title="update_website :: "><span class="description">update_website()
+        </span><pre>update_website()</pre></a></li>
+<li class="method public "><a href="#update_website_db" title="update_website_db :: "><span class="description">update_website_db()
+        </span><pre>update_website_db()</pre></a></li>
+<li class="method public "><a href="#update_website_media" title="update_website_media :: mit dieser Funktion werden die Pfade auf die Media-Dateien aktualisiert,
+nachdem die DB-gewechselt wurde"><span class="description">mit dieser Funktion werden die Pfade auf die Media-Dateien aktualisiert,
+nachdem die DB-gewechselt wurde</span><pre>update_website_media()</pre></a></li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties</li>
+<li class="nav-header private">» Private</li>
+<li class="property private "><a href="#%24mMeldung" title="$mMeldung :: "><span class="description">$mMeldung</span><pre>$mMeldung</pre></a></li>
+</ul>
+</div>
+<div class="span8">
+<a name="%5CconfigMaintain" id="\configMaintain"></a><div href="../classes/configMaintain.html" class="element class">
+<p class="short_description">----------------------------------------------------------
+(c) 2007  Roland Hempen
+          www.hempenweb.ch
+----------------------------------------------------------</p>
+<div class="details">
+<p class="long_description">Klasse fuer die Verwaltung der Navigation und zugehoeriger Seiten</p>
+<table class="table table-bordered">
+<tr>
+<th>author</th>
+<td><a href="">Roland Hempen</a></td>
+</tr>
+<tr>
+<th>copyright</th>
+<td>Frei einsetz- und veraenderbar, wenn der Autor erw�hnt wird</td>
+</tr>
+<tr>
+<th>version</th>
+<td>1.0 | 2007-07-14</td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="..//packages/CMSADMIN.html">CMSADMIN</a></td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a name="__construct" id="__construct"></a><div class="element clickable method public __construct" data-toggle="collapse" data-target=".__construct .collapse">
+<h2>__construct()
+        </h2>
+<pre>__construct($db) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$db</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<a name="bildgroessen_lesen" id="bildgroessen_lesen"></a><div class="element clickable method public bildgroessen_lesen" data-toggle="collapse" data-target=".bildgroessen_lesen .collapse">
+<h2>bildgroessen_lesen()
+        </h2>
+<pre>bildgroessen_lesen() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<a name="check_sprachcode" id="check_sprachcode"></a><div class="element clickable method public check_sprachcode" data-toggle="collapse" data-target=".check_sprachcode .collapse">
+<h2>check_sprachcode()
+        </h2>
+<pre>check_sprachcode($sprachcode) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$sprachcode</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<a name="config_category_lesen" id="config_category_lesen"></a><div class="element clickable method public config_category_lesen" data-toggle="collapse" data-target=".config_category_lesen .collapse">
+<h2>config_category_lesen()
+        </h2>
+<pre>config_category_lesen() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<a name="config_laden" id="config_laden"></a><div class="element clickable method public config_laden" data-toggle="collapse" data-target=".config_laden .collapse">
+<h2>config_laden()
+        </h2>
+<pre>config_laden() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<a name="config_lesen" id="config_lesen"></a><div class="element clickable method public config_lesen" data-toggle="collapse" data-target=".config_lesen .collapse">
+<h2>config_lesen()
+        </h2>
+<pre>config_lesen($category) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$category</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<a name="config_update" id="config_update"></a><div class="element clickable method public config_update" data-toggle="collapse" data-target=".config_update .collapse">
+<h2>config_update()
+        </h2>
+<pre>config_update($id, $feldname, $feldvalue) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$id</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$feldname</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$feldvalue</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<a name="config_update_rb" id="config_update_rb"></a><div class="element clickable method public config_update_rb" data-toggle="collapse" data-target=".config_update_rb .collapse">
+<h2>config_update_rb()
+        </h2>
+<pre>config_update_rb($id, $feldvalue, $alternative) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$id</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$feldvalue</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$alternative</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<a name="getBrowserLanguage" id="getBrowserLanguage"></a><div class="element clickable method public getBrowserLanguage" data-toggle="collapse" data-target=".getBrowserLanguage .collapse">
+<h2>getBrowserLanguage()
+        </h2>
+<pre>getBrowserLanguage($strict_mode) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$strict_mode</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<a name="get_disp_language_code" id="get_disp_language_code"></a><div class="element clickable method public get_disp_language_code" data-toggle="collapse" data-target=".get_disp_language_code .collapse">
+<h2>get_disp_language_code()
+        </h2>
+<pre>get_disp_language_code() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<a name="get_language_tra" id="get_language_tra"></a><div class="element clickable method public get_language_tra" data-toggle="collapse" data-target=".get_language_tra .collapse">
+<h2>get_language_tra()
+        </h2>
+<pre>get_language_tra() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<a name="get_sprache_from_url" id="get_sprache_from_url"></a><div class="element clickable method public get_sprache_from_url" data-toggle="collapse" data-target=".get_sprache_from_url .collapse">
+<h2>get_sprache_from_url()
+        </h2>
+<pre>get_sprache_from_url() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<a name="google_analytics" id="google_analytics"></a><div class="element clickable method public google_analytics" data-toggle="collapse" data-target=".google_analytics .collapse">
+<h2>script fuer Google-Analytics erstellen</h2>
+<pre>google_analytics(\: $kontonr) : \:</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$kontonr</h4>
+<code>\:</code><p>Kontonummer</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>\:</code>$ga_script - JavaScript</div>
+</div></div>
+</div>
+<a name="set_language_tra" id="set_language_tra"></a><div class="element clickable method public set_language_tra" data-toggle="collapse" data-target=".set_language_tra .collapse">
+<h2>set_language_tra()
+        </h2>
+<pre>set_language_tra() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<a name="spezial_lesen" id="spezial_lesen"></a><div class="element clickable method public spezial_lesen" data-toggle="collapse" data-target=".spezial_lesen .collapse">
+<h2>spezial_lesen()
+        </h2>
+<pre>spezial_lesen($theme) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$theme</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<a name="spezial_update" id="spezial_update"></a><div class="element clickable method public spezial_update" data-toggle="collapse" data-target=".spezial_update .collapse">
+<h2>spezial_update()
+        </h2>
+<pre>spezial_update($name, $feldname, $feldvalue) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$feldname</h4>
+<code></code>
+</div>
+<div class="subelement argument">
+<h4>$feldvalue</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<a name="sprache_festlegen" id="sprache_festlegen"></a><div class="element clickable method public sprache_festlegen" data-toggle="collapse" data-target=".sprache_festlegen .collapse">
+<h2>sprache_festlegen()
+        </h2>
+<pre>sprache_festlegen() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<a name="sprachen_lesen" id="sprachen_lesen"></a><div class="element clickable method public sprachen_lesen" data-toggle="collapse" data-target=".sprachen_lesen .collapse">
+<h2>sprachen_lesen()
+        </h2>
+<pre>sprachen_lesen() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<a name="update_website" id="update_website"></a><div class="element clickable method public update_website" data-toggle="collapse" data-target=".update_website .collapse">
+<h2>update_website()
+        </h2>
+<pre>update_website($website) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$website</h4>
+<code></code>
+</div>
+</div></div>
+</div>
+<a name="update_website_db" id="update_website_db"></a><div class="element clickable method public update_website_db" data-toggle="collapse" data-target=".update_website_db .collapse">
+<h2>update_website_db()
+        </h2>
+<pre>update_website_db() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<a name="update_website_media" id="update_website_media"></a><div class="element clickable method public update_website_media" data-toggle="collapse" data-target=".update_website_media .collapse">
+<h2>mit dieser Funktion werden die Pfade auf die Media-Dateien aktualisiert,
+nachdem die DB-gewechselt wurde</h2>
+<pre>update_website_media() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a name="%24mMeldung" id="$mMeldung"> </a><div class="element clickable property private $mMeldung" data-toggle="collapse" data-target=".$mMeldung .collapse">
+<h2>$mMeldung</h2>
+<pre>$mMeldung </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a3</a> and<br>
+            generated on </footer></div>
+</div>
+</body>
+</html>

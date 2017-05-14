@@ -1,0 +1,140 @@
+/*******************************************************************************
+ CSS-Notationen f�r Untermenupositionen unterhalb der horizontalen Navigation
+********************************************************************************/
+/*_________Definition des subnavi-containers */
+
+#subnavibereich_horizontal {
+  position: relative;
+  top: -41px;
+  margin: 0 auto;
+  width: 900px;
+  height: auto;
+  background-color: #2E5068;	    
+}
+
+#filler_subnavi_horizontal {
+  clear: both;
+  background-color: inherit;	
+  padding-left: 0px;
+}
+
+#subnavi_horizontal {
+  float: right; /* default: rechts -> kann im spezifischen CSS �berschrieben werden */
+  overflow: hidden;
+  width: 100%;
+  display: table; /* mit display table erscheinen die SubMenues ueBER den anderen DIV's */
+  background-color: #2E5068;
+}
+
+#subnavi_horizontal.left {
+  float: left;
+}
+
+#subnavi_horizontal.right {
+  float: right;
+}
+
+/*_________Format fuer Linksverhalten innerhalb des subnavis */
+#subnavi_horizontal ul  {
+  background-color: inherit;
+  padding: 0;
+  list-style-type: none;
+}
+#subnavi_horizontal ul li a {
+  color: #FFFFFF;
+  background-color: inherit;
+  display: inline;
+  float: left;
+  padding: 0.2em 1em;
+}
+
+#subnavi_horizontal ul li a.active {
+ /* color: #d90000;*/
+  color: #FFFF66;
+  background-color: #2E5068;
+  font-weight: bold;
+}
+
+
+/*_________Pseudoklassen fuer links im subnavi_h-container */
+
+#subnavi_horizontal a:visited {
+	background-color: inherit;
+	color:  #ffffff;
+}
+
+#subnavi_horizontal li:hover, #subnavi_horizontal li a:hover {
+/*	color:  #d90000;
+	background-color: #FFFF66; */
+    color: #FFFF66;
+    background-color: #2E5068;    
+    font-weight: normal;
+}
+
+/* hover und aktiver link */
+#subnavi_horizontal a.subactive, #subnavi_horizontal li.active  {
+	color: #d90000;
+	background-color: #FFFF66;
+}
+/*******************************************************************************
+ CSS-Notationen f�r Untermenupositionen unterhalb der vertikalen Hauptnavigation
+********************************************************************************/
+/*_________Definition des subnavi-containers */
+
+#subnavibereich_vertikal {
+	width: 100%;
+	height: auto;
+	background-color:  #2E5068;
+}
+
+#filler_subnavi_vertikal {
+	clear: both;
+	background-color: inherit;	
+	height: 2em;
+}
+
+#subnavi_vertikal {
+	float: right; /* default: rechts -> kann im spezifischen CSS �berschrieben werden */
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+	display: table; /* mit display table erscheinen die SubMenues �BER den anderen DIV's */
+	background-color: inherit;	
+}
+
+
+/*_________Format fuer Linksverhalten innerhalb des subnavis */
+#subnavi_vertikal ul li, 
+#subnavi_vertikal ul li a {
+	color: #FFFFFF;
+	display: block;
+	width: auto;
+}
+
+#subnavi_vertikal li {
+	padding: 0.2em 0.75em 0.2em 1.3em;
+	font-size: 1em;
+	width: auto;
+}
+
+/*_________Pseudoklassen fuer links im subnavi-container */
+
+#subnavi_vertikal a:visited {
+	background-color: inherit;
+	color: #FFFFFF;
+}
+
+#subnavi_vertikal li:hover, #subnavi_vertikal li a:hover {
+	color: #d90000;
+	font-weight: normal;
+	background-color: #FFFF66; /* #d90000;*/
+}
+
+/* hover und aktiver link */
+#subnavi_vertikal a.active, #subnavi_vertikal li.active  {
+	color: #d90000;
+	background-color: #FFFF66;
+	font-weight: normal;
+}
+
+

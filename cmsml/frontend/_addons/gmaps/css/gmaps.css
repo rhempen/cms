@@ -1,0 +1,208 @@
+/* 
+    Document   : gmaps.css
+    Created on : 22.01.2012, 08:18:40
+    Author     : Roland Hempen
+    Description: CSS für das AddOn Gmaps 
+*/
+
+/* Allgmeingueltige Notationen */
+/* zuruecksetzen der Innen und Aussenabstaende fuer alle Html Elemente */
+
+* {
+  margin: 0;
+  padding: 0;
+  }
+
+body { 
+  text-align: left;
+  font-family: Gill, Helvetica, sans-serif;
+  font-size: 12px;
+  }
+
+/* Notationen für index.php */
+ul { list-style-type: none; }
+li { display: inline; }
+
+.submit, .switch {
+  margin-left: 10px;
+  padding: 0px 8px;
+  cursor: pointer;
+  font-weight: bold;
+  }
+  
+select#umkreis {
+    width: 60px;
+  }  
+
+#gmapsWrapper {
+  margin: 0px auto;	
+  width: 900px;	  		  		
+  }
+
+#gmapsInputs {
+  width: 877px;
+  text-align: left;
+  padding: 5px;
+  background-color: #dedede;
+  }
+
+#gmapsWrapperMaint {
+  margin: 0px auto;	
+  width: 900px;	  		  		
+  }
+
+#gmapsInputsMaint {
+  width: 877px;
+  text-align: left;
+  padding: 5px;
+  background-color: #dedede;
+  }
+
+#gmaps {
+  width: 900px;
+  height: 530px;
+  border: 2px solid #dedede;
+  overflow: hidden;
+  }
+
+/* Notationen für index_schweiz.htm */
+h3 {
+  font-size: 15px;
+  padding: 0;
+  margin: 0;
+  }
+  
+#map {
+  margin: 0;
+  width: 887px;
+  height: 530px;
+  } 
+
+#lst, #lstMaint {
+  margin: 0;
+  width: 885px;
+  min-height: 530px;
+  border: 1px solid #dedede;
+  background-color: #ffffff;
+  overflow: auto;
+  text-align: left;
+  }
+
+#lstMaint {
+  width: 885px;
+  }  
+
+#ajaxLoad_old {
+	background: url(images/ajax-loader.gif) no-repeat;
+ 	width: 200px;
+ 	height: 200px;
+ 	position: absolute;
+ 	top: 50px;
+ 	left: 380px;
+	}
+  
+#resulttable { 
+  width: 100%; 
+  empty-cells: show;
+  border-spacing: 0px; 
+}
+
+#resulttable tr {
+  line-height: 25px;
+  border-bottom: 1px solid #434343;
+}  
+
+#resulttable td, #resulttable th  {
+  padding: 0 5px;
+  white-space: normal;
+}  
+
+#resulttable td.last-updated-cell  {
+  background-color: yellow !important;
+  border: 2px solid #434343;
+}  
+
+/* Processing Anzeige bei einem Ajax-Request */
+#resulttable_processing, #ajaxLoad {
+	border: 3px solid grey;
+	color: green;
+	position: absolute;
+	top: 150px;
+	left: 50%;
+	padding: 30px;
+	font-size: 25px;	
+	}
+
+#resulttable_length label {
+	padding-right: 20px;	
+}
+
+#resulttable_length.dataTables_length {
+	width: 48% !important;
+	}
+
+/* Anzeige der Anzahl Records im Div neben dem Eingabebereich */  
+#ergebnis {
+  padding: 3px 15px;
+  margin-left: 10px;
+  background-color: #ffffff;
+  } 
+
+/* Anzeige der Anzahl Records im Div ueber der Karte */  
+#resultat {
+  position: absolute;
+  top: 36px;
+  left: 90px;
+  width: auto;
+  height: auto;
+  background-color: white;
+  padding: 5px;			
+  }
+  
+.green { border: 3px solid #008800;	}				
+.red { border: 3px solid #ff0000; }
+.hide { display: none; }
+.show { display: block;	}
+.even {  background-color: #ffffff; }
+.odd { background-color: #dedede; }  
+.center { text-align: center; }
+
+
+/*===================================================*/
+/* CSS für die Maintenance-Seite der Partner-Marker  */
+/*===================================================*/
+#formAddNewRow div.label {
+  width: 80px;
+  background-color: #dedede;
+  line-height: 25px;
+  border-bottom: 2px solid white;
+  float: left;
+}
+
+#formAddNewRow div.input { 
+  width: 180px;
+  line-height: 25px;
+  border-bottom: 2px solid white;
+  float: right;
+}
+
+#formAddNewRow div.input input { 
+  width: 175px;
+  line-height: 25px;
+  color: #434343;
+}
+
+tr.row_selected {
+  background-color: yellow !important;
+}
+
+tr:hover, tr.row_hover {
+  background-color: #528CE0 !important;
+}
+
+/* Div für Buttons */
+.add_delete_toolbar {
+  position: absolute;
+  top: 36px;
+  left: 400px;
+}

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/2000/REC-xhtml1-20000126/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- Template: navi_edit.tpl.html -->
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>{titel}</title>
+
+<link rel="stylesheet" type="text/css" href="../css/cmsadmin_admin.css" media="screen"/>
+<link rel="stylesheet" type="text/css" href="../css/cmsadmin_tabnav.css" media="screen"/>
+<!-- Einbinden der TinyMCE-scripts und Customizing des Editors fuer diese Seite -->
+<script type="text/javascript" src="../../lib/prototype.php"></script>
+<script type="text/javascript" src="../../tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript" src="../../lib/path_finder.js"></script>
+<script type="text/javascript" src="../scripts/tinymce_settings.js"></script>
+
+</head>
+
+<body id="top">
+
+	<div id="content">
+		<!-- BEGIN row -->
+		<form id="naviSeitenEdit" name="page_edit" action="{action_url}" method="post">
+			<table id="naviEdit" width="800" cellpadding="1" cellspacing="1">
+			  <tr>
+				<td colspan="5">
+					<ul id="tabnav">
+						<!-- BEGIN tabnav -->
+						<li>{link}</li>
+						<!-- END tabnav -->
+					</ul>
+				</td>
+			  </tr>		  				
+			  <tr class="navi_overview_titel">
+				<td colspan="1" align="center">
+                  <button type="button" class="navi_abbrechen" value="abbrechen" title="{lbl_escape}"></button>
+                  <button type="button" class="navi_sichern" value="sichern" title="{lbl_save}"></button>                  
+                </td>
+				<td colspan="4">{lbl_seite} {seite}</td>
+			  </tr>		  				
+			  <tr id="trMessage" class="col_even {msg_hide}">
+				<td width="20%" align="right">{lbl_message}</td>
+				<td width="80%" id="message" class="{msg_class}">{message}</td>
+			  </tr>			  
+			  <tr class="col_odd">
+				<td width="20%" align="right">{lbl_seiteninfo}</td>
+				<td width="80%">{seiteninfo}</td>
+			  </tr>			  
+			  <tr class="col_even">
+				<td width="20%" align="right">
+                  <span align="left"><img id="ledLangu" src="{ledLangu}" alt="{ledAlt}" title="{ledTitle}"/></span>
+                  <span align="right">{lbl_sprachwahl}</span>                
+                </td>
+				<td width="80%">{sprachwahl}
+                  <input type="hidden" id="languForSave" name="langu_sav" value="" />
+                  <input type="hidden" id="msgFromSave" name="msg_sav" value="" />
+                  <input type="hidden" id="classFromSave" name="class_sav" value="" />                  
+                  <input type="hidden" id="ledFromSave" name="led_sav" value="" />                  
+                </td>
+			  </tr>
+			  <tr class="col_odd">
+				<td width="20%" align="right">{lbl_template}</td>
+				<td width="80%">{templates}</td>
+			  </tr>
+			  <tr class="col_even">
+				<td width="20%" align="right">{lbl_modul}</td>
+				<td width="80%">{modules}</td>
+			  </tr>
+			  <tr class="col_odd">
+				<td width="20%" align="right">{lbl_memberlogin}</td>
+				<td width="80%">{memberlogin}</td>
+			  </tr>
+              <tr class="col_even">
+                <td width="20%" align="right">{lbl_kurztitel}</td>
+                <td width="80%"><input type="text" id="kurztitel" name="kurztitel" size="60" maxlength="60" value="{kurztitel}" style="width:420px;" />
+                    {lbl_zeichen} <b><span id="anzeige_kurztitel"></span>&nbsp;/&nbsp;<span id="maxzeichen_kurztitel"></span></b>
+                </td>
+              </tr>
+              <tr class="col_odd">
+                <td width="20%" align="right">{lbl_zusatztext}</td>
+                <td width="80%"><input type="text" id="zusatztext" name="zusatztext" size="60" maxlength="60" value="{zusatztext}" style="width:420px;" />
+                    {lbl_zeichen} <b><span id="anzeige_zusatztext"></span>&nbsp;/&nbsp;<span id="maxzeichen_zusatztext"></span></b>
+                </td>
+              </tr>
+              <tr class="col_even">
+                <td width="20%" align="right">{lbl_inhaltstext}</td>
+                <td width="80%">
+                  <textarea id="inhalt1" cols="70" rows="30" name="inhalt1">{inhalt1}</textarea>
+                </td>
+              </tr>
+              <tr class="{evenodd1}" style="{hide_inhalt2}">
+                <td width="20%" align="right">{lbl_inhaltstext2}</td>
+                <td width="80%"><textarea id="inhalt2" cols="70" rows="10" name="inhalt2">{inhalt2}</textarea></td>
+              </tr>
+			  <tr class="{evenodd2}">
+				<td width="20%" align="right">{lbl_bild}</td>
+				<td width="80%" nowrap>
+					{bildselect}
+					<img name="bild1" src="{bild1}" hspace="30" border="0" align="top" alt="" /><br />
+					{galerie}
+				</td> 
+			  </tr>
+			  <tr class="{evenodd1}">
+				<td width="20%" align="right">{lbl_galerie}</td>
+				<td width="80%">{galerie_aktiv}</td>
+			  </tr>
+			  <tr class="navi_overview_titel">
+				<td colspan="1" align="center">
+                  <button type="button" class="navi_abbrechen" value="abbrechen" title="{lbl_escape}"></button>
+                  <button type="button" class="navi_sichern" value="sichern" title="{lbl_save}"></button>
+                </td>
+				<td width="80%">
+                  <button type="reset" class="reset" value="reset" title="{lbl_reset}"></button>
+				</td>
+			  </tr>
+			</table>
+		</form>
+	  <!-- END row -->
+	</div>
+
+    <!-- BEGIN texte -->
+    <table id="texteLangu">
+      <tr class="col_even">
+        <td width="20%" align="right">{lbl_kurztitel}</td>
+        <td width="80%"><input type="text" id="kurztitel" name="kurztitel" size="60" maxlength="60" value="{kurztitel}" style="width:420px;" />
+            {lbl_zeichen} <b><span id="anzeige_kurztitel"></span>&nbsp;/&nbsp;<span id="maxzeichen_kurztitel"></span></b>
+        </td>
+      </tr>
+      <tr class="col_odd">
+        <td width="20%" align="right">{lbl_zusatztext}</td>
+        <td width="80%"><input type="text" id="zusatztext" name="zusatztext" size="60" maxlength="60" value="{zusatztext}" style="width:420px;" />
+            {lbl_zeichen} <b><span id="anzeige_zusatztext"></span>&nbsp;/&nbsp;<span id="maxzeichen_zusatztext"></span></b>
+        </td>
+      </tr>
+      <tr class="col_even">
+        <td width="20%" align="right">{lbl_inhaltstext}</td>
+        <td width="80%"><textarea id="longtxt" cols="70" rows="50" name="inhalt1">{inhalt1}</textarea></td>
+      </tr>
+      <tr class="{evenodd1}" style="{hide_inhalt2}">
+        <td width="20%" align="right">{lbl_inhaltstext2}</td>
+        <td width="80%"><textarea id="longtxt2" cols="70" rows="10" name="inhalt2">{inhalt2}</textarea></td>
+      </tr>
+    </table>
+    <!-- END texte -->
+  
+	<script type="text/javascript" src="../scripts/navi_edit.js"></script>
+    <script type="text/javascript" src="../scripts/general_cmsadmin.js"></script>
+
+</body>
+
+</html>

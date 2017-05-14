@@ -1,0 +1,105 @@
+/*************************************************
+* Navigation
+*************************************************/
+
+
+#navigation_liste
+{
+padding: 31px 10px 10px 20px;
+font-family: inherit;
+font-size: 13px;
+font-weight: bold;
+/*vertical-align: base#navigation;*/
+width: 120px;
+}
+
+* html #navigation_liste
+{
+padding: 40px 10px 10px 20px;
+}
+
+
+#navigation_liste ul
+{
+line-height: 20px;
+list-style: none;
+margin-left: 0;
+padding: 0;
+border: none;
+}
+
+#navigation_liste li
+{
+padding-top: 0px;
+padding-bottom: 5px;
+margin: 0;
+}
+
+* html #navigation_liste ul {  /* nur fuer Internet Explorer */
+line-height: 15px;
+/* Version 5.x */
+}
+* html #navigation_liste li {  /* nur fuer Internet Explorer */
+padding-top: 0px;
+/* Version 5.x */
+}
+
+#navigation_liste li a:link, #navigation_liste li a:visited
+{
+display: block;
+padding: 0px;
+border: 0px;
+background-color: transparent;
+text-decoration: none;
+color: #323232;
+}
+
+.aktiv
+{
+font-weight: bold;
+color: #ffffff;
+}
+
+html>body #navigation_liste li a { width: auto; }
+
+#navigation_liste li a:active,
+#navigation_liste ul li a.active,
+#navigation_liste ul li a.subactive
+{
+color: #fff !important;
+font-weight: bold;
+}
+
+* html #navigation_liste ul ul
+{
+padding-bottom: 15px;
+}
+
+#navigation_liste li li
+{
+padding-left: 15px;
+padding-top: 0px;
+margin: 0;
+}
+
+* html #navigation_liste li li
+{
+padding-bottom: 5px;
+}
+
+
+#navigation_liste li li a:link, #navigation_liste li li a:visited
+{
+color: #323232;
+padding-top: 0px;
+display: block;
+text-decoration: none;
+width: 100%;
+}
+
+/* hover und aktiver link der 1. und 2. Ebene der Hauptnavigation */
+#navigation_liste ul li.aktiv, #navigation_liste ul li a.aktiv  {
+	color: #ffffff;
+	font-weight: bold;
+}
+

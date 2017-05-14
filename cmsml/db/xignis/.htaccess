@@ -1,0 +1,26 @@
+# .htaccess für www.xignis.ch - cms
+
+# Default Character Set
+# AddDefaultCharset ISO-8859-1
+ AddDefaultCharset utf-8
+
+# .htaccess unsichtbar machen für alle
+<Files .htaccess>
+  order allow,deny
+  deny from all
+</Files>
+
+#  mod_rewrite in use
+RewriteEngine On
+
+# Wo gilt das mod_rewrite
+RewriteBase /cmsml
+
+# URL ohne index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^(/index\.php|/images|/js|/css|/robots\.txt|/favicon\.ico)
+RewriteRule ^(.*)$ index.php?/$1 [L]
+
+# Security-Einstellung gem. https://secure.metanet.ch/support/kb/questions.php?questionid=404
+AddHandler php5-fastcgi .php .php5

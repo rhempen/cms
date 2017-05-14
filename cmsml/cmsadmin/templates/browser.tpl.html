@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/2000/REC-xhtml1-20000126/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- Template: browser.tpl.html -->
+
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Media Browser</title>
+
+<link rel="stylesheet" href="../css/cmsadmin_admin.css" />
+<link rel="stylesheet" href="../css/cmsadmin_tabnav.css" />
+
+<style type="text/css">
+a, a:link {
+	color: Purple;
+	font-size: 11px;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.hide {
+	display: none;
+}
+</style>
+
+<script type="text/javascript" src="../../lib/prototype.php" charset="utf-8"></script>
+<script type="text/javascript" src="../../lib/scriptaculous.js"></script>
+<script type="text/javascript" src="../../lib/effects.js"></script>
+<script type="text/javascript" src="../../lib/controls.js"></script>
+<script type="text/javascript" src="../../lib/path_finder.js"></script>
+<script type="text/javascript" src="../../lib/lightbox.js"></script>
+<script type="text/javascript" src="../scripts/browser.js"></script>
+
+</head>
+
+<body>
+
+<table cellpadding="0" cellspacing="1" border="0" width="800">
+<!-- BEGIN menue_block -->
+<!-- Start {menu_procedure} --> 
+  <tr>
+    <td colspan="8"> 
+		<ul id="tabnav">
+			<!-- BEGIN tabnav -->
+			<li>
+			    {link}
+			</li>
+			<!-- END tabnav -->
+		</ul>
+    </td>
+	</td>
+  </tr>
+<!-- Ende {menu_procedure} --> 
+<!-- END menue_block -->
+<!-- BEGIN message_block -->
+  <tr class="class_meldung">
+	<td colspan="8"><span class="{class_menu}">{menu_text}</span>
+				<br />{meldung}
+	</td>
+  </tr>
+<!-- END message_block -->
+<!-- BEGIN main_block -->
+  <tr class="{class}">
+	<td width="25" align="center">
+		<a href="{parent_dir_link}">
+			<img src="../gifs/up_folder_16.png" with="16" height="16" border="0" class="{display_up_arrow}" alt="{text_up}" title="{text_up}" />
+		</a>
+		{refresh_link}
+	</td>
+	<td colspan="7">
+		{text_current_folder}: {media_base}{current_dir} {text_seite} {seiten_info}
+	</td>
+  </tr>
+<!-- END main_block -->
+
+<!-- BEGIN show_bild -->
+  <tr class="{class}">
+	<td colspan="8">
+		{bild}
+	</td>
+  </tr>
+<!-- END show_bild -->
+
+<!-- BEGIN list_block -->
+<!-- Bilderverzeichnis -->
+  <tr class="{class}">
+	<td width="25" align="center">
+		<a href="{link}" target="{link_target}">
+			<img src="{filetype_icon}" width="16" height="16" class="{display_filetype_icon}" border="0"  alt="{text_filetype}" title="{text_filetype}" />
+		</a>		
+		<span>{sortkey}</span>
+	</td>
+	<td width="375">
+		<span class="{show_bild}"><img src="{pfad_und_bild}" border="0" width="{breite}" height="{hoehe}" alt="{filename}" title="{filename}" /></span>
+		<span class="{show_filename}">{filename}</span>
+	</td>
+	<td width="150" align="center">{filelastmodified}{permissions}
+	</td>
+	<td width="100" align="center">{filedimensions}{fileowner}
+	</td>
+	<td width="100" align="center">{filesize}{filegroup}
+	</td>
+	<td width="25" align="center">
+		<a href="{link_show}" target="{link_show_target}" class="{display_show}">
+			<img src="../gifs/view_16.png" alt="{text_bild_show}" title="{text_bild_show}" border="0" /> 
+		</a>
+	</td>
+	<td width="25" align="center">
+		<a href="{link_delete}" onclick="javascript:return confirm('{confirm_delete}\n {filename}');" class="{display_delete}"> 
+			<img src="../gifs/delete.gif" with="16" height="16" alt="{text_bild_delete}"  title="{text_bild_delete}" border="0" /> 
+		</a>
+	</td>
+  </tr>
+<!-- Ende Bilderverzeichnis -->
+<!-- END list_block -->
+
+<!-- BEGIN list_edit_block -->
+<!-- Kommentare pflegen -->
+  <tr class="{class}">
+	<td width="25" align="center">
+		<span>{sortkey}</span>
+	</td>
+	<td width="375">
+		<span class="{show_bild_pfad}"><img src="{pfad_und_bild}" border="0" alt="{filename}" title="{filename}" /></span><br />
+		<span class="{show_filename}">{filename}</span>
+	</td>
+	<td colspan="5" width="375" align="left">
+		<span id="meldung{kid}"></span><br />
+		<form action="#" method="post" name="komment{kid}">
+          <table id="{kid}">
+            <tr class="{hide_show_de}">
+              <td>{lang_de}</td>
+              <td><textarea id="{kid}_de" class="kommentar" cols="40" rows="0" name="kommentar">{kommentar_de}</textarea></td>
+            </tr>
+            <tr class="{hide_show_en}">
+              <td>{lang_en}</td>
+              <td><textarea id="{kid}_en" class="kommentar" cols="40" rows="0" name="kommentar">{kommentar_en}</textarea></td>
+            </tr>
+            <tr class="{hide_show_fr}">
+              <td>{lang_fr}</td>
+              <td><textarea id="{kid}_fr" class="kommentar" cols="40" rows="1" name="kommentar">{kommentar_fr}</textarea></td>
+            </tr>
+            <tr class="{hide_show_it}">
+              <td>{lang_it}</td>
+              <td><textarea id="{kid}_it" class="kommentar" cols="40" rows="1" name="kommentar">{kommentar_it}</textarea></td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <input type="reset" name="reset" value="reset" /> &nbsp;
+                <input type="submit" name="speichern" value="speichern" 
+                       onclick='update_kommentar($("{kid}").id); return false;' />                 
+              </td>
+            </tr>
+          </table>            
+		</form>
+	</td>
+	<td width="25" align="center">
+		<a href="{link_up}" class="{display_up}"> 
+			<img src="../gifs/up.gif" with="14" height="10" alt="{text_bild_up}"  title="{text_bild_up}" border="0" /> 
+		</a>
+	</td>
+  </tr>
+<!-- Ende Kommentare pflegen -->
+<!-- END list_edit_block -->
+</table>
+
+
+<!-- BEGIN create_directory -->
+<form name="creadir" action="{create_dir_link}" method="post" />
+<table cellpadding="0" cellspacing="1" border="0" width="800">
+  <tr class="{class}">
+	<td colspan="2">{text_verzeichnisse}</td>
+  </tr>
+  <tr class="{class_even}">  	
+	<td width="100">{text_ziel_verzeichnis}</td>
+	<td>{dirs_selectbox}</td>
+  </tr>
+  <tr class="{class_odd}">
+	<td width="100">{text_neues_verzeichnis}</td>
+	<td><input type="text" name="verzeichnis" size="50" style="width:605px;"/></td>
+  </tr>
+  <tr class="{class_even}">
+  	<td width="100">&nbsp;</td>
+	<td><input type="reset" name="reset" size="25" value="Reset" style="width:180px;"/>&nbsp;&nbsp;
+	    <input type="submit" name="submit" size="25" value="Verzeichnis anlegen" style="width:180px;"/>
+	</td>
+  </tr>
+</table>
+</form>
+<!-- END create_directory -->
+
+<!-- BEGIN upload_files -->
+<form name="upload" action="{create_dir_link}" method="post" enctype="multipart/form-data">
+<table cellpadding="0" cellspacing="1" border="0" width="800">
+  <tr class="{class}">
+	<td colspan="2">
+		{text_verzeichnisse} {text_seite} {seiten_info}
+	</td>
+  </tr>
+  <tr class="{class_even}" style="{style_ziel_verzeichnis}">
+	<td colspan="2">{text_ziel_verzeichnis}&nbsp;{dirs_selectbox}</td>
+  </tr>
+  <tr class="{class_odd}">
+	<td width="50%">
+		<input type="file" size="42" name="file1" />
+	</td>
+	<td width="50%">
+		<input type="file" size="42" name="file2" />
+	</td>
+  </tr>
+  <tr class="{class_even}">
+	<td width="50%">
+		<input type="file" size="42" name="file3" />
+	</td>
+	<td width="50%">
+		<input type="file" size="42" name="file4" />
+	</td>
+  </tr>
+  <tr class="{class_odd}">
+	<td width="50%">
+		<input type="file" size="42" name="file5" />
+	</td>
+	<td width="50%">
+		<input type="file" size="42" name="file6" />
+	</td>
+  </tr>
+  <tr class="{class_even}">
+	<td width="50%">
+		<input type="file" size="42" name="file7" />
+	</td>
+	<td width="50%">
+		<input type="file" size="42" name="file8" />
+	</td>
+  </tr>
+  <tr class="{class_odd}">
+	<td width="50%">
+		<input type="file" size="42" name="file9" />
+	</td>
+	<td width="50%">
+		<input type="file" size="42" name="file10" />
+	</td>
+  </tr>
+  <tr class="{class_even}">
+	<td colspan="2" width="100%"><input type="checkbox" style="display: none;" name="thumbnails" value="ja"  checked="checked" />{text_thumbnails_erstellen}&nbsp;&nbsp;{selectbox_groessen}&nbsp;px</td>
+  </tr>
+  <tr class="{class_odd}">
+	<td colspan="2" width="100%">
+		<input type="reset" name="reset" size="25" value="Reset" style="width:180px;"/>&nbsp;&nbsp;
+	    <input type="submit" name="submit" size="25" value="Dateien laden" style="width:180px;"/>
+	</td>
+  </tr>
+ </table>
+</form>
+<!-- END upload_files -->
+
+</body>
+
+</html>
+

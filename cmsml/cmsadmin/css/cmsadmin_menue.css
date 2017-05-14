@@ -1,0 +1,37 @@
+/* CSS Document */
+
+/* Menu Level 1 */
+ul {
+	position: relative;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+ul li {
+	position: relative;
+	width: 200px;
+}
+
+/* Links */
+a {
+	padding: 10px 10px;
+	color: Purple;
+	font-size: 11px;
+	font-weight: bold;
+	background-color:transparent;
+	display: block;
+	text-decoration: none;
+}
+
+a.ohne_rand {
+	padding: 0;
+	display: inline;
+}
+ 
+ul a:hover  {
+	padding: 10px 10px;
+	color: #dedede;
+	background-color: purple;
+}
+

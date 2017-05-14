@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/2000/REC-xhtml1-20000126/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- Template: page_edit.tpl.html -->
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+<title>{titel}</title>
+
+<link rel="stylesheet" type="text/css" href="../css/cmsadmin_admin.css" media="screen"/>
+<link rel="stylesheet" type="text/css" href="../css/cmsadmin_tabnav.css" media="screen"/>
+
+<!-- Einbinden der TinyMCE-scripts und Customizing des Editors f�r diese Seite -->
+<script type="text/javascript" src="../../lib/prototype.php"></script>
+<script type="text/javascript" src="../../lib/scriptaculous.js"></script>
+<script type="text/javascript" src="../../tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript" src="../../lib/path_finder.js"></script>
+<script type="text/javascript" src="../scripts/tinymce_settings.js"></script>
+<script type="text/javascript" src="../scripts/general_cmsadmin.js"></script>
+
+</head>
+
+<body id="top">
+
+	<div id="content">		
+	  <!-- BEGIN row -->
+    <script type="text/javascript" charset="utf-8">
+      Event.observe(window, "load", function(){
+         new Ajax.Autocompleter("exp1","explist1","{auto_complete_exe}", { afterUpdateElement: set_link_id1 });
+         new Ajax.Autocompleter("exp2","explist2","{auto_complete_exe}", { afterUpdateElement: set_link_id2 });
+      });
+      function set_link_id1(text, li) { $("linkid1").value = li.value; }
+      function set_link_id2(text, li) { $("linkid2").value = li.value; }
+    </script>
+		<form id="pageSeitenEdit" name="page_edit" action="{action_url}" method="post" onsubmit="return check_felder_pages();">			
+			<table width="730" cellpadding="1" cellspacing="1">
+              <tr> 
+			    <td colspan="2"> 
+					<ul id="tabnav">
+						<!-- BEGIN tabnav -->
+						<li>{link}</li>
+						<!-- END tabnav -->
+					</ul>
+			    </td>
+			  </tr>
+			  <!-- BEGINN message_block -->
+			  <tr> 
+				<td colspan="2"><span id="meldung">{meldung}</span></td>			    
+			  </tr>
+			  <!-- ENDE message_block -->
+			  <tr class="navi_overview_titel">
+				<td align="center">
+                  <button type="button" class="page_abbrechen" value="abbrechen" title="{lbl_escape}"></button>
+                  <button type="button" class="page_sichern" value="sichern" title="{lbl_save}"></button>                  
+                </td>
+				<td>{lbl_seite} {seite}
+				<input type="hidden" name="domain" value="{domain}" />
+				<input type="hidden" name="kennzeichen" value="{kennzeichen}" />
+				<input type="hidden" name="pageId" value="{page_id}" />
+				<input type="hidden" name="fach" id="fach" value="{fach}" />
+				<input type="hidden" name="aktiv" id="aktiv" value="{aktiv}" />
+				<input type="hidden" id="maxzeichenwert" value="{maxzeichenwert}" />
+                </td>
+			  </tr>		  				
+			  <tr id="trMessage" class="col_even {msg_hide}">
+				<td width="20%" align="right">{lbl_message}</td>
+				<td width="80%" id="message" class="{msg_class}">{message}</td>
+			  </tr>			  
+			  <tr class="col_odd">
+				<td width="20%" align="right">{lbl_seiteninfo}</td>
+				<td width="80%">{seiteninfo}</td>
+			  </tr>              
+			  <tr class="col_even">
+				<td width="20%" align="right">
+                  <span align="left"><img id="ledLangu" src="{ledLangu}" alt="{ledAlt}" title="{ledTitle}"/></span>
+                  <span align="right">{lbl_sprachwahl}</span>                
+                </td>
+				<td width="80%">{sprachwahl}
+                  <input type="hidden" id="languForSave" name="langu_sav" value="" />
+                  <input type="hidden" id="msgFromSave" name="msg_sav" value="" />
+                  <input type="hidden" id="classFromSave" name="class_sav" value="" />                  
+                  <input type="hidden" id="ledFromSave" name="led_sav" value="" />                  
+                </td>
+			  </tr>              
+			  <tr class="col_odd">
+				<td width="20%" align="right">{lbl_template}</td>
+				<td width="80%">{templates}</td>
+			  </tr>
+			  <tr class="col_even">
+				<td width="20%" align="right">{lbl_integration}</td>
+				<td width="80%">{navigation}</td>
+			  </tr>
+			  <tr class="col_odd">
+				<td width="20%" align="right">{lbl_name}</td>
+				<td width="80%">
+                  <input type="text" id="name" name="name" size="60" maxlength="60" value="{name}" style="width:420px;" class="{name_error}" />
+                  {lbl_zeichen} <b><span id="anzeige_name"></span>&nbsp;/&nbsp;<span id="maxzeichen_name"></span></b>
+				</td>				
+			  </tr>
+			  <tr class="col_even">
+				<td width="20%" align="right">{lbl_vonbis}</td>
+				<td width="80%"><input type="text" id="datum_von" name="datum_von" size="10" maxlength="10" value="{datum_von}" class="{datum_von_error}" />&nbsp;&#8212;&nbsp;
+								<input type="text" id="datum_bis" name="datum_bis" size="10" maxlength="10" value="{datum_bis}" class="{datum_bis_error}" />&nbsp;&nbsp;Format: DD.MM.JJJJ
+				</td>
+			  </tr>
+			  <tr class="col_odd">
+				<td width="20%" align="right">{lbl_kurztext}</td>
+				<td width="80%">
+                  <textarea id="shortxt" cols="70" rows="3" name="kurztext" wrap="physical" class="{kurztext_error}">{kurztext}</textarea>
+                  <br />{max_zeichen} <b><span id="maxzeichen">{maxzeichenwert}</span></b>&nbsp;&#8212;&nbsp;{restl_zeichen} <b><span id="anzeige"></span></b>
+						<!--<input type="text" name="kurztext" size="50" maxlength="50" value="{kurztext}" style="width:600px;" class="{kurztext_error}" />-->
+				</td>
+			  </tr>
+			  <tr class="col_even">
+				<td width="20%" align="right">{lbl_inhalt1}</td>
+			 	<td width="80%" class="{langtext_error}">
+                  <textarea id="inhalt1" cols="70" rows="10" name="inhalt1">{inhalt1}</textarea></td>
+			  </tr>
+
+			  <tr class="{evenodd2}" style="{hide_inhalt2}">
+				<td width="20%" align="right">{lbl_inhalt2}</td>
+			 	<td width="80%"><textarea id="inhalt2" cols="70" rows="10" name="inhalt2">{inhalt2}</textarea></td>
+			  </tr>
+
+			  <tr class="{evenodd1}" style="display:{none};">
+				<td width="20%" align="right">{lbl_bild1}</td>
+		        <td width="80%">
+          			{thumbnail_selectbox1}
+					<img name="bild1" src="{bild1}" hspace="50" border="0" align="top" alt="" />
+        		</td> 
+			  </tr>
+			  <tr class="{evenodd2}" style="display:{none};">
+				<td width="20%" align="right">{lbl_bild2}</td>
+				<td width="80%"">
+					{thumbnail_selectbox2}
+					<img name="bild2" src="{bild2}" hspace="50" border="0" align="top" alt="" />
+				</td> 
+			  </tr>
+			  <tr class="{evenodd1}" style="display:{none};">
+				<td width="20%" align="right">{lbl_galerie}</td>
+				<td width="80%">{galerie_aktiv}</td>
+			  </tr>
+			  <tr class="{evenodd2}" style="display:{none};">
+				<td width="20%" align="right">{lbl_link1}</td>
+				<td width="80%">
+					<div id="explink1">
+						<input type="text" id="exp1" name="exp1" autocomplete="off" value="{wert_link1}" /> 
+						<input type="hidden" id="linkid1" name="linkid1" value="{wert_linkid1}" /> 
+						<div id="explist1" class="auto_complete"></div>
+					</div>
+				</td>
+			  </tr>
+			  <tr class="{evenodd1}" style="display:{none};">
+				<td width="20%" align="right">{lbl_link2}</td>
+				<td width="80%">
+					<div id="explink2">
+						<input type="text" id="exp2" name="exp2" autocomplete="off" value="{wert_link2}" /> 
+						<input type="hidden" id="linkid2" name="linkid2" value="{wert_linkid2}" /> 
+						<div id="explist2" class="auto_complete"></div>
+					</div>
+				</td>
+			  </tr>
+			  <tr class="navi_overview_titel">
+				<td width="20%" align="center">
+                  <button type="button" class="page_abbrechen" value="abbrechen" title="{lbl_escape}"></button>
+                  <button type="button" class="page_sichern" value="sichern" title="{lbl_save}"></button>                  
+                </td>
+				<td width="80%">
+                  <button type="reset" class="reset" value="reset" title="{lbl_reset}"></button>
+				</td>
+			  </tr>
+			</table>
+		</form>
+	  <!-- END row -->
+	</div>
+	<script type="text/javascript" src="../scripts/page_edit.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,353 @@
+/* zuruecksetzen der Innen und Aussenabst�nde fuer alle Html Elemente */
+ * {
+ margin:0; padding: 0
+ }
+ 
+/* Schrift Frutiger einbinden */ 
+/* erst für den Internet Explorer */
+@font-face {
+	font-family: "Frutiger LT Std Ligth";
+	src: url("../font/FrutigerLTStd-Light.otf");
+/*
+	font-family: "Frutiger LT Std Black";
+	src: url("../font/FrutigerLTStd-Black.otf");
+	font-family: "Frutiger LT Std Roman";
+	src: url("../font/FrutigerLTStd-Roman.otf");
+*/
+}
+
+/* dann für Firefox 
+@font-face {
+font-family: MeineSchrift;
+src: url("/schriften/MeineSchrift.woff") format("woff");
+}
+*/
+ 
+/* (de) Erzwingen vertikaler Scrollbalken in Netscape, Firefox und Safari Browsern */
+html{
+  height: 100%
+}
+
+body{ 
+  min-height: 101%;
+/* (de) Vorgabe der Standardfarben und Textausrichtung */
+  color: #424242;
+  background-color: #ffffff;
+  text-align: left;
+  font-family: Arial, Helvetica, "Frutiger LT Std Light", "Microsoft Sans Serif";
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: 0.3px;
+}
+
+h1 {
+  color: #FF3300;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+h2 {
+  color: #336699;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+/* Member-Login */
+#memberLogin {
+  width: 380px;
+  padding: 10px;
+  background-color: #2E5068; 
+  position: absolute;
+  left: 33%;
+  right: 33%;
+  margin: auto;
+}
+
+#memberLogin fieldset {
+  background-color: #ffffff;
+  padding: 5px 10px;
+}
+
+#memberLogin label {
+  min-width: 120px;
+  width: auto;
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+#memberLogin input {
+  width: 98%;
+}
+
+#memberLogin input#login {
+  cursor: pointer;
+  width: auto;
+  background-color: #dedede;
+  border-right: 2px solid #434343;
+  border-bottom: 2px solid #434343;  
+}
+
+#memberLogin #memberLinks {
+  width: 100%;
+  background-color: #2E5068;
+}
+
+#memberLogin .memberLink {
+  padding: 0 10px;
+  cursor: pointer;  
+  color: #FFFFFF;
+}
+
+#memberLogin .memberLink:hover {
+  font-weight: bold;
+  color: #FFFF66;
+}
+
+#memberLogin div#message {
+  font-weight: bold;
+  padding-bottom: 10px; 
+}
+
+#memberData {
+  position: absolute;
+  right: 0;
+  width: 20%;
+  height: 22px;
+  color: #ffffff;
+}
+
+#memberData #memberlogout {
+  cursor: pointer;  
+}
+
+
+/* das folgende Statemant verhindert, dass ein Link umrahmt wird, wenn man draufklickt */
+*:focus, *:active  {
+  outline: none; 
+}
+
+/* (de) Layout: Breite, Hintergrund, Rahmen */
+#page_margins
+{
+  width: 100%;
+  margin: 0px auto;
+  border: 0px;
+  text-align:left;
+}
+
+#page
+{
+  min-height: 400px;
+}
+
+iframe#addon_canvas 
+{
+  width: 900px;
+  height: 570px;
+  margin-bottom: 40px;
+  border: none;
+  overflow-y: auto;
+}
+
+a:link, a:visited, a:active 
+{
+  color: #232323;
+  font-weight: normal;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+a:hover
+{
+  color: #FF3300;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+#header
+{
+  height: 340px;
+  background-color: #ffffff; /*#0099CC;*/
+  padding: 0;
+  width: 100%;
+}
+
+#header .header_background {
+  position: absolute;
+  top: 22px;
+  left: 0;
+  height: auto;
+  width: 100%;
+}
+
+/* Hintergrundbild skalierbar machen */
+#header .header_background img {
+  width: 100%;
+  height: 300px;
+}
+
+#header_balken_oben {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 25px;
+  background-color: #2E5068;
+}
+
+#header_balken_unten {
+  position: absolute;
+  top: 325px;
+  width: 100%;
+  height: 25px;
+  background-color: #2E5068;
+}
+
+#header .header_balken {
+  background-color: #2e5068;
+  height: 25px;
+  width: 100%;
+}
+
+#header_home_wrapper {
+  position: relative;
+  top: 25px;
+  width: 900px;
+  height: 300px;
+  margin: 0 auto;
+}
+
+#home_bild {
+  z-index: 2;
+  position:	relative;
+  background-color: transparent;
+  padding: 0;
+  width: 400px;
+  height: 300px;
+  float: right;
+}
+
+#home_bild img {
+  height: 300px;
+  width: 400px;
+}
+
+#home_link
+{
+  position: absolute;
+  top: 0;
+  left: 125px;
+  float: left;
+  z-index: 3;
+  height: 140px; /*300*/
+  width: 132px;  /*263*/
+  background-color: transparent;
+  background-image: url(../img/logo-klein.png); /* 263x300px */
+  background-repeat: no-repeat;
+  padding: 0;
+  cursor: pointer;
+}
+
+
+#main
+{
+  clear: both;
+  width: 900px;
+  min-height: 480px;
+  background-color: #ffffff;
+  padding: 0 0 20px 0;
+  margin: 0 auto;
+}
+
+/* (de) Definition 2 Kolonnen (navigation und spalte 1 */
+#navigation
+{
+  position: absolute; /*fixed;*/
+  top: 350px;
+  left: -45px;
+  float: left;
+  width: 250px;
+  border: 0;
+  margin: 0;
+}
+
+
+#spalte3
+{
+  border: 0;
+  border-left: 0px solid #f0f0f0;
+  border-right: 0px solid #f0f0f0;
+}
+
+#spalte3_inhalt
+{
+  padding: 0px;
+  min-height: 480px;
+}
+
+* html #spalte3_inhalt {
+  height: 480px;
+}
+
+#spalte2
+{
+  visibility: hidden;
+  width: 1px;
+  background-color: red;
+  float: right;
+  border: 0;
+  min-height: 480px;
+}
+
+* html #spalte2 {
+  height: 480px;
+}
+
+.clearfix
+{
+  display: block;
+}
+
+#footer
+{
+  height: 22px;
+  color: #ffffff;
+  background-color: #2e5068;
+  padding: 0 20px;
+  border: 0px;
+  clear: both;
+  display: block;
+  line-height: 20px;
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+}
+
+#copyright {
+  float: left;
+  line-height: 22px;  
+  width: 20%;
+  display: inline;
+}
+
+#sprachen {
+  float: left;
+  width: 60%;
+  line-height: 22px;
+  text-align: center;
+}
+
+.even {
+  background-color: #F3F3F3;
+}
+
+.odd {
+  background-color: #FFFFFF;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}

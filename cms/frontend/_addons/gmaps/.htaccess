@@ -1,0 +1,14 @@
+# .htaccess für /addon
+
+# Default Character Set
+# AddDefaultCharset ISO-8859-1
+ AddDefaultCharset utf-8
+
+# User - Authorization
+AuthName "admin"
+AuthType Basic
+AuthUserFile 	C:/xampp/htdocs/.htpasswd
+#Require user admin
+
+# allow file_open via URL
+php_value allow_url_fopen 1

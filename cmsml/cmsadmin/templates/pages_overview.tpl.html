@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/2000/REC-xhtml1-20000126/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- Template: pages_overview.tpl.html -->
+
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Seitenverwaltung</title>
+
+<link rel="stylesheet" href="../css/cmsadmin_admin.css" />
+<link rel="stylesheet" href="../css/cmsadmin_tabnav.css" />
+
+<style type="text/css">
+a, a:link {
+	color: Purple;
+	font-size: 11px;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.hide {
+	display: none;
+}
+</style>
+
+<script src="../../lib/prototype.php" type="text/javascript"></script>
+<script src="../../lib/scriptaculous.js" type="text/javascript"></script>
+<script src="../../lib/effects.js" type="text/javascript"></script>
+<script src="../../lib/controls.js" type="text/javascript"></script>
+<script src="../scripts/general_cmsadmin.js" type="text/javascript" charset="utf-8"></script>
+<script src="../scripts/pages_overview.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<table class="pages_overview" cellpadding="0" cellspacing="1" border="0">
+  <colgroup>
+    <col width="350"></col>
+    <col width="30"></col>
+    <col width="100"></col>
+    <col width="50"></col>
+    <col width="170"></col>
+  </colgroup>
+  <tr> 
+    <td colspan="5"> 
+		<ul id="tabnav">
+			<!-- BEGIN tabnav -->
+			<li>
+			    {link}
+			</li>
+			<!-- END tabnav -->
+		</ul>
+    </td>
+  </tr>
+  <!-- BEGIN message_block -->
+  <tr> 
+    <td colspan="5">{meldung}</td>
+  </tr>
+  <!-- END message_block -->
+
+
+  <!-- BEGIN list_block -->
+  <tr class="{class_gruppe_abstand}"><td colspan="5"></td></tr>  
+  <tr class="{class_gruppe}"> 
+    <td colspan="5"> 
+      <a href="#">
+        <img src="../gifs/{plus_minus}" id="{name_plus_minus}" name="{name_plus_minus}" 
+              with="16" height="16" alt="{text_plus_minus}" title="{text_plus_minus}" border="0" 
+              onclick="toggle_visibility('{gruppe}');" /> 
+      </a>
+      &nbsp;&nbsp;<span>{fach}</span> 
+	</td>
+  </tr>
+  
+  <!-- BEGIN titel -->
+  <tr id="{gruppen_id}" class="{class}" style="{style}">
+	<td>{label_bezeichnung}</td>
+    <td align="center"></td>
+	<td align="center">{label_gueltigkeit}</td>
+	<td align="center">{label_aktiv}</td>
+	<td align="center" nowrap>{label_links}</td>
+  </tr>
+  <!-- END titel -->
+  
+  <tr id="{gruppen_id}" class="{class_liste}" style="{style}">   
+	<td>
+      <table id="{lang_id}" width="100%">
+        <tr id="tr{page_id}_de" class="{class_de}"><td width="10%">{lang_de}</td><td><span class="name" id="{page_id}_de">{name_de}</span></td></tr>
+        <tr id="tr{page_id}_en" class="{class_en}"><td width="10%">{lang_en}</td><td><span class="name" id="{page_id}_en">{name_en}</span></td></tr>
+        <tr id="tr{page_id}_fr" class="{class_fr}"><td width="10%">{lang_fr}</td><td><span class="name" id="{page_id}_fr">{name_fr}</span></td></tr>
+        <tr id="tr{page_id}_it" class="{class_it}"><td width="10%">{lang_it}</td><td><span class="name" id="{page_id}_it">{name_it}</span></td></tr>        
+      </table>
+    </td>
+    <td align="center">{button_translate}</td>    
+	<td align="center"><span title="{datum_bis}" class="klein">{datum_von}<br />{datum_bis}</span></td>
+	<td align="center" class="aktivflag" id="{aktivid}" style="color:{farbe}">{button_aktiv}</td>
+	<td align="left" nowrap>
+      <table>
+        <tr>
+          <td>{button_upload}</td>
+          <td>{button_bilder_edit}</td>
+          <td>{button_edit}</td>
+          <td>{button_delete}</td>
+          <td>{button_moveup}</td>
+        </tr>
+      </table>
+	</td>
+  </tr>
+  <!-- END list_block -->
+</table>
+
+</body>
+
+</html>
+

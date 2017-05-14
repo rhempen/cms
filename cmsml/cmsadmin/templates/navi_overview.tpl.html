@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/2000/REC-xhtml1-20000126/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!-- Template: navi_overview.tpl.html -->
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>{titel}</title>
+
+<script src="../../lib/prototype.php" type="text/javascript" charset="utf-8"></script>
+<script src="../../lib/scriptaculous.js" type="text/javascript"></script>
+<script src="../../lib/effects.js" type="text/javascript"></script>
+<script src="../../lib/controls.js" type="text/javascript"></script>
+<script src="../scripts/general_cmsadmin.js" type="text/javascript" charset="utf-8"></script>
+<script src="../scripts/navi_overview.js" type="text/javascript" charset="utf-8"></script>
+
+<link rel="stylesheet" type="text/css" href="../css/cmsadmin_admin.css" media="screen"/>
+<link rel="stylesheet" type="text/css" href="../css/cmsadmin_tabnav.css" media="screen"/>
+
+</head>
+
+<body id="top">
+
+	<div id="content">
+      <div id="navisWrapper">
+        <table id="navis" width="100%" cellspacing="1">
+		  <tr> 
+		    <td colspan="8"> 
+				<ul id="tabnav">
+					<!-- BEGIN tabnav -->
+					<li>
+					    {link}
+					</li>
+					<!-- END tabnav -->
+				</ul>
+		    </td>
+		  </tr>
+	      <!-- BEGIN message_block -->
+		  <tr>
+			<td colspan="8">
+				{meldung}
+			</td>
+			<td>&nbsp;</td>
+		  </tr>		  				
+          <!-- END message_block -->
+        </table>
+        <div id="debug" style="padding:5px;"></div>		
+        <!-- BEGIN titel -->
+        <table class="navi_overview" cellspacing="1">
+          <colgroup>
+            <col width="40"></col>
+            <col width="45"></col>
+            <col width="280"></col>
+            <col width="45"></col>
+            <col width="45"></col>
+            <col width="45"></col>
+            <col width="45"></col>
+            <col width="240"></col>            
+          </colgroup>
+		  <tr class="{class}">
+			<td align="center">{label_kap}</td>
+			<td align="center">{label_ukap}</td>
+			<td align="left">{label_bezeichnung}</td>
+            <td>&nbsp;</td>
+			<td align="center">{label_start}</td>
+			<td align="center">{label_nav_type}</td>
+			<td align="center">{label_aktiv}</td>
+			<td align="left" nowrap>{label_links}</td>
+		  </tr>
+        </table>
+          <!-- END titel -->
+        <div id="navisDivs">
+          <!-- BEGIN zeile -->
+          {sortableDivBegin}
+            <table class="navi_overview" cellspacing="1">
+              <colgroup>
+                <col width="40"></col>
+                <col width="45"></col>
+                <col width="280"></col>
+                <col width="45"></col>
+                <col width="45"></col>
+                <col width="45"></col>
+                <col width="45"></col>
+                <col width="240"></col>
+              </colgroup>
+              <tr class="{class}" id="{tr_id}"{ukap_hide}>
+                <td align="center" id="{kap_ukap}" class="sortid">{kap}</td>
+                <td align="center">{ukap}</td>
+                <td>
+                  <table id="{lang_id}" width="100%">
+                    <tr id="tr{nav_id}_de" class="{class_de}"><td width="10%">{lang_de}</td><td><span class="bezeichnung" id="{nav_id}_de">{bezeich_de}</span></td></tr>
+                    <tr id="tr{nav_id}_en" class="{class_en}"><td width="10%">{lang_en}</td><td><span class="bezeichnung" id="{nav_id}_en">{bezeich_en}</span></td></tr>
+                    <tr id="tr{nav_id}_fr" class="{class_fr}"><td width="10%">{lang_fr}</td><td><span class="bezeichnung" id="{nav_id}_fr">{bezeich_fr}</span></td></tr>
+                    <tr id="tr{nav_id}_it" class="{class_it}"><td width="10%">{lang_it}</td><td><span class="bezeichnung" id="{nav_id}_it">{bezeich_it}</span></td></tr>
+                  </table>                
+                </td>
+                <td align="center">{button_translate}</td>
+                <td align="center">
+                    <span class="startflag" id="{startid}" title="{starttitle}">{startseite}</span> 
+                </td>
+                <td align="center">
+                    <span class="typeflag" style="color:{typecolor};" id="{typeid}" title="{typetitle}">{nav_type}</span>
+                </td>
+                <td align="center">
+                    <span class="aktivflag" id="{aktivid}" style="color:{farbe}">{aktiv}</span>
+                </td>
+                <td align="left" nowrap>
+                  <table><tr>
+                    <td>{button_upload}</td>
+                    <td>{button_bilder_edit}</td>
+                    <td>{button_edit}</td>
+                    <td>{button_copy}</td>
+                    <td>{button_create}</td>
+                    <td>{button_delete}</td>
+                    <td>{button_move}{button_move_up}</td>
+                  </tr></table>
+                  {links}
+                </td>
+              </tr>
+            </table>
+          {sortableDivEnd}
+          <!-- END zeile -->
+        </div>
+      </div>
+	</div>
+
+</body>
+<!-- Ende: navi_overview.tpl.html -->
+
+</html>

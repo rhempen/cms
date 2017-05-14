@@ -1,0 +1,3 @@
+192.168.1.51 - hero - 2012-06-04 (21:16) - 1338837390 - operating_system - 4 - Windows -  - http://hero/beta/voting/ - Mozilla/5.0 (Windows NT 6.1; WOW64; rv:9.0.1) Gecko/20100101 Firefox/9.0.1
+192.168.1.106 - hero.home - 2013-08-16 (16:42) - 1376664135 - operating_system - 1 - Macintosh -  - http://hero/beta/voting/ - Mozilla/5.0 (Windows NT 6.1; WOW64; rv:22.0) Gecko/20100101 Firefox/22.0
+192.168.1.106 - hero.home - 2013-08-16 (16:42) - 1376664146 - operating_system - 4 - Windows -  - http://hero/beta/voting/ - Mozilla/5.0 (Windows NT 6.1; WOW64; rv:22.0) Gecko/20100101 Firefox/22.0

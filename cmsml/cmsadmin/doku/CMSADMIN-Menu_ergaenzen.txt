@@ -1,0 +1,6 @@
+[ Neuer Menueintrag im CMSAMDIN-Menu ]
+1. DB: in der Tabelle "cms_user" muss ein Code im Feld "Menu" hinzugefügt werden (zb. A für ADDONS)
+2. languages: in allen Sprachfiles einen neuen Eintrag $GLOBALS['CMS']['MENU??'] mit Bezeichnung eintragen
+3. funcs/cmslogin.php: function menu() ergänzen 
+4. _models/user_maintain.class.php:
+5. cmsadmin/index.php: Aufruf der entsprechenden Seite im iframe eintragen

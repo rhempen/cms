@@ -1,0 +1,71 @@
+<!doctype html public "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>{vote_title} - {txt_script_name} {txt_script_version}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset={txt_charset}" />
+    <style type="text/css">
+    <!--
+
+      h3, p, body, td {
+          font-family:Arial, Helvetica, Sans-serif;
+      }
+
+    -->
+    </style>
+  </head>
+
+  <body>
+
+    <h3>{vote_title}</h3>
+
+    <p>{vote_text}
+
+      <IF NAME="display_link">
+        (<a href="{document_self}">{txt_display_form}</a>)
+      </IF NAME="display_link">
+    </p>
+
+
+    <IF NAME="display_results">
+      <table border="0" cellspacing="3" cellpadding="1">
+        <LOOP NAME="vote_result">
+          <tr>
+            <td>{vote_option}</td>
+            <td><img src="./templates/images_voting/{bar_image_name}" height="15" width="{bar_width}" alt="" border="0"></td>
+            <td>&nbsp;&nbsp;&nbsp;{vote_number}</td>
+            <td>&nbsp;&nbsp;&nbsp;{relation} %</td>
+          </tr>
+        </LOOP NAME="vote_result">
+      </table>
+
+      <p>{txt_total_votes}: {total_votes}</p>
+
+    </IF NAME="display_results">
+
+
+
+    <p>
+      <LOOP NAME="message">
+        <strong>{message}</strong><br />
+      </LOOP NAME="message">
+    </p>
+
+
+    <IF NAME="display_form">
+      <form name="vote" action="{script_self}" method="post">
+        {vote_form_fields}
+        <IF NAME="display_email"><p>{txt_enter_email} <input type="text" name="email_address" value="{email_address}"></p></IF NAME="display_email">
+        <IF NAME="display_captcha">
+          <p>
+          {txt_captcha_note}
+          <br /><br />
+          {captcha_content}
+          </p>
+        </IF NAME="display_captcha">
+        <p><input type="submit" name="submit_vote" value="{txt_submit}">&nbsp;&nbsp;&nbsp;(<a href="{document_self}?result=true">{txt_display_results}</a>)</p>
+      </form>
+    </IF NAME="display_form">
+
+ </body>
+</html>

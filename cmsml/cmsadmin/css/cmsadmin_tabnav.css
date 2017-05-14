@@ -1,0 +1,129 @@
+/* CSS Document f�r Pages-Menu */
+
+/* horizontels CSS-Menu */
+
+ul#tabnav {
+	list-style-type: none;
+	margin: 0px;
+	margin-left: -8px;
+	padding-left: 6px;
+	padding-bottom: 26px;
+	border-bottom: 1px solid purple;
+	font: bold 11px Verdana, Arial, sans-serif;
+}
+
+ul#tabnav li {
+	float: left;
+	background-color: #dedede;
+	color: #ffffff;
+	padding: 6px 0px;
+	margin: 0px 3px;
+  border: 1px solid purple; 
+}
+
+ul#tabnav a:link {
+	display: inline;
+	background-color: transparent;
+	color: purple;
+	text-decoration: none;
+}
+
+ul#tabnav a:hover {
+	padding: 6px 0px;
+	background-color: purple;
+	color: #ffffff;
+}
+
+.aktivnav {
+	padding: 6px 0px;
+	background-color: purple !important;
+	color: #ffffff !important;
+}
+
+.passivnav {
+	padding: 6px 0px;
+	background-color: transparent;
+	color: purple;
+}
+
+select.selboxEdit {
+  width: 600px;
+}
+
+/* CSS f�r Fragmente */
+div#msg {
+  height: 20px;
+}
+
+div#wrapper {
+  margin: 5px 0;
+  padding: 0 0 0 10px;
+}
+
+li.lielem {
+	clear: both;
+	height: 40px;
+	background-color: #F0FFFF;
+	width: 730px;
+	border-bottom: 2px solid #999999;
+}
+
+div.sortid {
+	float: left;
+	width: 30px;
+	line-height: 40px;
+	text-align: center;
+	border-right: 2px solid #999999;
+}
+
+div.divelem {
+	float: left;
+	line-height: 40px;
+	width: 450px;
+	padding-left: 10px;
+}
+
+div.divwork {
+	float: left;
+	height: 40px;
+    padding-left: 10px;
+	text-align: center;
+	border-left: 2px solid #999999;
+}
+
+div.mnusort {
+	float: left;
+	line-height: 27px;
+	text-align: center;
+	padding-top: 13px;
+	padding-right: 5px;
+    padding-left: 5px;
+	cursor: move;
+}
+
+span.navisort {
+    /*position: relative;*/
+	cursor: move;  
+}
+
+span.navisort img {
+  width: 24px;
+  height: 24px;
+  border: 1px solid #323232;
+}
+
+ul {
+  margin: 10px 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+ul#workmenu {
+	margin: 0;
+	padding: 0;
+}
+
+ul#workmenu .workitem {
+	display: inline;
+	padding: 0 5px;
+}

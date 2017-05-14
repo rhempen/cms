@@ -1,0 +1,2447 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>phpDocumentor</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="css/template.css" rel="stylesheet" media="all">
+<script src="js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="js/bootstrap.js" type="text/javascript"></script><script src="js/template.js" type="text/javascript"></script><script src="js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="img/favicon.ico">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="index.html">phpDocumentor</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="packages/CMSADMIN.html"><i class="icon-folder-open"></i> CMSADMIN</a></li>
+<li><a href="packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">364</span></a></li>
+<li><a href="markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4"><ul class="side-nav nav nav-list">
+<li class="nav-header">Filter type</li>
+<li><div class="btn-group type-filter" data-toggle="buttons-checkbox">
+<button class="btn critical">Critical</button><button class="btn error">Error</button><button class="btn notice">Notice</button>
+</div></li>
+<li class="nav-header">Navigation</li>
+<li><a href="#%5Cauth.php"><i class="icon-file"></i>\auth.php</a></li>
+<li><a href="#%5Cbackup%5Cbackup2.php"><i class="icon-file"></i>\backup\backup2.php</a></li>
+<li><a href="#%5Cbackup%5Cdb_connect2.php"><i class="icon-file"></i>\backup\db_connect2.php</a></li>
+<li><a href="#%5Cbackup%5Cindex.php"><i class="icon-file"></i>\backup\index.php</a></li>
+<li><a href="#%5Cbackup%5Cmaintain_backups.php"><i class="icon-file"></i>\backup\maintain_backups.php</a></li>
+<li><a href="#%5Cconfig.php"><i class="icon-file"></i>\config.php</a></li>
+<li><a href="#%5Cdoku.php"><i class="icon-file"></i>\doku.php</a></li>
+<li><a href="#%5Cfuncs%5Ccmslogin.php"><i class="icon-file"></i>\funcs\cmslogin.php</a></li>
+<li><a href="#%5Cfuncs%5Cdebug.php"><i class="icon-file"></i>\funcs\debug.php</a></li>
+<li><a href="#%5Cfuncs%5Cerzeuge_code.php"><i class="icon-file"></i>\funcs\erzeuge_code.php</a></li>
+<li><a href="#%5Cfuncs%5Cform_fus.php"><i class="icon-file"></i>\funcs\form_fus.php</a></li>
+<li><a href="#%5Cfuncs%5Clogin_fields_save.php"><i class="icon-file"></i>\funcs\login_fields_save.php</a></li>
+<li><a href="#%5Cfuncs%5Cphpinfo.php"><i class="icon-file"></i>\funcs\phpinfo.php</a></li>
+<li><a href="#%5Cfuncs%5Csecurity.php"><i class="icon-file"></i>\funcs\security.php</a></li>
+<li><a href="#%5Cindex.php"><i class="icon-file"></i>\index.php</a></li>
+<li><a href="#%5Cindex_save.php"><i class="icon-file"></i>\index_save.php</a></li>
+<li><a href="#%5Clinks.php"><i class="icon-file"></i>\links.php</a></li>
+<li><a href="#%5C_controllers%5Ccmsadmin.inc.php"><i class="icon-file"></i>\_controllers\cmsadmin.inc.php</a></li>
+<li><a href="#%5C_controllers%5Cconfig_co_maintain.php"><i class="icon-file"></i>\_controllers\config_co_maintain.php</a></li>
+<li><a href="#%5C_controllers%5Cfrgmnts_co_maintain.php"><i class="icon-file"></i>\_controllers\frgmnts_co_maintain.php</a></li>
+<li><a href="#%5C_controllers%5Cnavi_co_maintain.php"><i class="icon-file"></i>\_controllers\navi_co_maintain.php</a></li>
+<li><a href="#%5C_controllers%5Cpages_co_maintain.php"><i class="icon-file"></i>\_controllers\pages_co_maintain.php</a></li>
+<li><a href="#%5C_controllers%5Cpictures_co_maintain.php"><i class="icon-file"></i>\_controllers\pictures_co_maintain.php</a></li>
+<li><a href="#%5C_models%5Cconfig_maintain.class.php"><i class="icon-file"></i>\_models\config_maintain.class.php</a></li>
+<li><a href="#%5C_models%5Cfrgmnts_maintain.class.php"><i class="icon-file"></i>\_models\frgmnts_maintain.class.php</a></li>
+<li><a href="#%5C_models%5Cgeneral_maintain.class.php"><i class="icon-file"></i>\_models\general_maintain.class.php</a></li>
+<li><a href="#%5C_models%5Cnavi_maintain.class.php"><i class="icon-file"></i>\_models\navi_maintain.class.php</a></li>
+<li><a href="#%5C_models%5Cpages_maintain.class.php"><i class="icon-file"></i>\_models\pages_maintain.class.php</a></li>
+<li><a href="#%5C_models%5Cpictures_db_maintain.class.php"><i class="icon-file"></i>\_models\pictures_db_maintain.class.php</a></li>
+<li><a href="#%5C_models%5Cpictures_maintain.class.php"><i class="icon-file"></i>\_models\pictures_maintain.class.php</a></li>
+<li><a href="#%5C_models%5Credirect_maintain.class.php"><i class="icon-file"></i>\_models\redirect_maintain.class.php</a></li>
+<li><a href="#%5C_models%5Cuser_maintain.class.php"><i class="icon-file"></i>\_models\user_maintain.class.php</a></li>
+<li><a href="#%5C_views%5Cautocomplete_result.php"><i class="icon-file"></i>\_views\autocomplete_result.php</a></li>
+<li><a href="#%5C_views%5Cconfig_present.class.php"><i class="icon-file"></i>\_views\config_present.class.php</a></li>
+<li><a href="#%5C_views%5Cfrgmnts_present.class.php"><i class="icon-file"></i>\_views\frgmnts_present.class.php</a></li>
+<li><a href="#%5C_views%5Cgeneral_present.class.php"><i class="icon-file"></i>\_views\general_present.class.php</a></li>
+<li><a href="#%5C_views%5Cnavi_present.class.php"><i class="icon-file"></i>\_views\navi_present.class.php</a></li>
+<li><a href="#%5C_views%5Cpages_present.class.php"><i class="icon-file"></i>\_views\pages_present.class.php</a></li>
+<li><a href="#%5C_views%5Cpictures_present.class.php"><i class="icon-file"></i>\_views\pictures_present.class.php</a></li>
+</ul></div>
+<div class="span8">
+<ul class="breadcrumb">
+<li>
+<a href=""><i class="icon-remove-sign"></i></a><span class="divider">\</span>
+</li>
+<li>Compilation Errors</li>
+</ul>
+<div class="package-contents">
+<a name="%5Cauth.php" id="\auth.php"></a><h3>
+<i class="icon-file"></i>\auth.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="error">
+<td>error</td>
+<td>1</td>
+<td>No page-level DocBlock was found in file \auth.php</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="%5Cbackup%5Cbackup2.php" id="\backup\backup2.php"></a><h3>
+<i class="icon-file"></i>\backup\backup2.php<small style="float: right;padding-right: 10px;">3</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>1</td>
+<td>No page-level DocBlock was found in file \backup\backup2.php</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>10</td>
+<td>No DocBlock was found for function get_def()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>41</td>
+<td>No DocBlock was found for function get_content()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="%5Cbackup%5Cdb_connect2.php" id="\backup\db_connect2.php"></a><h3>
+<i class="icon-file"></i>\backup\db_connect2.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="error">
+<td>error</td>
+<td>1</td>
+<td>No page-level DocBlock was found in file \backup\db_connect2.php</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="%5Cbackup%5Cindex.php" id="\backup\index.php"></a><h3>
+<i class="icon-file"></i>\backup\index.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="error">
+<td>error</td>
+<td>1</td>
+<td>No page-level DocBlock was found in file \backup\index.php</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="%5Cbackup%5Cmaintain_backups.php" id="\backup\maintain_backups.php"></a><h3>
+<i class="icon-file"></i>\backup\maintain_backups.php<small style="float: right;padding-right: 10px;">4</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>1</td>
+<td>No page-level DocBlock was found in file \backup\maintain_backups.php</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>8</td>
+<td>No DocBlock was found for function read_backups()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>48</td>
+<td>No DocBlock was found for function delete_backupfile()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>63</td>
+<td>No DocBlock was found for function set_date_time()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="%5Cconfig.php" id="\config.php"></a><h3>
+<i class="icon-file"></i>\config.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="error">
+<td>error</td>
+<td>1</td>
+<td>No page-level DocBlock was found in file \config.php</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="%5Cdoku.php" id="\doku.php"></a><h3>
+<i class="icon-file"></i>\doku.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="error">
+<td>error</td>
+<td>1</td>
+<td>No page-level DocBlock was found in file \doku.php</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="%5Cfuncs%5Ccmslogin.php" id="\funcs\cmslogin.php"></a><h3>
+<i class="icon-file"></i>\funcs\cmslogin.php<small style="float: right;padding-right: 10px;">6</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>1</td>
+<td>No page-level DocBlock was found in file \funcs\cmslogin.php</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>6</td>
+<td>No DocBlock was found for function login_fields()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>78</td>
+<td>No DocBlock was found for function set_class()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>88</td>
+<td>No DocBlock was found for function menu()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>124</td>
+<td>No DocBlock was found for function message()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>137</td>
+<td>No DocBlock was found for function copyright()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="%5Cfuncs%5Cdebug.php" id="\funcs\debug.php"></a><h3>
+<i class="icon-file"></i>\funcs\debug.php<small style="float: right;padding-right: 10px;">7</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>1</td>
+<td>No page-level DocBlock was found in file \funcs\debug.php</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>27</td>
+<td>No DocBlock was found for function debug_finish()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>39</td>
+<td>No DocBlock was found for function debug_msg()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>48</td>
+<td>No DocBlock was found for function debug_capture_print_r()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>57</td>
+<td>No DocBlock was found for function debug_colorize_string()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>69</td>
+<td>No DocBlock was found for function debug_var()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>85</td>
+<td>No DocBlock was found for function get_request_headers()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="%5Cfuncs%5Cerzeuge_code.php" id="\funcs\erzeuge_code.php"></a><h3>
+<i class="icon-file"></i>\funcs\erzeuge_code.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>1</td>
+<td>No page-level DocBlock was found in file \funcs\erzeuge_code.php</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>2</td>
+<td>No DocBlock was found for function erzeuge_code()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="%5Cfuncs%5Cform_fus.php" id="\funcs\form_fus.php"></a><h3>
+<i class="icon-file"></i>\funcs\form_fus.php<small style="float: right;padding-right: 10px;">6</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>1</td>
+<td>No page-level DocBlock was found in file \funcs\form_fus.php</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>2</td>
+<td>No DocBlock was found for function sql_quote()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>19</td>
+<td>No DocBlock was found for function filter_data()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>33</td>
+<td>No DocBlock was found for function html_encode()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>44</td>
+<td>No DocBlock was found for function convert_umlaute()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>84</td>
+<td>No DocBlock was found for function convert_umlaute2()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="%5Cfuncs%5Clogin_fields_save.php" id="\funcs\login_fields_save.php"></a><h3>
+<i class="icon-file"></i>\funcs\login_fields_save.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="error">
+<td>error</td>
+<td>1</td>
+<td>No page-level DocBlock was found in file \funcs\login_fields_save.php</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="%5Cfuncs%5Cphpinfo.php" id="\funcs\phpinfo.php"></a><h3>
+<i class="icon-file"></i>\funcs\phpinfo.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="error">
+<td>error</td>
+<td>1</td>
+<td>No page-level DocBlock was found in file \funcs\phpinfo.php</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="%5Cfuncs%5Csecurity.php" id="\funcs\security.php"></a><h3>
+<i class="icon-file"></i>\funcs\security.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="error">
+<td>error</td>
+<td>1</td>
+<td>No page-level DocBlock was found in file \funcs\security.php</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="%5Cindex.php" id="\index.php"></a><h3>
+<i class="icon-file"></i>\index.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>1</td>
+<td>No page-level DocBlock was found in file \index.php</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>9</td>
+<td>No DocBlock was found for function printTitelZeile()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="%5Cindex_save.php" id="\index_save.php"></a><h3>
+<i class="icon-file"></i>\index_save.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>1</td>
+<td>No page-level DocBlock was found in file \index_save.php</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>76</td>
+<td>No DocBlock was found for function set_class()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="%5Clinks.php" id="\links.php"></a><h3>
+<i class="icon-file"></i>\links.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="error">
+<td>error</td>
+<td>1</td>
+<td>No page-level DocBlock was found in file \links.php</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="%5C_controllers%5Ccmsadmin.inc.php" id="\_controllers\cmsadmin.inc.php"></a><h3>
+<i class="icon-file"></i>\_controllers\cmsadmin.inc.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="error">
+<td>error</td>
+<td>1</td>
+<td>No page-level DocBlock was found in file \_controllers\cmsadmin.inc.php</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="%5C_controllers%5Cconfig_co_maintain.php" id="\_controllers\config_co_maintain.php"></a><h3>
+<i class="icon-file"></i>\_controllers\config_co_maintain.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="error">
+<td>error</td>
+<td>1</td>
+<td>No page-level DocBlock was found in file \_controllers\config_co_maintain.php</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="%5C_controllers%5Cfrgmnts_co_maintain.php" id="\_controllers\frgmnts_co_maintain.php"></a><h3>
+<i class="icon-file"></i>\_controllers\frgmnts_co_maintain.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="error">
+<td>error</td>
+<td>1</td>
+<td>No page-level DocBlock was found in file \_controllers\frgmnts_co_maintain.php</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="%5C_controllers%5Cnavi_co_maintain.php" id="\_controllers\navi_co_maintain.php"></a><h3>
+<i class="icon-file"></i>\_controllers\navi_co_maintain.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="error">
+<td>error</td>
+<td>1</td>
+<td>No page-level DocBlock was found in file \_controllers\navi_co_maintain.php</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="%5C_controllers%5Cpages_co_maintain.php" id="\_controllers\pages_co_maintain.php"></a><h3>
+<i class="icon-file"></i>\_controllers\pages_co_maintain.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="error">
+<td>error</td>
+<td>1</td>
+<td>No page-level DocBlock was found in file \_controllers\pages_co_maintain.php</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="%5C_controllers%5Cpictures_co_maintain.php" id="\_controllers\pictures_co_maintain.php"></a><h3>
+<i class="icon-file"></i>\_controllers\pictures_co_maintain.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="error">
+<td>error</td>
+<td>1</td>
+<td>No page-level DocBlock was found in file \_controllers\pictures_co_maintain.php</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="%5C_models%5Cconfig_maintain.class.php" id="\_models\config_maintain.class.php"></a><h3>
+<i class="icon-file"></i>\_models\config_maintain.class.php<small style="float: right;padding-right: 10px;">21</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>1</td>
+<td>No page-level DocBlock was found in file \_models\config_maintain.class.php</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>17</td>
+<td>No DocBlock was found for property $mMeldung</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>20</td>
+<td>No DocBlock was found for method __construct()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>30</td>
+<td>No DocBlock was found for method config_laden()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>45</td>
+<td>No DocBlock was found for method config_lesen()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>54</td>
+<td>No DocBlock was found for method update_website()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>70</td>
+<td>No DocBlock was found for method update_website_db()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>122</td>
+<td>No DocBlock was found for method config_category_lesen()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>133</td>
+<td>No DocBlock was found for method config_update()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>147</td>
+<td>No DocBlock was found for method config_update_rb()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>162</td>
+<td>No DocBlock was found for method spezial_lesen()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>175</td>
+<td>No DocBlock was found for method spezial_update()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>187</td>
+<td>No DocBlock was found for method bildgroessen_lesen()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>209</td>
+<td>No DocBlock was found for method sprachen_lesen()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>229</td>
+<td>No DocBlock was found for method check_sprachcode()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>241</td>
+<td>No DocBlock was found for method sprache_festlegen()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>277</td>
+<td>No DocBlock was found for method get_sprache_from_url()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>303</td>
+<td>No DocBlock was found for method getBrowserLanguage()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>364</td>
+<td>No DocBlock was found for method get_disp_language_code()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>371</td>
+<td>No DocBlock was found for method set_language_tra()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>379</td>
+<td>No DocBlock was found for method get_language_tra()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="%5C_models%5Cfrgmnts_maintain.class.php" id="\_models\frgmnts_maintain.class.php"></a><h3>
+<i class="icon-file"></i>\_models\frgmnts_maintain.class.php<small style="float: right;padding-right: 10px;">25</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>1</td>
+<td>No page-level DocBlock was found in file \_models\frgmnts_maintain.class.php</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>16</td>
+<td>No DocBlock was found for property $mMeldung</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>19</td>
+<td>No DocBlock was found for method __construct()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>28</td>
+<td>No DocBlock was found for method fragmente_lesen()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>40</td>
+<td>No DocBlock was found for method fragmente_sortieren()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>58</td>
+<td>No DocBlock was found for method read_single_content()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>69</td>
+<td>No DocBlock was found for method read_single_frgmnt()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>77</td>
+<td>No DocBlock was found for method fragment_speichern()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>94</td>
+<td>No DocBlock was found for method fragment_name_save()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>104</td>
+<td>No DocBlock was found for method fragment_kopieren()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>133</td>
+<td>No DocBlock was found for method fragment_loeschen()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>150</td>
+<td>No DocBlock was found for method fragment_anlegen()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>180</td>
+<td>No DocBlock was found for method get_next_fragid()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>186</td>
+<td>No DocBlock was found for method get_next_sortid()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>192</td>
+<td>No DocBlock was found for method increment_sortids()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>205</td>
+<td>No DocBlock was found for method renumber_sortids()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>223</td>
+<td>No DocBlock was found for method update_bildpfade()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>264</td>
+<td>No DocBlock was found for method alle_fragmente_laden()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>272</td>
+<td>No DocBlock was found for method links_replace()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>308</td>
+<td>No DocBlock was found for method read_css()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>316</td>
+<td>No DocBlock was found for method get_cssfile_name()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>324</td>
+<td>No DocBlock was found for method read_thema()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>330</td>
+<td>No DocBlock was found for method read_cssfile()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>362</td>
+<td>No DocBlock was found for method extract_path()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>370</td>
+<td>No DocBlock was found for method save_cssfile()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="%5C_models%5Cgeneral_maintain.class.php" id="\_models\general_maintain.class.php"></a><h3>
+<i class="icon-file"></i>\_models\general_maintain.class.php<small style="float: right;padding-right: 10px;">11</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>1</td>
+<td>No page-level DocBlock was found in file \_models\general_maintain.class.php</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>16</td>
+<td>No DocBlock was found for property $mPrefix</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>17</td>
+<td>No DocBlock was found for property $mDb</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>18</td>
+<td>No DocBlock was found for property $mMeldung</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>22</td>
+<td>No DocBlock was found for method __construct()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>32</td>
+<td>No DocBlock was found for method read_templates()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>41</td>
+<td>No DocBlock was found for method read_modules()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>52</td>
+<td>No DocBlock was found for method read_navi_ukaps()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>63</td>
+<td>No DocBlock was found for method read_navi_ukaps_old()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>119</td>
+<td>No DocBlock was found for method read_enum()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>131</td>
+<td>No DocBlock was found for method format_kuerzel()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="%5C_models%5Cnavi_maintain.class.php" id="\_models\navi_maintain.class.php"></a><h3>
+<i class="icon-file"></i>\_models\navi_maintain.class.php<small style="float: right;padding-right: 10px;">32</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>1</td>
+<td>No page-level DocBlock was found in file \_models\navi_maintain.class.php</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>16</td>
+<td>No DocBlock was found for property $mNavId</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>17</td>
+<td>No DocBlock was found for property $mMeldung</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>20</td>
+<td>No DocBlock was found for method __construct()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>30</td>
+<td>No DocBlock was found for method navigation_laden()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>39</td>
+<td>No DocBlock was found for method read_navigation_by_id()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>48</td>
+<td>No DocBlock was found for method read_navigation_by_bildpfad()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>57</td>
+<td>No DocBlock was found for method read_bezeichnung_by_area()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>66</td>
+<td>No DocBlock was found for method read_navigation_by_kap()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>75</td>
+<td>No DocBlock was found for method read_anz_ukap_by_kap()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>85</td>
+<td>No DocBlock was found for method read_anz_ukap_by_kap_ukap()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>94</td>
+<td>No DocBlock was found for method read_navid_by_kap()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>103</td>
+<td>No DocBlock was found for method read_first_hauptnavi()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>112</td>
+<td>No DocBlock was found for method kap_hochziehen()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>125</td>
+<td>No DocBlock was found for method ukap_hochziehen()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>141</td>
+<td>No DocBlock was found for method neuer_ukap()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>191</td>
+<td>No DocBlock was found for method neuer_kap()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>241</td>
+<td>No DocBlock was found for method getNextKap()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>250</td>
+<td>No DocBlock was found for method getNextUkap()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>259</td>
+<td>No DocBlock was found for method getNextNavid()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>268</td>
+<td>No DocBlock was found for method getNextSeitenid()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>283</td>
+<td>No DocBlock was found for method delete_navigationspunkt()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>323</td>
+<td>No DocBlock was found for method read_navi_page_by_seiten_id()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>332</td>
+<td>No DocBlock was found for method read_navi_page()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>341</td>
+<td>No DocBlock was found for method copy_navi_page()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>398</td>
+<td>No DocBlock was found for method prepare_copy_kap()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>415</td>
+<td>No DocBlock was found for method prepare_copy_seite()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>438</td>
+<td>No DocBlock was found for method save_navi_page()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>471</td>
+<td>No DocBlock was found for method navi_update()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>527</td>
+<td>No DocBlock was found for method navi_sortieren()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>579</td>
+<td>No DocBlock was found for method update_bildpfade()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>622</td>
+<td>No DocBlock was found for method alle_seiten_laden()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="%5C_models%5Cpages_maintain.class.php" id="\_models\pages_maintain.class.php"></a><h3>
+<i class="icon-file"></i>\_models\pages_maintain.class.php<small style="float: right;padding-right: 10px;">31</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>1</td>
+<td>No page-level DocBlock was found in file \_models\pages_maintain.class.php</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>16</td>
+<td>No DocBlock was found for property $mPrefix</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>17</td>
+<td>No DocBlock was found for property $mDb</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>18</td>
+<td>No DocBlock was found for property $mMsg</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>21</td>
+<td>No DocBlock was found for method __construct()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>45</td>
+<td>Argument $fach is missing from the Docblock of read_pages_overview()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>45</td>
+<td>Argument $start is missing from the Docblock of read_pages_overview()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>45</td>
+<td>Argument $language is missing from the Docblock of read_pages_overview()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>64</td>
+<td>Name of argument $feld does not match with the DocBlock's name $page_id in read_single_value_from_pages()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>64</td>
+<td>Name of argument $page_id does not match with the DocBlock's name $feld in read_single_value_from_pages()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>80</td>
+<td>Name of argument $selectfeld does not match with the DocBlock's name $feld in read_fieldarray_from_pages()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>80</td>
+<td>Name of argument $wherefeld does not match with the DocBlock's name $feld in read_fieldarray_from_pages()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>80</td>
+<td>Argument $kriterium is missing from the Docblock of read_fieldarray_from_pages()</td>
+</tr>
+<tr class="notice">
+<td>notice</td>
+<td>80</td>
+<td>Parameter $feld could not be found in read_fieldarray_from_pages()</td>
+</tr>
+<tr class="notice">
+<td>notice</td>
+<td>80</td>
+<td>Parameter $feld could not be found in read_fieldarray_from_pages()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>111</td>
+<td>Argument $fach is missing from the Docblock of count_pages_per_domain()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>127</td>
+<td>Argument $exp is missing from the Docblock of read_pages_per_domain()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>156</td>
+<td>Argument $name is missing from the Docblock of move_up_page()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>178</td>
+<td>Name of argument $page_id does not match with the DocBlock's name $page in delete_page()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>178</td>
+<td>Argument $msg is missing from the Docblock of delete_page()</td>
+</tr>
+<tr class="notice">
+<td>notice</td>
+<td>178</td>
+<td>Parameter $page could not be found in delete_page()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>254</td>
+<td>Argument $anzahl is missing from the Docblock of read_pages_with_latest_date()</td>
+</tr>
+<tr class="notice">
+<td>notice</td>
+<td>295</td>
+<td>Parameter $_POST-Array could not be found in validate_inputs()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>345</td>
+<td>Name of argument $page_id does not match with the DocBlock's name $dbaction in save_page()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>345</td>
+<td>Name of argument $action does not match with the DocBlock's name $page_id in save_page()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>345</td>
+<td>Argument $dbaction is missing from the Docblock of save_page()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>503</td>
+<td>No DocBlock was found for method update_bildpfade()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>546</td>
+<td>No DocBlock was found for method alle_unterseiten_laden()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>628</td>
+<td>Name of argument $datum_von does not match with the DocBlock's name $datum in compare_von_bis_datum()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>628</td>
+<td>Argument $datum_bis is missing from the Docblock of compare_von_bis_datum()</td>
+</tr>
+<tr class="notice">
+<td>notice</td>
+<td>628</td>
+<td>Parameter $datum could not be found in compare_von_bis_datum()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="%5C_models%5Cpictures_db_maintain.class.php" id="\_models\pictures_db_maintain.class.php"></a><h3>
+<i class="icon-file"></i>\_models\pictures_db_maintain.class.php<small style="float: right;padding-right: 10px;">24</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>1</td>
+<td>No page-level DocBlock was found in file \_models\pictures_db_maintain.class.php</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>17</td>
+<td>No DocBlock was found for property $mDb</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>18</td>
+<td>No DocBlock was found for property $mPrefix</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>21</td>
+<td>No DocBlock was found for method __construct()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>35</td>
+<td>No DocBlock was found for method bild_in_db_speichern()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>94</td>
+<td>No DocBlock was found for method get_next_sortkey()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>106</td>
+<td>No DocBlock was found for method bild_in_db_loeschen()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>138</td>
+<td>No DocBlock was found for method bilder_loeschen_pro_ref_id()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>163</td>
+<td>No DocBlock was found for method bilder_aus_db_lesen()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>201</td>
+<td>No DocBlock was found for method bild_hochziehen()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>213</td>
+<td>No DocBlock was found for method bild_kommentar_speichern()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>237</td>
+<td>No DocBlock was found for method bild_in_db_checken()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>248</td>
+<td>No DocBlock was found for method count_bilder_pro_pageid()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>260</td>
+<td>No DocBlock was found for method bilder_pro_pageid_lesen()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>275</td>
+<td>No DocBlock was found for method bild_kommentar_in_db_lesen()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>288</td>
+<td>No DocBlock was found for method update_bildpfade()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>315</td>
+<td>No DocBlock was found for method alle_bilder_lesen()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>326</td>
+<td>No DocBlock was found for method refresh_sortkey()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>339</td>
+<td>No DocBlock was found for method bilder_lesen()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>347</td>
+<td>No DocBlock was found for method update_sortkey()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>362</td>
+<td>No DocBlock was found for method disk_db_adjustment()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>370</td>
+<td>No DocBlock was found for method adjust_galerien_navi()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>393</td>
+<td>No DocBlock was found for method adjust_galerien_pages()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>417</td>
+<td>No DocBlock was found for method check_and_update_db()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="%5C_models%5Cpictures_maintain.class.php" id="\_models\pictures_maintain.class.php"></a><h3>
+<i class="icon-file"></i>\_models\pictures_maintain.class.php<small style="float: right;padding-right: 10px;">27</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>1</td>
+<td>No page-level DocBlock was found in file \_models\pictures_maintain.class.php</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>17</td>
+<td>No DocBlock was found for property $mDir</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>18</td>
+<td>No DocBlock was found for property $mBildDb</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>19</td>
+<td>No DocBlock was found for property $mMeldung</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>22</td>
+<td>No DocBlock was found for method __construct()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>36</td>
+<td>No DocBlock was found for method dirlst()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>106</td>
+<td>No DocBlock was found for method file_perms()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>116</td>
+<td>No DocBlock was found for method file_owner()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>134</td>
+<td>No DocBlock was found for method rename_file()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>155</td>
+<td>No DocBlock was found for method delete_file()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>240</td>
+<td>No DocBlock was found for method deltree()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>265</td>
+<td>No DocBlock was found for method get_next_directory()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>284</td>
+<td>No DocBlock was found for method get_next_file()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>300</td>
+<td>No DocBlock was found for method datei_loeschen()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>313</td>
+<td>No DocBlock was found for method verzeichnis_loeschen()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>326</td>
+<td>No DocBlock was found for method scan_directories()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>349</td>
+<td>No DocBlock was found for method create_directory()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>373</td>
+<td>No DocBlock was found for method get_images()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>402</td>
+<td>No DocBlock was found for method upload_files()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>484</td>
+<td>No DocBlock was found for method check_filetype()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>495</td>
+<td>No DocBlock was found for method check_filesize()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>505</td>
+<td>No DocBlock was found for method check_subdirectories()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>523</td>
+<td>No DocBlock was found for method set_bildpfad()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>536</td>
+<td>No DocBlock was found for method set_dateipfad()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>560</td>
+<td>No DocBlock was found for method create_thumbnail()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>609</td>
+<td>No DocBlock was found for method check_gd_lib()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>623</td>
+<td>No DocBlock was found for method resize_picture()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="%5C_models%5Credirect_maintain.class.php" id="\_models\redirect_maintain.class.php"></a><h3>
+<i class="icon-file"></i>\_models\redirect_maintain.class.php<small style="float: right;padding-right: 10px;">19</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>1</td>
+<td>No page-level DocBlock was found in file \_models\redirect_maintain.class.php</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>16</td>
+<td>No DocBlock was found for property $mPrefix</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>17</td>
+<td>No DocBlock was found for property $mDb</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>18</td>
+<td>No DocBlock was found for property $mMsg</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>21</td>
+<td>No DocBlock was found for method __construct()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>36</td>
+<td>No DocBlock was found for method page_save_redirect()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>75</td>
+<td>No DocBlock was found for method page_update_redirect()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>109</td>
+<td>No DocBlock was found for method page_delete_redirect()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>134</td>
+<td>No DocBlock was found for method page_read_redirect()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>152</td>
+<td>No DocBlock was found for method navi_kuerzel_update()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>174</td>
+<td>No DocBlock was found for method page_kuerzel_update()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>204</td>
+<td>No DocBlock was found for method smurl_update()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>214</td>
+<td>No DocBlock was found for method smurl_truncate()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>222</td>
+<td>No DocBlock was found for method smurl_navi_insert()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>255</td>
+<td>No DocBlock was found for method smurl_page_insert()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>283</td>
+<td>No DocBlock was found for method insert_redirect()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>309</td>
+<td>No DocBlock was found for method update_redirect()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>334</td>
+<td>No DocBlock was found for method delete_redirect()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>364</td>
+<td>No DocBlock was found for method get_navids()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="%5C_models%5Cuser_maintain.class.php" id="\_models\user_maintain.class.php"></a><h3>
+<i class="icon-file"></i>\_models\user_maintain.class.php<small style="float: right;padding-right: 10px;">16</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>1</td>
+<td>No page-level DocBlock was found in file \_models\user_maintain.class.php</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>16</td>
+<td>No DocBlock was found for property $mPrefix</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>17</td>
+<td>No DocBlock was found for property $mDb</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>18</td>
+<td>No DocBlock was found for property $mMeldung</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>22</td>
+<td>No DocBlock was found for method __construct()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>36</td>
+<td>No DocBlock was found for method login()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>70</td>
+<td>No DocBlock was found for method get_user_row()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>85</td>
+<td>No DocBlock was found for method change_password()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>98</td>
+<td>No DocBlock was found for method update_user()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>114</td>
+<td>No DocBlock was found for method get_new_password()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>126</td>
+<td>No DocBlock was found for method set_new_password()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>148</td>
+<td>No DocBlock was found for method send_mail()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>167</td>
+<td>No DocBlock was found for method update_user_pw()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>189</td>
+<td>No DocBlock was found for method check_input()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>232</td>
+<td>No DocBlock was found for method check_username()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>246</td>
+<td>No DocBlock was found for method set_menu_arr()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="%5C_views%5Cautocomplete_result.php" id="\_views\autocomplete_result.php"></a><h3>
+<i class="icon-file"></i>\_views\autocomplete_result.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="error">
+<td>error</td>
+<td>1</td>
+<td>No page-level DocBlock was found in file \_views\autocomplete_result.php</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="%5C_views%5Cconfig_present.class.php" id="\_views\config_present.class.php"></a><h3>
+<i class="icon-file"></i>\_views\config_present.class.php<small style="float: right;padding-right: 10px;">16</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>1</td>
+<td>No page-level DocBlock was found in file \_views\config_present.class.php</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>17</td>
+<td>No DocBlock was found for property $mTpl</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>19</td>
+<td>No DocBlock was found for method __construct()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>26</td>
+<td>No DocBlock was found for method show_messages()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>46</td>
+<td>No DocBlock was found for method config_anzeigen()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>74</td>
+<td>No DocBlock was found for method show_menu()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>103</td>
+<td>No DocBlock was found for method present_spezial()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>144</td>
+<td>No DocBlock was found for method present_config()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>246</td>
+<td>No DocBlock was found for method read_themes()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>263</td>
+<td>No DocBlock was found for method read_languages()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>280</td>
+<td>No DocBlock was found for method create_selectbox()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>302</td>
+<td>No DocBlock was found for method create_selectbox_tpldir()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>330</td>
+<td>No DocBlock was found for method create_radiobuttons()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>352</td>
+<td>No DocBlock was found for method show_radiobuttons()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>368</td>
+<td>No DocBlock was found for method show_pushbutton()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>383</td>
+<td>No DocBlock was found for method create_pushbutton()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="%5C_views%5Cfrgmnts_present.class.php" id="\_views\frgmnts_present.class.php"></a><h3>
+<i class="icon-file"></i>\_views\frgmnts_present.class.php<small style="float: right;padding-right: 10px;">10</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>1</td>
+<td>No page-level DocBlock was found in file \_views\frgmnts_present.class.php</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>17</td>
+<td>No DocBlock was found for property $mTpl</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>19</td>
+<td>No DocBlock was found for method __construct()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>26</td>
+<td>No DocBlock was found for method fragmente_anzeigen()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>46</td>
+<td>No DocBlock was found for method show_menu()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>80</td>
+<td>No DocBlock was found for method present_fragments()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>105</td>
+<td>No DocBlock was found for method compose_workmenu()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>127</td>
+<td>No DocBlock was found for method output()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>144</td>
+<td>No DocBlock was found for method css_editieren()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>156</td>
+<td>No DocBlock was found for method present_css()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="%5C_views%5Cgeneral_present.class.php" id="\_views\general_present.class.php"></a><h3>
+<i class="icon-file"></i>\_views\general_present.class.php<small style="float: right;padding-right: 10px;">18</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>1</td>
+<td>No page-level DocBlock was found in file \_views\general_present.class.php</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>17</td>
+<td>No DocBlock was found for property $mTpl</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>19</td>
+<td>No DocBlock was found for method __construct()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>24</td>
+<td>Argument $message is missing from the Docblock of print_message()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>80</td>
+<td>No DocBlock was found for method compose_sorticon()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>86</td>
+<td>Name of argument $edit_id does not match with the DocBlock's name $template in create_sprachen_selectbox()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>86</td>
+<td>Name of argument $template does not match with the DocBlock's name $GLOBALS['sprachen_erlaubt'] in create_sprachen_selectbox()</td>
+</tr>
+<tr class="notice">
+<td>notice</td>
+<td>86</td>
+<td>Parameter $GLOBALS['sprachen_erlaubt'] could not be found in create_sprachen_selectbox()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>258</td>
+<td>Argument $datum is missing from the Docblock of date_mysql2german()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>277</td>
+<td>Argument $strng is missing from the Docblock of reslash()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>295</td>
+<td>Argument $navtype is missing from the Docblock of set_navtype_title()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>315</td>
+<td>Argument $navtype is missing from the Docblock of set_navtype_color()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>336</td>
+<td>Name of argument $tplnr does not match with the DocBlock's name $tmpl in show_inhalt2()</td>
+</tr>
+<tr class="notice">
+<td>notice</td>
+<td>336</td>
+<td>Parameter $tmpl could not be found in show_inhalt2()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>356</td>
+<td>Argument $tplname is missing from the Docblock of analyse_template()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>356</td>
+<td>Argument $tplnr is missing from the Docblock of analyse_template()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>356</td>
+<td>Argument $pattern is missing from the Docblock of analyse_template()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>399</td>
+<td>Argument $text is missing from the Docblock of xx()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="%5C_views%5Cnavi_present.class.php" id="\_views\navi_present.class.php"></a><h3>
+<i class="icon-file"></i>\_views\navi_present.class.php<small style="float: right;padding-right: 10px;">14</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>1</td>
+<td>No page-level DocBlock was found in file \_views\navi_present.class.php</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>17</td>
+<td>No DocBlock was found for property $mTpl</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>19</td>
+<td>No DocBlock was found for method __construct()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>241</td>
+<td>Name of argument $class does not match with the DocBlock's name $type in create_button()</td>
+</tr>
+<tr class="notice">
+<td>notice</td>
+<td>241</td>
+<td>Parameter $type could not be found in create_button()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>318</td>
+<td>No DocBlock was found for method edit_page()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>411</td>
+<td>No DocBlock was found for method prepare_save_script()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>423</td>
+<td>No DocBlock was found for method prepare_seiteninfo()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>436</td>
+<td>No DocBlock was found for method edit_page_replace_texte()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>468</td>
+<td>No DocBlock was found for method create_checkbox()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>475</td>
+<td>No DocBlock was found for method create_thumbs_selectbox()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>484</td>
+<td>No DocBlock was found for method show_menu()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>508</td>
+<td>No DocBlock was found for method show_tabnav()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>515</td>
+<td>No DocBlock was found for method xx()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="%5C_views%5Cpages_present.class.php" id="\_views\pages_present.class.php"></a><h3>
+<i class="icon-file"></i>\_views\pages_present.class.php<small style="float: right;padding-right: 10px;">34</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>1</td>
+<td>No page-level DocBlock was found in file \_views\pages_present.class.php</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>18</td>
+<td>No DocBlock was found for property $mTpl</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>20</td>
+<td>No DocBlock was found for method __construct()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>29</td>
+<td>Argument $overview is missing from the Docblock of show_pages_overview()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>29</td>
+<td>Argument $area is missing from the Docblock of show_pages_overview()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>29</td>
+<td>Argument $action is missing from the Docblock of show_pages_overview()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>29</td>
+<td>Argument $msg is missing from the Docblock of show_pages_overview()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>29</td>
+<td>Argument $language is missing from the Docblock of show_pages_overview()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>171</td>
+<td>Name of argument $class does not match with the DocBlock's name $type in create_button()</td>
+</tr>
+<tr class="notice">
+<td>notice</td>
+<td>171</td>
+<td>Parameter $type could not be found in create_button()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>234</td>
+<td>Name of argument $area does not match with the DocBlock's name $next_id_kz in new_page()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>234</td>
+<td>Name of argument $next_id_kz does not match with the DocBlock's name $template in new_page()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>234</td>
+<td>Name of argument $templates does not match with the DocBlock's name $unavi in new_page()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>234</td>
+<td>Argument $unavi is missing from the Docblock of new_page()</td>
+</tr>
+<tr class="notice">
+<td>notice</td>
+<td>234</td>
+<td>Parameter $template could not be found in new_page()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>291</td>
+<td>Name of argument $row does not match with the DocBlock's name $page in edit_page()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>291</td>
+<td>Name of argument $templates does not match with the DocBlock's name $area in edit_page()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>291</td>
+<td>Name of argument $unavi does not match with the DocBlock's name $dbaction in edit_page()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>291</td>
+<td>Argument $thumbnails is missing from the Docblock of edit_page()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>291</td>
+<td>Argument $area is missing from the Docblock of edit_page()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>291</td>
+<td>Argument $domain is missing from the Docblock of edit_page()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>291</td>
+<td>Argument $msg is missing from the Docblock of edit_page()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>291</td>
+<td>Argument $dbaction is missing from the Docblock of edit_page()</td>
+</tr>
+<tr class="notice">
+<td>notice</td>
+<td>291</td>
+<td>Parameter $page could not be found in edit_page()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>408</td>
+<td>Argument $modus is missing from the Docblock of set_labels()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>456</td>
+<td>No DocBlock was found for method prepare_pageinfo()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>486</td>
+<td>Name of argument $area does not match with the DocBlock's name $action in show_menue()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>486</td>
+<td>Argument $action is missing from the Docblock of show_menue()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>486</td>
+<td>Argument $language is missing from the Docblock of show_menue()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>539</td>
+<td>Name of argument $html does not match with the DocBlock's name $link in show_tabnav()</td>
+</tr>
+<tr class="notice">
+<td>notice</td>
+<td>539</td>
+<td>Parameter $link could not be found in show_tabnav()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>561</td>
+<td>Argument $datum is missing from the Docblock of date_mysql2german()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>573</td>
+<td>Argument $text is missing from the Docblock of reslash()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>585</td>
+<td>Argument $aktiv is missing from the Docblock of create_checkbox()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="%5C_views%5Cpictures_present.class.php" id="\_views\pictures_present.class.php"></a><h3>
+<i class="icon-file"></i>\_views\pictures_present.class.php<small style="float: right;padding-right: 10px;">18</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>1</td>
+<td>No page-level DocBlock was found in file \_views\pictures_present.class.php</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>14</td>
+<td>No DocBlock was found for picturesPresent</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>16</td>
+<td>No DocBlock was found for property $mTpl</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>18</td>
+<td>No DocBlock was found for method __construct()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>30</td>
+<td>No DocBlock was found for method bilder_anzeigen()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>158</td>
+<td>No DocBlock was found for method bilder_verzeichnis()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>168</td>
+<td>No DocBlock was found for method set_date_time()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>189</td>
+<td>No DocBlock was found for method berechne_breite_hoehe()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>209</td>
+<td>No DocBlock was found for method kommentare_anzeigen()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>283</td>
+<td>No DocBlock was found for method bild_anzeigen()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>304</td>
+<td>No DocBlock was found for method verzeichnis_anlegen()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>333</td>
+<td>No DocBlock was found for method create_dirs_selectbox()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>375</td>
+<td>No DocBlock was found for method dateien_hochladen()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>418</td>
+<td>No DocBlock was found for method selectbox_thumbnail_groessen()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>458</td>
+<td>No DocBlock was found for method print_message()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>465</td>
+<td>No DocBlock was found for method show_menue()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>563</td>
+<td>No DocBlock was found for method show_tabnav()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>571</td>
+<td>No DocBlock was found for method xx()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a3</a> and<br>
+            generated on </footer></div>
+</div>
+</body>
+</html>
